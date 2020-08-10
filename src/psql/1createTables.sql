@@ -56,17 +56,81 @@ CREATE TABLE public.course
     id_instructor bigserial NOT NULL,
     id_category bigserial NOT NULL,
     hours_done int NOT NULL,
+    finished boolean NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_student) REFERENCES public.login(id),
     FOREIGN KEY (id_instructor) REFERENCES public.login(id),
     FOREIGN KEY (id_category) REFERENCES public.category(id)
 );
 
-CREATE TABLE public.category
+CREATE TABLE public.instructor_category
 (
     id bigserial NOT NULL,
     category_name text NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (category_name)
 );
+
+CREATE TABLE public.instructor_category
+(
+    id_instructor bigserial NOT NULL,
+    id_category bigserial NOT NULL,
+
+    PRIMARY KEY (id_instructor, id_category),
+    FOREIGN KEY (id_instructor) REFERENCES public.instructor(id),
+    FOREIGN KEY (id_category) REFERENCES public.category(id)
+);
+
+CREATE TABLE public.vehicle
+(
+    id bigserial NOT NULL,
+    mark varchar (128) NOT NULL,
+    model varchar (128) NOT NULL,
+    id_category bigserial NOT NULL,
+    plate_number varchar (128) NOT NULL,
+    vin varchar (128) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_category) REFERENCES public.category(id)
+);
+
+CREATE TABLE public.instructor_vehicle
+(
+    id_instructor bigserial NOT NULL,
+    id_vehicle bigserial NOT NULL,
+
+    PRIMARY KEY (id_instructor, id_vehicle),
+    FOREIGN KEY (id_instructor) REFERENCES public.instructor(id),
+    FOREIGN KEY (id_vehicle) REFERENCES public.vehicle(id)
+);
+
+CREATE TABLE public.instructor_rating
+(
+    id bigserial NOT NULL,
+    id_student bigserial NOT NULL,
+    id_instructor bigserial NOT NULL,
+    grade int NOT NULL,
+    comment varchar (128) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_student) REFERENCES public.student(id),
+    FOREIGN KEY (id_instructor) REFERENCES public.instructor(id)
+);
+
+CREATE TABLE public.event
+(
+    id bigserial NOT NULL,
+    id_student bigserial NOT NULL,
+    id_instructor bigserial NOT NULL,
+    id_vehicle int,
+    id_course varchar (128) NOT NULL,
+    duration int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_student) REFERENCES public.student(id),
+    FOREIGN KEY (id_instructor) REFERENCES public.instructor(id),
+    FOREIGN KEY (id_vehicle) REFERENCES public.vehicle(id),
+    FOREIGN KEY (id_course) REFERENCES public.course(id)
+)
+
+
+
+
 
