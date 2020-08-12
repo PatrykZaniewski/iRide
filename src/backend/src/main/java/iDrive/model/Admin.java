@@ -3,8 +3,7 @@ package iDrive.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "student")
-public class Student {
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -17,8 +16,6 @@ public class Student {
     private String firstname;
     @NotNull
     private String lastname;
-    @NotNull
-    private Boolean active;
 
     public int getId() {
         return id;
@@ -50,13 +47,5 @@ public class Student {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 }

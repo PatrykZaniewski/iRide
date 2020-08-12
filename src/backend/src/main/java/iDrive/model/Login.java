@@ -18,6 +18,8 @@ public class Login {
     @NotNull
     @Column(name = "creation_date")
     private Date creationDate;
+    @NotNull
+    private String status;
 
     public int getId() {
         return id;
@@ -49,5 +51,13 @@ public class Login {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

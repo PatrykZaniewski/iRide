@@ -4,6 +4,7 @@ CREATE TABLE public.login
     email text NOT NULL,
     password varchar(1024) NOT NULL,
     creation_date date NOT NULL,
+    status varchar(16) NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)
 );

@@ -2,9 +2,10 @@ package iDrive.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-@Entity(name = "student")
-public class Student {
+@Entity(name = "instructor")
+public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -18,7 +19,11 @@ public class Student {
     @NotNull
     private String lastname;
     @NotNull
-    private Boolean active;
+    @Column(name = "employment_date")
+    private Date employmentDate;
+    @NotNull
+    @Column(name = "dismissal_date")
+    private Date dismissalDate;
 
     public int getId() {
         return id;
@@ -52,11 +57,19 @@ public class Student {
         this.lastname = lastname;
     }
 
-    public Boolean getActive() {
-        return active;
+    public Date getEmploymentDate() {
+        return employmentDate;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
+    public void setEmploymentDate(Date employmentDate) {
+        this.employmentDate = employmentDate;
+    }
+
+    public Date getDismissalDate() {
+        return dismissalDate;
+    }
+
+    public void setDismissalDate(Date dismissalDate) {
+        this.dismissalDate = dismissalDate;
     }
 }
