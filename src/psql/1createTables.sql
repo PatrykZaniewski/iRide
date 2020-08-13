@@ -16,6 +16,7 @@ CREATE TABLE public.student
     firstname varchar(128) NOT NULL,
     lastname varchar(128) NOT NULL,
     active boolean NOT NULL,
+    phone_number varchar(16) NOT NULL
     PRIMARY KEY (id),
     FOREIGN KEY(id_login) REFERENCES public.login(id)
 );
@@ -66,14 +67,6 @@ CREATE TABLE public.course
 
 CREATE TABLE public.instructor_category
 (
-    id bigserial NOT NULL,
-    category_name text NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE (category_name)
-);
-
-CREATE TABLE public.instructor_category
-(
     id_instructor bigserial NOT NULL,
     id_category bigserial NOT NULL,
 
@@ -96,6 +89,7 @@ CREATE TABLE public.vehicle
 
 CREATE TABLE public.instructor_vehicle
 (
+    id bigserial NOT NULL,
     id_instructor bigserial NOT NULL,
     id_vehicle bigserial NOT NULL,
 

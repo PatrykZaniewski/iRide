@@ -19,6 +19,9 @@ public class Student {
     private String lastname;
     @NotNull
     private Boolean active;
+    @Column(name = "phone_number")
+    @NotNull
+    private String phoneNumber;
 
     public int getId() {
         return id;
@@ -58,5 +61,13 @@ public class Student {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
