@@ -1,7 +1,8 @@
-package iDrive.model;
+package iRide.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity(name = "course")
 public class Course {
@@ -21,10 +22,17 @@ public class Course {
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     @NotNull
     private Category category;
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @NotNull
+    private List<Event> event;
+    @Column(name = "hours_remaining")
+    @NotNull
+    private int hoursRemaining;
+    @Column(name = "hours_done")
     @NotNull
     private int hoursDone;
     @NotNull
-    private boolean finished;
+    private String status;
 
 
 }

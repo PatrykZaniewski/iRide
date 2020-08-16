@@ -1,4 +1,4 @@
-package iDrive.model;
+package iRide.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package iDrive.model;
+package iRide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity(name = "instructor")
@@ -40,11 +39,11 @@ public class Instructor {
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "instructor_vehicle",
+            name = "instructor_vehicles",
             joinColumns = {@JoinColumn(name = "id_instructor")},
             inverseJoinColumns = {@JoinColumn(name = "id_vehicle")}
     )
-    Set<Vehicle> vehicles = new HashSet<>();
+    private Set<Vehicle> vehicles = new HashSet<>();
 
     public int getId() {
         return id;

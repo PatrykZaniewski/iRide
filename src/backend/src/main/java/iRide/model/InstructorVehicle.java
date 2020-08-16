@@ -1,20 +1,29 @@
-package iDrive.model;
+package iRide.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "intructor_vehicle")
+@Entity(name = "instructor_vehicle")
 public class InstructorVehicle {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_instructor", referencedColumnName = "id")
     @NotNull
     private Instructor instructor;
-    @Id
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_vehicle", referencedColumnName = "id")
     @NotNull
     private Vehicle vehicle;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Instructor getInstructor() {
         return instructor;

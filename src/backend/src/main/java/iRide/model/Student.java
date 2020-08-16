@@ -1,4 +1,4 @@
-package iDrive.model;
+package iRide.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,8 +17,6 @@ public class Student {
     private String firstname;
     @NotNull
     private String lastname;
-    @NotNull
-    private Boolean active;
     @Column(name = "phone_number")
     @NotNull
     private String phoneNumber;
@@ -53,14 +51,6 @@ public class Student {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 
     public String getPhoneNumber() {

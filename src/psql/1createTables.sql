@@ -15,8 +15,7 @@ CREATE TABLE public.student
     id_login bigserial NOT NULL,
     firstname varchar(128) NOT NULL,
     lastname varchar(128) NOT NULL,
-    active boolean NOT NULL,
-    phone_number varchar(16) NOT NULL
+    phone_number varchar(16) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY(id_login) REFERENCES public.login(id)
 );
@@ -29,9 +28,10 @@ CREATE TABLE public.instructor
     lastname varchar (128) NOT NULL,
     employment_date date NOT NULL,
     dismissal_date date NOT NULL,
+    phone_number varchar(16) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_login) REFERENCES public.login(id)
-)
+);
 
 CREATE TABLE public.admin
 (
@@ -41,7 +41,7 @@ CREATE TABLE public.admin
     lastname varchar (128) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_login) REFERENCES public.login(id)
-)
+);
 
 CREATE TABLE public.category
 (
@@ -57,8 +57,9 @@ CREATE TABLE public.course
     id_student bigserial NOT NULL,
     id_instructor bigserial NOT NULL,
     id_category bigserial NOT NULL,
+    hours_remaining int NOT NULL,
     hours_done int NOT NULL,
-    finished boolean NOT NULL,
+    status varchar(16) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_student) REFERENCES public.login(id),
     FOREIGN KEY (id_instructor) REFERENCES public.login(id),
@@ -93,7 +94,7 @@ CREATE TABLE public.instructor_vehicle
     id_instructor bigserial NOT NULL,
     id_vehicle bigserial NOT NULL,
 
-    PRIMARY KEY (id_instructor, id_vehicle),
+    PRIMARY KEY (id),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor(id),
     FOREIGN KEY (id_vehicle) REFERENCES public.vehicle(id)
 );
@@ -105,6 +106,7 @@ CREATE TABLE public.instructor_rating
     id_instructor bigserial NOT NULL,
     grade int NOT NULL,
     comment varchar (128) NOT NULL,
+
     PRIMARY KEY (id),
     FOREIGN KEY (id_student) REFERENCES public.student(id),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor(id)
@@ -115,15 +117,16 @@ CREATE TABLE public.event
     id bigserial NOT NULL,
     id_student bigserial NOT NULL,
     id_instructor bigserial NOT NULL,
-    id_vehicle int,
-    id_course varchar (128) NOT NULL,
+    id_vehicle bigserial,
+    id_course bigserial NOT NULL,
     duration int NOT NULL,
+    comment varchar(256),
     PRIMARY KEY (id),
     FOREIGN KEY (id_student) REFERENCES public.student(id),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor(id),
     FOREIGN KEY (id_vehicle) REFERENCES public.vehicle(id),
     FOREIGN KEY (id_course) REFERENCES public.course(id)
-)
+);
 
 
 

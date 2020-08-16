@@ -1,9 +1,10 @@
-package iDrive.model;
+package iRide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "vehicle")
@@ -20,8 +21,8 @@ public class Vehicle {
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
     @JsonIgnore
-    @ManyToMany(mappedBy = "instructor", fetch = FetchType.LAZY)
-    private Set<Vehicle> vehicles;
+    @ManyToMany(mappedBy = "vehicles", fetch = FetchType.LAZY)
+    private Set<Instructor> instructors = new HashSet<>();
     @NotNull
     private String plateNumber;
     @NotNull
@@ -59,12 +60,12 @@ public class Vehicle {
         this.category = category;
     }
 
-    public Set<Vehicle> getVehicles() {
-        return vehicles;
+    public Set<Instructor> getInstructors() {
+        return instructors;
     }
 
-    public void setVehicles(Set<Vehicle> vehicles) {
-        this.vehicles = vehicles;
+    public void setInstructors(Set<Instructor> instructors) {
+        this.instructors = instructors;
     }
 
     public String getPlateNumber() {

@@ -1,4 +1,4 @@
-package iDrive.model;
+package iRide.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
