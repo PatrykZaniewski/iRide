@@ -25,7 +25,6 @@ public class Instructor {
     @NotNull
     @Column(name = "employment_date")
     private Date employmentDate;
-    @NotNull
     @Column(name = "dismissal_date")
     private Date dismissalDate;
     @JsonIgnore

@@ -16,6 +16,8 @@ public class Admin {
     private String firstname;
     @NotNull
     private String lastname;
+    @NotNull
+    private String phoneNumber;
 
     public int getId() {
         return id;
@@ -47,5 +49,13 @@ public class Admin {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

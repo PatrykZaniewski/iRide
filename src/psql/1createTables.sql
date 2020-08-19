@@ -27,7 +27,7 @@ CREATE TABLE public.instructor
     firstname varchar (128) NOT NULL,
     lastname varchar (128) NOT NULL,
     employment_date date NOT NULL,
-    dismissal_date date NOT NULL,
+    dismissal_date date,
     phone_number varchar(16) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_login) REFERENCES public.login(id)
@@ -39,6 +39,7 @@ CREATE TABLE public.admin
     id_login bigserial NOT NULL,
     firstname varchar (128) NOT NULL,
     lastname varchar (128) NOT NULL,
+    phone_number varchar (16) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (id_login) REFERENCES public.login(id)
 );
@@ -47,6 +48,7 @@ CREATE TABLE public.category
 (
     id bigserial NOT NULL,
     category_name text NOT NULL,
+    category_type text NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (category_name)
 );
@@ -57,6 +59,7 @@ CREATE TABLE public.course
     id_student bigserial NOT NULL,
     id_instructor bigserial NOT NULL,
     id_category bigserial NOT NULL,
+    hours_minimum int NOT NULL,
     hours_remaining int NOT NULL,
     hours_done int NOT NULL,
     status varchar(16) NOT NULL,

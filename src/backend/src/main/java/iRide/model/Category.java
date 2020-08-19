@@ -12,6 +12,10 @@ public class Category {
     @NotNull
     @Column(name = "category_name")
     private String categoryName;
+    @NotNull
+    @Column(name = "category_type")
+    private String categoryType;
+
 
     public int getId() {
         return id;
@@ -27,5 +31,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getCategoryType() {
+        return categoryType;
+    }
+
+    public void setCategoryType(String categoryType) {
+        this.categoryType = categoryType;
     }
 }
