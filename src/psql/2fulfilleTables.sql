@@ -104,10 +104,23 @@ values (1, 1, 5, 'OK');
 
 insert into course(id_student, id_instructor, id_category, hours_minimum, hours_remaining, hours_done, status)
 values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),
-        values (1, 1, 22, 30, 0, 'WAITING'),
-        values (2, 1, 6, 30, 0, 30, 'FINISHED'),
-        values (1, 2, 22, 30, 8, 28, 'IN_PROGRESS'),
-        values (3, 2, )
+         (1, 2, 22, 30, 30, 0, 'WAITING'),
+         (2, 1, 6, 30, 0, 30, 'FINISHED'),
+         (2, 2, 22, 30, 8, 28, 'IN_PROGRESS'),
+         (3, 1, 6, 30, 0, 30, 'FINISHED'),
+         (3, 2, 22, 30, 17, 13, 'WAITING');
+
+insert into event(id_student, id_instructor, id_vehicle, id_course, duration, comment)
+values (1, 1, null, 1, 15, null),
+       (1, 1, null, 1, 15, null),
+       (2, 1, null, 3, 15, null),
+       (2, 1, null, 3, 15, null),
+       (2, 2, 1, 4, 4, null),
+       (2, 2, 1, 4, 4, null),
+       (3, 1, null, 5, 15, null),
+       (3, 1, null, 5, 15, null),
+       (3, 2, 1, 6, 10, null),
+       (3, 2, 1, 6, 10, null);
 
 
 

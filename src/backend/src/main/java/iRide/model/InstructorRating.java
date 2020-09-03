@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "instructor_rating")
-public class instructorRating {
+public class InstructorRating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
