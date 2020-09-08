@@ -1,8 +1,10 @@
 package iRide.model;
 
+import iRide.service.Student.model.StudentCreateInput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity(name = "login")
 public class Login {
@@ -17,9 +19,12 @@ public class Login {
     private String password;
     @NotNull
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime creationDate;
     @NotNull
     private String status;
+    @NotNull
+    @Column(name = "account_group")
+    private String accountGroup;
 
     public int getId() {
         return id;
@@ -45,11 +50,11 @@ public class Login {
         this.password = password;
     }
 
-    public Date getCreationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -59,5 +64,25 @@ public class Login {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAccountGroup() {
+        return accountGroup;
+    }
+
+    public void setAccountGroup(String accountGroup) {
+        this.accountGroup = accountGroup;
+    }
+
+    public Login() {
+
+    }
+
+    public Login(StudentCreateInput studentCreateInput) {
+        this.email = studentCreateInput.getEmail();
+        this.password = studentCreateInput.getPassword();
+        this.creationDate = LocalDateTime.now();
+        this.status = "ACTIVE";
+        this.accountGroup = "STUDENT";
     }
 }

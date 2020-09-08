@@ -1,18 +1,19 @@
 CREATE TABLE public.login
 (
-    id            bigserial     NOT NULL,
+    id            serial     NOT NULL,
     email         text          NOT NULL,
     password      varchar(1024) NOT NULL,
     creation_date date          NOT NULL,
     status        varchar(16)   NOT NULL,
+    account_group varchar(16)   NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)
 );
 
 CREATE TABLE public.student
 (
-    id           bigserial    NOT NULL,
-    id_login     bigserial    NOT NULL,
+    id           serial    NOT NULL,
+    id_login     integer    NOT NULL,
     firstname    varchar(128) NOT NULL,
     lastname     varchar(128) NOT NULL,
     phone_number varchar(16)  NOT NULL,
@@ -22,8 +23,8 @@ CREATE TABLE public.student
 
 CREATE TABLE public.instructor
 (
-    id              bigserial    NOT NULL,
-    id_login        bigserial    NOT NULL,
+    id              serial    NOT NULL,
+    id_login        integer    NOT NULL,
     firstname       varchar(128) NOT NULL,
     lastname        varchar(128) NOT NULL,
     employment_date date         NOT NULL,
@@ -35,8 +36,8 @@ CREATE TABLE public.instructor
 
 CREATE TABLE public.admin
 (
-    id           bigserial    NOT NULL,
-    id_login     bigserial    NOT NULL,
+    id           serial    NOT NULL,
+    id_login     integer    NOT NULL,
     firstname    varchar(128) NOT NULL,
     lastname     varchar(128) NOT NULL,
     phone_number varchar(16)  NOT NULL,
@@ -46,7 +47,7 @@ CREATE TABLE public.admin
 
 CREATE TABLE public.category
 (
-    id            bigserial NOT NULL,
+    id            serial NOT NULL,
     category_name text      NOT NULL,
     category_type text      NOT NULL,
     PRIMARY KEY (id)
@@ -54,8 +55,8 @@ CREATE TABLE public.category
 
 CREATE TABLE public.instructor_category
 (
-    id_instructor bigserial NOT NULL,
-    id_category   bigserial NOT NULL,
+    id_instructor integer NOT NULL,
+    id_category   integer NOT NULL,
 
     PRIMARY KEY (id_instructor, id_category),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor (id),
@@ -64,10 +65,10 @@ CREATE TABLE public.instructor_category
 
 CREATE TABLE public.vehicle
 (
-    id           bigserial    NOT NULL,
+    id           serial    NOT NULL,
     mark         varchar(128) NOT NULL,
     model        varchar(128) NOT NULL,
-    id_category  bigserial    NOT NULL,
+    id_category  integer    NOT NULL,
     plate_number varchar(128) NOT NULL,
     vin          varchar(128) NOT NULL,
     PRIMARY KEY (id),
@@ -76,9 +77,9 @@ CREATE TABLE public.vehicle
 
 CREATE TABLE public.instructor_vehicle
 (
-    id            bigserial NOT NULL,
-    id_instructor bigserial NOT NULL,
-    id_vehicle    bigserial NOT NULL,
+    id            serial NOT NULL,
+    id_instructor integer NOT NULL,
+    id_vehicle    integer NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor (id),
@@ -87,10 +88,10 @@ CREATE TABLE public.instructor_vehicle
 
 CREATE TABLE public.course
 (
-    id              bigserial   NOT NULL,
-    id_student      bigserial   NOT NULL,
-    id_instructor   bigserial   NOT NULL,
-    id_category     bigserial   NOT NULL,
+    id              serial   NOT NULL,
+    id_student      integer   NOT NULL,
+    id_instructor   integer   NOT NULL,
+    id_category     integer   NOT NULL,
     hours_minimum   int         NOT NULL,
     hours_remaining int         NOT NULL,
     hours_done      int         NOT NULL,
@@ -103,9 +104,9 @@ CREATE TABLE public.course
 
 CREATE TABLE public.instructor_rating
 (
-    id            bigserial    NOT NULL,
-    id_student    bigserial    NOT NULL,
-    id_instructor bigserial    NOT NULL,
+    id            serial    NOT NULL,
+    id_student    integer    NOT NULL,
+    id_instructor integer    NOT NULL,
     grade         int          NOT NULL,
     comment       varchar(128) NOT NULL,
 
@@ -116,11 +117,11 @@ CREATE TABLE public.instructor_rating
 
 CREATE TABLE public.event
 (
-    id            bigserial NOT NULL,
-    id_student    bigserial NOT NULL,
-    id_instructor bigserial NOT NULL,
-    id_vehicle    bigserial,
-    id_course     bigserial NOT NULL,
+    id            serial NOT NULL,
+    id_student    integer NOT NULL,
+    id_instructor integer NOT NULL,
+    id_vehicle    integer,
+    id_course     integer NOT NULL,
     duration      int       NOT NULL,
     comment       varchar(256),
     PRIMARY KEY (id),

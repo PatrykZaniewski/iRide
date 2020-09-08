@@ -1,10 +1,10 @@
-INSERT INTO login(email, password, creation_date, status)
-values ('a@iride.pl', '123123', '2019-03-05', 'ACTIVE'),
-       ('b@iride.pl', 'aaaaa', '2019-01-05', 'ACTIVE'),
-       ('c@iride.pl', 'qweqwe', '2016-05-05', 'ACTIVE'),
-       ('d@iride.pl', 'aqaqaq', '2018-05-05', 'ACTIVE'),
-       ('e@iride.pl', 'qwerty', '2019-02-02', 'ACTIVE'),
-       ('f@iride.pl', 'zzzzzz', '2019-12-01', 'ACTIVE');
+INSERT INTO login(email, password, creation_date, status, account_group)
+values ('a@iride.pl', '123123', '2019-03-05', 'ACTIVE', 'STUDENT'),
+       ('b@iride.pl', 'aaaaa', '2019-01-05', 'ACTIVE', 'STUDENT'),
+       ('c@iride.pl', 'qweqwe', '2016-05-05', 'ACTIVE', 'STUDENT'),
+       ('d@iride.pl', 'aqaqaq', '2018-05-05', 'ACTIVE', 'INSTRUCTOR'),
+       ('e@iride.pl', 'qwerty', '2019-02-02', 'ACTIVE', 'INSTRUCTOR'),
+       ('f@iride.pl', 'zzzzzz', '2019-12-01', 'ACTIVE', 'ADMIN');
 
 INSERT INTO student(id_login, firstname, lastname, phone_number)
 values (1, 'Jan', 'Kowalski', '694213769'),
@@ -111,16 +111,16 @@ values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),
          (3, 2, 22, 30, 17, 13, 'WAITING');
 
 insert into event(id_student, id_instructor, id_vehicle, id_course, duration, comment)
-values (1, 1, null, 1, 15, null),
-       (1, 1, null, 1, 15, null),
-       (2, 1, null, 3, 15, null),
-       (2, 1, null, 3, 15, null),
-       (2, 2, 1, 4, 4, null),
-       (2, 2, 1, 4, 4, null),
-       (3, 1, null, 5, 15, null),
-       (3, 1, null, 5, 15, null),
-       (3, 2, 1, 6, 10, null),
-       (3, 2, 1, 6, 10, null);
+values (1, 1, NULL, 1, 15, NULL),
+       (1, 1, NULL, 1, 15, NULL),
+       (2, 1, NULL, 3, 15, NULL),
+       (2, 1, NULL, 3, 15, NULL),
+       (2, 2, 1, 4, 4, NULL),
+       (2, 2, 1, 4, 4, NULL),
+       (3, 1, NULL, 5, 15, NULL),
+       (3, 1, NULL, 5, 15, NULL),
+       (3, 2, 1, 6, 10, NULL),
+       (3, 2, 1, 6, 10, NULL);
 
 
 
