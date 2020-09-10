@@ -2,16 +2,16 @@ package iRide.controller;
 
 import iRide.service.Student.StudentService;
 import iRide.service.Student.model.StudentCreateInput;
+import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController(value = "/student")
+@RestController
+@RequestMapping("/student")
 public class StudentController {
-    private StudentService studentService;
+    private final StudentService studentService;
 
     @Autowired
     public StudentController(StudentService studentService){
@@ -19,11 +19,16 @@ public class StudentController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<Object> createStudent(@RequestBody StudentCreateInput studentCreateInput){
+    public ResponseEntity<String> createStudent(@RequestBody StudentCreateInput studentCreateInput){
         if (!studentCreateInput.checkDataCompleteness()){
             return new ResponseEntity<>("Incomplete request data.", HttpStatus.BAD_REQUEST);
         }
-        studentService.createStudent(studentCreateInput);
-        return ResponseEntity.ok("git");
+        try {
+            int studentId = studentService.createStudent(studentCreateInput);
+            return ResponseEntity.ok("Student account has been created. Student id = " + studentId);
+        } catch (EmailExistsException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
     }
 }

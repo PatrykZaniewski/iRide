@@ -1,6 +1,7 @@
 package iRide.model;
 
 import iRide.service.Student.model.StudentCreateInput;
+import iRide.service.model.LoginCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -78,11 +79,11 @@ public class Login {
 
     }
 
-    public Login(StudentCreateInput studentCreateInput) {
-        this.email = studentCreateInput.getEmail();
-        this.password = studentCreateInput.getPassword();
+    public Login(LoginCreateInput loginCreateInput, String accountGroup) {
+        this.email = loginCreateInput.getEmail();
+        this.password = loginCreateInput.getPassword();
         this.creationDate = LocalDateTime.now();
         this.status = "ACTIVE";
-        this.accountGroup = "STUDENT";
+        this.accountGroup = accountGroup;
     }
 }

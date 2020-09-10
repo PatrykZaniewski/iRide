@@ -1,9 +1,12 @@
 package iRide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import iRide.service.Instructor.model.InstructorCreateInput;
+import iRide.service.Student.model.StudentCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,11 +25,13 @@ public class Instructor {
     private String firstname;
     @NotNull
     private String lastname;
-    @NotNull
     @Column(name = "employment_date")
-    private Date employmentDate;
+    private LocalDateTime employmentDate;
     @Column(name = "dismissal_date")
-    private Date dismissalDate;
+    private LocalDateTime dismissalDate;
+    @NotNull
+    @Column(name = "phone_number")
+    private String phoneNumber;
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -43,6 +48,19 @@ public class Instructor {
             inverseJoinColumns = {@JoinColumn(name = "id_vehicle")}
     )
     private Set<Vehicle> vehicles = new HashSet<>();
+
+
+    public Instructor(){
+
+    }
+
+    public Instructor(InstructorCreateInput instructorCreateInput, Login login){
+        this.firstname = instructorCreateInput.getFirstname();
+        this.lastname = instructorCreateInput.getLastname();
+        this.phoneNumber = instructorCreateInput.getPhoneNumber();
+        this.employmentDate = instructorCreateInput.getEmploymentDate();
+        this.login = login;
+    }
 
     public int getId() {
         return id;
@@ -76,20 +94,28 @@ public class Instructor {
         this.lastname = lastname;
     }
 
-    public Date getEmploymentDate() {
+    public LocalDateTime getEmploymentDate() {
         return employmentDate;
     }
 
-    public void setEmploymentDate(Date employmentDate) {
+    public void setEmploymentDate(LocalDateTime employmentDate) {
         this.employmentDate = employmentDate;
     }
 
-    public Date getDismissalDate() {
+    public LocalDateTime getDismissalDate() {
         return dismissalDate;
     }
 
-    public void setDismissalDate(Date dismissalDate) {
+    public void setDismissalDate(LocalDateTime dismissalDate) {
         this.dismissalDate = dismissalDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public Set<Category> getCategorySet() {

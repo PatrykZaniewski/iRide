@@ -1,5 +1,7 @@
 package iRide.model;
 
+import iRide.service.Student.model.StudentCreateInput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -20,6 +22,17 @@ public class Student {
     @Column(name = "phone_number")
     @NotNull
     private String phoneNumber;
+
+    public Student(){
+
+    }
+
+    public Student(StudentCreateInput studentCreateInput, Login login){
+        this.firstname = studentCreateInput.getFirstname();
+        this.lastname = studentCreateInput.getLastname();
+        this.phoneNumber = studentCreateInput.getPhoneNumber();
+        this.login = login;
+    }
 
     public int getId() {
         return id;

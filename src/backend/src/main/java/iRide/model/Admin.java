@@ -1,5 +1,7 @@
 package iRide.model;
 
+import iRide.service.Admin.model.AdminCreateInput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +21,17 @@ public class Admin {
     private String lastname;
     @NotNull
     private String phoneNumber;
+
+    public Admin() {
+
+    }
+
+    public Admin(AdminCreateInput adminCreateInput, Login login) {
+        this.firstname = adminCreateInput.getFirstname();
+        this.lastname = adminCreateInput.getLastname();
+        this.phoneNumber = adminCreateInput.getPhoneNumber();
+        this.login = login;
+    }
 
     public int getId() {
         return id;
