@@ -1,6 +1,6 @@
 package iRide.model;
 
-import iRide.service.Admin.model.AdminCreateInput;
+import iRide.service.Admin.model.input.AdminCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

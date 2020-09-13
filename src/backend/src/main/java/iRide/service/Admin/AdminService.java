@@ -1,12 +1,9 @@
 package iRide.service.Admin;
 
 import iRide.model.Admin;
-import iRide.model.Instructor;
 import iRide.model.Login;
 import iRide.repository.AdminRepository;
-import iRide.repository.InstructorRepository;
-import iRide.service.Admin.model.AdminCreateInput;
-import iRide.service.Instructor.model.InstructorCreateInput;
+import iRide.service.Admin.model.input.AdminCreateInput;
 import iRide.service.Login.LoginService;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;

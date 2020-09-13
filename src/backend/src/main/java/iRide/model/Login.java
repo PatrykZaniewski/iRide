@@ -1,6 +1,5 @@
 package iRide.model;
 
-import iRide.service.Student.model.StudentCreateInput;
 import iRide.service.model.LoginCreateInput;
 
 import javax.persistence.*;

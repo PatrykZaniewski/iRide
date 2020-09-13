@@ -3,7 +3,7 @@ package iRide.service.Instructor;
 import iRide.model.Instructor;
 import iRide.model.Login;
 import iRide.repository.InstructorRepository;
-import iRide.service.Instructor.model.InstructorCreateInput;
+import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.service.Login.LoginService;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;

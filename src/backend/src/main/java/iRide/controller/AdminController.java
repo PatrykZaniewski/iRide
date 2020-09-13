@@ -1,9 +1,7 @@
 package iRide.controller;
 
 import iRide.service.Admin.AdminService;
-import iRide.service.Admin.model.AdminCreateInput;
-import iRide.service.Instructor.InstructorService;
-import iRide.service.Instructor.model.InstructorCreateInput;
+import iRide.service.Admin.model.input.AdminCreateInput;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

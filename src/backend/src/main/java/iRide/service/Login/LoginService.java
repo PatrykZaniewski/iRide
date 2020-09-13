@@ -2,7 +2,6 @@ package iRide.service.Login;
 
 import iRide.model.Login;
 import iRide.repository.LoginRepository;
-import iRide.service.Student.model.StudentCreateInput;
 import iRide.service.model.LoginCreateInput;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;

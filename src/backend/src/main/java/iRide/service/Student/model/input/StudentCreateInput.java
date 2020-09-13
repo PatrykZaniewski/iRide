@@ -1,25 +1,20 @@
-package iRide.service.Instructor.model;
+package iRide.service.Student.model.input;
 
 import iRide.service.model.LoginCreateInput;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
-public class InstructorCreateInput {
+public class StudentCreateInput {
     private String email;
     private String password;
     private String firstname;
     private String lastname;
-    private LocalDateTime employmentDate;
     private String phoneNumber;
-    private List<String> categories;
 
     public LoginCreateInput getLoginCreateInput(){
         return new LoginCreateInput(this.email, this.password);
     }
 
     public Boolean checkDataCompleteness(){
-        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null;
+        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null;
     }
 
     public String getEmail() {
@@ -54,14 +49,6 @@ public class InstructorCreateInput {
         this.lastname = lastname;
     }
 
-    public LocalDateTime getEmploymentDate() {
-        return employmentDate;
-    }
-
-    public void setEmploymentDate(LocalDateTime employmentDate) {
-        this.employmentDate = employmentDate;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -69,12 +56,5 @@ public class InstructorCreateInput {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public List<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
-    }
 }
+

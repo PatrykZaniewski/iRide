@@ -1,7 +1,7 @@
 package iRide.controller;
 
 import iRide.service.Student.StudentService;
-import iRide.service.Student.model.StudentCreateInput;
+import iRide.service.Student.model.input.StudentCreateInput;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,9 +1,7 @@
 package iRide.controller;
 
 import iRide.service.Instructor.InstructorService;
-import iRide.service.Instructor.model.InstructorCreateInput;
-import iRide.service.Student.StudentService;
-import iRide.service.Student.model.StudentCreateInput;
+import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.utils.exceptions.EmailExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +30,5 @@ public class InstructorController {
         } catch (EmailExistsException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-
     }
 }

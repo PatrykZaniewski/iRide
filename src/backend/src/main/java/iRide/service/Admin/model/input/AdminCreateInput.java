@@ -1,19 +1,19 @@
-package iRide.service.Student.model;
+package iRide.service.Admin.model.input;
 
 import iRide.service.model.LoginCreateInput;
 
-public class StudentCreateInput {
+public class AdminCreateInput {
     private String email;
     private String password;
     private String firstname;
     private String lastname;
     private String phoneNumber;
 
-    public LoginCreateInput getLoginCreateInput(){
+    public LoginCreateInput getLoginCreateInput() {
         return new LoginCreateInput(this.email, this.password);
     }
 
-    public Boolean checkDataCompleteness(){
+    public Boolean checkDataCompleteness() {
         return email != null && password != null && firstname != null && lastname != null && phoneNumber != null;
     }
 
@@ -57,4 +57,3 @@ public class StudentCreateInput {
         this.phoneNumber = phoneNumber;
     }
 }
-

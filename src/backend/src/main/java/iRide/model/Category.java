@@ -1,5 +1,7 @@
 package iRide.model;
 
+import iRide.service.Category.model.input.CategoryCreateInput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -39,5 +41,14 @@ public class Category {
 
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
+    }
+
+    public Category(){
+
+    }
+
+    public Category(CategoryCreateInput categoryCreateInput){
+        this.categoryName = categoryCreateInput.getCategoryName();
+        this.categoryType = categoryCreateInput.getCategoryType();
     }
 }

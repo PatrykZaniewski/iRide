@@ -1,13 +1,11 @@
 package iRide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import iRide.service.Instructor.model.InstructorCreateInput;
-import iRide.service.Student.model.StudentCreateInput;
+import iRide.service.Instructor.model.input.InstructorCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
