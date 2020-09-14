@@ -1,5 +1,7 @@
 package iRide.service.Instructor.model.input;
 
+import iRide.model.Category;
+import iRide.service.Category.model.input.CategoryCreateInput;
 import iRide.service.model.LoginCreateInput;
 
 import java.time.LocalDateTime;
@@ -12,14 +14,15 @@ public class InstructorCreateInput {
     private String lastname;
     private LocalDateTime employmentDate;
     private String phoneNumber;
-    private List<String> categories;
+    //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
+    private List<Category> categories;
 
     public LoginCreateInput getLoginCreateInput(){
         return new LoginCreateInput(this.email, this.password);
     }
 
     public Boolean checkDataCompleteness(){
-        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null;
+        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null && categories != null;
     }
 
     public String getEmail() {
@@ -70,11 +73,11 @@ public class InstructorCreateInput {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<String> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
+    public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
 }

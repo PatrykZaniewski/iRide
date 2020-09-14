@@ -16,6 +16,7 @@ public class Category {
     private String categoryName;
     @NotNull
     @Column(name = "category_type")
+    //TODO moze enumy?
     private String categoryType;
 
 

@@ -1,5 +1,6 @@
 package iRide.controller;
 
+import iRide.service.Category.CategoryService;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.utils.exceptions.EmailExistsException;
@@ -13,10 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("/instructor")
 public class InstructorController {
     private final InstructorService instructorService;
+    private final CategoryService categoryService;
 
     @Autowired
-    public InstructorController(InstructorService instructorService){
+    public InstructorController(InstructorService instructorService, CategoryService categoryService){
         this.instructorService = instructorService;
+        this.categoryService = categoryService;
     }
 
     @PostMapping(value = "/create")

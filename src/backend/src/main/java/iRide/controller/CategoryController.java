@@ -2,6 +2,7 @@ package iRide.controller;
 
 import iRide.service.Category.CategoryService;
 import iRide.service.Category.model.input.CategoryCreateInput;
+import iRide.utils.exceptions.CategoryExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +25,11 @@ public class CategoryController {
         if (!categoryCreateInput.checkDataCompleteness()){
             return new ResponseEntity<>("Incomplete request data.", HttpStatus.BAD_REQUEST);
         }
-        //TODO sprawdzenie czy istnieje juz taka para
-        int categoryId = categoryService.createCategory(categoryCreateInput);
-        return ResponseEntity.ok("Category has been created. Category id = " + categoryId);
+        try {
+            int categoryId = categoryService.createCategory(categoryCreateInput);
+            return ResponseEntity.ok("Category has been created. Category id = " + categoryId);
+        } catch (CategoryExistsException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
