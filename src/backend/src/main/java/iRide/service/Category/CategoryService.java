@@ -4,6 +4,7 @@ import iRide.model.Category;
 import iRide.repository.CategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
 import iRide.utils.exceptions.CategoryExistsException;
+import iRide.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +18,19 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public int createCategory(CategoryCreateInput categoryCreateInput) throws CategoryExistsException {
-        if (getCategoryId(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) != -1){
-            throw new CategoryExistsException("Combination of " + categoryCreateInput.getCategoryName() + " and " + categoryCreateInput.getCategoryType() + " already exists");
+    public int createCategory(CategoryCreateInput categoryCreateInput) throws CategoryExistsException, NotFoundException {
+        //TODO ta funkcja z dolu wyrzuca exception w tej u gory
+        if (getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) != -1){
+            throw new CategoryExistsException("Category combination of " + categoryCreateInput.getCategoryName() + " and " + categoryCreateInput.getCategoryType() + " already exists");
         }
         return categoryRepository.save(new Category(categoryCreateInput)).getId();
     }
 
-    public int getCategoryId(String categoryName, String categoryType){
-        if (categoryRepository.getCategoryIdByNameByType(categoryName, categoryType).isPresent())
+    public int getCategoryByNameAndType(String categoryName, String categoryType) throws NotFoundException {
+        if (!categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent())
         {
-            return categoryRepository.getCategoryIdByNameByType(categoryName, categoryType).get();
+            throw new NotFoundException("Category combination of " +  categoryName + " and " + categoryType + " has not been found");
         }
-        return -1;
+        return categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
     }
 }

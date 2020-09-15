@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface LoginRepository extends JpaRepository<Login, Long>{
+public interface LoginRepository extends JpaRepository<Login, Integer>{
 
     @Query("SELECT login FROM Login WHERE login.email == ?1")
     Optional<Login> getLoginByEmail(String email);

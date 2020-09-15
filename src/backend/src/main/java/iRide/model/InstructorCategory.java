@@ -25,6 +25,15 @@ public class InstructorCategory {
         this.id = id;
     }
 
+    public InstructorCategory(){
+
+    }
+
+    public InstructorCategory(@NotNull Instructor instructor, @NotNull Category category) {
+        this.instructor = instructor;
+        this.category = category;
+    }
+
     public Instructor getInstructor() {
         return instructor;
     }
