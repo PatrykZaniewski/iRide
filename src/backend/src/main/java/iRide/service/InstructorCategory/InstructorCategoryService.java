@@ -22,7 +22,7 @@ public class InstructorCategoryService {
     private final InstructorService instructorService;
 
     @Autowired
-    public InstructorCategoryService(InstructorCategoryRepository instructorCategoryRepository, CategoryService categoryService, InstructorService instructorService){
+    public InstructorCategoryService(InstructorCategoryRepository instructorCategoryRepository, CategoryService categoryService, InstructorService instructorService) {
         this.instructorCategoryRepository = instructorCategoryRepository;
         this.categoryService = categoryService;
         this.instructorService = instructorService;
@@ -30,9 +30,9 @@ public class InstructorCategoryService {
 
     public int assignCategoriesToInstructor(ArrayList<InstructorCategoryInput> instructorCategoryInputs, int instructorId) throws NotFoundException {
         Instructor instructor = instructorService.getInstructorById(instructorId);
-        for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs){
-            int categoryId = categoryService.getCategoryId(instructorCategoryInput.getCategoryName(), instructorCategoryInput.getCategoryType());
-            InstructorCategory instructorCategory = new InstructorCategory(instructor, categoryId);
+        for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs) {
+            int categoryId = categoryService.getCategoryByNameAndType(instructorCategoryInput.getCategoryName(), instructorCategoryInput.getCategoryType()) == null ? it
+                    InstructorCategory instructorCategory = new InstructorCategory(instructor, categoryId);
             //TODO liczenie ile dodanych kategorii + walidacja
         }
     }

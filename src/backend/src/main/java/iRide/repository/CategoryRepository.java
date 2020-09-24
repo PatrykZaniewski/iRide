@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
     @Query("SELECT category FROM Category WHERE category.category_name == ?1 AND category.category_type == ?2")
-    Optional<Integer> getCategoryByNameByType(String categoryName, String categoryType);
+    Optional<Category> getCategoryByNameByType(String categoryName, String categoryType);
 
 
 }

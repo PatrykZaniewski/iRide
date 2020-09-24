@@ -15,21 +15,19 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Autowired
-    public CategoryController(CategoryService categoryService){
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
-//    TODO moze przejsc na modele zwracane w response entity?
+    //    TODO moze przejsc na modele zwracane w response entity?
+    // TODO moze przejsc z exceptionow na -1
     @PostMapping(value = "/create")
-    public ResponseEntity<String> createCategory (@RequestBody CategoryCreateInput categoryCreateInput){
-        if (!categoryCreateInput.checkDataCompleteness()){
+    public ResponseEntity<String> createCategory(@RequestBody CategoryCreateInput categoryCreateInput) {
+        if (!categoryCreateInput.checkDataCompleteness()) {
             return new ResponseEntity<>("Incomplete request data.", HttpStatus.BAD_REQUEST);
         }
-        try {
-            int categoryId = categoryService.createCategory(categoryCreateInput);
-            return ResponseEntity.ok("Category has been created. Category id = " + categoryId);
-        } catch (CategoryExistsException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        int categoryId = categoryService.createCategory(categoryCreateInput);
+        return ResponseEntity.ok("Category has been created. Category id = " + categoryId);
+
     }
 }

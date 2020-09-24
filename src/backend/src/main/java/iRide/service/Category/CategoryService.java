@@ -14,22 +14,21 @@ public class CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository){
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
-    public int createCategory(CategoryCreateInput categoryCreateInput) throws CategoryExistsException, NotFoundException {
+    public int createCategory(CategoryCreateInput categoryCreateInput) {
         //TODO ta funkcja z dolu wyrzuca exception w tej u gory
-        if (getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) != -1){
-            throw new CategoryExistsException("Category combination of " + categoryCreateInput.getCategoryName() + " and " + categoryCreateInput.getCategoryType() + " already exists");
+        if (getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) == null) {
+            return -1;
         }
         return categoryRepository.save(new Category(categoryCreateInput)).getId();
     }
 
-    public int getCategoryByNameAndType(String categoryName, String categoryType) throws NotFoundException {
-        if (!categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent())
-        {
-            throw new NotFoundException("Category combination of " +  categoryName + " and " + categoryType + " has not been found");
+    public Category getCategoryByNameAndType(String categoryName, String categoryType) {
+        if (!categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent()) {
+            return null;
         }
         return categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
     }
