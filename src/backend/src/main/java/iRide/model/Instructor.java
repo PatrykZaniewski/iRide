@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity(name = "instructor")
+@Entity
+@Table(name = "instructor")
 public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Instructor {
     @NotNull
     private String lastname;
     @Column(name = "employment_date")
+    @NotNull
     private LocalDateTime employmentDate;
     @Column(name = "dismissal_date")
     private LocalDateTime dismissalDate;
@@ -52,12 +54,11 @@ public class Instructor {
 
     }
 
-    public Instructor(InstructorCreateInput instructorCreateInput, Login login){
+    public Instructor(InstructorCreateInput instructorCreateInput){
         this.firstname = instructorCreateInput.getFirstname();
         this.lastname = instructorCreateInput.getLastname();
         this.phoneNumber = instructorCreateInput.getPhoneNumber();
         this.employmentDate = instructorCreateInput.getEmploymentDate();
-        this.login = login;
     }
 
     public int getId() {

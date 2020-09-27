@@ -2,15 +2,17 @@ package iRide.controller;
 
 import iRide.service.Admin.AdminService;
 import iRide.service.Admin.model.input.AdminCreateInput;
-import iRide.utils.exceptions.EmailExistsException;
+import iRide.utils.exceptions.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/admin")
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
     private final AdminService adminService;
 
@@ -27,7 +29,7 @@ public class AdminController {
         try {
             int adminId = adminService.createAdmin(adminCreateInput);
             return ResponseEntity.ok("Instructor account has been created. Student id = " + adminId);
-        } catch (EmailExistsException e) {
+        } catch (DataExistsException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 

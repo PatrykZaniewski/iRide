@@ -16,15 +16,15 @@ services:
   #      - app
   #    stdin_open: true
 
-  application:
-    build: ../src/backend
-    restart: unless-stopped
-    volumes:
-      - ../src/backend/target/iRide-Backend-1.0-SNAPSHOT.jar:/iRide-Backend-1.0-SNAPSHOT.jar
-    ports:
-      - "18080:8080"
-    depends_on:
-      - database
+#  application:
+#    build: ../src/backend
+#    restart: unless-stopped
+#    volumes:
+#      - ../src/backend/target/iRide-Backend-1.0-SNAPSHOT.jar:/iRide-Backend-1.0-SNAPSHOT.jar
+#    ports:
+#      - "18080:8080"
+#    depends_on:
+#      - database
 
   database:
     image: postgres:latest

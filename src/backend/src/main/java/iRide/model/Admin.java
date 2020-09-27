@@ -26,11 +26,10 @@ public class Admin {
 
     }
 
-    public Admin(AdminCreateInput adminCreateInput, Login login) {
+    public Admin(AdminCreateInput adminCreateInput) {
         this.firstname = adminCreateInput.getFirstname();
         this.lastname = adminCreateInput.getLastname();
         this.phoneNumber = adminCreateInput.getPhoneNumber();
-        this.login = login;
     }
 
     public int getId() {

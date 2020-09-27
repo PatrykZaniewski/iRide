@@ -5,7 +5,7 @@ import iRide.model.Login;
 import iRide.repository.AdminRepository;
 import iRide.service.Admin.model.input.AdminCreateInput;
 import iRide.service.Login.LoginService;
-import iRide.utils.exceptions.EmailExistsException;
+import iRide.utils.exceptions.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +21,10 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public int createAdmin(AdminCreateInput adminCreateInput) throws EmailExistsException {
+    public int createAdmin(AdminCreateInput adminCreateInput) throws DataExistsException {
+        Admin admin = adminRepository.save(new Admin(adminCreateInput));
         Login login = loginService.createLogin(adminCreateInput.getLoginCreateInput(), "ADMIN");
-        Admin admin = adminRepository.save(new Admin(adminCreateInput, login));
-        return admin.getId();
+        admin.setLogin(login);
+        return adminRepository.save(admin).getId();
     }
 }

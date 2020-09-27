@@ -5,7 +5,8 @@ import iRide.service.Category.model.input.CategoryCreateInput;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "category")
+@Entity
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

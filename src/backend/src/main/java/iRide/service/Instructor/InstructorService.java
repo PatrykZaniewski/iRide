@@ -5,8 +5,9 @@ import iRide.model.Login;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.service.Login.LoginService;
-import iRide.utils.exceptions.EmailExistsException;
+import iRide.utils.exceptions.DataExistsException;
 import iRide.utils.exceptions.NotFoundException;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,15 +25,17 @@ public class InstructorService {
         this.instructorRepository = instructorRepository;
     }
 
-    public int createInstructor(InstructorCreateInput instructorCreateInput) throws EmailExistsException {
+    public int createInstructor(InstructorCreateInput instructorCreateInput) {
+        Instructor instructor = new Instructor(instructorCreateInput);
         Login login = loginService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
-        Instructor instructor = instructorRepository.save(new Instructor(instructorCreateInput, login));
-        return instructor.getId();
+        System.out.println("AAAAA");
+        instructor.setLogin(login);
+        return instructorRepository.save(instructor).getId();
     }
 
     public Instructor getInstructorById(int instructorId) throws NotFoundException {
         Optional<Instructor> instructor = instructorRepository.findById(instructorId);
-        if (!instructor.isPresent()){
+        if (!instructor.isPresent()) {
             throw new NotFoundException("Instructor with id = " + instructorId + " has not been found");
         }
         return instructor.get();

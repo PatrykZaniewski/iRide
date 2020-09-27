@@ -5,7 +5,8 @@ import iRide.service.Student.model.input.StudentCreateInput;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "student")
+@Entity
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +28,10 @@ public class Student {
 
     }
 
-    public Student(StudentCreateInput studentCreateInput, Login login){
+    public Student(StudentCreateInput studentCreateInput){
         this.firstname = studentCreateInput.getFirstname();
         this.lastname = studentCreateInput.getLastname();
         this.phoneNumber = studentCreateInput.getPhoneNumber();
-        this.login = login;
     }
 
     public int getId() {

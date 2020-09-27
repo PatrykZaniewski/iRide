@@ -1,7 +1,7 @@
 package iRide.service.Instructor.model.input;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import iRide.model.Category;
-import iRide.service.Category.model.input.CategoryCreateInput;
 import iRide.service.model.LoginCreateInput;
 
 import java.time.LocalDateTime;
@@ -12,7 +12,9 @@ public class InstructorCreateInput {
     private String password;
     private String firstname;
     private String lastname;
+    @JsonProperty("employment_date")
     private LocalDateTime employmentDate;
+    @JsonProperty("phone_number")
     private String phoneNumber;
     //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
     private List<Category> categories;
@@ -22,7 +24,7 @@ public class InstructorCreateInput {
     }
 
     public Boolean checkDataCompleteness(){
-        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null && categories != null;
+        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null;
     }
 
     public String getEmail() {

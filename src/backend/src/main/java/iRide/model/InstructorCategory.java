@@ -3,7 +3,8 @@ package iRide.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity(name = "instructor_category")
+@Entity
+@Table(name = "instructor_category")
 public class InstructorCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

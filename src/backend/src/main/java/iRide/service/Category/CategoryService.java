@@ -32,4 +32,5 @@ public class CategoryService {
         }
         return categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
     }
+
 }

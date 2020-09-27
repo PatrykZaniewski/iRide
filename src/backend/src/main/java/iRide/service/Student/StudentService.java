@@ -5,7 +5,7 @@ import iRide.model.Student;
 import iRide.repository.StudentRepository;
 import iRide.service.Login.LoginService;
 import iRide.service.Student.model.input.StudentCreateInput;
-import iRide.utils.exceptions.EmailExistsException;
+import iRide.utils.exceptions.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,11 @@ public class StudentService {
         this.loginService = loginService;
     }
 
-    public int createStudent(StudentCreateInput studentCreateInput) throws EmailExistsException {
+    public int createStudent(StudentCreateInput studentCreateInput) throws DataExistsException {
+        Student student = studentRepository.save(new Student(studentCreateInput));
         Login login = loginService.createLogin(studentCreateInput.getLoginCreateInput(), "STUDENT");
-        Student student = studentRepository.save(new Student(studentCreateInput, login));
-        return student.getId();
+        student.setLogin(login);
+        return studentRepository.save(student).getId();
     }
 
 

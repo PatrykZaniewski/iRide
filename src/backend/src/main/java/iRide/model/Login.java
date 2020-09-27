@@ -6,7 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-@Entity(name = "login")
+@Entity
+@Table(name = "login")
 public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

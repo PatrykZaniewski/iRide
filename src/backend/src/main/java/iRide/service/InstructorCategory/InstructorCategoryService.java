@@ -28,13 +28,21 @@ public class InstructorCategoryService {
         this.instructorService = instructorService;
     }
 
-    public int assignCategoriesToInstructor(ArrayList<InstructorCategoryInput> instructorCategoryInputs, int instructorId) throws NotFoundException {
-        Instructor instructor = instructorService.getInstructorById(instructorId);
-        for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs) {
-            int categoryId = categoryService.getCategoryByNameAndType(instructorCategoryInput.getCategoryName(), instructorCategoryInput.getCategoryType()) == null ? it
-                    InstructorCategory instructorCategory = new InstructorCategory(instructor, categoryId);
-            //TODO liczenie ile dodanych kategorii + walidacja
+    public int assignCategoriesToInstructor(ArrayList<InstructorCategoryInput> instructorCategoryInputs, int instructorId){
+        Instructor instructor = null;
+        try {
+            instructor = instructorService.getInstructorById(instructorId);
+            for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs) {
+                Category category = categoryService.getCategoryByNameAndType(instructorCategoryInput.getCategoryName(), instructorCategoryInput.getCategoryType());
+                InstructorCategory instructorCategory = new InstructorCategory(instructor, category);
+
+                return instructorCategoryRepository.save(instructorCategory).getId();
+                //TODO liczenie ile dodanych kategorii + walidacja
+            }
+        } catch (NotFoundException e) {
+            e.printStackTrace();
         }
+        return -1;
     }
 
 }
