@@ -28,7 +28,6 @@ public class InstructorService {
     public int createInstructor(InstructorCreateInput instructorCreateInput) {
         Instructor instructor = new Instructor(instructorCreateInput);
         Login login = loginService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
-        System.out.println("AAAAA");
         instructor.setLogin(login);
         return instructorRepository.save(instructor).getId();
     }

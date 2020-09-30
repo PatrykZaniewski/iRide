@@ -1,6 +1,8 @@
 package iRide.service.Instructor.model.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import iRide.enums.CategoryName;
+import iRide.enums.CategoryType;
 import iRide.model.Category;
 import iRide.service.model.LoginCreateInput;
 
@@ -8,6 +10,20 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class InstructorCreateInput {
+
+    private static class InstructorCategoryAssignInput{
+        private CategoryType categoryType;
+        private CategoryName categoryName;
+
+        public CategoryType getCategoryType() {
+            return categoryType;
+        }
+
+        public CategoryName getCategoryName() {
+            return categoryName;
+        }
+    }
+
     private String email;
     private String password;
     private String firstname;
@@ -17,7 +33,7 @@ public class InstructorCreateInput {
     @JsonProperty("phone_number")
     private String phoneNumber;
     //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
-    private List<Category> categories;
+    private List<InstructorCategoryAssignInput> categories;
 
     public LoginCreateInput getLoginCreateInput(){
         return new LoginCreateInput(this.email, this.password);
@@ -75,11 +91,11 @@ public class InstructorCreateInput {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
+//    public List<Category> getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(List<Category> categories) {
+//        this.categories = categories;
+//    }
 }
