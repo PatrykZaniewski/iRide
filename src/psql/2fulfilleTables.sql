@@ -1,4 +1,4 @@
-INSERT INTO login(email, password, creation_date, status, account_group)
+INSERT INTO user_(email, password, creation_date, status, account_role)
 values ('a@iride.pl', '123123', '2019-03-05', 'ACTIVE', 'STUDENT'),
        ('b@iride.pl', 'aaaaa', '2019-01-05', 'ACTIVE', 'STUDENT'),
        ('c@iride.pl', 'qweqwe', '2016-05-05', 'ACTIVE', 'STUDENT'),
@@ -6,17 +6,17 @@ values ('a@iride.pl', '123123', '2019-03-05', 'ACTIVE', 'STUDENT'),
        ('e@iride.pl', 'qwerty', '2019-02-02', 'ACTIVE', 'INSTRUCTOR'),
        ('f@iride.pl', 'zzzzzz', '2019-12-01', 'ACTIVE', 'ADMIN');
 
-INSERT INTO student(id_login, firstname, lastname, phone_number)
+INSERT INTO student(id_user, firstname, lastname, phone_number)
 values (1, 'Jan', 'Kowalski', '694213769'),
        (2, 'Adam', 'Konieczny', '501487748'),
        (3, 'Joanna', 'Szybka', '503665482');
 
 
-INSERT INTO instructor(id_login, firstname, lastname, employment_date, phone_number)
+INSERT INTO instructor(id_user, firstname, lastname, employment_date, phone_number)
 values (4, 'Monika', 'Słoneczna', '2016-01-01', '554857689'),
        (5, 'Paweł', 'Andrut', '2019-03-01', '684584889');
 
-INSERT INTO admin(id_login, firstname, lastname, phone_number)
+INSERT INTO admin(id_user, firstname, lastname, phone_number)
 values (6, 'Tadeusz', 'Mysz', '556445778');
 
 INSERT INTO category(category_name, category_type)
@@ -79,7 +79,6 @@ values (1, 1),
         (1, 20),
         (1, 21),
         (1, 22),
-        (1, 23),
         (2, 21),
         (2, 22),
         (2, 23),
@@ -89,8 +88,7 @@ values (1, 1),
         (2, 27),
         (2, 28),
         (2, 29),
-        (2, 30),
-        (2, 31);
+        (2, 30);
 
 insert into instructor_vehicle(id_instructor, id_vehicle)
 values (1, 1),

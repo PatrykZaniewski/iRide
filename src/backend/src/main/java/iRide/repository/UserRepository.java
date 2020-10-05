@@ -1,6 +1,6 @@
 package iRide.repository;
 
-import iRide.model.Login;
+import iRide.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface LoginRepository extends JpaRepository<Login, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer>{
 
-    @Query("SELECT login FROM Login login WHERE login.email = ?1")
-    Optional<Login> getLoginByEmail(String email);
+    @Query("SELECT user FROM User user WHERE user.email = ?1")
+    Optional<User> getUserByEmail(String email);
 
 }

@@ -1,13 +1,11 @@
 package iRide.service.Instructor;
 
 import iRide.model.Instructor;
-import iRide.model.Login;
+import iRide.model.User;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
-import iRide.service.Login.LoginService;
-import iRide.utils.exceptions.DataExistsException;
+import iRide.service.User.UserService;
 import iRide.utils.exceptions.NotFoundException;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +14,19 @@ import java.util.Optional;
 @Service
 public class InstructorService {
 
-    private final LoginService loginService;
+    private final UserService userService;
     private final InstructorRepository instructorRepository;
 
     @Autowired
-    public InstructorService(LoginService loginService, InstructorRepository instructorRepository) {
-        this.loginService = loginService;
+    public InstructorService(UserService userService, InstructorRepository instructorRepository) {
+        this.userService = userService;
         this.instructorRepository = instructorRepository;
     }
 
     public int createInstructor(InstructorCreateInput instructorCreateInput) {
         Instructor instructor = new Instructor(instructorCreateInput);
-        Login login = loginService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
-        instructor.setLogin(login);
+        User user = userService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
+        instructor.setLogin(user);
         return instructorRepository.save(instructor).getId();
     }
 

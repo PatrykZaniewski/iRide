@@ -1,14 +1,19 @@
 package iRide.model;
 
 import iRide.service.model.LoginCreateInput;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.lang.reflect.Array;
 import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
-@Table(name = "login")
-public class Login {
+@Table(name = "user_")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
@@ -24,8 +29,8 @@ public class Login {
     @NotNull
     private String status;
     @NotNull
-    @Column(name = "account_group")
-    private String accountGroup;
+    @Column(name = "account_role")
+    private String accountRole;
 
     public int getId() {
         return id;
@@ -67,23 +72,23 @@ public class Login {
         this.status = status;
     }
 
-    public String getAccountGroup() {
-        return accountGroup;
+    public String getAccountRole() {
+        return accountRole;
     }
 
-    public void setAccountGroup(String accountGroup) {
-        this.accountGroup = accountGroup;
+    public void setAccountRole(String accountRole) {
+        this.accountRole = accountRole;
     }
 
-    public Login() {
+    public User() {
 
     }
 
-    public Login(LoginCreateInput loginCreateInput, String accountGroup) {
+    public User(LoginCreateInput loginCreateInput, String accountRole) {
         this.email = loginCreateInput.getEmail();
         this.password = loginCreateInput.getPassword();
         this.creationDate = LocalDateTime.now();
         this.status = "ACTIVE";
-        this.accountGroup = accountGroup;
+        this.accountRole = accountRole;
     }
 }

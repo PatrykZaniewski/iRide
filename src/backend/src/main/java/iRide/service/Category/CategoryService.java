@@ -3,8 +3,6 @@ package iRide.service.Category;
 import iRide.model.Category;
 import iRide.repository.CategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
-import iRide.utils.exceptions.CategoryExistsException;
-import iRide.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

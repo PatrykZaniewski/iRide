@@ -1,10 +1,10 @@
 package iRide.service.Admin;
 
 import iRide.model.Admin;
-import iRide.model.Login;
+import iRide.model.User;
 import iRide.repository.AdminRepository;
 import iRide.service.Admin.model.input.AdminCreateInput;
-import iRide.service.Login.LoginService;
+import iRide.service.User.UserService;
 import iRide.utils.exceptions.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,19 +12,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminService {
 
-    private final LoginService loginService;
+    private final UserService userService;
     private final AdminRepository adminRepository;
 
     @Autowired
-    public AdminService(LoginService loginService, AdminRepository adminRepository) {
-        this.loginService = loginService;
+    public AdminService(UserService userService, AdminRepository adminRepository) {
+        this.userService = userService;
         this.adminRepository = adminRepository;
     }
 
     public int createAdmin(AdminCreateInput adminCreateInput) throws DataExistsException {
         Admin admin = adminRepository.save(new Admin(adminCreateInput));
-        Login login = loginService.createLogin(adminCreateInput.getLoginCreateInput(), "ADMIN");
-        admin.setLogin(login);
+        User user = userService.createLogin(adminCreateInput.getLoginCreateInput(), "ADMIN");
+        admin.setLogin(user);
         return adminRepository.save(admin).getId();
     }
 }

@@ -15,7 +15,7 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_login", referencedColumnName = "id")
     @NotNull
-    private Login login;
+    private User user;
     @NotNull
     private String firstname;
     @NotNull
@@ -42,12 +42,12 @@ public class Student {
         this.id = id;
     }
 
-    public Login getLogin() {
-        return login;
+    public User getLogin() {
+        return user;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setLogin(User user) {
+        this.user = user;
     }
 
     public String getFirstname() {

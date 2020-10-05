@@ -2,7 +2,6 @@ package iRide.controller;
 
 import iRide.service.Category.CategoryService;
 import iRide.service.Category.model.input.CategoryCreateInput;
-import iRide.utils.exceptions.CategoryExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

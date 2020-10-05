@@ -1,11 +1,11 @@
-CREATE TABLE public.login
+CREATE TABLE public.user_
 (
     id            serial     NOT NULL,
     email         text          NOT NULL,
     password      varchar(1024) NOT NULL,
     creation_date date          NOT NULL,
     status        varchar(16)   NOT NULL,
-    account_group varchar(16)   NOT NULL,
+    account_role varchar(16)   NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)
 );
@@ -13,36 +13,36 @@ CREATE TABLE public.login
 CREATE TABLE public.student
 (
     id           serial    NOT NULL,
-    id_login     integer    NOT NULL,
+    id_user     integer    NOT NULL,
     firstname    varchar(128) NOT NULL,
     lastname     varchar(128) NOT NULL,
     phone_number varchar(16)  NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_login) REFERENCES public.login (id)
+    FOREIGN KEY (id_user) REFERENCES public.user_ (id)
 );
 
 CREATE TABLE public.instructor
 (
     id              serial    NOT NULL,
-    id_login        integer    NOT NULL,
+    id_user        integer    NOT NULL,
     firstname       varchar(128) NOT NULL,
     lastname        varchar(128) NOT NULL,
     employment_date date         NOT NULL,
     dismissal_date  date,
     phone_number    varchar(16)  NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_login) REFERENCES public.login (id)
+    FOREIGN KEY (id_user) REFERENCES public.user_ (id)
 );
 
 CREATE TABLE public.admin
 (
     id           serial    NOT NULL,
-    id_login     integer    NOT NULL,
+    id_user     integer    NOT NULL,
     firstname    varchar(128) NOT NULL,
     lastname     varchar(128) NOT NULL,
     phone_number varchar(16)  NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_login) REFERENCES public.login (id)
+    FOREIGN KEY (id_user) REFERENCES public.user_ (id)
 );
 
 CREATE TABLE public.category
@@ -97,8 +97,8 @@ CREATE TABLE public.course
     hours_done      int         NOT NULL,
     status          varchar(16) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_student) REFERENCES public.login (id),
-    FOREIGN KEY (id_instructor) REFERENCES public.login (id),
+    FOREIGN KEY (id_student) REFERENCES public.user_ (id),
+    FOREIGN KEY (id_instructor) REFERENCES public.user_ (id),
     FOREIGN KEY (id_category) REFERENCES public.category (id)
 );
 
