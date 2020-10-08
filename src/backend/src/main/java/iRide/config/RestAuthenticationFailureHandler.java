@@ -17,6 +17,7 @@ public class RestAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
                                         AuthenticationException exception) throws IOException, ServletException {
         super.onAuthenticationFailure(request, response, exception);
-        response.setStatus(HttpStatus.I_AM_A_TEAPOT.value());
+        response.setStatus(HttpStatus.FORBIDDEN.value());
+        response.getOutputStream().println(exception.getMessage());
     }
 }

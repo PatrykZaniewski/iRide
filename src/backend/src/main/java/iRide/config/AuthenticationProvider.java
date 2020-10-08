@@ -5,13 +5,17 @@ import iRide.service.User.UserService;
 import iRide.utils.exceptions.EmailConfirmationException;
 import iRide.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountStatusException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
+import javax.security.auth.login.AccountLockedException;
 
 @Component
 public class AuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
@@ -28,21 +32,22 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
 
     @Override
     protected UserDetails retrieveUser(String email, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        try {
-            User user = userService.getUserByEmail(email);
-            if (user.getStatus().equals("PENDING_CONFIRMATION")){
-                throw new EmailConfirmationException("Address email need to be confirmed before logging in.");
-            }
-            if (!user.getPassword().equals(usernamePasswordAuthenticationToken.getCredentials().toString())){
-                throw new NotFoundException("Typed email and/or password is not correct.");
-            }
-
-
-            //FIXME passwordEncoder.matches(usernamePasswordAuthenticationToken.getCredentials().toString(), user.getPassword());
-            AuthenticationUserDetails userDetails = new AuthenticationUserDetails(user);
-            return userDetails;
-        } catch (NotFoundException e){
-            throw e;
+        User user = userService.getUserByEmail(email);
+        if (user.getStatus().equals("PENDING_CONFIRMATION")) {
+            throw new AccountStatusException("Address email need to be confirmed before logging in.") {
+                @Override
+                public String getMessage() {
+                    return super.getMessage();
+                }
+            };
         }
+        if (!user.getPassword().equals(usernamePasswordAuthenticationToken.getCredentials().toString())) {
+            throw new BadCredentialsException("Typed email and/or password is not correct.");
+        }
+
+
+        //FIXME passwordEncoder.matches(usernamePasswordAuthenticationToken.getCredentials().toString(), user.getPassword());
+        AuthenticationUserDetails userDetails = new AuthenticationUserDetails(user);
+        return userDetails;
     }
 }

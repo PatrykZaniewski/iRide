@@ -4,7 +4,7 @@ CREATE TABLE public.user_
     email         text          NOT NULL,
     password      varchar(1024) NOT NULL,
     creation_date date          NOT NULL,
-    status        varchar(16)   NOT NULL,
+    status        varchar(128)   NOT NULL,
     account_role varchar(16)   NOT NULL,
     PRIMARY KEY (id),
     UNIQUE (email)

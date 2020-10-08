@@ -1,8 +1,6 @@
 package iRide.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import iRide.service.User.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -26,9 +24,9 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         ObjectMapper objectMapper = new ObjectMapper();
 
         response.setStatus(HttpStatus.OK.value());
-        String userEmail = authentication.getPrincipal().get
+        String userEmail = authentication.getPrincipal().toString();
         Map<String, String> data = new HashMap<>();
-        data.put("userID", "d");
+        data.put("userID", userEmail);
         response.getOutputStream().println(objectMapper.writeValueAsString(data));
     }
 }

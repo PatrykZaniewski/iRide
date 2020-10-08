@@ -63,10 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+                .antMatchers("/student/test").hasAnyAuthority("STUDENT","INSTRUCTOR","ADMIN")
                 .antMatchers("**").permitAll()
-                .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling().accessDeniedHandler(null);
     }
 
 }

@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -30,5 +32,16 @@ public class StudentController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @GetMapping("/test1")
+    public String get1(Principal principal){
+        System.out.println(principal);
+        return "ok1";
+    }
+
+    @GetMapping("/test")
+    public String get(){
+        return "ok";
     }
 }
