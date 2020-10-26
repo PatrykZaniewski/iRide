@@ -1,0 +1,12 @@
+1. Robert C. Martin - "Czysty kod. Podrêcznik dobrego programisty"
+2. Dokumentacja jêzyka java - https://docs.oracle.com/javase/8/docs/api/
+3. Jon Duckett - "HTML i CSS. Zaprojektuj i zbuduj witrynê WWW"
+4. Paolo Perrotta - "How Git Works" - https://app.pluralsight.com/library/courses/how-git-works
+5. Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides - "Wzorce projektowe. Elementy oprogramowania obiektowego wielokrotnego u¿ytku"
+6. Bryan Hansen - "Spring with JPA and Hibernate" - https://app.pluralsight.com/library/courses/spring-jpa-hibernate
+7. Dan Bunker - "Spring Framework: Spring Data JPA" - https://app.pluralsight.com/library/courses/spring-data-jpa-getting-started
+8. Bryan Hansen - "Spring Framework: Spring Fundamentals" - https://app.pluralsight.com/library/courses/spring-framework-spring-fundamentals
+9. Dan Bunker - "Spring Framework: Creating Your First Spring Boot Application" - https://app.pluralsight.com/library/courses/creating-first-spring-boot-application
+10. Eugen Paraschiv - "Security with Spring" - https://www.baeldung.com/security-spring
+11. Eugen Paraschiv - "Spring Tutorial" - https://www.baeldung.com/spring-tutorial
+12. Eugen Paraschiv - "Learn Spring Boot" - https://www.baeldung.com/spring-boot
