@@ -5,10 +5,7 @@ import iRide.service.Category.model.input.CategoryCreateInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/category")
@@ -30,5 +27,11 @@ public class CategoryController {
         int categoryId = categoryService.createCategory(categoryCreateInput);
         return ResponseEntity.ok("Category has been created. Category id = " + categoryId);
 
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteCategory(@PathVariable int id){
+        this.categoryService.deleteById(id);
+        return ResponseEntity.ok("");
     }
 }

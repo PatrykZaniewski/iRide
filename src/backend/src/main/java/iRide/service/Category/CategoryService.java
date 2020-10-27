@@ -31,4 +31,8 @@ public class CategoryService {
         return categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
     }
 
+    public void deleteById(int id){
+        categoryRepository.deleteById(id);
+    }
+
 }
