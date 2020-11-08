@@ -1,6 +1,6 @@
 package iRide.service.Admin.model.input;
 
-import iRide.service.model.LoginCreateInput;
+import iRide.service.User.model.UserCreateInput;
 
 public class AdminCreateInput {
     private String email;
@@ -9,8 +9,8 @@ public class AdminCreateInput {
     private String lastname;
     private String phoneNumber;
 
-    public LoginCreateInput getLoginCreateInput() {
-        return new LoginCreateInput(this.email, this.password);
+    public UserCreateInput getLoginCreateInput() {
+        return new UserCreateInput(this.email, this.password);
     }
 
     public Boolean checkDataCompleteness() {

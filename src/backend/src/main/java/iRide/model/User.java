@@ -1,6 +1,6 @@
 package iRide.model;
 
-import iRide.service.model.LoginCreateInput;
+import iRide.service.User.model.UserCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -79,9 +79,9 @@ public class User {
 
     }
 
-    public User(LoginCreateInput loginCreateInput, String accountRole) {
-        this.email = loginCreateInput.getEmail();
-        this.password = loginCreateInput.getPassword();
+    public User(UserCreateInput userCreateInput, String accountRole) {
+        this.email = userCreateInput.getEmail();
+        this.password = userCreateInput.getPassword();
         this.creationDate = LocalDateTime.now();
         this.status = "ACTIVE";
         this.accountRole = accountRole;

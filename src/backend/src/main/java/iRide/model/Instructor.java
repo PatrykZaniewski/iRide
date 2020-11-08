@@ -17,7 +17,7 @@ public class Instructor {
     @NotNull
     private int id;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_login", referencedColumnName = "id")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @NotNull
     private User user;
     @NotNull
@@ -39,11 +39,11 @@ public class Instructor {
             joinColumns = {@JoinColumn(name = "id_instructor")},
             inverseJoinColumns = {@JoinColumn(name = "id_category")}
     )
-    private Set<Category> categorySet;
+    private Set<Category> categories;
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "instructor_vehicles",
+            name = "instructor_vehicle",
             joinColumns = {@JoinColumn(name = "id_instructor")},
             inverseJoinColumns = {@JoinColumn(name = "id_vehicle")}
     )
@@ -69,11 +69,11 @@ public class Instructor {
         this.id = id;
     }
 
-    public User getLogin() {
+    public User getUser() {
         return user;
     }
 
-    public void setLogin(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -117,12 +117,12 @@ public class Instructor {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Category> getCategorySet() {
-        return categorySet;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategorySet(Set<Category> categorySet) {
-        this.categorySet = categorySet;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public Set<Vehicle> getVehicles() {

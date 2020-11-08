@@ -3,8 +3,7 @@ package iRide.service.Instructor.model.input;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import iRide.enums.CategoryName;
 import iRide.enums.CategoryType;
-import iRide.model.Category;
-import iRide.service.model.LoginCreateInput;
+import iRide.service.User.model.UserCreateInput;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,8 +34,8 @@ public class InstructorCreateInput {
     //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
     private List<InstructorCategoryAssignInput> categories;
 
-    public LoginCreateInput getLoginCreateInput(){
-        return new LoginCreateInput(this.email, this.password);
+    public UserCreateInput getLoginCreateInput(){
+        return new UserCreateInput(this.email, this.password);
     }
 
     public Boolean checkDataCompleteness(){

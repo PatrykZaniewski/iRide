@@ -1,10 +1,10 @@
-package iRide.service.model;
+package iRide.service.User.model;
 
-public class LoginCreateInput {
+public class UserCreateInput {
     private String email;
     private String password;
 
-    public LoginCreateInput(String email, String password){
+    public UserCreateInput(String email, String password){
         this.email = email;
         this.password = password;
     }

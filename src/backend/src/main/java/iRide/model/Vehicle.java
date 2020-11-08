@@ -22,7 +22,12 @@ public class Vehicle {
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
     @JsonIgnore
-    @ManyToMany(mappedBy = "vehicles", fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "instructor_vehicle",
+            joinColumns = {@JoinColumn(name = "id_vehicle")},
+            inverseJoinColumns = {@JoinColumn(name = "id_instructor")}
+    )
     private Set<Instructor> instructors = new HashSet<>();
     @NotNull
     private String plateNumber;

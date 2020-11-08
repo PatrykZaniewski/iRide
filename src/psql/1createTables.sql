@@ -68,7 +68,7 @@ CREATE TABLE public.vehicle
     id           serial    NOT NULL,
     mark         varchar(128) NOT NULL,
     model        varchar(128) NOT NULL,
-    id_category  integer    NOT NULL,
+    id_category  integer,
     plate_number varchar(128) NOT NULL,
     vin          varchar(128) NOT NULL,
     PRIMARY KEY (id),

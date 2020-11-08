@@ -1,9 +1,11 @@
 package iRide.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import iRide.service.Category.model.input.CategoryCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -19,6 +21,14 @@ public class Category {
     @Column(name = "category_type")
     //TODO moze enumy?
     private String categoryType;
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "instructor_category",
+            joinColumns = {@JoinColumn(name = "id_category")},
+            inverseJoinColumns = {@JoinColumn(name = "id_instructor")}
+    )
+    private Set<Instructor> instructors;
 
 
     public int getId() {

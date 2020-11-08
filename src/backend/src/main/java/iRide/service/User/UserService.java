@@ -2,11 +2,10 @@ package iRide.service.User;
 
 import iRide.model.User;
 import iRide.repository.UserRepository;
-import iRide.service.model.LoginCreateInput;
+import iRide.service.User.model.UserCreateInput;
 import iRide.utils.exceptions.DataExistsException;
 import iRide.utils.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,11 +18,11 @@ public class UserService{
         this.userRepository = userRepository;
     }
 
-    public User createLogin(LoginCreateInput loginCreateInput, String accountGroup) throws DataExistsException {
-        if(userRepository.getUserByEmail(loginCreateInput.getEmail()).isPresent()){
-            throw new DataExistsException("Email: " + loginCreateInput.getEmail() + " is currently in usage.");
+    public User createLogin(UserCreateInput userCreateInput, String accountGroup) throws DataExistsException {
+        if(userRepository.getUserByEmail(userCreateInput.getEmail()).isPresent()){
+            throw new DataExistsException("Email: " + userCreateInput.getEmail() + " is currently in usage.");
         }
-        User user = new User(loginCreateInput, accountGroup);
+        User user = new User(userCreateInput, accountGroup);
         return userRepository.save(user);
     }
 

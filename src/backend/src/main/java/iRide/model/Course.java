@@ -23,7 +23,7 @@ public class Course {
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     @NotNull
     private Category category;
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull
     private List<Event> event;
     @Column(name = "hours_remaining")
