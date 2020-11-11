@@ -96,8 +96,8 @@ values (1, 1),
         (2, 2),
         (2, 3);
 
-insert into instructor_rating(id_student, id_instructor, grade, comment)
-values (1, 1, 5, 'OK');
+-- insert into instructor_rating(id_student, id_instructor, grade, comment)
+-- values (1, 1, 5, 'OK');
 
 insert into course(id_student, id_instructor, id_category, hours_minimum, hours_remaining, hours_done, status)
 values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),

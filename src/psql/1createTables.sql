@@ -102,18 +102,18 @@ CREATE TABLE public.course
     FOREIGN KEY (id_category) REFERENCES public.category (id)
 );
 
-CREATE TABLE public.instructor_rating
-(
-    id            serial    NOT NULL,
-    id_student    integer    NOT NULL,
-    id_instructor integer    NOT NULL,
-    grade         int          NOT NULL,
-    comment       varchar(128) NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (id_student) REFERENCES public.student (id),
-    FOREIGN KEY (id_instructor) REFERENCES public.instructor (id)
-);
+-- CREATE TABLE public.instructor_rating
+-- (
+--     id            serial    NOT NULL,
+--     id_student    integer    NOT NULL,
+--     id_instructor integer    NOT NULL,
+--     grade         int          NOT NULL,
+--     comment       varchar(128) NOT NULL,
+--
+--     PRIMARY KEY (id),
+--     FOREIGN KEY (id_student) REFERENCES public.student (id),
+--     FOREIGN KEY (id_instructor) REFERENCES public.instructor (id)
+-- );
 
 CREATE TABLE public.event
 (

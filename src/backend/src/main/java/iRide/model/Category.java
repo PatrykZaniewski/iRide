@@ -5,6 +5,7 @@ import iRide.service.Category.model.input.CategoryCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,13 +23,15 @@ public class Category {
     //TODO moze enumy?
     private String categoryType;
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "instructor_category",
             joinColumns = {@JoinColumn(name = "id_category")},
             inverseJoinColumns = {@JoinColumn(name = "id_instructor")}
     )
     private Set<Instructor> instructors;
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Course> courses;
 
 
     public int getId() {
@@ -53,6 +56,22 @@ public class Category {
 
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
+    }
+
+    public Set<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(Set<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 
     public Category(){

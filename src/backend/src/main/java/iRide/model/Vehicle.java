@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,13 +23,16 @@ public class Vehicle {
     @JoinColumn(name = "id_category", referencedColumnName = "id")
     private Category category;
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "instructor_vehicle",
             joinColumns = {@JoinColumn(name = "id_vehicle")},
             inverseJoinColumns = {@JoinColumn(name = "id_instructor")}
     )
     private Set<Instructor> instructors = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Event> events;
     @NotNull
     private String plateNumber;
     @NotNull
@@ -72,6 +76,14 @@ public class Vehicle {
 
     public void setInstructors(Set<Instructor> instructors) {
         this.instructors = instructors;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
     }
 
     public String getPlateNumber() {

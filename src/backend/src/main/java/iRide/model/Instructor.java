@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,7 +34,7 @@ public class Instructor {
     @Column(name = "phone_number")
     private String phoneNumber;
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "instructor_category",
             joinColumns = {@JoinColumn(name = "id_instructor")},
@@ -41,13 +42,17 @@ public class Instructor {
     )
     private Set<Category> categories;
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "instructor_vehicle",
             joinColumns = {@JoinColumn(name = "id_instructor")},
             inverseJoinColumns = {@JoinColumn(name = "id_vehicle")}
     )
     private Set<Vehicle> vehicles = new HashSet<>();
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Event> events;
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Course> courses;
 
 
     public Instructor(){
@@ -131,5 +136,21 @@ public class Instructor {
 
     public void setVehicles(Set<Vehicle> vehicles) {
         this.vehicles = vehicles;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
     }
 }

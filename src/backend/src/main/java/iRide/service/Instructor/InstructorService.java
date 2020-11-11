@@ -38,5 +38,10 @@ public class InstructorService {
         return instructor.get();
     }
 
+    public int deleteById(int id){
+        instructorRepository.deleteById(id);
+        return id;
+    }
+
 
 }
