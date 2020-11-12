@@ -5,7 +5,7 @@ import iRide.model.Student;
 import iRide.repository.StudentRepository;
 import iRide.service.User.UserService;
 import iRide.service.Student.model.input.StudentCreateInput;
-import iRide.utils.exceptions.DataExistsException;
+import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

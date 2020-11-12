@@ -1,7 +1,7 @@
 package iRide.config;
 
 import iRide.service.User.UserService;
-import iRide.utils.exceptions.NotFoundException;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

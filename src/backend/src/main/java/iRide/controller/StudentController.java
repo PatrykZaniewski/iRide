@@ -2,7 +2,7 @@ package iRide.controller;
 
 import iRide.service.Student.StudentService;
 import iRide.service.Student.model.input.StudentCreateInput;
-import iRide.utils.exceptions.DataExistsException;
+import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -5,7 +5,7 @@ import iRide.model.User;
 import iRide.repository.AdminRepository;
 import iRide.service.Admin.model.input.AdminCreateInput;
 import iRide.service.User.UserService;
-import iRide.utils.exceptions.DataExistsException;
+import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

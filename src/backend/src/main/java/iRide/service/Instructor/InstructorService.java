@@ -5,7 +5,7 @@ import iRide.model.User;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.service.User.UserService;
-import iRide.utils.exceptions.NotFoundException;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

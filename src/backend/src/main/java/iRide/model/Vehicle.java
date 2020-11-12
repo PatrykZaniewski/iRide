@@ -1,6 +1,7 @@
 package iRide.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import iRide.service.Vehicle.model.input.VehicleCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -37,6 +38,17 @@ public class Vehicle {
     private String plateNumber;
     @NotNull
     private String vin;
+
+    public Vehicle(){
+
+    }
+
+    public Vehicle(VehicleCreateInput vehicleCreateInput){
+        this.mark = vehicleCreateInput.getMark();
+        this.model = vehicleCreateInput.getModel();
+        this.plateNumber = vehicleCreateInput.getPlateNumber();
+        this.vin = vehicleCreateInput.getVin();
+    }
 
     public int getId() {
         return id;

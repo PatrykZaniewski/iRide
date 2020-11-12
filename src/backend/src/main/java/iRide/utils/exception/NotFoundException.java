@@ -1,4 +1,4 @@
-package iRide.utils.exceptions;
+package iRide.utils.exception;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String errorMessage){

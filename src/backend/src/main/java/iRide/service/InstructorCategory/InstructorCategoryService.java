@@ -7,8 +7,7 @@ import iRide.repository.InstructorCategoryRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.InstructorCategory.model.input.InstructorCategoryInput;
-import iRide.service.Student.StudentService;
-import iRide.utils.exceptions.NotFoundException;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

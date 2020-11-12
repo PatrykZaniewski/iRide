@@ -3,8 +3,8 @@ package iRide.service.User;
 import iRide.model.User;
 import iRide.repository.UserRepository;
 import iRide.service.User.model.UserCreateInput;
-import iRide.utils.exceptions.DataExistsException;
-import iRide.utils.exceptions.NotFoundException;
+import iRide.utils.exception.DataExistsException;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

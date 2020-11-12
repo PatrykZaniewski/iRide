@@ -2,7 +2,7 @@ package iRide.controller;
 
 import iRide.service.Admin.AdminService;
 import iRide.service.Admin.model.input.AdminCreateInput;
-import iRide.utils.exceptions.DataExistsException;
+import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

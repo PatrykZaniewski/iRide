@@ -1,10 +1,12 @@
 package iRide.service.Instructor.model.input;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import iRide.enums.CategoryName;
 import iRide.enums.CategoryType;
 import iRide.service.User.model.UserCreateInput;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,13 +25,19 @@ public class InstructorCreateInput {
         }
     }
 
+    @NotNull
+    @Valid
     private String email;
+    @NotNull
     private String password;
+    @NotNull(message = "test")
+    @Valid
     private String firstname;
+    @NotNull
     private String lastname;
-    @JsonProperty("employment_date")
+    @NotNull
     private LocalDateTime employmentDate;
-    @JsonProperty("phone_number")
+    @NotNull
     private String phoneNumber;
     //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
     private List<InstructorCategoryAssignInput> categories;
