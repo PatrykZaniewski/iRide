@@ -2,43 +2,47 @@ package iRide.service.Category;
 
 import iRide.model.Category;
 import iRide.repository.CategoryRepository;
+import iRide.repository.InstructorCategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final InstructorCategoryRepository instructorCategoryRepository;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, InstructorCategoryRepository instructorCategoryRepository) {
         this.categoryRepository = categoryRepository;
+        this.instructorCategoryRepository = instructorCategoryRepository;
     }
 
     public int createCategory(CategoryCreateInput categoryCreateInput) {
-        //TODO ta funkcja z dolu wyrzuca exception w tej u gory
         if (getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) == null) {
-            return -1;
+            return categoryRepository.save(new Category(categoryCreateInput)).getId();
         }
-        return categoryRepository.save(new Category(categoryCreateInput)).getId();
+        return -1;
     }
+
 
     public Category getCategoryByNameAndType(String categoryName, String categoryType) {
-        if (!categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent()) {
-            return null;
+        if (this.categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent()) {
+            return this.categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
         }
-        return categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
+        return null;
     }
 
-    public void deleteById(int id){
-        categoryRepository.deleteById(id);
+    public Category getOne(int id) {
+        if (this.categoryRepository.findById(id).isPresent()) {
+            return this.categoryRepository.findById(id).get();
+        }
+        return null;
     }
 
-    public Optional<Category> getOneModel(String categoryName, String categoryType){
-        return this.categoryRepository.getCategoryByNameByType(categoryName, categoryType);
+    public void deleteById(int id) {
+        this.categoryRepository.deleteById(id);
     }
 
 }

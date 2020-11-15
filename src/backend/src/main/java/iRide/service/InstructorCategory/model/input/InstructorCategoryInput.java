@@ -2,22 +2,13 @@ package iRide.service.InstructorCategory.model.input;
 
 public class InstructorCategoryInput {
 
-    private String categoryName;
-    private String categoryType;
+    private int categoryId;
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public String getCategoryType() {
-        return categoryType;
-    }
-
-    public void setCategoryType(String categoryType) {
-        this.categoryType = categoryType;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 }

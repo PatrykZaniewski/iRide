@@ -1,10 +1,10 @@
 package iRide.service.Student;
 
-import iRide.model.User;
 import iRide.model.Student;
+import iRide.model.User;
 import iRide.repository.StudentRepository;
-import iRide.service.User.UserService;
 import iRide.service.Student.model.input.StudentCreateInput;
+import iRide.service.User.UserService;
 import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,11 @@ public class StudentService {
     }
 
     public int createStudent(StudentCreateInput studentCreateInput) throws DataExistsException {
-        Student student = studentRepository.save(new Student(studentCreateInput));
+        Student student = new Student(studentCreateInput);
         User user = userService.createLogin(studentCreateInput.getLoginCreateInput(), "STUDENT");
         student.setLogin(user);
         return studentRepository.save(student).getId();
     }
-
-
 
 
 }

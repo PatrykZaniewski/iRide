@@ -55,11 +55,11 @@ public class Instructor {
     private List<Course> courses;
 
 
-    public Instructor(){
+    public Instructor() {
 
     }
 
-    public Instructor(InstructorCreateInput instructorCreateInput){
+    public Instructor(InstructorCreateInput instructorCreateInput) {
         this.firstname = instructorCreateInput.getFirstname();
         this.lastname = instructorCreateInput.getLastname();
         this.phoneNumber = instructorCreateInput.getPhoneNumber();

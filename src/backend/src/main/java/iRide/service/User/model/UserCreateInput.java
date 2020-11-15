@@ -4,7 +4,7 @@ public class UserCreateInput {
     private String email;
     private String password;
 
-    public UserCreateInput(String email, String password){
+    public UserCreateInput(String email, String password) {
         this.email = email;
         this.password = password;
     }

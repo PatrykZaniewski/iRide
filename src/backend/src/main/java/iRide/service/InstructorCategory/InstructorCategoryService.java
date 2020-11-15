@@ -9,9 +9,13 @@ import iRide.service.Instructor.InstructorService;
 import iRide.service.InstructorCategory.model.input.InstructorCategoryInput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class InstructorCategoryService {
@@ -21,27 +25,36 @@ public class InstructorCategoryService {
     private final InstructorService instructorService;
 
     @Autowired
-    public InstructorCategoryService(InstructorCategoryRepository instructorCategoryRepository, CategoryService categoryService, InstructorService instructorService) {
+    public InstructorCategoryService(InstructorCategoryRepository instructorCategoryRepository, CategoryService categoryService, @Lazy InstructorService instructorService) {
         this.instructorCategoryRepository = instructorCategoryRepository;
         this.categoryService = categoryService;
         this.instructorService = instructorService;
     }
 
-    public int assignCategoriesToInstructor(ArrayList<InstructorCategoryInput> instructorCategoryInputs, int instructorId){
+    @Transactional
+    public int assignCategoriesToInstructor(List<InstructorCategoryInput> instructorCategoryInputs, int instructorId) {
+        List<Integer> existingInstructorCategories = this.instructorCategoryRepository.getIdsOfInstructorCategories(instructorId).isPresent() ? this.instructorCategoryRepository.getIdsOfInstructorCategories(instructorId).get() : Collections.emptyList();
         Instructor instructor = null;
+        List<InstructorCategory> instructorCategories = new ArrayList<>();
         try {
-            instructor = instructorService.getInstructorById(instructorId);
+            instructor = instructorService.getOne(instructorId);
             for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs) {
-                Category category = categoryService.getCategoryByNameAndType(instructorCategoryInput.getCategoryName(), instructorCategoryInput.getCategoryType());
-                InstructorCategory instructorCategory = new InstructorCategory(instructor, category);
-
-                return instructorCategoryRepository.save(instructorCategory).getId();
-                //TODO liczenie ile dodanych kategorii + walidacja
+                Category category = categoryService.getOne(instructorCategoryInput.getCategoryId());
+                if (!existingInstructorCategories.contains(category.getId())) {
+                    InstructorCategory instructorCategory = new InstructorCategory(instructor, category);
+                    instructorCategories.add(instructorCategory);
+                    //TODO zbierac info o istniejacych i dawac exception jesli nie istnieje id
+                }
             }
         } catch (NotFoundException e) {
             e.printStackTrace();
+            return -1;
         }
-        return -1;
+        this.instructorCategoryRepository.deleteInstructorCategories(instructorId);
+        for (InstructorCategory instructorCategory : instructorCategories) {
+            this.instructorCategoryRepository.save(instructorCategory);
+        }
+        return 1;
     }
 
 }

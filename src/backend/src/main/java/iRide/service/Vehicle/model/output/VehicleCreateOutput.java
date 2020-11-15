@@ -11,7 +11,7 @@ public class VehicleCreateOutput {
     private String plateNumber;
     private String vin;
 
-    public VehicleCreateOutput(Vehicle vehicle){
+    public VehicleCreateOutput(Vehicle vehicle) {
         this.id = vehicle.getId();
         this.mark = vehicle.getMark();
         this.model = vehicle.getModel();

@@ -18,12 +18,12 @@ public class InstructorController {
     private final InstructorService instructorService;
 
     @Autowired
-    public InstructorController(InstructorService instructorService){
+    public InstructorController(InstructorService instructorService) {
         this.instructorService = instructorService;
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<String> createInstructor(@Valid @RequestBody InstructorCreateInput instructorCreateInput){
+    public ResponseEntity<String> createInstructor(@Valid @RequestBody InstructorCreateInput instructorCreateInput) {
 //        if (!instructorCreateInput.checkDataCompleteness()){
 //            return new ResponseEntity<>("Incomplete request data.", HttpStatus.BAD_REQUEST);
 //        }
@@ -36,7 +36,7 @@ public class InstructorController {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteInstructor(@PathVariable int id){
+    public ResponseEntity<String> deleteInstructor(@PathVariable int id) {
         this.instructorService.deleteById(id);
         return ResponseEntity.ok("");
     }

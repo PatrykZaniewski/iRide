@@ -20,19 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AuthenticationProvider authenticationProvider;
 
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, AuthenticationUserDetailsService authenticationUserDetailsService, AuthenticationProvider authenticationProvider){
+    public SecurityConfig(PasswordEncoder passwordEncoder, AuthenticationUserDetailsService authenticationUserDetailsService, AuthenticationProvider authenticationProvider) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationUserDetailsService = authenticationUserDetailsService;
         this.authenticationProvider = authenticationProvider;
     }
 
     @Bean
-    public RestAuthenticationSuccessHandler getAuthenticationSuccessHandler(){
+    public RestAuthenticationSuccessHandler getAuthenticationSuccessHandler() {
         return new RestAuthenticationSuccessHandler();
     }
 
     @Bean
-    public RestAuthenticationFailureHandler getAuthenticationFailureHandler(){
+    public RestAuthenticationFailureHandler getAuthenticationFailureHandler() {
         return new RestAuthenticationFailureHandler();
     }
 
@@ -63,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers("/student/test").hasAnyAuthority("STUDENT","INSTRUCTOR","ADMIN")
+                .antMatchers("/student/test").hasAnyAuthority("STUDENT", "INSTRUCTOR", "ADMIN")
                 .antMatchers("**").permitAll()
                 .and()
                 .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)

@@ -18,6 +18,15 @@ public class InstructorVehicle {
     @NotNull
     private Vehicle vehicle;
 
+    public InstructorVehicle() {
+
+    }
+
+    public InstructorVehicle(Instructor instructor, Vehicle vehicle) {
+        this.instructor = instructor;
+        this.vehicle = vehicle;
+    }
+
     public int getId() {
         return id;
     }

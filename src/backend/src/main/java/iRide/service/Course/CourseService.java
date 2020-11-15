@@ -10,11 +10,11 @@ public class CourseService {
     private final CourseRepository courseRepository;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository){
+    public CourseService(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }
 
-    public int deleteById(int id){
+    public int deleteById(int id) {
         courseRepository.deleteById(id);
         return id;
     }

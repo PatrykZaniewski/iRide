@@ -27,6 +27,18 @@ public class User {
     @Column(name = "account_role")
     private String accountRole;
 
+    public User() {
+
+    }
+
+    public User(UserCreateInput userCreateInput, String accountRole) {
+        this.email = userCreateInput.getEmail();
+        this.password = userCreateInput.getPassword();
+        this.creationDate = LocalDateTime.now();
+        this.status = "ACTIVE";
+        this.accountRole = accountRole;
+    }
+
     public int getId() {
         return id;
     }
@@ -72,18 +84,6 @@ public class User {
     }
 
     public void setAccountRole(String accountRole) {
-        this.accountRole = accountRole;
-    }
-
-    public User() {
-
-    }
-
-    public User(UserCreateInput userCreateInput, String accountRole) {
-        this.email = userCreateInput.getEmail();
-        this.password = userCreateInput.getPassword();
-        this.creationDate = LocalDateTime.now();
-        this.status = "ACTIVE";
         this.accountRole = accountRole;
     }
 }

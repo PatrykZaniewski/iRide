@@ -4,7 +4,7 @@ public class CategoryCreateInput {
     private String categoryName;
     private String categoryType;
 
-    public Boolean checkDataCompleteness(){
+    public Boolean checkDataCompleteness() {
         return categoryName != null && categoryType != null;
     }
 

@@ -55,10 +55,11 @@ CREATE TABLE public.category
 
 CREATE TABLE public.instructor_category
 (
+    id           serial    NOT NULL,
     id_instructor integer NOT NULL,
     id_category   integer NOT NULL,
 
-    PRIMARY KEY (id_instructor, id_category),
+    PRIMARY KEY (id),
     FOREIGN KEY (id_instructor) REFERENCES public.instructor (id),
     FOREIGN KEY (id_category) REFERENCES public.category (id)
 );

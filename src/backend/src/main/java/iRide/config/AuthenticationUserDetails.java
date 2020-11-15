@@ -5,7 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 public class AuthenticationUserDetails implements UserDetails {
 
@@ -14,23 +15,11 @@ public class AuthenticationUserDetails implements UserDetails {
     private String status;
     private List<GrantedAuthority> authorities;
 
-    public AuthenticationUserDetails(User user){
+    public AuthenticationUserDetails(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.status = user.getStatus();
         this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getAccountRole()));
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
     }
 
     public String getStatus() {
@@ -46,14 +35,26 @@ public class AuthenticationUserDetails implements UserDetails {
         return authorities;
     }
 
+    public void setAuthorities(List<GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
     @Override
     public String getPassword() {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

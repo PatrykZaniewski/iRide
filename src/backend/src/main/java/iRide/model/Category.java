@@ -34,6 +34,15 @@ public class Category {
     private List<Course> courses;
 
 
+    public Category() {
+
+    }
+
+    public Category(CategoryCreateInput categoryCreateInput) {
+        this.categoryName = categoryCreateInput.getCategoryName();
+        this.categoryType = categoryCreateInput.getCategoryType();
+    }
+
     public int getId() {
         return id;
     }
@@ -72,14 +81,5 @@ public class Category {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    public Category(){
-
-    }
-
-    public Category(CategoryCreateInput categoryCreateInput){
-        this.categoryName = categoryCreateInput.getCategoryName();
-        this.categoryType = categoryCreateInput.getCategoryType();
     }
 }

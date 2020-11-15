@@ -16,12 +16,12 @@ public class InstructorRatingController {
     private InstructorRatingService instructorRatingService;
 
     @Autowired
-    public InstructorRatingController(InstructorRatingService instructorRatingService){
+    public InstructorRatingController(InstructorRatingService instructorRatingService) {
         this.instructorRatingService = instructorRatingService;
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Integer> deleteById(@PathVariable int id){
+    public ResponseEntity<Integer> deleteById(@PathVariable int id) {
         this.instructorRatingService.deleteById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }

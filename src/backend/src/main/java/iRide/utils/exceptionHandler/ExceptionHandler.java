@@ -10,7 +10,7 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public NotFoundException handleNotFoundException(NotFoundException notFoundException){
+    public NotFoundException handleNotFoundException(NotFoundException notFoundException) {
         return notFoundException;
     }
 }

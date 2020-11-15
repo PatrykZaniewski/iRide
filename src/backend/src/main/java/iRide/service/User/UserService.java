@@ -9,17 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService{
+public class UserService {
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     public User createLogin(UserCreateInput userCreateInput, String accountGroup) throws DataExistsException {
-        if(userRepository.getUserByEmail(userCreateInput.getEmail()).isPresent()){
+        if (userRepository.getUserByEmail(userCreateInput.getEmail()).isPresent()) {
             throw new DataExistsException("Email: " + userCreateInput.getEmail() + " is currently in usage.");
         }
         User user = new User(userCreateInput, accountGroup);
@@ -27,7 +27,7 @@ public class UserService{
     }
 
     public User getUserByEmail(String email) throws NotFoundException {
-        if (userRepository.getUserByEmail(email).isPresent()){
+        if (userRepository.getUserByEmail(email).isPresent()) {
             return userRepository.getUserByEmail(email).get();
         }
         throw new NotFoundException("Typed email and/or password is not correct.");

@@ -10,11 +10,11 @@ public class InstructorRatingService {
     private InstructorRatingRepository instructorRatingRepository;
 
     @Autowired
-    public InstructorRatingService(InstructorRatingRepository instructorRatingRepository){
+    public InstructorRatingService(InstructorRatingRepository instructorRatingRepository) {
         this.instructorRatingRepository = instructorRatingRepository;
     }
 
-    public void deleteById(int id){
+    public void deleteById(int id) {
         this.instructorRatingRepository.deleteById(id);
     }
 }

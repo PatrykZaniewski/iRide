@@ -16,12 +16,12 @@ public class EventController {
     private EventService eventService;
 
     @Autowired
-    public EventController(EventService eventService){
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Integer> deleteById(@PathVariable int id){
+    public ResponseEntity<Integer> deleteById(@PathVariable int id) {
         this.eventService.deleteById(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }

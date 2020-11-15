@@ -9,12 +9,8 @@ public class StudentCreateInput {
     private String lastname;
     private String phoneNumber;
 
-    public UserCreateInput getLoginCreateInput(){
+    public UserCreateInput getLoginCreateInput() {
         return new UserCreateInput(this.email, this.password);
-    }
-
-    public Boolean checkDataCompleteness(){
-        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null;
     }
 
     public String getEmail() {

@@ -39,11 +39,11 @@ public class Vehicle {
     @NotNull
     private String vin;
 
-    public Vehicle(){
+    public Vehicle() {
 
     }
 
-    public Vehicle(VehicleCreateInput vehicleCreateInput){
+    public Vehicle(VehicleCreateInput vehicleCreateInput) {
         this.mark = vehicleCreateInput.getMark();
         this.model = vehicleCreateInput.getModel();
         this.plateNumber = vehicleCreateInput.getPlateNumber();

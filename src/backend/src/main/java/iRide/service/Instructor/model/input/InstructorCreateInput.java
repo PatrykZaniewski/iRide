@@ -1,9 +1,7 @@
 package iRide.service.Instructor.model.input;
 
-import iRide.enums.CategoryName;
-import iRide.enums.CategoryType;
+import iRide.service.InstructorCategory.model.input.InstructorCategoryInput;
 import iRide.service.User.model.UserCreateInput;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -11,19 +9,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class InstructorCreateInput {
-
-    private static class InstructorCategoryAssignInput{
-        private CategoryType categoryType;
-        private CategoryName categoryName;
-
-        public CategoryType getCategoryType() {
-            return categoryType;
-        }
-
-        public CategoryName getCategoryName() {
-            return categoryName;
-        }
-    }
 
     @NotNull
     @Valid
@@ -39,15 +24,10 @@ public class InstructorCreateInput {
     private LocalDateTime employmentDate;
     @NotNull
     private String phoneNumber;
-    //TODO moze przejsc na inny model tak zeby modele z pakietu model były tylko do mapowania hibernate?
-    private List<InstructorCategoryAssignInput> categories;
+    private List<InstructorCategoryInput> categories;
 
-    public UserCreateInput getLoginCreateInput(){
+    public UserCreateInput getLoginCreateInput() {
         return new UserCreateInput(this.email, this.password);
-    }
-
-    public Boolean checkDataCompleteness(){
-        return email != null && password != null && firstname != null && lastname != null && phoneNumber != null && employmentDate != null;
     }
 
     public String getEmail() {
@@ -98,11 +78,11 @@ public class InstructorCreateInput {
         this.phoneNumber = phoneNumber;
     }
 
-//    public List<Category> getCategories() {
-//        return categories;
-//    }
-//
-//    public void setCategories(List<Category> categories) {
-//        this.categories = categories;
-//    }
+    public List<InstructorCategoryInput> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<InstructorCategoryInput> categories) {
+        this.categories = categories;
+    }
 }

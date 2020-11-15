@@ -17,15 +17,12 @@ public class AdminController {
     private final AdminService adminService;
 
     @Autowired
-    public AdminController(AdminService adminService){
+    public AdminController(AdminService adminService) {
         this.adminService = adminService;
     }
 
-    @PostMapping(value = "/create")
-    public ResponseEntity<String> createAdmin(@RequestBody AdminCreateInput adminCreateInput){
-        if (!adminCreateInput.checkDataCompleteness()){
-            return new ResponseEntity<>("Incomplete request data.", HttpStatus.BAD_REQUEST);
-        }
+    @PostMapping(value = "/")
+    public ResponseEntity<String> createAdmin(@RequestBody AdminCreateInput adminCreateInput) {
         try {
             int adminId = adminService.createAdmin(adminCreateInput);
             return ResponseEntity.ok("Instructor account has been created. Student id = " + adminId);

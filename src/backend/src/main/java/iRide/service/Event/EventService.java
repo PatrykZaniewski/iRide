@@ -10,11 +10,11 @@ public class EventService {
     public EventRepository eventRepository;
 
     @Autowired
-    public EventService(EventRepository eventRepository){
+    public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
-    public int deleteById(int id){
+    public int deleteById(int id) {
         eventRepository.deleteById(id);
         return id;
     }

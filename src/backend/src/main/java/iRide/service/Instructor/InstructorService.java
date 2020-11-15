@@ -4,10 +4,12 @@ import iRide.model.Instructor;
 import iRide.model.User;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
+import iRide.service.InstructorCategory.InstructorCategoryService;
 import iRide.service.User.UserService;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,21 +18,26 @@ public class InstructorService {
 
     private final UserService userService;
     private final InstructorRepository instructorRepository;
+    private final InstructorCategoryService instructorCategoryService;
 
     @Autowired
-    public InstructorService(UserService userService, InstructorRepository instructorRepository) {
+    public InstructorService(UserService userService, InstructorRepository instructorRepository, InstructorCategoryService instructorCategoryService) {
         this.userService = userService;
         this.instructorRepository = instructorRepository;
+        this.instructorCategoryService = instructorCategoryService;
     }
 
+    @Transactional
     public int createInstructor(InstructorCreateInput instructorCreateInput) {
         Instructor instructor = new Instructor(instructorCreateInput);
         User user = userService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
         instructor.setUser(user);
-        return instructorRepository.save(instructor).getId();
+        int id = instructorRepository.save(instructor).getId();
+        this.instructorCategoryService.assignCategoriesToInstructor(instructorCreateInput.getCategories(), id);
+        return id;
     }
 
-    public Instructor getInstructorById(int instructorId) throws NotFoundException {
+    public Instructor getOne(int instructorId) throws NotFoundException {
         Optional<Instructor> instructor = instructorRepository.findById(instructorId);
         if (!instructor.isPresent()) {
             throw new NotFoundException("Instructor with id = " + instructorId + " has not been found");
@@ -38,7 +45,7 @@ public class InstructorService {
         return instructor.get();
     }
 
-    public int deleteById(int id){
+    public int deleteById(int id) {
         instructorRepository.deleteById(id);
         return id;
     }

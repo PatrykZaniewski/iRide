@@ -12,7 +12,7 @@ public class Admin {
     @NotNull
     private int id;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_login", referencedColumnName = "id")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @NotNull
     private User user;
     @NotNull

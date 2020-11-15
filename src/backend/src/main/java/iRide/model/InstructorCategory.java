@@ -18,21 +18,21 @@ public class InstructorCategory {
     @NotNull
     private Category category;
 
+    public InstructorCategory() {
+
+    }
+
+    public InstructorCategory(Instructor instructor, Category category) {
+        this.instructor = instructor;
+        this.category = category;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public InstructorCategory(){
-
-    }
-
-    public InstructorCategory(@NotNull Instructor instructor, @NotNull Category category) {
-        this.instructor = instructor;
-        this.category = category;
     }
 
     public Instructor getInstructor() {

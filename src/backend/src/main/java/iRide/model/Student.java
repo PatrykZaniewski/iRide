@@ -13,7 +13,7 @@ public class Student {
     @NotNull
     private int id;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_login", referencedColumnName = "id")
+    @JoinColumn(name = "id_user", referencedColumnName = "id")
     @NotNull
     private User user;
     @NotNull
@@ -24,11 +24,11 @@ public class Student {
     @NotNull
     private String phoneNumber;
 
-    public Student(){
+    public Student() {
 
     }
 
-    public Student(StudentCreateInput studentCreateInput){
+    public Student(StudentCreateInput studentCreateInput) {
         this.firstname = studentCreateInput.getFirstname();
         this.lastname = studentCreateInput.getLastname();
         this.phoneNumber = studentCreateInput.getPhoneNumber();
