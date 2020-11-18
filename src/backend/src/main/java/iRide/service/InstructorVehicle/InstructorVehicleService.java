@@ -36,9 +36,9 @@ public class InstructorVehicleService {
         Vehicle vehicle = null;
         List<InstructorVehicle> vehicleInstructors = new ArrayList<>();
         try {
-            vehicle = vehicleService.getOne(vehicleId);
+            vehicle = vehicleService.getVehicle(vehicleId);
             for (InstructorVehicleInput instructorVehicleInput : instructorCategoryInputs) {
-                Instructor instructor = instructorService.getOne(instructorVehicleInput.getInstructorId());
+                Instructor instructor = instructorService.getInstructor(instructorVehicleInput.getInstructorId());
                 if (!existingVehicleInstructors.contains(instructor.getId())) {
                     InstructorVehicle instructorVehicle = new InstructorVehicle(instructor, vehicle);
                     vehicleInstructors.add(instructorVehicle);

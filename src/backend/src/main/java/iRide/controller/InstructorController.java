@@ -37,7 +37,7 @@ public class InstructorController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteInstructor(@PathVariable int id) {
-        this.instructorService.deleteById(id);
+        this.instructorService.deleteInstructor(id);
         return ResponseEntity.ok("");
     }
 }

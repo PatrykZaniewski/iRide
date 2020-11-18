@@ -14,7 +14,7 @@ public class EventService {
         this.eventRepository = eventRepository;
     }
 
-    public int deleteById(int id) {
+    public int deleteEvent(int id) {
         eventRepository.deleteById(id);
         return id;
     }

@@ -37,13 +37,12 @@ public class InstructorCategoryService {
         Instructor instructor = null;
         List<InstructorCategory> instructorCategories = new ArrayList<>();
         try {
-            instructor = instructorService.getOne(instructorId);
+            instructor = instructorService.getInstructor(instructorId);
             for (InstructorCategoryInput instructorCategoryInput : instructorCategoryInputs) {
-                Category category = categoryService.getOne(instructorCategoryInput.getCategoryId());
+                Category category = categoryService.getCategory(instructorCategoryInput.getCategoryId());
                 if (!existingInstructorCategories.contains(category.getId())) {
                     InstructorCategory instructorCategory = new InstructorCategory(instructor, category);
                     instructorCategories.add(instructorCategory);
-                    //TODO zbierac info o istniejacych i dawac exception jesli nie istnieje id
                 }
             }
         } catch (NotFoundException e) {

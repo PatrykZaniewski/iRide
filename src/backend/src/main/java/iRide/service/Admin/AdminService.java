@@ -23,7 +23,7 @@ public class AdminService {
 
     public int createAdmin(AdminCreateInput adminCreateInput) throws DataExistsException {
         Admin admin = new Admin(adminCreateInput);
-        User user = userService.createLogin(adminCreateInput.getLoginCreateInput(), "ADMIN");
+        User user = userService.createUser(adminCreateInput.getLoginCreateInput(), "ADMIN");
         admin.setLogin(user);
         return adminRepository.save(admin).getId();
     }

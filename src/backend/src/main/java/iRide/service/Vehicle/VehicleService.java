@@ -22,12 +22,12 @@ public class VehicleService {
         this.categoryService = categoryService;
     }
 
-    public int deleteById(int id) {
+    public int deleteVehicle(int id) {
         vehicleRepository.deleteById(id);
         return id;
     }
 
-    public int createOne(VehicleCreateInput vehicleCreateInput) throws DataExistsException, NotFoundException {
+    public int createVehicle(VehicleCreateInput vehicleCreateInput) throws DataExistsException, NotFoundException {
         if (this.vehicleRepository.getVehicleByParameters(vehicleCreateInput.getMark(), vehicleCreateInput.getModel(), vehicleCreateInput.getPlateNumber(), vehicleCreateInput.getVin()).isPresent()) {
             throw new DataExistsException("Vehicle with typed data is already in database.");
         }
@@ -42,7 +42,7 @@ public class VehicleService {
         return this.vehicleRepository.save(vehicle).getId();
     }
 
-    public Vehicle getOne(int id) {
+    public Vehicle getVehicle(int id) {
         if (this.vehicleRepository.findById(id).isPresent()) {
             return this.vehicleRepository.findById(id).get();
         }

@@ -1,7 +1,10 @@
 package iRide.model;
 
+import iRide.service.Course.model.input.CourseInput;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -24,8 +27,10 @@ public class Course {
     @NotNull
     private Category category;
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @NotNull
     private List<Event> event;
+    @Column(name = "hours_minimum")
+    @NotNull
+    private int hoursMinimum;
     @Column(name = "hours_remaining")
     @NotNull
     private int hoursRemaining;
@@ -34,6 +39,20 @@ public class Course {
     private int hoursDone;
     @NotNull
     private String status;
+
+    public Course(){
+
+    }
+
+    public Course(CourseInput courseInput, Instructor instructor, Student student, Category category){
+        this.instructor = instructor;
+        this.student = student;
+        this.category = category;
+        //TODO zrobic na podstawie kategorii
+        this.hoursRemaining = courseInput.getHoursRemaining();
+        this.hoursDone = 0;
+        this.hoursMinimum = courseInput.getHoursMinimum();
+    }
 
     public int getId() {
         return id;

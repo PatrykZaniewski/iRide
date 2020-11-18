@@ -30,22 +30,22 @@ public class InstructorService {
     @Transactional
     public int createInstructor(InstructorCreateInput instructorCreateInput) {
         Instructor instructor = new Instructor(instructorCreateInput);
-        User user = userService.createLogin(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
+        User user = userService.createUser(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
         instructor.setUser(user);
         int id = instructorRepository.save(instructor).getId();
         this.instructorCategoryService.assignCategoriesToInstructor(instructorCreateInput.getCategories(), id);
         return id;
     }
 
-    public Instructor getOne(int instructorId) throws NotFoundException {
-        Optional<Instructor> instructor = instructorRepository.findById(instructorId);
-        if (!instructor.isPresent()) {
+    public Instructor getInstructor(int instructorId) throws NotFoundException {
+        Optional<Instructor> result = instructorRepository.findById(instructorId);
+        if (!result.isPresent()) {
             throw new NotFoundException("Instructor with id = " + instructorId + " has not been found");
         }
-        return instructor.get();
+        return result.get();
     }
 
-    public int deleteById(int id) {
+    public int deleteInstructor(int id) {
         instructorRepository.deleteById(id);
         return id;
     }

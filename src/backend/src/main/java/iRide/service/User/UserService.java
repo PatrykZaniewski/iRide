@@ -18,7 +18,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createLogin(UserCreateInput userCreateInput, String accountGroup) throws DataExistsException {
+    public User createUser(UserCreateInput userCreateInput, String accountGroup) throws DataExistsException {
         if (userRepository.getUserByEmail(userCreateInput.getEmail()).isPresent()) {
             throw new DataExistsException("Email: " + userCreateInput.getEmail() + " is currently in usage.");
         }

@@ -22,7 +22,7 @@ public class EventController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Integer> deleteById(@PathVariable int id) {
-        this.eventService.deleteById(id);
+        this.eventService.deleteEvent(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

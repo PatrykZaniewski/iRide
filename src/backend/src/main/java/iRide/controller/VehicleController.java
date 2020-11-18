@@ -26,14 +26,14 @@ public class VehicleController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Integer> deleteById(@PathVariable int id) {
-        this.vehicleService.deleteById(id);
+        this.vehicleService.deleteVehicle(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> createOne(@Valid @RequestBody VehicleCreateInput vehicleCreateInput) {
         try {
-            int id = this.vehicleService.createOne(vehicleCreateInput);
+            int id = this.vehicleService.createVehicle(vehicleCreateInput);
             return ResponseEntity.ok(id);
         } catch (DataExistsException | NotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);

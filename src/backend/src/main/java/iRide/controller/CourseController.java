@@ -1,13 +1,16 @@
 package iRide.controller;
 
+import iRide.model.Course;
 import iRide.service.Course.CourseService;
+import iRide.service.Course.model.input.CourseInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/course")
@@ -22,7 +25,13 @@ public class CourseController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Integer> deleteById(@PathVariable int id) {
-        this.courseService.deleteById(id);
+        this.courseService.deleteCategory(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/")
+    public ResponseEntity<Object> createOne(@RequestBody CourseInput courseInput){
+        int id = this.courseService.createCourse(courseInput);
+        return ResponseEntity.ok(id);
     }
 }
