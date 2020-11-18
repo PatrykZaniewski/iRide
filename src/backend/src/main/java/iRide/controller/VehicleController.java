@@ -2,19 +2,17 @@ package iRide.controller;
 
 import iRide.service.Vehicle.VehicleService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
+import iRide.service.Vehicle.model.output.VehicleOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/vehicle")
-@Validated
 public class VehicleController {
 
     public final VehicleService vehicleService;
@@ -31,13 +29,18 @@ public class VehicleController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Object> createOne(@Valid @RequestBody VehicleCreateInput vehicleCreateInput) {
+    public ResponseEntity<Object> createOne(@RequestBody VehicleCreateInput vehicleCreateInput) {
         try {
             int id = this.vehicleService.createVehicle(vehicleCreateInput);
             return ResponseEntity.ok(id);
         } catch (DataExistsException | NotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping(value = "/{vehicleId}")
+    public ResponseEntity<VehicleOutput> getVehicleDetails(@PathVariable int vehicleId){
+        return ResponseEntity.ok(this.vehicleService.getVehicleDetails(vehicleId));
     }
 
 }

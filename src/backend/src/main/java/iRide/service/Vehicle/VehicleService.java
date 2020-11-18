@@ -5,10 +5,15 @@ import iRide.model.Vehicle;
 import iRide.repository.VehicleRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
+import iRide.service.Vehicle.model.output.VehicleOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VehicleService {
@@ -42,10 +47,27 @@ public class VehicleService {
         return this.vehicleRepository.save(vehicle).getId();
     }
 
-    public Vehicle getVehicle(int id) {
-        if (this.vehicleRepository.findById(id).isPresent()) {
-            return this.vehicleRepository.findById(id).get();
+    public Vehicle getVehicle(int vehicleId) {
+        Optional<Vehicle> result = this.vehicleRepository.findById(vehicleId);
+        if (!result.isPresent()) {
+            throw new NotFoundException("Vehicle with id = " + vehicleId + " has not been found");
         }
-        return null;
+        return result.get();
     }
+
+    public VehicleOutput getVehicleDetails(int vehicleId) throws NotFoundException {
+        return new VehicleOutput(this.getVehicle(vehicleId));
+    }
+
+    public List<VehicleOutput> getVehicleDetailsList() {
+        List<Vehicle> vehicles = this.vehicleRepository.findAll();
+        List<VehicleOutput> vehicleOutputs = new ArrayList<>();
+
+        for (Vehicle vehicle: vehicles){
+            vehicleOutputs.add(new VehicleOutput(vehicle));
+        }
+
+        return vehicleOutputs;
+    }
+
 }

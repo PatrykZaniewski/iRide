@@ -2,30 +2,20 @@ package iRide.service.Vehicle.model.output;
 
 import iRide.model.Vehicle;
 
-public class VehicleCreateOutput {
+public class VehicleOutput {
 
-    private int id;
     private String mark;
     private String model;
     private String category;
     private String plateNumber;
     private String vin;
 
-    public VehicleCreateOutput(Vehicle vehicle) {
-        this.id = vehicle.getId();
+    public VehicleOutput(Vehicle vehicle) {
         this.mark = vehicle.getMark();
         this.model = vehicle.getModel();
-        this.category = vehicle.getCategory() == null ? null : vehicle.getCategory().getCategoryName();
+        this.category = vehicle.getCategory() == null ? "-" : vehicle.getCategory().getCategoryName();
         this.plateNumber = vehicle.getPlateNumber();
         this.vin = vehicle.getVin();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getMark() {

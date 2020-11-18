@@ -55,4 +55,5 @@ public class CourseService {
         return this.courseRepository.save(course).getId();
         //TODO sprawdzic czy jest kurs na dana kategorie w stanie innym niz FINISHED i czy instruktor moze prowadzic dana kategorie!
     }
+
 }
