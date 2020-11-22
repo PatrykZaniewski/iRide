@@ -5,6 +5,7 @@ import iRide.model.Vehicle;
 import iRide.repository.VehicleRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
+import iRide.service.Vehicle.model.input.VehicleUpdateInput;
 import iRide.service.Vehicle.model.output.VehicleOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
@@ -30,6 +31,27 @@ public class VehicleService {
     public int deleteVehicle(int id) {
         vehicleRepository.deleteById(id);
         return id;
+    }
+
+    public int updateVehicle(VehicleUpdateInput vehicleUpdateInput, int vehicleId) {
+        Vehicle vehicle = getVehicle(vehicleId);
+        if (vehicleUpdateInput.getMark() != null) {
+            vehicle.setMark(vehicleUpdateInput.getMark());
+        }
+        if (vehicleUpdateInput.getModel() != null) {
+            vehicle.setModel(vehicleUpdateInput.getModel());
+        }
+        if (vehicleUpdateInput.getPlateNumber() != null) {
+            vehicle.setPlateNumber(vehicleUpdateInput.getPlateNumber());
+        }
+        if (vehicleUpdateInput.getVin() != null) {
+            vehicle.setVin(vehicleUpdateInput.getVin());
+        }
+        if (vehicleUpdateInput.getCategoryName() != null){
+            //TODO obadac jak w thymeleafie zrobic walidacje na kategorie
+        }
+
+        return this.vehicleRepository.save(vehicle).getId();
     }
 
     public int createVehicle(VehicleCreateInput vehicleCreateInput) throws DataExistsException, NotFoundException {
@@ -63,7 +85,7 @@ public class VehicleService {
         List<Vehicle> vehicles = this.vehicleRepository.findAll();
         List<VehicleOutput> vehicleOutputs = new ArrayList<>();
 
-        for (Vehicle vehicle: vehicles){
+        for (Vehicle vehicle : vehicles) {
             vehicleOutputs.add(new VehicleOutput(vehicle));
         }
 
