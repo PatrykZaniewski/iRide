@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -66,8 +65,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/student/test").hasAnyAuthority("STUDENT", "INSTRUCTOR", "ADMIN")
                 .antMatchers("**").permitAll()
                 .and()
-                .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling().accessDeniedHandler(null);
+                    .formLogin()
+                    .loginPage("/login")
+                    .usernameParameter("email")
+                    .permitAll()
+                    .failureUrl("/login-error")
+                .and()
+                    .logout()
+                    .permitAll()
+                    .logoutSuccessUrl("/");
+
+//                .addFilterBefore(getAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+//                .exceptionHandling().accessDeniedHandler(null);
     }
 
 }

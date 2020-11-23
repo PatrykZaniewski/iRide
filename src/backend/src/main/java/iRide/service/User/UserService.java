@@ -8,6 +8,8 @@ import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -27,6 +29,7 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) throws NotFoundException {
+        Optional<User> test = userRepository.getUserByEmail(email);
         if (userRepository.getUserByEmail(email).isPresent()) {
             return userRepository.getUserByEmail(email).get();
         }

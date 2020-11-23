@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +37,8 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
                 }
             };
         }
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String test = bCryptPasswordEncoder.encode(usernamePasswordAuthenticationToken.getCredentials().toString());
         if (!user.getPassword().equals(usernamePasswordAuthenticationToken.getCredentials().toString())) {
             throw new BadCredentialsException("Typed email and/or password is not correct.");
         }

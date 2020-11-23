@@ -13,13 +13,11 @@
     <link rel="stylesheet" th:href="@{/css/navbar.css}"/>
 </head>
 <body>
-<!--<div th:replace="fragments/header :: header_admin"></div>-->
-<div th:replace="${user.accountRole} == 'ADMIN' ? ~{fragments/header :: header_admin} : _"></div>
-<div th:replace="${user.accountRole} == 'INSTRUCTOR' ? ~{fragments/header :: header_instructor} : _"></div>
-<div th:replace="${user.accountRole} == 'STUDENT' ? ~{fragments/header :: header_student} : _"></div>
-<div th:replace="${user.accountRole} == 'UNLOGGED' ? ~{fragments/header :: header_unlogged} : _"></div>
+<div th:replace="${accountRole} == 'ADMIN' ? ~{fragments/header :: header_admin} : _"></div>
+<div th:replace="${accountRole} == 'INSTRUCTOR' ? ~{fragments/header :: header_instructor} : _"></div>
+<div th:replace="${accountRole} == 'STUDENT' ? ~{fragments/header :: header_student} : _"></div>
+<div th:replace="${accountRole} ?  _ : ~{fragments/header :: header_unlogged}"></div>
 
-<!--<div th:replace="fragments/header :: header_unlogged"></div>-->
 <div layout:fragment="content"></div>
 <div th:replace="fragments/footer"></div>
 </body>

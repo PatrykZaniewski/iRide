@@ -1,0 +1,53 @@
+<!--<!DOCTYPE HTML>-->
+<!--<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">-->
+<!--<head>-->
+<!--    <title>iRide</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="content" class="container">-->
+<!--    <div class="jumbotron">-->
+<!--        <h1>iRideaaa</h1>-->
+<!--        <p>iRide</p>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout.html}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <!--    <div class="jumbotron">-->
+    <!--        <h1>iRide</h1>-->
+    <!--        <p>iRide</p>-->
+    <!--    </div>-->
+    <div th:if="${loginError}">
+        <div class="alert alert-danger" role="alert">
+            This is a danger alert—check it out!
+        </div>
+    </div>
+    <form th:action="@{/login}" method="post" class="w-25 align-items-center">
+        <div class="md-form form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                   placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Zapamiętaj mnie</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Zaloguj</button>
+    </form>
+</div>
+</body>
+</html>

@@ -17,4 +17,10 @@
     .navbar-expand-custom .navbar-toggler {
         display: none;
     }
+
+    .ml-auto .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+    }
+
 }
