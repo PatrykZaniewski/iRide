@@ -18,7 +18,12 @@ public class AuthenticationUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws NotFoundException {
-        return new AuthenticationUserDetails(userService.getUserByEmail(email));
+    public UserDetails loadUserByUsername(String email) {
+        try {
+            return new AuthenticationUserDetails(userService.getUserByEmail(email));
+        }
+        catch (NotFoundException e){
+            return null;
+        }
     }
 }

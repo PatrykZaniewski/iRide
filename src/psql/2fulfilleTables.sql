@@ -1,10 +1,10 @@
 INSERT INTO user_(email, password, creation_date, status, account_role)
-values ('a@iride.pl', '123123', '2019-03-05', 'ACTIVE', 'STUDENT'),
-       ('b@iride.pl', 'aaaaa', '2019-01-05', 'ACTIVE', 'STUDENT'),
-       ('c@iride.pl', 'qweqwe', '2016-05-05', 'ACTIVE', 'STUDENT'),
-       ('d@iride.pl', 'aqaqaq', '2018-05-05', 'ACTIVE', 'INSTRUCTOR'),
-       ('e@iride.pl', 'qwerty', '2019-02-02', 'ACTIVE', 'INSTRUCTOR'),
-       ('f@iride.pl', 'zzzzzz', '2019-12-01', 'ACTIVE', 'ADMIN');
+values ('a@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2019-03-05', 'ACTIVE', 'STUDENT'),
+       ('b@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2019-01-05', 'ACTIVE', 'STUDENT'),
+       ('c@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2016-05-05', 'ACTIVE', 'STUDENT'),
+       ('d@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2018-05-05', 'ACTIVE', 'INSTRUCTOR'),
+       ('e@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2019-02-02', 'ACTIVE', 'INSTRUCTOR'),
+       ('f@iride.pl', '$2a$10$N3T4F8YJzRuw80NRGd3nQe9Tp4LLogx7xNL54RYUYBGs8Um9C9YHO', '2019-12-01', 'ACTIVE', 'ADMIN');
 
 INSERT INTO student(id_user, firstname, lastname, phone_number)
 values (1, 'Jan', 'Kowalski', '694213769'),

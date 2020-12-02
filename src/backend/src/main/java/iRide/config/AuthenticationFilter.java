@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    //TODO do usuniecia
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override

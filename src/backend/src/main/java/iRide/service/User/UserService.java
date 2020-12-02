@@ -33,6 +33,6 @@ public class UserService {
         if (userRepository.getUserByEmail(email).isPresent()) {
             return userRepository.getUserByEmail(email).get();
         }
-        throw new NotFoundException("Typed email and/or password is not correct.");
+        throw new NotFoundException("Typed email not found");
     }
 }

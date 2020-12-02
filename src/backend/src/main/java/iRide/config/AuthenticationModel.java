@@ -1,5 +1,7 @@
 package iRide.config;
 
+
+//TODO tez chyba do usuniecia
 public class AuthenticationModel {
     private String email;
     private String password;

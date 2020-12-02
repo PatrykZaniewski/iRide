@@ -1,6 +1,8 @@
 package iRide.utils.exception;
 
-public class EmailConfirmationException extends RuntimeException {
+import org.springframework.security.authentication.AccountStatusException;
+
+public class EmailConfirmationException extends AccountStatusException {
     public EmailConfirmationException(String errorMessage) {
         super(errorMessage);
     }

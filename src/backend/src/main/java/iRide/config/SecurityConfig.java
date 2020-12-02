@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -25,28 +26,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.authenticationProvider = authenticationProvider;
     }
 
-    @Bean
-    public RestAuthenticationSuccessHandler getAuthenticationSuccessHandler() {
-        return new RestAuthenticationSuccessHandler();
-    }
+//    @Bean
+//    public RestAuthenticationSuccessHandler getAuthenticationSuccessHandler() {
+//        return new RestAuthenticationSuccessHandler();
+//    }
 
     @Bean
-    public RestAuthenticationFailureHandler getAuthenticationFailureHandler() {
+    public AuthenticationFailureHandler authenticationFailureHandler() {
         return new RestAuthenticationFailureHandler();
     }
 
-    @Bean
-    public AuthenticationFilter getAuthenticationFilter() throws Exception {
-        AuthenticationFilter filter = new AuthenticationFilter();
-        filter.setAuthenticationSuccessHandler(getAuthenticationSuccessHandler());
-        filter.setAuthenticationFailureHandler(getAuthenticationFailureHandler());
-        filter.setAuthenticationManager(super.authenticationManager());
-        return filter;
-    }
+//    @Bean
+//    public AuthenticationFilter getAuthenticationFilter() throws Exception {
+//        AuthenticationFilter filter = new AuthenticationFilter();
+//        filter.setAuthenticationSuccessHandler(getAuthenticationSuccessHandler());
+//        filter.setAuthenticationFailureHandler(getAuthenticationFailureHandler());
+//        filter.setAuthenticationManager(super.authenticationManager());
+//        return filter;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(authenticationUserDetailsService).passwordEncoder(passwordEncoder);
+        //auth.userDetailsService(authenticationUserDetailsService).passwordEncoder(passwordEncoder);
+        //authenticationProvider.setHideUserNotFoundExceptions(true);
         auth.authenticationProvider(authenticationProvider);
     }
 
@@ -69,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .usernameParameter("email")
                     .permitAll()
-                    .failureUrl("/login-error")
+                    .failureHandler(authenticationFailureHandler())
                 .and()
                     .logout()
                     .permitAll()
