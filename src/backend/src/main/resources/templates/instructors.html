@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="instructor: ${instructors}">
+                <th scope="row" th:text="${instructor.id}" />
+                <td th:text="${instructor.firstname}" />
+                <td th:text="${instructor.lastname}" />
+                <td th:text="${categories}" />
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

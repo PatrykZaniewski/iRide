@@ -15,9 +15,9 @@
     </nav>
 </div>
 
-<div th:fragment="header_admin" xmlns:th="http://www.thymeleaf.org">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">iRide</a>
+<div th:fragment="header_admin" class="p-5" xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">iRide</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToogle"
                 aria-controls="navbarToogle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,16 +28,19 @@
                     <a class="nav-link" href="#">Konta użytkowników</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Instruktorzy</a>
+                    <a class="nav-link" href="/instructor">Instruktorzy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pojazdy</a>
+                    <a class="nav-link" href="/student">Kursanci</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kursy</a>
+                    <a class="nav-link" href="/vehicle">Pojazdy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pomoce naukowe</a>
+                    <a class="nav-link" href="/course">Kursy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/files">Pomoce naukowe</a>
                 </li>
             </ul>
             <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -45,9 +48,9 @@
     </nav>
 </div>
 
-<div th:fragment="header_instructor" xmlns:th="http://www.thymeleaf.org">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">iRide</a>
+<div th:fragment="header_instructor" class="p-5" xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">iRide</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToogle"
                 aria-controls="navbarToogle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,9 +66,9 @@
     </nav>
 </div>
 
-<div th:fragment="header_student" xmlns:th="http://www.thymeleaf.org">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">iRide</a>
+<div th:fragment="header_student" class="p-5" xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">iRide</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToogle"
                 aria-controls="navbarToogle" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

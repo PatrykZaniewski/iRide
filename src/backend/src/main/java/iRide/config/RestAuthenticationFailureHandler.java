@@ -34,8 +34,6 @@ public class RestAuthenticationFailureHandler
         else{
             errorCode = "104";
         }
-        response.setHeader("Error-Code", "101");
-        response.addHeader("Error-Code", "101");
-        getRedirectStrategy().sendRedirect(request, response, "/login");
+        getRedirectStrategy().sendRedirect(request, response, "/login?error=" + errorCode);
     }
 }
