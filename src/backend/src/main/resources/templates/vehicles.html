@@ -10,20 +10,21 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Imię</th>
-                <th scope="col">Nazwisko</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Model</th>
                 <th scope="col">Kategorie</th>
+                <th scope="col">Instruktorzy</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="instructorListOutput: ${instructorListOutputs}">
-                <th scope="row" th:text="${instructorListOutput.id}" />
-                <td th:text="${instructorListOutput.firstname}" />
-                <td th:text="${instructorListOutput.lastname}" />
+            <tr th:each="vehicleListOutput: ${vehicleListOutputs}">
+                <th scope="row" th:text="${vehicleListOutput.id}" />
+                <td th:text="${vehicleListOutput.mark}" />
+                <td th:text="${vehicleListOutput.model}" />
+                <td th:text="${vehicleListOutput.category} ? ${vehicleListOutput.category} : 'Brak'"></td>
                 <td>
-                    <div>Teoria: <div th:text="${#lists.size(instructorListOutput.theory)} > 0 ? ${instructorListOutput.theory} : 'Brak'"></div></div>
-                    <div>praktyka: <div th:text="${instructorListOutput.practice}"></div></div>
+                    <div th:text="${#lists.size(vehicleListOutput.instructors)} > 0 ? ${vehicleListOutput.instructors} : 'Brak'"></div>
                 </td>
                 <td>
                     Przyciski edycja, usuwanie

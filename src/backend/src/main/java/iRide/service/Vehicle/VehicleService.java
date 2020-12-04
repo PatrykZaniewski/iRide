@@ -1,11 +1,13 @@
 package iRide.service.Vehicle;
 
 import iRide.model.Category;
+import iRide.model.Instructor;
 import iRide.model.Vehicle;
 import iRide.repository.VehicleRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.input.VehicleUpdateInput;
+import iRide.service.Vehicle.model.output.VehicleListOutput;
 import iRide.service.Vehicle.model.output.VehicleOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
@@ -31,6 +33,27 @@ public class VehicleService {
     public int deleteVehicle(int id) {
         vehicleRepository.deleteById(id);
         return id;
+    }
+
+    public List<VehicleListOutput> getVehicleListOutput(){
+        List<Vehicle> vehicles = this.vehicleRepository.findAll();
+        List<VehicleListOutput> vehicleListOutputs = new ArrayList<>();
+        for (Vehicle vehicle: vehicles){
+            VehicleListOutput vehicleListOutput = new VehicleListOutput();
+
+            vehicleListOutput.setId(vehicle.getId());
+            vehicleListOutput.setMark(vehicle.getMark());
+            vehicleListOutput.setModel(vehicle.getModel());
+            vehicleListOutput.setCategory(vehicle.getCategory().getCategoryName());
+
+            List<String> instructors = new ArrayList<>();
+            for (Instructor instructor: vehicle.getInstructors()){
+                instructors.add(instructor.getLastname() + " " + instructor.getFirstname());
+            }
+            vehicleListOutput.setInstructors(instructors);
+            vehicleListOutputs.add(vehicleListOutput);
+        }
+        return vehicleListOutputs;
     }
 
     public int updateVehicle(VehicleUpdateInput vehicleUpdateInput, int vehicleId) {

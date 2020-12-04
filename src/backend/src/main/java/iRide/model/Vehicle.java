@@ -5,6 +5,7 @@ import iRide.service.Vehicle.model.input.VehicleCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,7 +31,7 @@ public class Vehicle {
             joinColumns = {@JoinColumn(name = "id_vehicle")},
             inverseJoinColumns = {@JoinColumn(name = "id_instructor")}
     )
-    private Set<Instructor> instructors = new HashSet<>();
+    private List<Instructor> instructors = new ArrayList<>();
     @JsonIgnore
     @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Event> events;
@@ -82,11 +83,11 @@ public class Vehicle {
         this.category = category;
     }
 
-    public Set<Instructor> getInstructors() {
+    public List<Instructor> getInstructors() {
         return instructors;
     }
 
-    public void setInstructors(Set<Instructor> instructors) {
+    public void setInstructors(List<Instructor> instructors) {
         this.instructors = instructors;
     }
 
