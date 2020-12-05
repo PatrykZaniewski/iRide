@@ -1,13 +1,14 @@
 package iRide.service.Vehicle.model.output;
 
 import java.util.List;
+import java.util.Map;
 
 public class VehicleListOutput {
     private int id;
     private String mark;
     private String model;
     private String category;
-    private List<String> instructors;
+    private Map<Integer, String> instructors;
 
     public int getId() {
         return id;
@@ -41,11 +42,11 @@ public class VehicleListOutput {
         this.category = category;
     }
 
-    public List<String> getInstructors() {
+    public Map<Integer, String> getInstructors() {
         return instructors;
     }
 
-    public void setInstructors(List<String> instructors) {
+    public void setInstructors(Map<Integer, String> instructors) {
         this.instructors = instructors;
     }
 }

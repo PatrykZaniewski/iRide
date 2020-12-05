@@ -14,9 +14,7 @@ import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class VehicleService {
@@ -46,9 +44,9 @@ public class VehicleService {
             vehicleListOutput.setModel(vehicle.getModel());
             vehicleListOutput.setCategory(vehicle.getCategory().getCategoryName());
 
-            List<String> instructors = new ArrayList<>();
+            Map<Integer, String> instructors = new HashMap<>();
             for (Instructor instructor: vehicle.getInstructors()){
-                instructors.add(instructor.getLastname() + " " + instructor.getFirstname());
+                instructors.put(instructor.getId(), instructor.getLastname() + " " + instructor.getFirstname());
             }
             vehicleListOutput.setInstructors(instructors);
             vehicleListOutputs.add(vehicleListOutput);

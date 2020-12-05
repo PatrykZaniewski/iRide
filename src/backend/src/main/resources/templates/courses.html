@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 700px">
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Instruktor</th>
+                <th scope="col">Kursant</th>
+                <th scope="col">Typ kategorii</th>
+                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Status</th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="courseListOutput: ${courseListOutputs}">
+                <th scope="row" th:text="${courseListOutput.id}" />
+                <td>
+                    <a th:href="@{'/instructor/' + ${courseListOutput.instructorId}}" th:text="${courseListOutput.instructor}" />
+                </td>
+                <td>
+                    <a th:href="@{'/student/' + ${courseListOutput.studentId}}" th:text="${courseListOutput.student}" />
+                </td>
+                <td th:text="${courseListOutput.categoryType}" />
+                <td th:text="${courseListOutput.categoryName}" />
+                <td th:text="${courseListOutput.status}" />
+                <td>
+                    Przyciski edycja, usuwanie
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

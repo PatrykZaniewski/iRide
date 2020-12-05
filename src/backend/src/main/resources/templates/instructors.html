@@ -4,7 +4,7 @@
     <title>iRide</title>
 </head>
 <body>
-<div layout:fragment="content" class="container">
+<div layout:fragment="content" class="container" style="min-width: 600px">
     <div class="jumbotron">
         <table class="table">
             <thead>
@@ -22,8 +22,20 @@
                 <td th:text="${instructorListOutput.firstname}" />
                 <td th:text="${instructorListOutput.lastname}" />
                 <td>
-                    <div>Teoria: <div th:text="${#lists.size(instructorListOutput.theory)} > 0 ? ${instructorListOutput.theory} : 'Brak'"></div></div>
-                    <div>praktyka: <div th:text="${instructorListOutput.practice}"></div></div>
+                    Teoria:
+                    <div th:if="${#lists.size(instructorListOutput.theory)} > 0" th:each="theory : ${instructorListOutput.theory}" style="display: inline">
+                        <div th:text="${theory}"  style="display: inline"/>
+                    </div>
+                    <div th:if="${#lists.size(instructorListOutput.theory)} == 0" style="display: inline">
+                        <div style="display: inline">Brak</div>
+                    </div>
+                    <br>Praktyka:
+                    <div th:if="${#lists.size(instructorListOutput.practice)} > 0" th:each="practice : ${instructorListOutput.practice}" style="display: inline">
+                        <div th:text="${practice}"  style="display: inline"/>
+                    </div>
+                    <div th:if="${#lists.size(instructorListOutput.practice)} == 0" style="display: inline">
+                        <div style="display: inline">Brak</div>
+                    </div>
                 </td>
                 <td>
                     Przyciski edycja, usuwanie

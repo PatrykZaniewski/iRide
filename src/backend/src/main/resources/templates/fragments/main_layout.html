@@ -13,10 +13,13 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-<div th:replace="${accountRole} == 'ADMIN' ? ~{fragments/header :: header_admin} : _"></div>
-<div th:replace="${accountRole} == 'INSTRUCTOR' ? ~{fragments/header :: header_instructor} : _"></div>
-<div th:replace="${accountRole} == 'STUDENT' ? ~{fragments/header :: header_student} : _"></div>
-<div th:replace="${accountRole} ?  _ : ~{fragments/header :: header_unlogged}"></div>
+<!--<div th:replace="${accountRole} == 'ADMIN' ? ~{fragments/header :: header_admin} : _"></div>-->
+<!--<div th:replace="${accountRole} == 'INSTRUCTOR' ? ~{fragments/header :: header_instructor} : _"></div>-->
+<!--<div th:replace="${accountRole} == 'STUDENT' ? ~{fragments/header :: header_student} : _"></div>-->
+<!--<div th:replace="${accountRole} ?  _ : ~{fragments/header :: header_unlogged}"></div>-->
+
+<div th:replace="fragments/header :: header_admin"></div>
+
 
 <div layout:fragment="content"></div>
 <div th:replace="fragments/footer"></div>

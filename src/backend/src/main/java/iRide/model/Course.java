@@ -14,7 +14,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_student", referencedColumnName = "id")
     @NotNull
     private Student student;

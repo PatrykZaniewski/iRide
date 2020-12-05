@@ -30,7 +30,7 @@ public class VehicleController {
     }
 
     @GetMapping(value = "")
-    public String getInstructors(Model model){
+    public String getVehicles(Model model){
         List<VehicleListOutput> vehicleListOutputs = this.vehicleService.getVehicleListOutput();
         model.addAttribute("vehicleListOutputs", vehicleListOutputs);
         return "vehicles";
