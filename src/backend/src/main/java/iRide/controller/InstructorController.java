@@ -1,20 +1,15 @@
 package iRide.controller;
 
-import iRide.model.Instructor;
 import iRide.service.Instructor.InstructorService;
-import iRide.service.Instructor.model.input.InstructorCreateInput;
+import iRide.service.Instructor.model.output.InstructorAdminOutput;
 import iRide.service.Instructor.model.output.InstructorListOutput;
-import iRide.utils.exception.DataExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -34,6 +29,13 @@ public class InstructorController {
         return "instructors";
     }
 
+    @GetMapping(value = "/{id}")
+    public String getInstructorDetails(Model model, @PathVariable int id){
+        InstructorAdminOutput instructorAdminOutput = this.instructorService.getInstructorDetailsAsAdmin(id);
+        model.addAttribute("instructorAdminOutput", instructorAdminOutput);
+        return "instructor_details_admin";
+    }
+
 //    @PostMapping(value = "/")
 //    public ResponseEntity<String> createInstructor(@Valid @RequestBody InstructorCreateInput instructorCreateInput) {
 //        try {
@@ -46,7 +48,7 @@ public class InstructorController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteInstructor(@PathVariable int id) {
-        this.instructorService.deleteInstructor(id);
+        System.out.println("XDDD");
         return ResponseEntity.ok("");
     }
 

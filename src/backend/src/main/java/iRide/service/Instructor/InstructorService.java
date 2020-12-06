@@ -1,10 +1,9 @@
 package iRide.service.Instructor;
 
-import iRide.model.Category;
-import iRide.model.Instructor;
-import iRide.model.User;
+import iRide.model.*;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
+import iRide.service.Instructor.model.output.InstructorAdminOutput;
 import iRide.service.Instructor.model.output.InstructorListOutput;
 import iRide.service.InstructorCategory.InstructorCategoryService;
 import iRide.service.User.UserService;
@@ -69,6 +68,52 @@ public class InstructorService {
         return instructorListOutputs;
     }
 
+    public InstructorAdminOutput getInstructorDetailsAsAdmin(int id){
+        Instructor instructor = this.getInstructor(id);
+
+        InstructorAdminOutput instructorAdminOutput = new InstructorAdminOutput();
+
+        instructorAdminOutput.setId(instructor.getId());
+        instructorAdminOutput.setFirstname(instructor.getFirstname());
+        instructorAdminOutput.setLastname(instructor.getLastname());
+        instructorAdminOutput.setEmail(instructor.getUser().getEmail());
+        instructorAdminOutput.setEmploymentDate(instructor.getEmploymentDate());
+        instructorAdminOutput.setDismissalDate(instructor.getDismissalDate());
+        instructorAdminOutput.setPhoneNumber(instructor.getPhoneNumber());
+
+        List<String> theory = new ArrayList<>();
+        List<String> practice = new ArrayList<>();
+
+        for (Category category: instructor.getCategories()){
+            if(category.getCategoryType().equals("PRACTICE")){
+                practice.add(category.getCategoryName());
+            }
+            if(category.getCategoryType().equals("THEORY")){
+                theory.add(category.getCategoryName());
+            }
+        }
+        instructorAdminOutput.setTheory(theory.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+        instructorAdminOutput.setPractice(practice.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList()));
+
+        Map<Integer, String> vehicles = new HashMap<>();
+        for (Vehicle vehicle: instructor.getVehicles()){
+            vehicles.put(vehicle.getId(), vehicle.getId() + "-" + vehicle.getMark() + " " + vehicle.getModel());
+        }
+        instructorAdminOutput.setVehicles(vehicles);
+
+        //TODO moze jednak kursy?
+        Map<Integer, String> activeCourses = new HashMap<>();
+        List<String> activeStatuses = new ArrayList<>(Arrays.asList("WAITING", "IN_PROGRESS"));
+        for (Course course: instructor.getCourses()){
+            if(activeStatuses.contains(course.getStatus())){
+                activeCourses.put(course.getId(), course.getId() + "." + mapParameters(course.getCategory().getCategoryType()) + "-" + course.getCategory().getCategoryName());
+            }
+        }
+        instructorAdminOutput.setActiveCourses(activeCourses);
+
+        return instructorAdminOutput;
+    }
+
     public Instructor getInstructor(int instructorId) throws NotFoundException {
         Optional<Instructor> result = instructorRepository.findById(instructorId);
         if (!result.isPresent()) {
@@ -84,6 +129,25 @@ public class InstructorService {
     public int deleteInstructor(int id) {
         instructorRepository.deleteById(id);
         return id;
+    }
+
+    private String mapParameters(String param){
+        switch (param){
+            case "THEORY":
+                return "Teoria";
+            case "PRACTICE":
+                return "Praktyka";
+            case "IN_PROGRESS":
+                return "W trakcie";
+            case "FINISHED":
+                return "Ukończony";
+            case "CANCELLED":
+                return "Przerwany";
+            case "WAITING":
+                return "Oczekuje na rozpoczęcie";
+            default:
+                return "Status nieznany";
+        }
     }
 
 
