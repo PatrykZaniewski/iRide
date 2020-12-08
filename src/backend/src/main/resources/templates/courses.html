@@ -31,7 +31,12 @@
                 <td th:text="${courseListOutput.categoryName}" />
                 <td th:text="${courseListOutput.status}" />
                 <td>
-                    Przyciski edycja, usuwanie
+                    <a th:href="@{'/course/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm">Szczegóły</a>
+                    <a th:href="@{'/courseEdit/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm">Edycja</a>
+                    <form th:action="@{'/course/{id}'(id=${courseListOutput.id})}" th:method="DELETE" style="display: inline">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button class="btn btn-danger btn-sm" type="submit" id="submitButton">Usuń</button>
+                    </form>
                 </td>
             </tr>
             </tbody>

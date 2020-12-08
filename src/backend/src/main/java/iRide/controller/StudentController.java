@@ -1,10 +1,13 @@
 package iRide.controller;
 
+import iRide.service.Instructor.model.output.InstructorAdminOutput;
 import iRide.service.Student.StudentService;
 import iRide.service.Student.model.input.StudentCreateInput;
+import iRide.service.Student.model.output.StudentAdminOutput;
 import iRide.service.Student.model.output.StudentListOutput;
 import iRide.service.Vehicle.model.output.VehicleListOutput;
 import iRide.utils.exception.DataExistsException;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +31,22 @@ public class StudentController {
     public String getStudents(Model model){
         List<StudentListOutput> studentListOutputs = this.studentService.getStudentListOutput();
         model.addAttribute("studentListOutputs", studentListOutputs);
-//        model.addAttribute("test", studentListOutputs.get(1).getActiveCourses());
         return "students";
     }
+
+    @GetMapping(value = "/{id}")
+    public String getStudentDetails(Model model, @PathVariable int id){
+        try {
+            StudentAdminOutput studentAdminOutput = this.studentService.getStudentDetailsAsAdmin(id);
+            model.addAttribute("studentAdminOutput", studentAdminOutput);
+            return "student_details_admin";
+        }
+        catch (NotFoundException e){
+            return "redirect:/student?code=202";
+        }
+    }
+
+
 
 //    @PostMapping(value = "/")
 //    public ResponseEntity<String> createStudent(@RequestBody StudentCreateInput studentCreateInput) {

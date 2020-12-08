@@ -101,7 +101,6 @@ public class InstructorService {
         }
         instructorAdminOutput.setVehicles(vehicles);
 
-        //TODO moze jednak kursy?
         Map<Integer, String> activeCourses = new HashMap<>();
         List<String> activeStatuses = new ArrayList<>(Arrays.asList("WAITING", "IN_PROGRESS"));
         for (Course course: instructor.getCourses()){
