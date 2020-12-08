@@ -4,7 +4,7 @@
     <title>iRide</title>
 </head>
 <body>
-<div layout:fragment="content" class="container" style="min-width: 700px">
+<div layout:fragment="content" class="container" style="min-width: 700px; max-width: 1500px">
     <div class="jumbotron">
         <table class="table">
             <thead>
@@ -30,12 +30,12 @@
                 <td th:text="${courseListOutput.categoryType}" />
                 <td th:text="${courseListOutput.categoryName}" />
                 <td th:text="${courseListOutput.status}" />
-                <td>
-                    <a th:href="@{'/course/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm">Szczegóły</a>
-                    <a th:href="@{'/courseEdit/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm">Edycja</a>
+                <td style="max-width: 195px;">
+                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
+                    <a style="width: 80px;" th:href="@{'/courseEdit/' + ${courseListOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
                     <form th:action="@{'/course/{id}'(id=${courseListOutput.id})}" th:method="DELETE" style="display: inline">
                         <input type="hidden" name="_method" value="DELETE" />
-                        <button class="btn btn-danger btn-sm" type="submit" id="submitButton">Usuń</button>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>
                     </form>
                 </td>
             </tr>

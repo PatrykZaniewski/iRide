@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
 <head>
     <title>iRide</title>
 </head>
@@ -22,31 +23,33 @@
             </thead>
             <tbody>
             <tr th:each="instructorListOutput: ${instructorListOutputs}">
-                <th scope="row" th:text="${instructorListOutput.id}" />
-                <td th:text="${instructorListOutput.firstname}" />
-                <td th:text="${instructorListOutput.lastname}" />
+                <th scope="row" th:text="${instructorListOutput.id}"/>
+                <td th:text="${instructorListOutput.firstname}"/>
+                <td th:text="${instructorListOutput.lastname}"/>
                 <td>
                     Teoria:
-                    <div th:if="${#lists.size(instructorListOutput.theory)} > 0" th:each="theory : ${instructorListOutput.theory}" style="display: inline">
-                        <div th:text="${theory}"  style="display: inline"/>
+                    <div th:if="${#lists.size(instructorListOutput.theory)} > 0"
+                         th:each="theory : ${instructorListOutput.theory}" style="display: inline">
+                        <div th:text="${theory}" style="display: inline"/>
                     </div>
                     <div th:if="${#lists.size(instructorListOutput.theory)} == 0" style="display: inline">
                         <div style="display: inline">Brak</div>
                     </div>
                     <br>Praktyka:
-                    <div th:if="${#lists.size(instructorListOutput.practice)} > 0" th:each="practice : ${instructorListOutput.practice}" style="display: inline">
-                        <div th:text="${practice}"  style="display: inline"/>
+                    <div th:if="${#lists.size(instructorListOutput.practice)} > 0"
+                         th:each="practice : ${instructorListOutput.practice}" style="display: inline">
+                        <div th:text="${practice}" style="display: inline"/>
                     </div>
                     <div th:if="${#lists.size(instructorListOutput.practice)} == 0" style="display: inline">
                         <div style="display: inline">Brak</div>
                     </div>
                 </td>
-                <td>
-                    <a th:href="@{'/instructor/' + ${instructorListOutput.id}}" class="btn btn-primary btn-sm">Szczegóły</a>
-                    <a th:href="@{'/instructorEdit/' + ${instructorListOutput.id}}" class="btn btn-primary btn-sm">Edycja</a>
-                    <form th:action="@{'/instructor/{id}'(id=${instructorListOutput.id})}" th:method="DELETE" style="display: inline">
-                        <input type="hidden" name="_method" value="DELETE" />
-                        <button class="btn btn-danger btn-sm" type="submit" id="submitButton">Usuń</button>
+                <td style="max-width: 195px;">
+                    <a style="width: 80px;" th:href="@{'/instructor/' + ${instructorListOutput.id}}" class="btn btn-primary btn-sm my-2 text-center">Szczegóły</a>
+                    <a style="width: 80px" th:href="@{'/instructorEdit/' + ${instructorListOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
+                    <form style=" display: inline" th:action="@{'/instructor/{id}'(id=${instructorListOutput.id})}" th:method="DELETE">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>
                     </form>
                 </td>
             </tr>

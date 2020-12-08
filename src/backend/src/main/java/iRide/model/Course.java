@@ -27,7 +27,7 @@ public class Course {
     @NotNull
     private Category category;
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Event> event;
+    private List<Event> events;
     @Column(name = "hours_minimum")
     @NotNull
     private int hoursMinimum;
@@ -48,7 +48,6 @@ public class Course {
         this.instructor = instructor;
         this.student = student;
         this.category = category;
-        //TODO zrobic na podstawie kategorii
         this.hoursRemaining = courseInput.getHoursRemaining();
         this.hoursDone = 0;
         this.hoursMinimum = courseInput.getHoursMinimum();
@@ -87,11 +86,19 @@ public class Course {
     }
 
     public List<Event> getEvent() {
-        return event;
+        return events;
     }
 
-    public void setEvent(List<Event> event) {
-        this.event = event;
+    public void setEvent(List<Event> events) {
+        this.events = events;
+    }
+
+    public int getHoursMinimum() {
+        return hoursMinimum;
+    }
+
+    public void setHoursMinimum(int hoursMinimum) {
+        this.hoursMinimum = hoursMinimum;
     }
 
     public int getHoursRemaining() {

@@ -2,7 +2,10 @@ package iRide.controller;
 
 import iRide.service.Course.CourseService;
 import iRide.service.Course.model.input.CourseInput;
+import iRide.service.Course.model.output.CourseAdminOutput;
 import iRide.service.Course.model.output.CourseListOutput;
+import iRide.service.Student.model.output.StudentAdminOutput;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,18 @@ public class CourseController {
         List<CourseListOutput> courseListOutputs = this.courseService.getCourseListOutput();
         model.addAttribute("courseListOutputs", courseListOutputs);
         return "courses";
+    }
+
+    @GetMapping(value = "/{id}")
+    public String getCourseDetails(Model model, @PathVariable int id){
+        try {
+            CourseAdminOutput courseAdminOutput = this.courseService.getCourseDetailsAsAdmin(id);
+            model.addAttribute("courseAdminOutput", courseAdminOutput);
+            return "course_details_admin";
+        }
+        catch (NotFoundException e){
+            return "redirect:/course?code=202";
+        }
     }
 
 //    @DeleteMapping(value = "/{id}")

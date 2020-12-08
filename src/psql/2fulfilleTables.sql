@@ -107,17 +107,17 @@ values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),
          (3, 1, 6, 30, 0, 30, 'FINISHED'),
          (3, 2, 22, 30, 17, 13, 'WAITING');
 
-insert into event(id_student, id_instructor, id_vehicle, id_course, duration, comment)
-values (1, 1, NULL, 1, 15, NULL),
-       (1, 1, NULL, 1, 15, NULL),
-       (2, 1, NULL, 3, 15, NULL),
-       (2, 1, NULL, 3, 15, NULL),
-       (2, 2, 1, 4, 4, NULL),
-       (2, 2, 1, 4, 4, NULL),
-       (3, 1, NULL, 5, 15, NULL),
-       (3, 1, NULL, 5, 15, NULL),
-       (3, 2, 1, 6, 10, NULL),
-       (3, 2, 1, 6, 10, NULL);
+insert into event(id_student, id_instructor, id_vehicle, id_course, start_date, end_date, duration, comment)
+values (1, 1, NULL, 1, '2019-03-01T12:00', '2019-03-01 14:00', 15, NULL),
+       (1, 1, NULL, 1, '2019-03-02T12:00', '2019-03-01 14:00', 15, NULL),
+       (2, 1, NULL, 3, '2019-03-03T12:00', '2019-03-01 14:00', 15, NULL),
+       (2, 1, NULL, 3, '2019-03-04T12:00', '2019-03-01 14:00', 15, NULL),
+       (2, 2, 1, 4, '2019-03-05T12:00', '2019-03-01 14:00', 4, NULL),
+       (2, 2, 1, 4, '2019-03-06T12:00', '2019-03-01 14:00', 4, NULL),
+       (3, 1, NULL, 5, '2019-03-07T12:00', '2019-03-01 14:00', 15, NULL),
+       (3, 1, NULL, 5, '2019-03-08T12:00', '2019-03-01 14:00', 15, NULL),
+       (3, 2, 1, 6, '2019-03-09T12:00', '2019-03-01 14:00', 10, NULL),
+       (3, 2, 1, 6, '2019-03-10T12:00', '2019-03-01 14:00', 10, NULL);
 
 
 

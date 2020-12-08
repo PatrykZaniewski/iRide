@@ -123,6 +123,8 @@ CREATE TABLE public.event
     id_instructor integer NOT NULL,
     id_vehicle    integer,
     id_course     integer NOT NULL,
+    start_date    timestamp NOT NULL,
+    end_date      timestamp NOT NULL,
     duration      int       NOT NULL,
     comment       varchar(256),
     PRIMARY KEY (id),

@@ -2,6 +2,7 @@ package iRide.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event")
@@ -24,6 +25,10 @@ public class Event {
     private Course course;
     @NotNull
     private int duration;
+    @Column(name = "start_date")
+    private LocalDateTime startDate;
+    @Column(name = "end_date")
+    private LocalDateTime endDate;
     private String comment;
 
     public int getId() {
@@ -72,6 +77,22 @@ public class Event {
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public String getComment() {

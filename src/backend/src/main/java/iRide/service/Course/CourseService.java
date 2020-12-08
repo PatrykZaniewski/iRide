@@ -1,23 +1,18 @@
 package iRide.service.Course;
 
-import iRide.model.Category;
-import iRide.model.Course;
-import iRide.model.Instructor;
-import iRide.model.Student;
+import iRide.model.*;
 import iRide.repository.CourseRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Course.model.input.CourseInput;
+import iRide.service.Course.model.output.CourseAdminOutput;
 import iRide.service.Course.model.output.CourseListOutput;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Student.StudentService;
-import iRide.service.Vehicle.model.output.VehicleListOutput;
+import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CourseService {
@@ -53,7 +48,7 @@ public class CourseService {
         List<Course> courses = this.courseRepository.findAll();
         List<CourseListOutput> courseListOutputs = new ArrayList<>();
 
-        for (Course course: courses){
+        for (Course course : courses) {
             CourseListOutput courseListOutput = new CourseListOutput();
 
             courseListOutput.setId(course.getId());
@@ -69,6 +64,38 @@ public class CourseService {
         return courseListOutputs;
     }
 
+    public CourseAdminOutput getCourseDetailsAsAdmin(int id) {
+        Course course = this.getCourse(id);
+        CourseAdminOutput courseAdminOutput = new CourseAdminOutput();
+
+        courseAdminOutput.setId(course.getId());
+        courseAdminOutput.setCategory(course.getCategory().getCategoryName() + "-" + mapParameters(course.getCategory().getCategoryType()));
+        courseAdminOutput.setHoursDone(course.getHoursDone());
+        courseAdminOutput.setHoursMinimum(course.getHoursMinimum());
+        courseAdminOutput.setHoursRemaining(course.getHoursRemaining());
+        courseAdminOutput.setInstructorId(course.getInstructor().getId());
+        courseAdminOutput.setInstructor(course.getInstructor().getFirstname() + " " + course.getInstructor().getLastname());
+        courseAdminOutput.setStudentId(course.getStudent().getId());
+        courseAdminOutput.setStudent(course.getStudent().getFirstname() + " " + course.getStudent().getLastname());
+        courseAdminOutput.setStatus(mapParameters(course.getStatus()));
+
+        Map<Integer, String> events = new HashMap<>();
+        for (Event event : course.getEvent()){
+            events.put(event.getId(), String.valueOf(event.getStartDate()));
+        }
+
+        courseAdminOutput.setEvents(events);
+        return courseAdminOutput;
+    }
+
+    public Course getCourse(int courseId) {
+        Optional<Course> result = this.courseRepository.findById(courseId);
+        if (!result.isPresent()) {
+            throw new NotFoundException("Course with id = " + courseId + " has not been found");
+        }
+        return result.get();
+    }
+
 
     public int createCourse(CourseInput courseInput) {
         //TODO walidacja czy podane wartosci istnieja
@@ -80,8 +107,8 @@ public class CourseService {
         //TODO sprawdzic czy jest kurs na dana kategorie w stanie innym niz FINISHED i czy instruktor moze prowadzic dana kategorie!
     }
 
-    private String mapParameters(String param){
-        switch (param){
+    private String mapParameters(String param) {
+        switch (param) {
             case "THEORY":
                 return "Teoria";
             case "PRACTICE":
@@ -98,7 +125,6 @@ public class CourseService {
                 return "Status nieznany";
         }
     }
-
 
 
 }
