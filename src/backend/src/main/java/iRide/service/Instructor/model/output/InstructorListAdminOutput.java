@@ -2,8 +2,9 @@ package iRide.service.Instructor.model.output;
 
 import java.util.List;
 
-public class InstructorListOutput {
+public class InstructorListAdminOutput {
     private int id;
+    private int userId;
     private String firstname;
     private String lastname;
     private List<String> theory;
@@ -15,6 +16,14 @@ public class InstructorListOutput {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstname() {

@@ -1,19 +1,15 @@
 package iRide.controller;
 
-import iRide.service.Instructor.model.output.InstructorListOutput;
 import iRide.service.Vehicle.VehicleService;
-import iRide.service.Vehicle.model.input.VehicleCreateInput;
-import iRide.service.Vehicle.model.output.VehicleListOutput;
-import iRide.service.Vehicle.model.output.VehicleOutput;
-import iRide.utils.exception.DataExistsException;
+import iRide.service.Vehicle.model.output.VehicleAdminOutput;
+import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -31,10 +27,52 @@ public class VehicleController {
 
     @GetMapping(value = "")
     public String getVehicles(Model model){
-        List<VehicleListOutput> vehicleListOutputs = this.vehicleService.getVehicleListOutput();
-        model.addAttribute("vehicleListOutputs", vehicleListOutputs);
-        return "vehicles";
+        List<VehicleListAdminOutput> vehicleListAdminOutputs = this.vehicleService.getVehicleListAdminOutput();
+        if (model.asMap().get("code") != null) {
+            Integer code = (Integer)model.asMap().get("code");
+            switch (code) {
+                case 101:
+                    model.addAttribute("infoMessage", "Pojazd został usunięty pomyślnie.");
+                    break;
+                case 201:
+                    model.addAttribute("infoError", "Wybrany pojazd został już usunięty.");
+                    break;
+                case 202:
+                    model.addAttribute("infoError", "Pojazd o wybranym id nie istnieje.");
+                    break;
+                default:
+                    model.addAttribute("infoError", "Wystąpił nieznany błąd.");
+            }
+        }
+        model.addAttribute("vehicleListAdminOutputs", vehicleListAdminOutputs);
+        return "admin/vehicles";
     }
+
+    @GetMapping(value = "/{id}")
+    public String getVehicleDetails(Model model, @PathVariable int id, RedirectAttributes redirectAttributes){
+        try {
+            VehicleAdminOutput vehicleAdminOutput = this.vehicleService.getVehicleDetails(id);
+            model.addAttribute("vehicleAdminOutput", vehicleAdminOutput);
+            return "admin/vehicle_details_admin";
+        }
+        catch (NotFoundException e){
+            redirectAttributes.addFlashAttribute("code", 202);
+            return "redirect:/vehicle";
+        }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public String deleteVehicle(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        try {
+            this.vehicleService.deleteVehicle(id);
+            redirectAttributes.addFlashAttribute("code", 101);
+        } catch (NotFoundException e){
+            redirectAttributes.addFlashAttribute("code", 201);
+        }
+        return "redirect:/vehicle";
+    }
+
+
 
 //    @DeleteMapping(value = "/{id}")
 //    public ResponseEntity<Integer> deleteById(@PathVariable int id) {

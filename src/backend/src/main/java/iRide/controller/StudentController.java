@@ -1,19 +1,14 @@
 package iRide.controller;
 
-import iRide.service.Instructor.model.output.InstructorAdminOutput;
 import iRide.service.Student.StudentService;
-import iRide.service.Student.model.input.StudentCreateInput;
 import iRide.service.Student.model.output.StudentAdminOutput;
-import iRide.service.Student.model.output.StudentListOutput;
-import iRide.service.Vehicle.model.output.VehicleListOutput;
-import iRide.utils.exception.DataExistsException;
+import iRide.service.Student.model.output.StudentListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,21 +24,49 @@ public class StudentController {
 
     @GetMapping(value = "")
     public String getStudents(Model model){
-        List<StudentListOutput> studentListOutputs = this.studentService.getStudentListOutput();
-        model.addAttribute("studentListOutputs", studentListOutputs);
-        return "students";
+        List<StudentListAdminOutput> studentListAdminOutputs = this.studentService.getStudentListAdminOutput();
+        if (model.asMap().get("code") != null) {
+            Integer code = (Integer)model.asMap().get("code");
+            switch (code) {
+                case 101:
+                    model.addAttribute("infoMessage", "Student został usunięty pomyślnie.");
+                    break;
+                case 201:
+                    model.addAttribute("infoError", "Wybrany student został już usunięty.");
+                    break;
+                case 202:
+                    model.addAttribute("infoError", "Student o wybranym id nie istnieje.");
+                    break;
+                default:
+                    model.addAttribute("infoError", "Wystąpił nieznany błąd.");
+            }
+        }
+        model.addAttribute("studentListAdminOutputs", studentListAdminOutputs);
+        return "admin/students";
     }
 
     @GetMapping(value = "/{id}")
-    public String getStudentDetails(Model model, @PathVariable int id){
+    public String getStudentDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
         try {
             StudentAdminOutput studentAdminOutput = this.studentService.getStudentDetailsAsAdmin(id);
             model.addAttribute("studentAdminOutput", studentAdminOutput);
-            return "student_details_admin";
+            return "admin/student_details_admin";
         }
         catch (NotFoundException e){
-            return "redirect:/student?code=202";
+            redirectAttributes.addFlashAttribute("code", 202);
+            return "redirect:/student";
         }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public String deleteStudent(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        try {
+            this.studentService.deleteStudent(id);
+            redirectAttributes.addFlashAttribute("code", 101);
+        } catch (NotFoundException e){
+            redirectAttributes.addFlashAttribute("code", 201);
+        }
+        return "redirect:/category";
     }
 
 

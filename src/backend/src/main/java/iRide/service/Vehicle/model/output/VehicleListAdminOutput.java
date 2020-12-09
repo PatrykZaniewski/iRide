@@ -1,9 +1,8 @@
 package iRide.service.Vehicle.model.output;
 
-import java.util.List;
 import java.util.Map;
 
-public class VehicleListOutput {
+public class VehicleListAdminOutput {
     private int id;
     private String mark;
     private String model;

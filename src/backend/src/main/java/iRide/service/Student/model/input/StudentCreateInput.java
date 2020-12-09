@@ -1,6 +1,6 @@
 package iRide.service.Student.model.input;
 
-import iRide.service.User.model.UserCreateInput;
+import iRide.service.User.model.input.UserCreateInput;
 
 public class StudentCreateInput {
     private String email;

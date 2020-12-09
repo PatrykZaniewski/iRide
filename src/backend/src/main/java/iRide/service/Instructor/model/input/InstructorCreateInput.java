@@ -1,7 +1,7 @@
 package iRide.service.Instructor.model.input;
 
 import iRide.service.InstructorCategory.model.input.InstructorCategoryInput;
-import iRide.service.User.model.UserCreateInput;
+import iRide.service.User.model.input.UserCreateInput;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

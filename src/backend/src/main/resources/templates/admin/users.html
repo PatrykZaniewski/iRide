@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 600px; max-width: 1500px">
+
+    <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
+    <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
+
+    <div class="jumbotron">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">Data utworzenia</th>
+                <th scope="col">Status</th>
+                <th scope="col">Grupa</th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="userListAdminOutput: ${userListAdminOutputs}">
+                <th scope="row" th:text="${userListAdminOutput.id}" />
+                <td th:text="${userListAdminOutput.email}" />
+                <td th:text="${userListAdminOutput.creationDate}" />
+                <td th:text="${userListAdminOutput.status}" />
+                <td th:text="${userListAdminOutput.accountRole}" />
+                <td style="max-width: 80px;">
+                    <a style="width: 80px" th:href="@{'/userEdit/' + ${userListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
+                    <form style=" display: inline" th:action="@{'/user/{id}/{group}'(id=${userListAdminOutput.id}, group=${userListAdminOutput.accountRole})}" th:method="DELETE">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

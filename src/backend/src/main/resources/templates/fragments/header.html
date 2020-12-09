@@ -16,7 +16,7 @@
 </div>
 
 <div th:fragment="header_admin" class="p-5" xmlns:th="http://www.thymeleaf.org">
-    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">iRide</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToogle"
                 aria-controls="navbarToogle" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,8 +24,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarToogle">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Konta użytkowników</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Konta
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/user">Lista kont</a>
+                        <a class="dropdown-item" href="#">Dodaj konto</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,9 +44,6 @@
                     </div>
                 </li>
 
-<!--                <li class="nav-item">-->
-<!--                    <a class="nav-link" href="/instructor">Instruktorzy</a>-->
-<!--                </li>-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Kursanci
@@ -57,6 +60,15 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/vehicle">Lista pojazdów</a>
                         <a class="dropdown-item" href="#">Dodaj pojazd</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Kategorie
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/category">Lista kategorii</a>
+                        <a class="dropdown-item" href="#">Dodaj kurs</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -105,7 +117,19 @@
         <div class="collapse navbar-collapse" id="navbarToogle">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">test_student</a>
+                    <a class="nav-link" href="/course">Moje kursy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pomoce naukowe</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Konta
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/user">Lista kont</a>
+                        <a class="dropdown-item" href="#">Dodaj konto</a>
+                    </div>
                 </li>
             </ul>
             <div th:replace="~{fragments/navbar :: navbar}"></div>

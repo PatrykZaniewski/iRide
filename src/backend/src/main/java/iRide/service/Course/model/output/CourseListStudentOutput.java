@@ -1,14 +1,13 @@
 package iRide.service.Course.model.output;
 
-public class CourseListOutput {
+import java.util.Map;
 
+public class CourseListStudentOutput {
     private int id;
     private int instructorId;
     private String instructor;
-    private int studentId;
-    private String student;
-    private String categoryName;
     private String categoryType;
+    private String categoryName;
     private String status;
 
     public int getId() {
@@ -19,14 +18,6 @@ public class CourseListOutput {
         this.id = id;
     }
 
-    public String getInstructor() {
-        return instructor;
-    }
-
-    public void setInstructor(String instructor) {
-        this.instructor = instructor;
-    }
-
     public int getInstructorId() {
         return instructorId;
     }
@@ -35,28 +26,12 @@ public class CourseListOutput {
         this.instructorId = instructorId;
     }
 
-    public int getStudentId() {
-        return studentId;
+    public String getInstructor() {
+        return instructor;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudent() {
-        return student;
-    }
-
-    public void setStudent(String student) {
-        this.student = student;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
     }
 
     public String getCategoryType() {
@@ -65,6 +40,14 @@ public class CourseListOutput {
 
     public void setCategoryType(String categoryType) {
         this.categoryType = categoryType;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public String getStatus() {

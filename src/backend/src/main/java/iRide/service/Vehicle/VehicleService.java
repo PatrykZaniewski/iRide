@@ -7,12 +7,13 @@ import iRide.repository.VehicleRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.input.VehicleUpdateInput;
-import iRide.service.Vehicle.model.output.VehicleListOutput;
-import iRide.service.Vehicle.model.output.VehicleOutput;
+import iRide.service.Vehicle.model.output.VehicleAdminOutput;
+import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -28,30 +29,32 @@ public class VehicleService {
         this.categoryService = categoryService;
     }
 
+    @Transactional
     public int deleteVehicle(int id) {
-        vehicleRepository.deleteById(id);
+        Vehicle vehicle = this.getVehicle(id);
+        vehicleRepository.delete(vehicle);
         return id;
     }
 
-    public List<VehicleListOutput> getVehicleListOutput(){
+    public List<VehicleListAdminOutput> getVehicleListAdminOutput() {
         List<Vehicle> vehicles = this.vehicleRepository.findAll();
-        List<VehicleListOutput> vehicleListOutputs = new ArrayList<>();
-        for (Vehicle vehicle: vehicles){
-            VehicleListOutput vehicleListOutput = new VehicleListOutput();
+        List<VehicleListAdminOutput> vehicleListAdminOutputs = new ArrayList<>();
+        for (Vehicle vehicle : vehicles) {
+            VehicleListAdminOutput vehicleListAdminOutput = new VehicleListAdminOutput();
 
-            vehicleListOutput.setId(vehicle.getId());
-            vehicleListOutput.setMark(vehicle.getMark());
-            vehicleListOutput.setModel(vehicle.getModel());
-            vehicleListOutput.setCategory(vehicle.getCategory().getCategoryName());
+            vehicleListAdminOutput.setId(vehicle.getId());
+            vehicleListAdminOutput.setMark(vehicle.getMark());
+            vehicleListAdminOutput.setModel(vehicle.getModel());
+            vehicleListAdminOutput.setCategory(vehicle.getCategory().getCategoryName());
 
             Map<Integer, String> instructors = new HashMap<>();
-            for (Instructor instructor: vehicle.getInstructors()){
+            for (Instructor instructor : vehicle.getInstructors()) {
                 instructors.put(instructor.getId(), instructor.getLastname() + " " + instructor.getFirstname());
             }
-            vehicleListOutput.setInstructors(instructors);
-            vehicleListOutputs.add(vehicleListOutput);
+            vehicleListAdminOutput.setInstructors(instructors);
+            vehicleListAdminOutputs.add(vehicleListAdminOutput);
         }
-        return vehicleListOutputs;
+        return vehicleListAdminOutputs;
     }
 
     public int updateVehicle(VehicleUpdateInput vehicleUpdateInput, int vehicleId) {
@@ -68,7 +71,7 @@ public class VehicleService {
         if (vehicleUpdateInput.getVin() != null) {
             vehicle.setVin(vehicleUpdateInput.getVin());
         }
-        if (vehicleUpdateInput.getCategoryName() != null){
+        if (vehicleUpdateInput.getCategoryName() != null) {
             //TODO obadac jak w thymeleafie zrobic walidacje na kategorie
         }
 
@@ -98,19 +101,35 @@ public class VehicleService {
         return result.get();
     }
 
-    public VehicleOutput getVehicleDetails(int vehicleId) throws NotFoundException {
-        return new VehicleOutput(this.getVehicle(vehicleId));
-    }
+    public VehicleAdminOutput getVehicleDetails(int vehicleId) throws NotFoundException {
+        Vehicle vehicle = this.getVehicle(vehicleId);
+        VehicleAdminOutput vehicleAdminOutput = new VehicleAdminOutput();
 
-    public List<VehicleOutput> getVehicleDetailsList() {
-        List<Vehicle> vehicles = this.vehicleRepository.findAll();
-        List<VehicleOutput> vehicleOutputs = new ArrayList<>();
+        vehicleAdminOutput.setId(vehicle.getId());
+        vehicleAdminOutput.setMark(vehicle.getMark());
+        vehicleAdminOutput.setModel(vehicle.getModel());
+        vehicleAdminOutput.setPlateNumber(vehicle.getPlateNumber());
+        vehicleAdminOutput.setVin(vehicle.getVin());
+        vehicleAdminOutput.setCategory(vehicle.getCategory().getCategoryName());
 
-        for (Vehicle vehicle : vehicles) {
-            vehicleOutputs.add(new VehicleOutput(vehicle));
+        Map<Integer, String> instructors = new HashMap<>();
+        for (Instructor instructor : vehicle.getInstructors()) {
+            instructors.put(instructor.getId(), instructor.getFirstname() + " " + instructor.getLastname());
         }
+        vehicleAdminOutput.setInstructors(instructors);
 
-        return vehicleOutputs;
+        return vehicleAdminOutput;
     }
+
+//    public List<VehicleAdminOutput> getVehicleDetailsList() {
+//        List<Vehicle> vehicles = this.vehicleRepository.findAll();
+//        List<VehicleAdminOutput> vehicleAdminOutputs = new ArrayList<>();
+//
+//        for (Vehicle vehicle : vehicles) {
+//            vehicleAdminOutputs.add(new VehicleAdminOutput(vehicle));
+//        }
+//
+//        return vehicleAdminOutputs;
+//    }
 
 }

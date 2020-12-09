@@ -5,12 +5,14 @@ import iRide.repository.CourseRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Course.model.input.CourseInput;
 import iRide.service.Course.model.output.CourseAdminOutput;
-import iRide.service.Course.model.output.CourseListOutput;
+import iRide.service.Course.model.output.CourseListAdminOutput;
+import iRide.service.Course.model.output.CourseListStudentOutput;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Student.StudentService;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -22,6 +24,8 @@ public class CourseService {
     private final StudentService studentService;
     private final CategoryService categoryService;
 
+    private final List<String> allCourseStatuses = new ArrayList<>(Arrays.asList("WAITING", "FINISHED", "IN_PROGRESS", "CANCELLED"));
+
     @Autowired
     public CourseService(CourseRepository courseRepository, InstructorService instructorService, StudentService studentService, CategoryService categoryService) {
         this.courseRepository = courseRepository;
@@ -30,8 +34,10 @@ public class CourseService {
         this.categoryService = categoryService;
     }
 
-    public int deleteCategory(int id) {
-        this.courseRepository.deleteById(id);
+    @Transactional
+    public int deleteCourse(int id) {
+        Course course = getCourse(id);
+        this.courseRepository.delete(course);
         return id;
     }
 
@@ -44,24 +50,49 @@ public class CourseService {
         return result.orElse(Collections.emptyList());
     }
 
-    public List<CourseListOutput> getCourseListOutput() {
+    public List<CourseListAdminOutput> getCourseListAdminOutput() {
         List<Course> courses = this.courseRepository.findAll();
-        List<CourseListOutput> courseListOutputs = new ArrayList<>();
+        List<CourseListAdminOutput> courseListAdminOutputs = new ArrayList<>();
 
         for (Course course : courses) {
-            CourseListOutput courseListOutput = new CourseListOutput();
+            CourseListAdminOutput courseListAdminOutput = new CourseListAdminOutput();
 
-            courseListOutput.setId(course.getId());
+            courseListAdminOutput.setId(course.getId());
 
-            courseListOutput.setCategoryName(course.getCategory().getCategoryName());
-            courseListOutput.setCategoryType(mapParameters(course.getCategory().getCategoryType()));
-            courseListOutput.setStatus(mapParameters(course.getStatus()));
-            courseListOutput.setInstructor(course.getInstructor().getFirstname() + " " + course.getInstructor().getLastname());
-            courseListOutput.setStudent(course.getStudent().getFirstname() + " " + course.getStudent().getLastname());
+            courseListAdminOutput.setCategoryName(course.getCategory().getCategoryName());
+            courseListAdminOutput.setCategoryType(mapParameters(course.getCategory().getCategoryType()));
+            courseListAdminOutput.setStatus(mapParameters(course.getStatus()));
+            courseListAdminOutput.setInstructor(course.getInstructor().getFirstname() + " " + course.getInstructor().getLastname());
+            courseListAdminOutput.setStudent(course.getStudent().getFirstname() + " " + course.getStudent().getLastname());
 
-            courseListOutputs.add(courseListOutput);
+            courseListAdminOutputs.add(courseListAdminOutput);
         }
-        return courseListOutputs;
+        return courseListAdminOutputs;
+    }
+
+    public List<Course> getCoursesByParameters(String instructorId, String studentId, String categoryId, List<String> statuses){
+        Optional<List<Course>> courses = this.courseRepository.getCoursesByParameters(instructorId, studentId, categoryId, statuses);
+        return courses.orElseGet(ArrayList::new);
+    }
+
+    public List<CourseListStudentOutput> getCourseListStudentOutput(int studentId){
+        List<Course> courses = getCoursesByParameters("%", String.valueOf(studentId), "%", allCourseStatuses);
+        List<CourseListStudentOutput> courseListStudentOutputs = new ArrayList<>();
+
+        for(Course course: courses){
+            CourseListStudentOutput courseListStudentOutput = new CourseListStudentOutput();
+
+            courseListStudentOutput.setId(course.getId());
+            courseListStudentOutput.setCategoryName(course.getCategory().getCategoryName());
+            courseListStudentOutput.setCategoryType(mapParameters(course.getCategory().getCategoryType()));
+            courseListStudentOutput.setStatus(course.getStatus());
+            courseListStudentOutput.setInstructorId(course.getInstructor().getId());
+            courseListStudentOutput.setInstructor(course.getInstructor().getFirstname() + " " + course.getInstructor().getLastname());
+
+            courseListStudentOutputs.add(courseListStudentOutput);
+        }
+
+        return courseListStudentOutputs;
     }
 
     public CourseAdminOutput getCourseDetailsAsAdmin(int id) {

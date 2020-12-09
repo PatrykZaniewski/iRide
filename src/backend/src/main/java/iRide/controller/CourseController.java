@@ -1,18 +1,16 @@
 package iRide.controller;
 
 import iRide.service.Course.CourseService;
-import iRide.service.Course.model.input.CourseInput;
 import iRide.service.Course.model.output.CourseAdminOutput;
-import iRide.service.Course.model.output.CourseListOutput;
-import iRide.service.Student.model.output.StudentAdminOutput;
+import iRide.service.Course.model.output.CourseListAdminOutput;
+import iRide.service.Course.model.output.CourseListStudentOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -28,22 +26,53 @@ public class CourseController {
     }
 
     @GetMapping(value = "")
-    public String getCourses(Model model) {
-        List<CourseListOutput> courseListOutputs = this.courseService.getCourseListOutput();
-        model.addAttribute("courseListOutputs", courseListOutputs);
-        return "courses";
+    public String getCourses(Model model, Authentication authentication) {
+        List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();
+        List<CourseListStudentOutput> courseListStudentOutputs = this.courseService.getCourseListStudentOutput(1);
+        model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
+        return "student/courses";
+//        if (model.asMap().get("code") != null) {
+//            Integer code = (Integer)model.asMap().get("code");
+//            switch (code) {
+//                case 101:
+//                    model.addAttribute("infoMessage", "Kurs został usunięty pomyślnie.");
+//                    break;
+//                case 201:
+//                    model.addAttribute("infoError", "Wybrany kurs został już usunięty.");
+//                    break;
+//                case 202:
+//                    model.addAttribute("infoError", "Kurs o wybranym id nie istnieje.");
+//                    break;
+//                default:
+//                    model.addAttribute("infoError", "Wystąpił nieznany błąd.");
+//            }
+//        }
+//        model.addAttribute("courseListAdminOutputs", courseListAdminOutputs);
+//        return "admin/courses";
     }
 
     @GetMapping(value = "/{id}")
-    public String getCourseDetails(Model model, @PathVariable int id){
+    public String getCourseDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
         try {
             CourseAdminOutput courseAdminOutput = this.courseService.getCourseDetailsAsAdmin(id);
             model.addAttribute("courseAdminOutput", courseAdminOutput);
-            return "course_details_admin";
+            return "admin/course_details_admin";
         }
         catch (NotFoundException e){
-            return "redirect:/course?code=202";
+            redirectAttributes.addFlashAttribute("code", 202);
+            return "redirect:/course";
         }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public String deleteCourse(@PathVariable int id, RedirectAttributes redirectAttributes) {
+        try {
+            this.courseService.deleteCourse(id);
+            redirectAttributes.addFlashAttribute("code", 101);
+        } catch (NotFoundException e){
+            redirectAttributes.addFlashAttribute("code", 201);
+        }
+        return "redirect:/course";
     }
 
 //    @DeleteMapping(value = "/{id}")

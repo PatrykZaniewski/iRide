@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 700px; max-width: 1500px">
+    <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
+    <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
+
+    <div class="jumbotron p-2">
+        <table class="table">
+            <caption style="caption-side: top;" class="text-center"><h1>Kursy</h1></caption>
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Instruktor</th>
+                <th scope="col">Typ kategorii</th>
+                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Status</th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="courseListStudentOutput: ${courseListStudentOutputs}">
+                <th scope="row" th:text="${courseListStudentOutput.id}" />
+                <td>
+                    <a th:href="@{'/instructor/' + ${courseListStudentOutput.instructorId}}" th:text="${courseListStudentOutput.instructor}" />
+                </td>
+                <td th:text="${courseListStudentOutput.categoryType}" />
+                <td th:text="${courseListStudentOutput.categoryName}" />
+                <td th:text="${courseListStudentOutput.status}" />
+                <td style="max-width: 195px;">
+                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListStudentOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

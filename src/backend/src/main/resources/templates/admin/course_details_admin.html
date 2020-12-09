@@ -21,7 +21,7 @@
                         <a th:href="@{'/course/' + ${courseAdminOutput.studentId}}" th:text="${courseAdminOutput.student}" />
                     </div>
                 </td>
-                <td style="border-right: 1px solid #dee2e6">
+                <td>
                     <div style="float:left;">Instruktor:</div>
                     <div style="float:right;">
                         <a th:href="@{'/course/' + ${courseAdminOutput.instructorId}}" th:text="${courseAdminOutput.instructor}" />
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Minimalna liczba godzin:</div>
+                    <div style="float:left;">Min. liczba godzin:</div>
                     <div th:text="${courseAdminOutput.hoursMinimum}" style="float:right; "></div>
                 </td>
                 <td style="border-right: 1px solid #dee2e6">

@@ -4,7 +4,7 @@ import iRide.model.*;
 import iRide.repository.InstructorRepository;
 import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.service.Instructor.model.output.InstructorAdminOutput;
-import iRide.service.Instructor.model.output.InstructorListOutput;
+import iRide.service.Instructor.model.output.InstructorListAdminOutput;
 import iRide.service.InstructorCategory.InstructorCategoryService;
 import iRide.service.User.UserService;
 import iRide.utils.exception.NotFoundException;
@@ -39,15 +39,16 @@ public class InstructorService {
         return id;
     }
 
-    public List<InstructorListOutput> getInstructorListOutput(){
+    public List<InstructorListAdminOutput> getInstructorListAdminOutput(){
         List<Instructor> instructors = this.instructorRepository.findAll();
-        List<InstructorListOutput> instructorListOutputs = new ArrayList<>();
+        List<InstructorListAdminOutput> instructorListAdminOutputs = new ArrayList<>();
         for (Instructor instructor: instructors){
-            InstructorListOutput instructorListOutput = new InstructorListOutput();
+            InstructorListAdminOutput instructorListAdminOutput = new InstructorListAdminOutput();
 
-            instructorListOutput.setFirstname(instructor.getFirstname());
-            instructorListOutput.setLastname(instructor.getLastname());
-            instructorListOutput.setId(instructor.getId());
+            instructorListAdminOutput.setFirstname(instructor.getFirstname());
+            instructorListAdminOutput.setLastname(instructor.getLastname());
+            instructorListAdminOutput.setId(instructor.getId());
+            instructorListAdminOutput.setUserId(instructor.getUser().getId());
 
             List<String> theory = new ArrayList<>();
             List<String> practice = new ArrayList<>();
@@ -60,12 +61,12 @@ public class InstructorService {
                     practice.add(category.getCategoryName());
                 }
             }
-            instructorListOutput.setPractice(practice.stream().sorted(Comparator.comparing((String::toString))).collect(Collectors.toList()));
-            instructorListOutput.setTheory(theory.stream().sorted(Comparator.comparing((String::toString))).collect(Collectors.toList()));
+            instructorListAdminOutput.setPractice(practice.stream().sorted(Comparator.comparing((String::toString))).collect(Collectors.toList()));
+            instructorListAdminOutput.setTheory(theory.stream().sorted(Comparator.comparing((String::toString))).collect(Collectors.toList()));
 
-            instructorListOutputs.add(instructorListOutput);
+            instructorListAdminOutputs.add(instructorListAdminOutput);
         }
-        return instructorListOutputs;
+        return instructorListAdminOutputs;
     }
 
     public InstructorAdminOutput getInstructorDetailsAsAdmin(int id){
@@ -125,8 +126,10 @@ public class InstructorService {
         return this.instructorRepository.findAll();
     }
 
+    @Transactional
     public int deleteInstructor(int id) {
-        instructorRepository.deleteById(id);
+        Instructor instructor = getInstructor(id);
+        instructorRepository.delete(instructor);
         return id;
     }
 

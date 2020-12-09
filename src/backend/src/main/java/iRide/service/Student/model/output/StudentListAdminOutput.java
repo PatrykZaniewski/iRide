@@ -2,8 +2,9 @@ package iRide.service.Student.model.output;
 
 import java.util.Map;
 
-public class StudentListOutput {
+public class StudentListAdminOutput {
     private int id;
+    private int userId;
     private String firstname;
     private String lastname;
     private Map<Integer, String> activeCourses;
@@ -15,6 +16,14 @@ public class StudentListOutput {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getFirstname() {

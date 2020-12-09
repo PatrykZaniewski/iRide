@@ -1,6 +1,6 @@
 package iRide.model;
 
-import iRide.service.User.model.UserCreateInput;
+import iRide.service.User.model.input.UserCreateInput;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

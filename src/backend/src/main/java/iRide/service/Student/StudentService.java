@@ -6,12 +6,13 @@ import iRide.model.User;
 import iRide.repository.StudentRepository;
 import iRide.service.Student.model.input.StudentCreateInput;
 import iRide.service.Student.model.output.StudentAdminOutput;
-import iRide.service.Student.model.output.StudentListOutput;
+import iRide.service.Student.model.output.StudentListAdminOutput;
 import iRide.service.User.UserService;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -27,16 +28,17 @@ public class StudentService {
         this.userService = userService;
     }
 
-    public List<StudentListOutput> getStudentListOutput() {
+    public List<StudentListAdminOutput> getStudentListAdminOutput() {
         List<Student> students = this.studentRepository.findAll();
-        List<StudentListOutput> studentListOutputs = new ArrayList<>();
+        List<StudentListAdminOutput> studentListAdminOutputs = new ArrayList<>();
 
         for (Student student : students) {
-            StudentListOutput studentListOutput = new StudentListOutput();
+            StudentListAdminOutput studentListAdminOutput = new StudentListAdminOutput();
 
-            studentListOutput.setId(student.getId());
-            studentListOutput.setFirstname(student.getFirstname());
-            studentListOutput.setLastname(student.getLastname());
+            studentListAdminOutput.setId(student.getId());
+            studentListAdminOutput.setUserId(student.getUser().getId());
+            studentListAdminOutput.setFirstname(student.getFirstname());
+            studentListAdminOutput.setLastname(student.getLastname());
 
             Map<Integer, String> activeCourses = new HashMap<>();
             Map<Integer, String> historicCourses = new HashMap<>();
@@ -51,12 +53,12 @@ public class StudentService {
                     historicCourses.put(course.getId(), course.getCategory().getCategoryName() + " - " + course.getCategory().getCategoryType());
                 }
             }
-            studentListOutput.setActiveCourses(activeCourses);
-            studentListOutput.setHistoricCourses(historicCourses);
+            studentListAdminOutput.setActiveCourses(activeCourses);
+            studentListAdminOutput.setHistoricCourses(historicCourses);
 
-            studentListOutputs.add(studentListOutput);
+            studentListAdminOutputs.add(studentListAdminOutput);
         }
-        return studentListOutputs;
+        return studentListAdminOutputs;
     }
 
     public StudentAdminOutput getStudentDetailsAsAdmin(int id) {
@@ -88,6 +90,13 @@ public class StudentService {
         return studentAdminOutput;
     }
 
+    @Transactional
+    public int deleteStudent(int id) {
+        Student student = getStudent(id);
+        this.studentRepository.delete(student);
+        return id;
+    }
+
     private String mapParameters(String param){
         switch (param){
             case "THEORY":
@@ -107,6 +116,10 @@ public class StudentService {
         }
     }
 
+    public List<Student> getAll(){
+        return this.studentRepository.findAll();
+    }
+
     public int createStudent(StudentCreateInput studentCreateInput) throws DataExistsException {
         Student student = new Student(studentCreateInput);
         User user = userService.createUser(studentCreateInput.getLoginCreateInput(), "STUDENT");
@@ -114,10 +127,11 @@ public class StudentService {
         return studentRepository.save(student).getId();
     }
 
+
     public Student getStudent(int studentId) {
         Optional<Student> result = this.studentRepository.findById(studentId);
         if (!result.isPresent()) {
-            throw new NotFoundException("Studnt with id = " + studentId + " has not been found");
+            throw new NotFoundException("Student with id = " + studentId + " has not been found");
         }
         return result.get();
     }

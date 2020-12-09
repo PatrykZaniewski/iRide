@@ -40,11 +40,11 @@ public class Admin {
         this.id = id;
     }
 
-    public User getLogin() {
+    public User getUser() {
         return user;
     }
 
-    public void setLogin(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

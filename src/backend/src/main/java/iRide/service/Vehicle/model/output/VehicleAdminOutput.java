@@ -1,21 +1,24 @@
 package iRide.service.Vehicle.model.output;
 
-import iRide.model.Vehicle;
+import java.util.Map;
 
-public class VehicleOutput {
+public class VehicleAdminOutput {
 
+    private int id;
     private String mark;
     private String model;
     private String category;
+    private Map<Integer, String> instructors;
     private String plateNumber;
     private String vin;
 
-    public VehicleOutput(Vehicle vehicle) {
-        this.mark = vehicle.getMark();
-        this.model = vehicle.getModel();
-        this.category = vehicle.getCategory() == null ? "-" : vehicle.getCategory().getCategoryName();
-        this.plateNumber = vehicle.getPlateNumber();
-        this.vin = vehicle.getVin();
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMark() {
@@ -40,6 +43,14 @@ public class VehicleOutput {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Map<Integer, String> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(Map<Integer, String> instructors) {
+        this.instructors = instructors;
     }
 
     public String getPlateNumber() {

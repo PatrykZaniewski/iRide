@@ -2,16 +2,15 @@ package iRide.controller;
 
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Instructor.model.output.InstructorAdminOutput;
-import iRide.service.Instructor.model.output.InstructorListOutput;
+import iRide.service.Instructor.model.output.InstructorListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -25,9 +24,10 @@ public class InstructorController {
     }
 
     @GetMapping(value = "")
-    public String getInstructors(Model model, @RequestParam(required = false) Integer code, @RequestHeader(required = false, name = "test") String header){
-        List<InstructorListOutput> instructorListOutputs = this.instructorService.getInstructorListOutput();
-        if (code != null) {
+    public String getInstructors(Model model){
+        List<InstructorListAdminOutput> instructorListAdminOutputs = this.instructorService.getInstructorListAdminOutput();
+        if (model.asMap().get("code") != null) {
+            Integer code = (Integer)model.asMap().get("code");
             switch (code) {
                 case 101:
                     model.addAttribute("infoMessage", "Instruktor został usunięty pomyślnie.");
@@ -42,19 +42,20 @@ public class InstructorController {
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
             }
         }
-        model.addAttribute("instructorListOutputs", instructorListOutputs);
-        return "instructors";
+        model.addAttribute("instructorListAdminOutputs", instructorListAdminOutputs);
+        return "admin/instructors";
     }
 
     @GetMapping(value = "/{id}")
-    public String getInstructorDetails(Model model, @PathVariable int id){
+    public String getInstructorDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
         try {
             InstructorAdminOutput instructorAdminOutput = this.instructorService.getInstructorDetailsAsAdmin(id);
             model.addAttribute("instructorAdminOutput", instructorAdminOutput);
-            return "instructor_details_admin";
+            return "admin/instructor_details_admin";
         }
         catch (NotFoundException e){
-            return "redirect:/instructor?code=202";
+            redirectAttributes.addFlashAttribute("code", 202);
+            return "redirect:/instructor";
         }
     }
 
@@ -69,14 +70,14 @@ public class InstructorController {
 //    }
 
     @DeleteMapping(value = "/{id}")
-    public String deleteInstructor(@PathVariable int id) {
-        int code = 101;
+    public String deleteInstructor(RedirectAttributes redirectAttributes, @PathVariable int id) {
         try {
             this.instructorService.deleteInstructor(id);
+            redirectAttributes.addFlashAttribute("code", 101);
         } catch (NotFoundException e){
-            code = 201;
+            redirectAttributes.addFlashAttribute("code", 201);
         }
-        return "redirect:/instructor" + "?code=" + code;
+        return "redirect:/instructor";
     }
 
     @PostMapping(value = "")

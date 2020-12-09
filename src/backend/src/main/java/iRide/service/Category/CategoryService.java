@@ -4,10 +4,14 @@ import iRide.model.Category;
 import iRide.repository.CategoryRepository;
 import iRide.repository.InstructorCategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
+import iRide.service.Category.model.output.CategoryListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,6 +33,22 @@ public class CategoryService {
         return -1;
     }
 
+    public List<CategoryListAdminOutput> getCategoryListAdminOutput() {
+        List<Category> categories = this.categoryRepository.findAll();
+        List<CategoryListAdminOutput> categoryListAdminOutputs = new ArrayList<>();
+
+        for (Category category : categories) {
+            CategoryListAdminOutput categoryListAdminOutput = new CategoryListAdminOutput();
+
+            categoryListAdminOutput.setId(category.getId());
+            categoryListAdminOutput.setCategoryName(category.getCategoryName());
+            categoryListAdminOutput.setCategoryType(mapParameters(category.getCategoryType()));
+
+            categoryListAdminOutputs.add(categoryListAdminOutput);
+        }
+        return categoryListAdminOutputs;
+    }
+
     public Category getCategoryByNameAndType(String categoryName, String categoryType) {
         if (this.categoryRepository.getCategoryByNameByType(categoryName, categoryType).isPresent()) {
             return this.categoryRepository.getCategoryByNameByType(categoryName, categoryType).get();
@@ -44,8 +64,30 @@ public class CategoryService {
         return result.get();
     }
 
-    public void deleteById(int id) {
-        this.categoryRepository.deleteById(id);
+    @Transactional
+    public int deleteById(int id) {
+        Category category = getCategory(id);
+        this.categoryRepository.delete(category);
+        return id;
+    }
+
+    private String mapParameters(String param){
+        switch (param){
+            case "THEORY":
+                return "Teoria";
+            case "PRACTICE":
+                return "Praktyka";
+            case "IN_PROGRESS":
+                return "W trakcie";
+            case "FINISHED":
+                return "Ukończony";
+            case "CANCELLED":
+                return "Przerwany";
+            case "WAITING":
+                return "Oczekuje na rozpoczęcie";
+            default:
+                return "Status nieznany";
+        }
     }
 
 }

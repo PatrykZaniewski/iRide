@@ -1,4 +1,4 @@
-package iRide.service.User.model;
+package iRide.service.User.model.input;
 
 public class UserCreateInput {
     private String email;
