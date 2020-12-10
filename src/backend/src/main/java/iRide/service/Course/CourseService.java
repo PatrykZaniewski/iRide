@@ -6,6 +6,7 @@ import iRide.service.Category.CategoryService;
 import iRide.service.Course.model.input.CourseInput;
 import iRide.service.Course.model.output.CourseAdminOutput;
 import iRide.service.Course.model.output.CourseListAdminOutput;
+import iRide.service.Course.model.output.CourseListInstructorOutput;
 import iRide.service.Course.model.output.CourseListStudentOutput;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Student.StudentService;
@@ -75,6 +76,26 @@ public class CourseService {
         return courses.orElseGet(ArrayList::new);
     }
 
+    public List<CourseListInstructorOutput> getCourseListInstructorOutput(int instructorId){
+        List<Course> courses = getCoursesByParameters(String.valueOf(instructorId), "%", "%", allCourseStatuses);
+        List<CourseListInstructorOutput> courseListInstructorOutputs = new ArrayList<>();
+
+        for(Course course: courses){
+            CourseListInstructorOutput courseListInstructorOutput = new CourseListInstructorOutput();
+
+            courseListInstructorOutput.setId(course.getId());
+            courseListInstructorOutput.setCategoryName(course.getCategory().getCategoryName());
+            courseListInstructorOutput.setCategoryType(mapParameters(course.getCategory().getCategoryType()));
+            courseListInstructorOutput.setStatus(mapParameters(course.getStatus()));
+            courseListInstructorOutput.setStudentId(course.getStudent().getId());
+            courseListInstructorOutput.setStudent(course.getStudent().getFirstname() + " " + course.getStudent().getLastname());
+
+            courseListInstructorOutputs.add(courseListInstructorOutput);
+        }
+
+        return courseListInstructorOutputs;
+    }
+
     public List<CourseListStudentOutput> getCourseListStudentOutput(int studentId){
         List<Course> courses = getCoursesByParameters("%", String.valueOf(studentId), "%", allCourseStatuses);
         List<CourseListStudentOutput> courseListStudentOutputs = new ArrayList<>();
@@ -85,7 +106,7 @@ public class CourseService {
             courseListStudentOutput.setId(course.getId());
             courseListStudentOutput.setCategoryName(course.getCategory().getCategoryName());
             courseListStudentOutput.setCategoryType(mapParameters(course.getCategory().getCategoryType()));
-            courseListStudentOutput.setStatus(course.getStatus());
+            courseListStudentOutput.setStatus(mapParameters(course.getStatus()));
             courseListStudentOutput.setInstructorId(course.getInstructor().getId());
             courseListStudentOutput.setInstructor(course.getInstructor().getFirstname() + " " + course.getInstructor().getLastname());
 

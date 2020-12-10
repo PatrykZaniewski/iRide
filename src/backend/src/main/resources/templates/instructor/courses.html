@@ -14,7 +14,7 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Instruktor</th>
+                <th scope="col">Kursant</th>
                 <th scope="col">Typ kategorii</th>
                 <th scope="col">Nazwa kategorii</th>
                 <th scope="col">Status</th>
@@ -22,16 +22,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="courseListStudentOutput: ${courseListStudentOutputs}">
-                <th scope="row" th:text="${courseListStudentOutput.id}" />
+            <tr th:each="courseListInstructorOutput: ${courseListInstructorOutputs}">
+                <th scope="row" th:text="${courseListInstructorOutput.id}" />
                 <td>
-                    <a th:href="@{'/instructor/' + ${courseListStudentOutput.instructorId}}" th:text="${courseListStudentOutput.instructor}" />
+                    <a th:href="@{'/student/' + ${courseListInstructorOutput.studentId}}" th:text="${courseListInstructorOutput.student}" />
                 </td>
-                <td th:text="${courseListStudentOutput.categoryType}" />
-                <td th:text="${courseListStudentOutput.categoryName}" />
-                <td th:text="${courseListStudentOutput.status}" />
+                <td th:text="${courseListInstructorOutput.categoryType}" />
+                <td th:text="${courseListInstructorOutput.categoryName}" />
+                <td th:text="${courseListInstructorOutput.status}" />
                 <td style="max-width: 195px;">
-                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListStudentOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
+                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListInstructorOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
                 </td>
             </tr>
             </tbody>

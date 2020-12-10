@@ -33,6 +33,14 @@ public class CategoryService {
         return -1;
     }
 
+    public List<String> getCategoriesAsStringList(){
+        List<String> result = new ArrayList<>();
+        for(Category category: this.categoryRepository.findAll()){
+            result.add(category.getCategoryName());
+        }
+        return result;
+    }
+
     public List<CategoryListAdminOutput> getCategoryListAdminOutput() {
         List<Category> categories = this.categoryRepository.findAll();
         List<CategoryListAdminOutput> categoryListAdminOutputs = new ArrayList<>();

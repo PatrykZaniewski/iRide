@@ -3,6 +3,7 @@ package iRide.controller;
 import iRide.service.Course.CourseService;
 import iRide.service.Course.model.output.CourseAdminOutput;
 import iRide.service.Course.model.output.CourseListAdminOutput;
+import iRide.service.Course.model.output.CourseListInstructorOutput;
 import iRide.service.Course.model.output.CourseListStudentOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,14 @@ public class CourseController {
     public String getCourses(Model model, Authentication authentication) {
         List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();
         List<CourseListStudentOutput> courseListStudentOutputs = this.courseService.getCourseListStudentOutput(1);
+        List<CourseListInstructorOutput> courseListInstructorOutputs = this.courseService.getCourseListInstructorOutput(1);
+
         model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
-        return "student/courses";
+//        return "student/courses";
+
+
+        model.addAttribute("courseListInstructorOutputs", courseListInstructorOutputs);
+        return "instructor/courses";
 //        if (model.asMap().get("code") != null) {
 //            Integer code = (Integer)model.asMap().get("code");
 //            switch (code) {
