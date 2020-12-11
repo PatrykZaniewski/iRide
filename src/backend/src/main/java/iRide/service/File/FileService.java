@@ -39,6 +39,6 @@ public class FileService {
     }
 
     public Model getUploadFile(){
-
+        return null;
     }
 }

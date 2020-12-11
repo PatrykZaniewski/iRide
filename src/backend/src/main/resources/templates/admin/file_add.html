@@ -1,60 +1,33 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
 <head>
     <title>iRide</title>
 </head>
 <body>
-<div layout:fragment="content" class="container" style="min-width: 700px; max-width: 1500px">
+<div layout:fragment="content" class="container" style="min-width: 300px; max-width: 600px">
 
     <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
     <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
 
     <div class="jumbotron p-2">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                </div>
-            </div>
+        <form th:action="@{'/file/upload'}" method="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                <label for="category_select">Kategoria:</label>
+                <select class="custom-select" id="category_select" name="category" required>
+                    <option th:each="category: ${categories}" th:value="${category.key}" th:text="${category.value}"></option>
+                </select>
+                <div class="invalid-feedback">Example invalid custom select feedback</div>
             </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <label>Plik:</label>
+            <div class="form-group custom-file">
+                <input type="file" class="custom-file-input" id="file" name="file" required>
+                <label class="custom-file-label" for="file">Choose file...</label>
+                <div class="invalid-feedback">Example invalid custom file feedback</div>
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
+            <div class="form-group text-center pt-3">
+                <input class="btn btn-primary btn-sm my-2" type="submit"></div>
             </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
         </form>
     </div>
 </div>

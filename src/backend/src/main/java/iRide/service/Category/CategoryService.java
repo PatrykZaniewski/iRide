@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -33,10 +31,12 @@ public class CategoryService {
         return -1;
     }
 
-    public List<String> getCategoriesAsStringList(){
-        List<String> result = new ArrayList<>();
+    public Map<Integer, String> getCategoriesAsStringList(){
+        Map<Integer, String> result = new HashMap<>();
         for(Category category: this.categoryRepository.findAll()){
-            result.add(category.getCategoryName());
+            if(category.getCategoryType().equals("THEORY")){
+                result.put(category.getId(), category.getCategoryName());
+            }
         }
         return result;
     }
