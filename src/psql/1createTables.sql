@@ -98,8 +98,8 @@ CREATE TABLE public.course
     hours_done      int         NOT NULL,
     status          varchar(16) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (id_student) REFERENCES public.user_ (id),
-    FOREIGN KEY (id_instructor) REFERENCES public.user_ (id),
+    FOREIGN KEY (id_student) REFERENCES public.student (id),
+    FOREIGN KEY (id_instructor) REFERENCES public.instructor (id),
     FOREIGN KEY (id_category) REFERENCES public.category (id)
 );
 

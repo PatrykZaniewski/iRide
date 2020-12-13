@@ -93,7 +93,7 @@ public class StudentService {
     @Transactional
     public int deleteStudent(int id) {
         Student student = getStudent(id);
-        this.studentRepository.delete(student);
+        studentRepository.delete(student);
         return id;
     }
 
