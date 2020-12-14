@@ -122,7 +122,15 @@ public class InstructorService {
         return result.get();
     }
 
-    public List<Instructor> getAll(){
+    public Instructor getInstructorByUserId(int userId) throws NotFoundException {
+        Optional<Instructor> result = this.instructorRepository.getInstructorByUserId(userId);
+        if (!result.isPresent()) {
+            throw new NotFoundException("Instructor with user_id = " + userId + " has not been found");
+        }
+        return result.get();
+    }
+
+    public List<Instructor> getAllInstructors(){
         return this.instructorRepository.findAll();
     }
 

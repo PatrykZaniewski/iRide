@@ -1,12 +1,19 @@
 package iRide.service.Category;
 
 import iRide.model.Category;
+import iRide.model.Course;
+import iRide.model.Instructor;
+import iRide.model.Student;
 import iRide.repository.CategoryRepository;
 import iRide.repository.InstructorCategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
 import iRide.service.Category.model.output.CategoryListAdminOutput;
+import iRide.service.Instructor.InstructorService;
+import iRide.service.Student.StudentService;
+import iRide.service.User.UserService;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +24,17 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final InstructorCategoryRepository instructorCategoryRepository;
+    private final InstructorService instructorService;
+    private final StudentService studentService;
+    private final UserService userService;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, InstructorCategoryRepository instructorCategoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, InstructorCategoryRepository instructorCategoryRepository, @Lazy InstructorService instructorService, StudentService studentService, UserService userService) {
         this.categoryRepository = categoryRepository;
         this.instructorCategoryRepository = instructorCategoryRepository;
+        this.instructorService = instructorService;
+        this.studentService = studentService;
+        this.userService = userService;
     }
 
     public int createCategory(CategoryCreateInput categoryCreateInput) {
@@ -31,14 +44,37 @@ public class CategoryService {
         return -1;
     }
 
-    public Map<Integer, String> getCategoriesAsStringList(){
-        Map<Integer, String> result = new HashMap<>();
+    public List<String> getCategoriesAsStringList(){
+        List<String> result = new ArrayList<>();
         for(Category category: this.categoryRepository.findAll()){
             if(category.getCategoryType().equals("THEORY")){
-                result.put(category.getId(), category.getCategoryName());
+                result.add(category.getCategoryName());
             }
         }
         return result;
+    }
+
+    public List<String> getCategoriesByGroupAndId(int userId){
+        Set<String> categories = new HashSet<>();
+        String group = this.userService.getUser(userId).getAccountRole();
+
+        switch (group){
+            case "INSTRUCTOR":
+                Instructor instructor = this.instructorService.getInstructorByUserId(userId);
+                for (Course course: instructor.getCourses()){
+                    categories.add(course.getCategory().getCategoryName());
+                }
+                break;
+            case "STUDENT":
+                Student student = this.studentService.getStudentByUserId(userId);
+                for (Course course: student.getCourses()){
+                    categories.add(course.getCategory().getCategoryName());
+                }
+                break;
+            case "ADMIN":
+                return getCategoriesAsStringList();
+        }
+        return new ArrayList<>(categories);
     }
 
     public List<CategoryListAdminOutput> getCategoryListAdminOutput() {
@@ -70,6 +106,10 @@ public class CategoryService {
             throw new NotFoundException("Category with id = " + categoryId + " has not been found");
         }
         return result.get();
+    }
+
+    public List<Category> getAllCategories(){
+        return this.categoryRepository.findAll();
     }
 
     @Transactional

@@ -10,16 +10,26 @@ import java.util.List;
 
 public class AuthenticationUserDetails implements UserDetails {
 
+    private int id;
     private String username;
     private String password;
     private String status;
     private List<GrantedAuthority> authorities;
 
     public AuthenticationUserDetails(User user) {
+        this.id = user.getId();
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.status = user.getStatus();
         this.authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getAccountRole()));
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStatus() {

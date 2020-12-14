@@ -1,6 +1,7 @@
 package iRide.service.Student;
 
 import iRide.model.Course;
+import iRide.model.Instructor;
 import iRide.model.Student;
 import iRide.model.User;
 import iRide.repository.StudentRepository;
@@ -116,7 +117,7 @@ public class StudentService {
         }
     }
 
-    public List<Student> getAll(){
+    public List<Student> getAllStudents(){
         return this.studentRepository.findAll();
     }
 
@@ -132,6 +133,14 @@ public class StudentService {
         Optional<Student> result = this.studentRepository.findById(studentId);
         if (!result.isPresent()) {
             throw new NotFoundException("Student with id = " + studentId + " has not been found");
+        }
+        return result.get();
+    }
+
+    public Student getStudentByUserId(int userId) throws NotFoundException {
+        Optional<Student> result = this.studentRepository.getStudentByUserId(userId);
+        if (!result.isPresent()) {
+            throw new NotFoundException("Student with user_id = " + userId + " has not been found");
         }
         return result.get();
     }

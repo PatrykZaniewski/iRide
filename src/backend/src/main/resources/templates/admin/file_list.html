@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 200px; max-width: 800px">
+
+    <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
+    <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
+
+    <div class="jumbotron p-2">
+        <table class="table">
+            <caption style="caption-side: top;" class="text-center"><h1>Pomoce naukowe</h1></caption>
+            <thead>
+            <tr>
+                <th scope="col">Kategoria</th>
+                <th scope="col">Plik</th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="fileListOutputAdmin: ${fileListOutputAdmins}">
+                <td style="width: 50px;" th:text="${fileListOutputAdmin.category}"/>
+                <td>
+                    <a th:href="@{'/file/' + ${fileListOutputAdmin.category} + '?filename=' + ${fileListOutputAdmin.file}}" th:text="${fileListOutputAdmin.file}"/>
+                </td>
+                <td style="width: 10px;">
+                    <form style=" display: inline" th:action="@{'/file/' + ${fileListOutputAdmin.category} + '?filename=' + ${fileListOutputAdmin.file}}" th:method="DELETE">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">
+                            Usuń
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

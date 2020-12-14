@@ -1,10 +1,8 @@
 package iRide.controller;
 
 import iRide.service.Course.CourseService;
-import iRide.service.Course.model.output.CourseAdminOutput;
-import iRide.service.Course.model.output.CourseListAdminOutput;
-import iRide.service.Course.model.output.CourseListInstructorOutput;
-import iRide.service.Course.model.output.CourseListStudentOutput;
+import iRide.service.Course.model.input.CourseInput;
+import iRide.service.Course.model.output.*;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,35 +25,46 @@ public class CourseController {
     }
 
     @GetMapping(value = "")
-    public String getCourses(Model model, Authentication authentication) {
+    public String getCourses(Model model) {
         List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();
         List<CourseListStudentOutput> courseListStudentOutputs = this.courseService.getCourseListStudentOutput(1);
         List<CourseListInstructorOutput> courseListInstructorOutputs = this.courseService.getCourseListInstructorOutput(1);
 
-        model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
-//        return "student/courses";
+//        model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
+////        return "student/courses";
+//
+//
+//        model.addAttribute("courseListInstructorOutputs", courseListInstructorOutputs);
+//        return "instructor/courses";
 
+        if (model.asMap().get("code") != null) {
+            Integer code = (Integer)model.asMap().get("code");
+            switch (code) {
+                case 100:
+                    model.addAttribute("infoMessage", "Kurs został utworzony pomyślnie.");
+                    break;
+                case 101:
+                    model.addAttribute("infoMessage", "Kurs został usunięty pomyślnie.");
+                    break;
+                case 201:
+                    model.addAttribute("infoError", "Wybrany kurs został już usunięty.");
+                    break;
+                case 202:
+                    model.addAttribute("infoError", "Kurs o wybranym id nie istnieje.");
+                    break;
+                default:
+                    model.addAttribute("infoError", "Wystąpił nieznany błąd.");
+            }
+        }
+        model.addAttribute("courseListAdminOutputs", courseListAdminOutputs);
+        return "admin/courses";
+    }
 
-        model.addAttribute("courseListInstructorOutputs", courseListInstructorOutputs);
-        return "instructor/courses";
-//        if (model.asMap().get("code") != null) {
-//            Integer code = (Integer)model.asMap().get("code");
-//            switch (code) {
-//                case 101:
-//                    model.addAttribute("infoMessage", "Kurs został usunięty pomyślnie.");
-//                    break;
-//                case 201:
-//                    model.addAttribute("infoError", "Wybrany kurs został już usunięty.");
-//                    break;
-//                case 202:
-//                    model.addAttribute("infoError", "Kurs o wybranym id nie istnieje.");
-//                    break;
-//                default:
-//                    model.addAttribute("infoError", "Wystąpił nieznany błąd.");
-//            }
-//        }
-//        model.addAttribute("courseListAdminOutputs", courseListAdminOutputs);
-//        return "admin/courses";
+    @GetMapping(value = "/create")
+    public String createCourse(Model model){
+        CourseCreateOutput courseCreateOutput = this.courseService.getCreateCourse();
+        model.addAttribute("courseCreateOutput", courseCreateOutput);
+        return "admin/course_create";
     }
 
     @GetMapping(value = "/{id}")
@@ -82,17 +91,14 @@ public class CourseController {
         return "redirect:/course";
     }
 
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity<Integer> deleteById(@PathVariable int id) {
-//        this.courseService.deleteCategory(id);
-//        return new ResponseEntity<>(id, HttpStatus.OK);
-//    }
-//
-//    @PostMapping(value = "/")
-//    public ResponseEntity<Object> createOne(@RequestBody CourseInput courseInput) {
-//        int id = this.courseService.createCourse(courseInput);
-//        return ResponseEntity.ok(id);
-//    }
+    @PostMapping(value = "/create")
+    public String createCourse(Model model, @ModelAttribute CourseInput courseInput, RedirectAttributes redirectAttributes) {
+
+        this.courseService.createCourse(courseInput);
+        redirectAttributes.addFlashAttribute("code", 100);
+
+        return "redirect:/course";
+    }
 
     @ModelAttribute("accountRole")
     public String getAccountRole(Authentication authentication) {

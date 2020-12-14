@@ -4,10 +4,7 @@ import iRide.model.*;
 import iRide.repository.CourseRepository;
 import iRide.service.Category.CategoryService;
 import iRide.service.Course.model.input.CourseInput;
-import iRide.service.Course.model.output.CourseAdminOutput;
-import iRide.service.Course.model.output.CourseListAdminOutput;
-import iRide.service.Course.model.output.CourseListInstructorOutput;
-import iRide.service.Course.model.output.CourseListStudentOutput;
+import iRide.service.Course.model.output.*;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Student.StudentService;
 import iRide.utils.exception.NotFoundException;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -71,16 +69,16 @@ public class CourseService {
         return courseListAdminOutputs;
     }
 
-    public List<Course> getCoursesByParameters(String instructorId, String studentId, String categoryId, List<String> statuses){
+    public List<Course> getCoursesByParameters(String instructorId, String studentId, String categoryId, List<String> statuses) {
         Optional<List<Course>> courses = this.courseRepository.getCoursesByParameters(instructorId, studentId, categoryId, statuses);
         return courses.orElseGet(ArrayList::new);
     }
 
-    public List<CourseListInstructorOutput> getCourseListInstructorOutput(int instructorId){
+    public List<CourseListInstructorOutput> getCourseListInstructorOutput(int instructorId) {
         List<Course> courses = getCoursesByParameters(String.valueOf(instructorId), "%", "%", allCourseStatuses);
         List<CourseListInstructorOutput> courseListInstructorOutputs = new ArrayList<>();
 
-        for(Course course: courses){
+        for (Course course : courses) {
             CourseListInstructorOutput courseListInstructorOutput = new CourseListInstructorOutput();
 
             courseListInstructorOutput.setId(course.getId());
@@ -96,11 +94,11 @@ public class CourseService {
         return courseListInstructorOutputs;
     }
 
-    public List<CourseListStudentOutput> getCourseListStudentOutput(int studentId){
+    public List<CourseListStudentOutput> getCourseListStudentOutput(int studentId) {
         List<Course> courses = getCoursesByParameters("%", String.valueOf(studentId), "%", allCourseStatuses);
         List<CourseListStudentOutput> courseListStudentOutputs = new ArrayList<>();
 
-        for(Course course: courses){
+        for (Course course : courses) {
             CourseListStudentOutput courseListStudentOutput = new CourseListStudentOutput();
 
             courseListStudentOutput.setId(course.getId());
@@ -132,7 +130,7 @@ public class CourseService {
         courseAdminOutput.setStatus(mapParameters(course.getStatus()));
 
         Map<Integer, String> events = new HashMap<>();
-        for (Event event : course.getEvent()){
+        for (Event event : course.getEvent()) {
             events.put(event.getId(), String.valueOf(event.getStartDate()));
         }
 
@@ -149,14 +147,43 @@ public class CourseService {
     }
 
 
-    public int createCourse(CourseInput courseInput) {
+    public void createCourse(CourseInput courseInput) {
         //TODO walidacja czy podane wartosci istnieja
         Instructor instructor = this.instructorService.getInstructor(courseInput.getInstructorId());
-        Student student = this.studentService.getStudent(courseInput.getInstructorId());
+        Student student = this.studentService.getStudent(courseInput.getStudentId());
         Category category = this.categoryService.getCategory(courseInput.getCategoryId());
         Course course = new Course(courseInput, instructor, student, category);
-        return this.courseRepository.save(course).getId();
+        this.courseRepository.save(course).getId();
         //TODO sprawdzic czy jest kurs na dana kategorie w stanie innym niz FINISHED i czy instruktor moze prowadzic dana kategorie!
+    }
+
+    public CourseCreateOutput getCreateCourse() {
+        List<Category> categories = this.categoryService.getAllCategories();
+        List<Instructor> instructors = this.instructorService.getAllInstructors();
+        List<Student> students = this.studentService.getAllStudents();
+
+        Map<Integer, String> categoriesMap = new HashMap<>();
+        Map<Integer, String> instructorsMap = new HashMap<>();
+        Map<Integer, String> studentsMap = new HashMap<>();
+
+        for (Category category : categories) {
+            categoriesMap.put(category.getId(), category.getCategoryName() + "-" + mapParameters(category.getCategoryType()));
+        }
+
+        for (Instructor instructor : instructors) {
+            instructorsMap.put(instructor.getId(), instructor.getLastname() + " " + instructor.getFirstname());
+        }
+
+        for (Student student : students) {
+            studentsMap.put(student.getId(), student.getLastname() + " " + student.getFirstname());
+        }
+
+        CourseCreateOutput courseCreateOutput = new CourseCreateOutput();
+        courseCreateOutput.setCategories(categoriesMap);
+        courseCreateOutput.setInstructors(instructorsMap);
+        courseCreateOutput.setStudents(studentsMap);
+
+        return courseCreateOutput;
     }
 
     private String mapParameters(String param) {

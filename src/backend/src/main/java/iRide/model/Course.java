@@ -51,6 +51,7 @@ public class Course {
         this.hoursRemaining = courseInput.getHoursRemaining();
         this.hoursDone = 0;
         this.hoursMinimum = courseInput.getHoursMinimum();
+        this.status = "WAITING";
     }
 
     public int getId() {

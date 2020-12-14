@@ -77,7 +77,7 @@ public class UserService {
                 break;
             case "INSTRUCTOR":
                 int instructorToDelete = 0;
-                for (Instructor instructor : this.instructorService.getAll()) {
+                for (Instructor instructor : this.instructorService.getAllInstructors()) {
                     if (instructor.getUser().getId() == id) {
                         instructorToDelete = instructor.getId();
                         break;
@@ -87,7 +87,7 @@ public class UserService {
                 break;
             case "STUDENT":
                 int studentToDelete = 0;
-                for (Student student : this.studentService.getAll()) {
+                for (Student student : this.studentService.getAllStudents()) {
                     if (student.getUser().getId() == id) {
                         studentToDelete = student.getId();
                         break;

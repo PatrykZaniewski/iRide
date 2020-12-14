@@ -1,27 +1,26 @@
 package iRide.service.File;
 
+import iRide.service.File.model.output.FileListOutputAdmin;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.*;
 
 @Service
 public class FileService {
 
-    public void uploadFile(MultipartFile file, String category){
-        if (file.isEmpty()){
+    public void uploadFile(MultipartFile file, String category) {
+        if (file.isEmpty()) {
             throw new NotFoundException("File not included");
         }
 
@@ -30,11 +29,11 @@ public class FileService {
         String stringPath = categoryRoot + "/" + filename;
 
         File f = new File(stringPath);
-        if (f.exists()){
+        if (f.exists()) {
             throw new DataExistsException("File exists");
         }
 
-        if(!Files.exists(Paths.get(categoryRoot))){
+        if (!Files.exists(Paths.get(categoryRoot))) {
             new File(categoryRoot).mkdir();
         }
 
@@ -53,7 +52,55 @@ public class FileService {
         }
     }
 
-    public Model getUploadFile(){
-        return null;
+    public List<FileListOutputAdmin> filesList(List<String> categories) {
+        List<FileListOutputAdmin> files = new ArrayList<>();
+
+        for (String category : categories) {
+            File directory = new File("files/" + category);
+            List<File> dirFiles;
+
+            try {
+                dirFiles = Arrays.asList(directory.listFiles());
+            }
+            catch (NullPointerException e){
+                dirFiles = new ArrayList<>();
+            }
+
+            List<String> filename = new ArrayList<>();
+            for (File dirFile: dirFiles){
+                filename.add(dirFile.getName());
+                FileListOutputAdmin fileListOutputAdmin = new FileListOutputAdmin();
+                fileListOutputAdmin.setCategory(category);
+                fileListOutputAdmin.setFile(dirFile.getName());
+
+                files.add(fileListOutputAdmin);
+            }
+        }
+        return files;
+    }
+
+    public InputStreamResource getFile(String category, String filename) {
+        String categoryRoot = "files/" + category;
+        String stringPath = categoryRoot + "/" + filename;
+
+        File f = new File(stringPath);
+
+        try {
+            return new InputStreamResource(new FileInputStream(f));
+        } catch (FileNotFoundException e) {
+            throw new NotFoundException("File not found");
+        }
+    }
+
+    public void deleteFile(String category, String filename){
+        String categoryRoot = "files/" + category;
+        String stringPath = categoryRoot + "/" + filename;
+
+        File f = new File(stringPath);
+
+        if(!f.exists()){
+            throw new NotFoundException("File not found");
+        }
+        f.delete();
     }
 }
