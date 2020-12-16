@@ -1,18 +1,11 @@
 package iRide.service.Vehicle.model.input;
 
-
-import javax.validation.constraints.NotNull;
-
 public class VehicleCreateInput {
 
-    @NotNull
     private String mark;
-    @NotNull
     private String model;
-    @NotNull
     private String plateNumber;
-    private String categoryName;
-    @NotNull
+    private int categoryId;
     private String vin;
 
     public String getMark() {
@@ -39,12 +32,12 @@ public class VehicleCreateInput {
         this.plateNumber = plateNumber;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getVin() {

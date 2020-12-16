@@ -1,15 +1,14 @@
 package iRide.controller;
 
 import iRide.service.User.UserService;
+import iRide.service.User.model.input.UserCreateInput;
+import iRide.service.User.model.output.UserCreateOutput;
 import iRide.service.User.model.output.UserListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -48,6 +47,12 @@ public class UserController {
         return "admin/users";
     }
 
+    @PostMapping(value = "/create")
+    public String createUser(RedirectAttributes redirectAttributes, @ModelAttribute UserCreateInput userCreateInput){
+        this.userService.createUser(userCreateInput);
+        return "redirect:/user";
+    }
+
     @DeleteMapping(value = "/{id}/{group}")
     public String deleteUser(RedirectAttributes redirectAttributes, @PathVariable int id, @PathVariable String group) {
         try {
@@ -57,6 +62,14 @@ public class UserController {
             redirectAttributes.addFlashAttribute("code", 201);
         }
         return "redirect:/user";
+    }
+
+    @GetMapping(value = "/create")
+    public String getCreateUser(Model model){
+        UserCreateOutput userCreateOutput = this.userService.getCreateUser();
+        model.addAttribute("userCreateOutput", userCreateOutput);
+
+        return "admin/user_create";
     }
 
     private String mapGroup(String group){

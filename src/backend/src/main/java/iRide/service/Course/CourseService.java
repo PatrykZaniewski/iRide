@@ -74,7 +74,8 @@ public class CourseService {
         return courses.orElseGet(ArrayList::new);
     }
 
-    public List<CourseListInstructorOutput> getCourseListInstructorOutput(int instructorId) {
+    public List<CourseListInstructorOutput> getCourseListInstructorOutput(int userId) {
+        int instructorId = this.instructorService.getInstructorByUserId(userId).getId();
         List<Course> courses = getCoursesByParameters(String.valueOf(instructorId), "%", "%", allCourseStatuses);
         List<CourseListInstructorOutput> courseListInstructorOutputs = new ArrayList<>();
 
@@ -94,7 +95,8 @@ public class CourseService {
         return courseListInstructorOutputs;
     }
 
-    public List<CourseListStudentOutput> getCourseListStudentOutput(int studentId) {
+    public List<CourseListStudentOutput> getCourseListStudentOutput(int userId) {
+        int studentId = this.studentService.getStudentByUserId(userId).getId();
         List<Course> courses = getCoursesByParameters("%", String.valueOf(studentId), "%", allCourseStatuses);
         List<CourseListStudentOutput> courseListStudentOutputs = new ArrayList<>();
 

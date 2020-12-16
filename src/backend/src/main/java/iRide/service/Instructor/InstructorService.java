@@ -30,13 +30,10 @@ public class InstructorService {
     }
 
     @Transactional
-    public int createInstructor(InstructorCreateInput instructorCreateInput) {
+    public void createInstructor(InstructorCreateInput instructorCreateInput, User user) {
         Instructor instructor = new Instructor(instructorCreateInput);
-        User user = userService.createUser(instructorCreateInput.getLoginCreateInput(), "INSTRUCTOR");
         instructor.setUser(user);
-        int id = instructorRepository.save(instructor).getId();
-        this.instructorCategoryService.assignCategoriesToInstructor(instructorCreateInput.getCategories(), id);
-        return id;
+        instructorRepository.save(instructor);
     }
 
     public List<InstructorListAdminOutput> getInstructorListAdminOutput(){

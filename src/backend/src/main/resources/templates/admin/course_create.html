@@ -7,6 +7,7 @@
 <body>
 <div layout:fragment="content" class="container" style="min-width: 600px;">
     <div class="jumbotron p-2" style="max-width: 100%;">
+        <h1 class="text-center" style="color: #6c757d;">Utwórz kurs</h1>
         <form th:action="@{'/course/create'}" method="post" >
             <div class="form-row">
                 <div class="col">
@@ -15,9 +16,6 @@
                         <option th:each="student: ${courseCreateOutput.students}" th:value="${student.key}"
                                 th:text="${student.value}"></option>
                     </select>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
                 </div>
             </div>
             <div class="form-row">
@@ -27,9 +25,6 @@
                         <option th:each="instructor: ${courseCreateOutput.instructors}" th:value="${instructor.key}"
                                 th:text="${instructor.value}"></option>
                     </select>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
                 </div>
             </div>
             <div class="form-row">
@@ -39,25 +34,16 @@
                         <option th:each="category: ${courseCreateOutput.categories}" th:value="${category.key}"
                                 th:text="${category.value}"></option>
                     </select>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col">
                     <label for="hoursMinimum" class="pt-2">Minimalna liczba godzin:</label>
                     <input type="number" min="0" class="form-control" id="hoursMinimum" name="hoursMinimum" required>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
                 </div>
                 <div class="col">
                     <label for="hoursRemaining" class="pt-2">Wykupiona liczba godzin:</label>
                     <input type="number" min="0" class="form-control" id="hoursRemaining" name="hoursRemaining" required>
-                    <div class="valid-tooltip">
-                        Looks good!
-                    </div>
                 </div>
             </div>
             <div class="form-group text-center pt-3">

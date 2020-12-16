@@ -8,6 +8,7 @@ import iRide.service.Category.CategoryService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.input.VehicleUpdateInput;
 import iRide.service.Vehicle.model.output.VehicleAdminOutput;
+import iRide.service.Vehicle.model.output.VehicleCreateOutput;
 import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
@@ -27,6 +28,13 @@ public class VehicleService {
     public VehicleService(VehicleRepository vehicleRepository, CategoryService categoryService) {
         this.vehicleRepository = vehicleRepository;
         this.categoryService = categoryService;
+    }
+
+    public VehicleCreateOutput getCreateVehicle(){
+        VehicleCreateOutput vehicleCreateOutput = new VehicleCreateOutput();
+        vehicleCreateOutput.setCategories(this.categoryService.getCategoriesForVehicles());
+
+        return vehicleCreateOutput;
     }
 
     @Transactional
@@ -78,19 +86,19 @@ public class VehicleService {
         return this.vehicleRepository.save(vehicle).getId();
     }
 
-    public int createVehicle(VehicleCreateInput vehicleCreateInput) throws DataExistsException, NotFoundException {
-        if (this.vehicleRepository.getVehicleByParameters(vehicleCreateInput.getMark(), vehicleCreateInput.getModel(), vehicleCreateInput.getPlateNumber(), vehicleCreateInput.getVin()).isPresent()) {
-            throw new DataExistsException("Vehicle with typed data is already in database.");
+    public void createVehicle(VehicleCreateInput vehicleCreateInput) throws DataExistsException, NotFoundException {
+        if (this.vehicleRepository.getVehicleByParameters("%", "%", "%", vehicleCreateInput.getVin()).isPresent()) {
+            throw new DataExistsException("Vehicle with typed vin is already in database.");
         }
         Vehicle vehicle = new Vehicle(vehicleCreateInput);
-        if (vehicleCreateInput.getCategoryName() != null) {
-            Category category = categoryService.getCategoryByNameAndType(vehicleCreateInput.getCategoryName(), "THEORY");
+        if (vehicleCreateInput.getCategoryId() != 0) {
+            Category category = categoryService.getCategory(vehicleCreateInput.getCategoryId());
             if (category == null) {
                 throw new NotFoundException("Typed category was not found.");
             }
             vehicle.setCategory(category);
         }
-        return this.vehicleRepository.save(vehicle).getId();
+        this.vehicleRepository.save(vehicle);
     }
 
     public Vehicle getVehicle(int vehicleId) {

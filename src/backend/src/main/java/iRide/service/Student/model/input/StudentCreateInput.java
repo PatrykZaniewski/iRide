@@ -3,30 +3,14 @@ package iRide.service.Student.model.input;
 import iRide.service.User.model.input.UserCreateInput;
 
 public class StudentCreateInput {
-    private String email;
-    private String password;
     private String firstname;
     private String lastname;
     private String phoneNumber;
 
-    public UserCreateInput getLoginCreateInput() {
-        return new UserCreateInput(this.email, this.password);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public StudentCreateInput(UserCreateInput userCreateInput){
+        this.firstname = userCreateInput.getFirstname();
+        this.lastname = userCreateInput.getLastname();
+        this.phoneNumber = userCreateInput.getPhoneNumber();
     }
 
     public String getFirstname() {

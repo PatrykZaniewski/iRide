@@ -7,10 +7,12 @@ import iRide.model.Student;
 import iRide.repository.CategoryRepository;
 import iRide.repository.InstructorCategoryRepository;
 import iRide.service.Category.model.input.CategoryCreateInput;
+import iRide.service.Category.model.output.CategoryCreateOutput;
 import iRide.service.Category.model.output.CategoryListAdminOutput;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Student.StudentService;
 import iRide.service.User.UserService;
+import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -37,11 +39,11 @@ public class CategoryService {
         this.userService = userService;
     }
 
-    public int createCategory(CategoryCreateInput categoryCreateInput) {
-        if (getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) == null) {
-            return categoryRepository.save(new Category(categoryCreateInput)).getId();
+    public void createCategory(CategoryCreateInput categoryCreateInput) {
+        if (this.getCategoryByNameAndType(categoryCreateInput.getCategoryName(), categoryCreateInput.getCategoryType()) != null) {
+            throw new DataExistsException("Such category already exists.");
         }
-        return -1;
+        categoryRepository.save(new Category(categoryCreateInput));
     }
 
     public List<String> getCategoriesAsStringList(){
@@ -51,6 +53,29 @@ public class CategoryService {
                 result.add(category.getCategoryName());
             }
         }
+        return result;
+    }
+
+    public CategoryCreateOutput getCreateCategory(){
+        CategoryCreateOutput categoryCreateOutput = new CategoryCreateOutput();
+
+        Map<String, String> categoryTypes = new HashMap<>();
+        categoryTypes.put("THEORY", mapParameters("THEORY"));
+        categoryTypes.put("PRACTICE", mapParameters("PRACTICE"));
+
+        categoryCreateOutput.setCategoryTypes(categoryTypes);
+
+        return categoryCreateOutput;
+    }
+
+    public Map<Integer, String> getCategoriesForVehicles(){
+        Map<Integer, String> result = new HashMap<>();
+        for(Category category: this.categoryRepository.findAll()){
+            if(category.getCategoryType().equals("PRACTICE")){
+                result.put(category.getId(), category.getCategoryName());
+            }
+        }
+
         return result;
     }
 

@@ -1,11 +1,13 @@
 package iRide.controller;
 
+import iRide.config.AuthenticationUserDetails;
 import iRide.service.Course.CourseService;
 import iRide.service.Course.model.input.CourseInput;
 import iRide.service.Course.model.output.*;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,17 +27,9 @@ public class CourseController {
     }
 
     @GetMapping(value = "")
-    public String getCourses(Model model) {
-        List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();
-        List<CourseListStudentOutput> courseListStudentOutputs = this.courseService.getCourseListStudentOutput(1);
-        List<CourseListInstructorOutput> courseListInstructorOutputs = this.courseService.getCourseListInstructorOutput(1);
-
-//        model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
-////        return "student/courses";
-//
-//
-//        model.addAttribute("courseListInstructorOutputs", courseListInstructorOutputs);
-//        return "instructor/courses";
+    public String getCourses(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetail) {
+        String group = authenticationUserDetail.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetail.getId();
 
         if (model.asMap().get("code") != null) {
             Integer code = (Integer)model.asMap().get("code");
@@ -56,8 +50,24 @@ public class CourseController {
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
             }
         }
-        model.addAttribute("courseListAdminOutputs", courseListAdminOutputs);
-        return "admin/courses";
+
+        switch (group){
+            case "ADMIN":
+                List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();
+                model.addAttribute("courseListAdminOutputs", courseListAdminOutputs);
+                return "admin/courses";
+            case "INSTRUCTOR":
+                List<CourseListInstructorOutput> courseListInstructorOutputs = this.courseService.getCourseListInstructorOutput(userId);
+                model.addAttribute("courseListInstructorOutputs", courseListInstructorOutputs);
+                return "instructor/courses";
+            case "STUDENT":
+                List<CourseListStudentOutput> courseListStudentOutputs = this.courseService.getCourseListStudentOutput(userId);
+                model.addAttribute("courseListStudentOutputs", courseListStudentOutputs);
+                return "student/courses";
+            default:
+                //TODO do 403?
+                return null;
+        }
     }
 
     @GetMapping(value = "/create")

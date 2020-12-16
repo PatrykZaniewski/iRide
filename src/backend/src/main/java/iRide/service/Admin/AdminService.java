@@ -26,11 +26,10 @@ public class AdminService {
         this.adminRepository = adminRepository;
     }
 
-    public int createAdmin(AdminCreateInput adminCreateInput) throws DataExistsException {
+    public void createAdmin(AdminCreateInput adminCreateInput, User user) throws DataExistsException {
         Admin admin = new Admin(adminCreateInput);
-        User user = userService.createUser(adminCreateInput.getLoginCreateInput(), "ADMIN");
         admin.setUser(user);
-        return adminRepository.save(admin).getId();
+        adminRepository.save(admin);
     }
 
     public List<Admin> getAll(){

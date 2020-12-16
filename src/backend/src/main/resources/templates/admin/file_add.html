@@ -11,6 +11,7 @@
     <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
 
     <div class="jumbotron p-2">
+        <h1 class="text-center" style="color: #6c757d;"> Dodaj plik</h1>
         <form th:action="@{'/file/upload'}" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="category_select">Kategoria:</label>

@@ -36,7 +36,7 @@
                         <div style="display: inline">Brak</div>
                     </div>
                 </td>
-                <td style="max-width: 125px;">
+                <td style="max-width: 140px;">
                     <a style="width: 80px;" th:href="@{'/vehicle/' + ${vehicleListAdminOutput.id}}" class="btn btn-primary btn-sm my-2 text-center">Szczegóły</a>
                     <a style="width: 80px" th:href="@{'/vehicleEdit/' + ${vehicleListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
                     <form style=" display: inline" th:action="@{'/vehicle/{id}'(id=${vehicleListAdminOutput.id})}" th:method="DELETE">

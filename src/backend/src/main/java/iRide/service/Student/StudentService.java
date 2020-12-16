@@ -121,11 +121,10 @@ public class StudentService {
         return this.studentRepository.findAll();
     }
 
-    public int createStudent(StudentCreateInput studentCreateInput) throws DataExistsException {
+    public void createStudent(StudentCreateInput studentCreateInput, User user) throws DataExistsException {
         Student student = new Student(studentCreateInput);
-        User user = userService.createUser(studentCreateInput.getLoginCreateInput(), "STUDENT");
         student.setLogin(user);
-        return studentRepository.save(student).getId();
+        studentRepository.save(student);
     }
 
 

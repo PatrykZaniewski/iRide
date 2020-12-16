@@ -24,8 +24,8 @@ public class AdminController {
     @PostMapping(value = "/")
     public ResponseEntity<String> createAdmin(@RequestBody AdminCreateInput adminCreateInput) {
         try {
-            int adminId = adminService.createAdmin(adminCreateInput);
-            return ResponseEntity.ok("Instructor account has been created. Student id = " + adminId);
+//            int adminId = adminService.createAdmin(adminCreateInput);
+            return ResponseEntity.ok("Instructor account has been created. Student id = ");
         } catch (DataExistsException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

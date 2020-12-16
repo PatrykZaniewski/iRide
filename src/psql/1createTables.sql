@@ -27,7 +27,7 @@ CREATE TABLE public.instructor
     id_user        integer    NOT NULL,
     firstname       varchar(128) NOT NULL,
     lastname        varchar(128) NOT NULL,
-    employment_date date         NOT NULL,
+    employment_date date,
     dismissal_date  date,
     phone_number    varchar(16)  NOT NULL,
     PRIMARY KEY (id),

@@ -26,7 +26,6 @@ public class Instructor {
     @NotNull
     private String lastname;
     @Column(name = "employment_date")
-    @NotNull
     private LocalDateTime employmentDate;
     @Column(name = "dismissal_date")
     private LocalDateTime dismissalDate;
@@ -63,7 +62,6 @@ public class Instructor {
         this.firstname = instructorCreateInput.getFirstname();
         this.lastname = instructorCreateInput.getLastname();
         this.phoneNumber = instructorCreateInput.getPhoneNumber();
-        this.employmentDate = instructorCreateInput.getEmploymentDate();
     }
 
     public int getId() {

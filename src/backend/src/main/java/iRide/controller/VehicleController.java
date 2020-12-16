@@ -1,8 +1,11 @@
 package iRide.controller;
 
 import iRide.service.Vehicle.VehicleService;
+import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.output.VehicleAdminOutput;
+import iRide.service.Vehicle.model.output.VehicleCreateOutput;
 import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
+import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -34,11 +37,20 @@ public class VehicleController {
                 case 101:
                     model.addAttribute("infoMessage", "Pojazd został usunięty pomyślnie.");
                     break;
+                case 102:
+                    model.addAttribute("infoMessage", "Pojazd został dodany pomyślnie.");
+                    break;
                 case 201:
                     model.addAttribute("infoError", "Wybrany pojazd został już usunięty.");
                     break;
                 case 202:
                     model.addAttribute("infoError", "Pojazd o wybranym id nie istnieje.");
+                    break;
+                case 203:
+                    model.addAttribute("infoError", "Pojazd z wybranym numerem vin istnieje.");
+                    break;
+                case 204:
+                    model.addAttribute("infoError", "Wybrana kategoria nie istnieje.");
                     break;
                 default:
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
@@ -72,28 +84,27 @@ public class VehicleController {
         return "redirect:/vehicle";
     }
 
+    @PostMapping(value = "/create")
+    public String createOne(@ModelAttribute VehicleCreateInput vehicleCreateInput, RedirectAttributes redirectAttributes) {
+        try {
+            this.vehicleService.createVehicle(vehicleCreateInput);
+            redirectAttributes.addFlashAttribute("code", 102);
+        } catch (NotFoundException e) {
+            redirectAttributes.addFlashAttribute("code", 204);
+        }
+        catch (DataExistsException e){
+            redirectAttributes.addFlashAttribute("code", 203);
+        }
+        return "redirect:/vehicle";
+    }
 
+    @GetMapping(value = "/create")
+    public String getCreateVehicle(Model model){
+        VehicleCreateOutput vehicleCreateOutput = this.vehicleService.getCreateVehicle();
+        model.addAttribute("vehicleCreateOutput", vehicleCreateOutput);
 
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity<Integer> deleteById(@PathVariable int id) {
-//        this.vehicleService.deleteVehicle(id);
-//        return new ResponseEntity<>(id, HttpStatus.OK);
-//    }
-//
-//    @PostMapping(value = "/")
-//    public ResponseEntity<Object> createOne(@RequestBody VehicleCreateInput vehicleCreateInput) {
-//        try {
-//            int id = this.vehicleService.createVehicle(vehicleCreateInput);
-//            return ResponseEntity.ok(id);
-//        } catch (DataExistsException | NotFoundException e) {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//        }
-//    }
-//
-//    @GetMapping(value = "/{vehicleId}")
-//    public ResponseEntity<VehicleOutput> getVehicleDetails(@PathVariable int vehicleId){
-//        return ResponseEntity.ok(this.vehicleService.getVehicleDetails(vehicleId));
-//    }
+        return "admin/vehicle_create";
+    }
 
     @ModelAttribute("accountRole")
     public String getAccountRole(Authentication authentication){

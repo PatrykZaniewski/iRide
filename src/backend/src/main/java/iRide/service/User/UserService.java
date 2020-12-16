@@ -6,20 +6,23 @@ import iRide.model.Student;
 import iRide.model.User;
 import iRide.repository.UserRepository;
 import iRide.service.Admin.AdminService;
+import iRide.service.Admin.model.input.AdminCreateInput;
 import iRide.service.Instructor.InstructorService;
+import iRide.service.Instructor.model.input.InstructorCreateInput;
 import iRide.service.Student.StudentService;
+import iRide.service.Student.model.input.StudentCreateInput;
 import iRide.service.User.model.input.UserCreateInput;
+import iRide.service.User.model.output.UserCreateOutput;
 import iRide.service.User.model.output.UserListAdminOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -28,6 +31,7 @@ public class UserService {
     private final AdminService adminService;
     private final InstructorService instructorService;
     private final StudentService studentService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     public UserService(UserRepository userRepository, @Lazy AdminService adminService, @Lazy InstructorService instructorService, @Lazy StudentService studentService) {
@@ -35,22 +39,42 @@ public class UserService {
         this.adminService = adminService;
         this.instructorService = instructorService;
         this.studentService = studentService;
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
     }
 
-    public User createUser(UserCreateInput userCreateInput, String accountGroup) throws DataExistsException {
+    @Transactional
+    public User createUser(UserCreateInput userCreateInput) throws DataExistsException {
         if (userRepository.getUserByEmail(userCreateInput.getEmail()).isPresent()) {
             throw new DataExistsException("Email: " + userCreateInput.getEmail() + " is currently in usage.");
         }
-        User user = new User(userCreateInput, accountGroup);
-        return userRepository.save(user);
+
+        User user = userRepository.save(new User(userCreateInput, bCryptPasswordEncoder.encode(userCreateInput.getPassword())));
+
+        switch (userCreateInput.getGroup()) {
+
+//            TODO zrobic maile
+            case "INSTRUCTOR":
+                InstructorCreateInput instructorCreateInput = new InstructorCreateInput(userCreateInput);
+                this.instructorService.createInstructor(instructorCreateInput, user);
+                break;
+            case "ADMIN":
+                AdminCreateInput adminCreateInput = new AdminCreateInput(userCreateInput);
+                this.adminService.createAdmin(adminCreateInput, user);
+                break;
+            case "STUDENT":
+                StudentCreateInput studentCreateInput = new StudentCreateInput(userCreateInput);
+                this.studentService.createStudent(studentCreateInput, user);
+                break;
+        }
+        return user;
     }
 
     public User getUserByEmail(String email) throws NotFoundException {
-        Optional<User> test = userRepository.getUserByEmail(email);
-        if (userRepository.getUserByEmail(email).isPresent()) {
-            return userRepository.getUserByEmail(email).get();
+        Optional<User> result = this.userRepository.getUserByEmail(email);
+        if (!result.isPresent()) {
+            throw new NotFoundException("Typed email not found");
         }
-        throw new NotFoundException("Typed email not found");
+        return result.get();
     }
 
     public User getUser(int userId) {
@@ -59,6 +83,19 @@ public class UserService {
             throw new NotFoundException("User with id = " + userId + " has not been found");
         }
         return result.get();
+    }
+
+    public UserCreateOutput getCreateUser() {
+        UserCreateOutput userCreateOutput = new UserCreateOutput();
+        Map<String, String> groupsMap = new HashMap<>();
+        String[] groups = {"ADMIN", "INSTRUCTOR", "STUDENT"};
+
+        for (String group : groups) {
+            groupsMap.put(group, mapParameters(group));
+        }
+        userCreateOutput.setGroups(groupsMap);
+
+        return userCreateOutput;
     }
 
     @Transactional

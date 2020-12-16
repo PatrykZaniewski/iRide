@@ -31,12 +31,12 @@ public class User {
 
     }
 
-    public User(UserCreateInput userCreateInput, String accountRole) {
+    public User(UserCreateInput userCreateInput, String password) {
         this.email = userCreateInput.getEmail();
-        this.password = userCreateInput.getPassword();
+        this.password = password;
         this.creationDate = LocalDateTime.now();
-        this.status = "ACTIVE";
-        this.accountRole = accountRole;
+        this.status = "PENDING_CONFIRMATION";
+        this.accountRole = userCreateInput.getGroup();
     }
 
     public int getId() {

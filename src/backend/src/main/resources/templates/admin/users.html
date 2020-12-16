@@ -9,8 +9,9 @@
     <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
     <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
 
-    <div class="jumbotron">
+    <div class="jumbotron p-2">
         <table class="table">
+            <caption style="caption-side: top;" class="text-center"><h1>Konta</h1></caption>
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -28,7 +29,7 @@
                 <td th:text="${userListAdminOutput.creationDate}" />
                 <td th:text="${userListAdminOutput.status}" />
                 <td th:text="${userListAdminOutput.accountRole}" />
-                <td style="max-width: 80px;">
+                <td style="max-width: 100px;">
                     <a style="width: 80px" th:href="@{'/userEdit/' + ${userListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
                     <form style=" display: inline" th:action="@{'/user/{id}/{group}'(id=${userListAdminOutput.id}, group=${userListAdminOutput.accountRole})}" th:method="DELETE">
                         <input type="hidden" name="_method" value="DELETE"/>
