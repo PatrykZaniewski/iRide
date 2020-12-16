@@ -29,7 +29,7 @@
                     <div style="float:left;">Przypisani instruktorzy:</div>
                     <div th:if="${#lists.size(vehicleAdminOutput.instructors)} > 0"
                          th:each="instructor : ${vehicleAdminOutput.instructors}" style="display: inline; float:right;">
-                        <a th:href="@{'/instructor/' + ${instructor.key}}" th:text="'&nbsp;' + ${instructor.value}"
+                        <div th:text="'&nbsp;' + ${instructor.value}"
                            style="float:right;"/>
                     </div>
                     <div th:if="${#lists.size(vehicleAdminOutput.instructors)} == 0">
@@ -43,17 +43,6 @@
             </tr>
             </tbody>
         </table>
-    </div>
-    <div class="row">
-        <div class="col text-center">
-            <a th:href="@{'/vehicleEdit/' + ${vehicleAdminOutput.id}}" class="btn btn-primary btn-lg"
-               style="color: black">Edytuj</a>
-            <form th:action="@{'/vehicle/{id}'(id=${vehicleAdminOutput.id})}" th:method="DELETE"
-                  style="display: inline">
-                <input type="hidden" name="_method" value="DELETE"/>
-                <button class="btn btn-danger btn-lg" type="submit" id="submitButton" style="color: black">Usuń</button>
-            </form>
-        </div>
     </div>
 </div>
 </body>

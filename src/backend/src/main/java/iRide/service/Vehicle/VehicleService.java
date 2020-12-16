@@ -5,14 +5,17 @@ import iRide.model.Instructor;
 import iRide.model.Vehicle;
 import iRide.repository.VehicleRepository;
 import iRide.service.Category.CategoryService;
+import iRide.service.Instructor.InstructorService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.input.VehicleUpdateInput;
 import iRide.service.Vehicle.model.output.VehicleAdminOutput;
 import iRide.service.Vehicle.model.output.VehicleCreateOutput;
+import iRide.service.Vehicle.model.output.VehicleInstructorOutput;
 import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +26,13 @@ public class VehicleService {
 
     private final VehicleRepository vehicleRepository;
     private final CategoryService categoryService;
+    private final InstructorService instructorService;
 
     @Autowired
-    public VehicleService(VehicleRepository vehicleRepository, CategoryService categoryService) {
+    public VehicleService(VehicleRepository vehicleRepository, CategoryService categoryService, @Lazy InstructorService instructorService) {
         this.vehicleRepository = vehicleRepository;
         this.categoryService = categoryService;
+        this.instructorService = instructorService;
     }
 
     public VehicleCreateOutput getCreateVehicle(){
@@ -109,7 +114,7 @@ public class VehicleService {
         return result.get();
     }
 
-    public VehicleAdminOutput getVehicleDetails(int vehicleId) throws NotFoundException {
+    public VehicleAdminOutput getVehicleDetailsAsAdmin(int vehicleId) throws NotFoundException {
         Vehicle vehicle = this.getVehicle(vehicleId);
         VehicleAdminOutput vehicleAdminOutput = new VehicleAdminOutput();
 
@@ -127,6 +132,37 @@ public class VehicleService {
         vehicleAdminOutput.setInstructors(instructors);
 
         return vehicleAdminOutput;
+    }
+
+    public VehicleInstructorOutput getVehicleDetailsAsInstructor(int vehicleId, int userId) throws NotFoundException {
+        Vehicle requestedVehicle = null;
+        VehicleInstructorOutput vehicleInstructorOutput = new VehicleInstructorOutput();
+
+        for(Vehicle vehicle : this.instructorService.getInstructorByUserId(userId).getVehicles()){
+            if(vehicle.getId() == vehicleId){
+                requestedVehicle = vehicle;
+                break;
+            }
+        }
+
+        if (requestedVehicle == null){
+            throw new NotFoundException("Vehicle not found");
+        }
+
+        vehicleInstructorOutput.setId(requestedVehicle.getId());
+        vehicleInstructorOutput.setMark(requestedVehicle.getMark());
+        vehicleInstructorOutput.setModel(requestedVehicle.getModel());
+        vehicleInstructorOutput.setPlateNumber(requestedVehicle.getPlateNumber());
+        vehicleInstructorOutput.setVin(requestedVehicle.getVin());
+        vehicleInstructorOutput.setCategory(requestedVehicle.getCategory().getCategoryName());
+
+        Map<Integer, String> instructors = new HashMap<>();
+        for (Instructor instructor : requestedVehicle.getInstructors()) {
+            instructors.put(instructor.getId(), instructor.getFirstname() + " " + instructor.getLastname());
+        }
+        vehicleInstructorOutput.setInstructors(instructors);
+
+        return vehicleInstructorOutput;
     }
 
 //    public List<VehicleAdminOutput> getVehicleDetailsList() {

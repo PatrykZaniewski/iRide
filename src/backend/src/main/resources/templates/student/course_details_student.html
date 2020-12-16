@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 600px;">
+    <div class="jumbotron p-2" style="max-width: 100%;">
+        <table class="table" style="table-layout: fixed;word-wrap: break-word;">
+            <caption style="caption-side: top;" class="text-center"><h1>Szczegóły kursu</h1></caption>
+            <tbody>
+            <tr>
+                <td style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Id:</div>
+                    <div th:text="${courseStudentOutput.id}" style="float:right; "></div>
+                </td>
+                <td style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Kursant:</div>
+                    <div style="float:right;">
+                        <a th:href="@{'/course/' + ${courseStudentOutput.studentId}}" th:text="${courseStudentOutput.student}" />
+                    </div>
+                </td>
+                <td>
+                    <div style="float:left;">Instruktor:</div>
+                    <div style="float:right;">
+                        <a th:href="@{'/course/' + ${courseStudentOutput.instructorId}}" th:text="${courseStudentOutput.instructor}" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Min. liczba godzin:</div>
+                    <div th:text="${courseStudentOutput.hoursMinimum}" style="float:right; "></div>
+                </td>
+                <td style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Pozostałe godziny:</div>
+                    <div th:text="${courseStudentOutput.hoursRemaining}" style="float:right; "></div>
+                </td>
+                <td>
+                    <div style="float:left;">Godziny zaliczone:</div>
+                    <div th:text="${courseStudentOutput.hoursDone}" style="float:right; "></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Status:</div>
+                    <div th:text="${courseStudentOutput.status}" style="float:right; "></div>
+                </td>
+                <td>
+                    <div style="float:left;">Kategoria:</div>
+                    <div th:text="${courseStudentOutput.category}" style="float:right; "></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="float:left;">Przeprowadzone lekcje:</div>
+                    <div style="display: inline; float:right;">
+                        <div th:if="${#lists.size(courseStudentOutput.events)} > 0"
+                             th:each="event : ${courseStudentOutput.events}" style="display: inline">
+                            <a th:href="@{'/event/' + ${event.key}}" th:text="${event.value} + '&nbsp;'" style="float:right; display: inline;"></a>
+                        </div>
+                        <div th:if="${#lists.size(courseStudentOutput.events)} == 0">
+                            <div style="float:right;">Brak</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

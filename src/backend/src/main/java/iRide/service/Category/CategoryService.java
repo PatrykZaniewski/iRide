@@ -79,7 +79,7 @@ public class CategoryService {
         return result;
     }
 
-    public List<String> getCategoriesByGroupAndId(int userId){
+    public List<String> getCategoriesByUserId(int userId){
         Set<String> categories = new HashSet<>();
         String group = this.userService.getUser(userId).getAccountRole();
 

@@ -1,11 +1,10 @@
 package iRide.service.File;
 
-import iRide.service.File.model.output.FileListOutputAdmin;
+import iRide.service.File.model.output.FileListOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,8 +51,8 @@ public class FileService {
         }
     }
 
-    public List<FileListOutputAdmin> filesList(List<String> categories) {
-        List<FileListOutputAdmin> files = new ArrayList<>();
+    public List<FileListOutput> filesList(List<String> categories) {
+        List<FileListOutput> files = new ArrayList<>();
 
         for (String category : categories) {
             File directory = new File("files/" + category);
@@ -69,11 +68,11 @@ public class FileService {
             List<String> filename = new ArrayList<>();
             for (File dirFile: dirFiles){
                 filename.add(dirFile.getName());
-                FileListOutputAdmin fileListOutputAdmin = new FileListOutputAdmin();
-                fileListOutputAdmin.setCategory(category);
-                fileListOutputAdmin.setFile(dirFile.getName());
+                FileListOutput fileListOutput = new FileListOutput();
+                fileListOutput.setCategory(category);
+                fileListOutput.setFile(dirFile.getName());
 
-                files.add(fileListOutputAdmin);
+                files.add(fileListOutput);
             }
         }
         return files;

@@ -2,9 +2,12 @@ package iRide.controller;
 
 import iRide.config.AuthenticationUserDetails;
 import iRide.service.Category.CategoryService;
+import iRide.service.Course.model.output.CourseAdminOutput;
+import iRide.service.Course.model.output.CourseInstructorOutput;
+import iRide.service.Course.model.output.CourseStudentOutput;
 import iRide.service.File.FileService;
 import iRide.service.File.model.input.FileAddInput;
-import iRide.service.File.model.output.FileListOutputAdmin;
+import iRide.service.File.model.output.FileListOutput;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/file")
@@ -49,15 +50,20 @@ public class FileController {
 
     @GetMapping("/upload")
     public String getUploadFile(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails) {
-        List<String> categories = this.categoryService.getCategoriesByGroupAndId(authenticationUserDetails.getId());
+        List<String> categories = this.categoryService.getCategoriesByUserId(authenticationUserDetails.getId());
         model.addAttribute("categories", categories);
         return "admin/file_add";
     }
 
     @GetMapping("")
     public String getFilesList(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails) {
-        List<String> categories = this.categoryService.getCategoriesByGroupAndId(authenticationUserDetails.getId());
-        List<FileListOutputAdmin> fileListOutputAdmins = this.fileService.filesList(categories);
+        String group = authenticationUserDetails.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetails.getId();
+
+        List<String> categories = this.categoryService.getCategoriesByUserId(userId);
+        List<FileListOutput> fileListOutputs = this.fileService.filesList(categories);
+
+        model.addAttribute("fileListOutputs", fileListOutputs);
 
         if (model.asMap().get("code") != null) {
             Integer code = (Integer)model.asMap().get("code");
@@ -78,8 +84,18 @@ public class FileController {
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
             }
         }
-        model.addAttribute("fileListOutputAdmins", fileListOutputAdmins);
-        return "admin/file_list";
+
+        switch (group){
+            case "ADMIN":
+                return "admin/file_list";
+            case "INSTRUCTOR":
+                return "instructor/file_list";
+            case "STUDENT":
+                return "student/file_list";
+            default:
+                //TODO do 403?
+                return null;
+        }
     }
 
     @GetMapping("/{category}")

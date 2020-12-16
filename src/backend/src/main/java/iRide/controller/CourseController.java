@@ -27,9 +27,9 @@ public class CourseController {
     }
 
     @GetMapping(value = "")
-    public String getCourses(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetail) {
-        String group = authenticationUserDetail.getAuthorities().get(0).toString();
-        int userId = authenticationUserDetail.getId();
+    public String getCourses(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails) {
+        String group = authenticationUserDetails.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetails.getId();
 
         if (model.asMap().get("code") != null) {
             Integer code = (Integer)model.asMap().get("code");
@@ -78,11 +78,28 @@ public class CourseController {
     }
 
     @GetMapping(value = "/{id}")
-    public String getCourseDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
+    public String getCourseDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails){
         try {
-            CourseAdminOutput courseAdminOutput = this.courseService.getCourseDetailsAsAdmin(id);
-            model.addAttribute("courseAdminOutput", courseAdminOutput);
-            return "admin/course_details_admin";
+            String group = authenticationUserDetails.getAuthorities().get(0).toString();
+            int userId = authenticationUserDetails.getId();
+
+            switch (group){
+                case "ADMIN":
+                    CourseAdminOutput courseAdminOutput = this.courseService.getCourseDetailsAsAdmin(id);
+                    model.addAttribute("courseAdminOutput", courseAdminOutput);
+                    return "admin/course_details_admin";
+                case "INSTRUCTOR":
+                    CourseInstructorOutput courseInstructorOutput = this.courseService.getCourseDetailsAsInstructor(id, userId);
+                    model.addAttribute("courseInstructorOutput", courseInstructorOutput);
+                    return "instructor/course_details_instructor";
+                case "STUDENT":
+                    CourseStudentOutput courseStudentOutput = this.courseService.getCourseDetailsAsStudent(id, userId);
+                    model.addAttribute("courseStudentOutput", courseStudentOutput);
+                    return "student/course_details_student";
+                default:
+                    //TODO do 403?
+                    return null;
+            }
         }
         catch (NotFoundException e){
             redirectAttributes.addFlashAttribute("code", 202);

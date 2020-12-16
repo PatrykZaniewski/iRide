@@ -17,7 +17,6 @@
             <tr>
                 <th scope="col">Kategoria</th>
                 <th scope="col">Plik</th>
-                <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
@@ -25,14 +24,6 @@
                 <td style="width: 50px;" th:text="${fileListOutput.category}"/>
                 <td>
                     <a th:href="@{'/file/' + ${fileListOutput.category} + '?filename=' + ${fileListOutput.file}}" th:text="${fileListOutput.file}"/>
-                </td>
-                <td style="width: 10px;">
-                    <form style=" display: inline" th:action="@{'/file/' + ${fileListOutput.category} + '?filename=' + ${fileListOutput.file}}" th:method="DELETE">
-                        <input type="hidden" name="_method" value="DELETE"/>
-                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">
-                            Usuń
-                        </button>
-                    </form>
                 </td>
             </tr>
             </tbody>

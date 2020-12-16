@@ -1,6 +1,6 @@
 package iRide.service.File.model.output;
 
-public class FileListOutputAdmin {
+public class FileListOutput {
 
     private String category;
     private String file;

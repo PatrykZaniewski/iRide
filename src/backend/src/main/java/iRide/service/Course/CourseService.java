@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class CourseService {
@@ -139,6 +138,79 @@ public class CourseService {
         courseAdminOutput.setEvents(events);
         return courseAdminOutput;
     }
+
+    public CourseInstructorOutput getCourseDetailsAsInstructor(int courseId, int userId) {
+        List<Course> courses = this.instructorService.getInstructorByUserId(userId).getCourses();
+
+        Course requestedCourse = null;
+        for (Course course : courses) {
+            if(course.getId() == courseId){
+                requestedCourse = course;
+            }
+        }
+
+        if(requestedCourse == null){
+            throw new NotFoundException("Course was not found.");
+        }
+
+        CourseInstructorOutput courseInstructorOutput = new CourseInstructorOutput();
+
+        courseInstructorOutput.setId(requestedCourse.getId());
+        courseInstructorOutput.setCategory(requestedCourse.getCategory().getCategoryName() + "-" + mapParameters(requestedCourse.getCategory().getCategoryType()));
+        courseInstructorOutput.setHoursDone(requestedCourse.getHoursDone());
+        courseInstructorOutput.setHoursMinimum(requestedCourse.getHoursMinimum());
+        courseInstructorOutput.setHoursRemaining(requestedCourse.getHoursRemaining());
+        courseInstructorOutput.setInstructorId(requestedCourse.getInstructor().getId());
+        courseInstructorOutput.setInstructor(requestedCourse.getInstructor().getFirstname() + " " + requestedCourse.getInstructor().getLastname());
+        courseInstructorOutput.setStudentId(requestedCourse.getStudent().getId());
+        courseInstructorOutput.setStudent(requestedCourse.getStudent().getFirstname() + " " + requestedCourse.getStudent().getLastname());
+        courseInstructorOutput.setStatus(mapParameters(requestedCourse.getStatus()));
+
+        Map<Integer, String> events = new HashMap<>();
+        for (Event event : requestedCourse.getEvent()) {
+            events.put(event.getId(), String.valueOf(event.getStartDate()));
+        }
+
+        courseInstructorOutput.setEvents(events);
+        return courseInstructorOutput;
+    }
+
+    public CourseStudentOutput getCourseDetailsAsStudent(int courseId, int userId) {
+        List<Course> courses = this.studentService.getStudentByUserId(userId).getCourses();
+
+        Course requestedCourse = null;
+        for (Course course : courses) {
+            if(course.getId() == courseId){
+                requestedCourse = course;
+            }
+        }
+
+        if(requestedCourse == null){
+            throw new NotFoundException("Course was not found.");
+        }
+
+        CourseStudentOutput courseStudentOutput = new CourseStudentOutput();
+
+        courseStudentOutput.setId(requestedCourse.getId());
+        courseStudentOutput.setCategory(requestedCourse.getCategory().getCategoryName() + "-" + mapParameters(requestedCourse.getCategory().getCategoryType()));
+        courseStudentOutput.setHoursDone(requestedCourse.getHoursDone());
+        courseStudentOutput.setHoursMinimum(requestedCourse.getHoursMinimum());
+        courseStudentOutput.setHoursRemaining(requestedCourse.getHoursRemaining());
+        courseStudentOutput.setInstructorId(requestedCourse.getInstructor().getId());
+        courseStudentOutput.setInstructor(requestedCourse.getInstructor().getFirstname() + " " + requestedCourse.getInstructor().getLastname());
+        courseStudentOutput.setStudentId(requestedCourse.getStudent().getId());
+        courseStudentOutput.setStudent(requestedCourse.getStudent().getFirstname() + " " + requestedCourse.getStudent().getLastname());
+        courseStudentOutput.setStatus(mapParameters(requestedCourse.getStatus()));
+
+        Map<Integer, String> events = new HashMap<>();
+        for (Event event : requestedCourse.getEvent()) {
+            events.put(event.getId(), String.valueOf(event.getStartDate()));
+        }
+
+        courseStudentOutput.setEvents(events);
+        return courseStudentOutput;
+    }
+
 
     public Course getCourse(int courseId) {
         Optional<Course> result = this.courseRepository.findById(courseId);

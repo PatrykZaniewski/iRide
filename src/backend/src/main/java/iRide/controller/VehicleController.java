@@ -63,7 +63,7 @@ public class VehicleController {
     @GetMapping(value = "/{id}")
     public String getVehicleDetails(Model model, @PathVariable int id, RedirectAttributes redirectAttributes){
         try {
-            VehicleAdminOutput vehicleAdminOutput = this.vehicleService.getVehicleDetails(id);
+            VehicleAdminOutput vehicleAdminOutput = this.vehicleService.getVehicleDetailsAsAdmin(id);
             model.addAttribute("vehicleAdminOutput", vehicleAdminOutput);
             return "admin/vehicle_details_admin";
         }
