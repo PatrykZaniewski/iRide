@@ -1,0 +1,1159 @@
+\documentclass[a4paper,12pt,twoside,openany]{report}
+%
+% Wzorzec pracy dyplomowej
+% J. Starzynski (jstar@iem.pw.edu.pl) na podstawie pracy dyplomowej
+% mgr. in¿. B³a¿eja Wincenciaka
+% Wersja 0.1 - 8 paŸdziernika 2016
+%
+\usepackage{polski}
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+\usepackage{anyfontsize}
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[polish]{babel}
+\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage{verbatim}
+\usepackage{indentfirst}
+\usepackage[pdftex]{hyperref}
+
+
+% rozmaite polecenia pomocnicze
+% gdzie rysunki?
+\newcommand{\ImgPath}{.}
+
+% oznaczenie rzeczy do zrobienia/poprawienia
+\newcommand{\TODO}{\textbf{TODO}}
+
+
+% wyroznienie slow kluczowych
+\newcommand{\tech}{\texttt}
+
+% na oprawe (1.0cm - 0.7cm)*2 = 0.6cm
+% na oprawe (1.1cm - 0.7cm)*2 = 0.8cm
+%  oddsidemargin lewy margines na nieparzystych stronach
+% evensidemargin lewy margines na parzystych stronach
+\def\oprawa{1.05cm}
+\addtolength{\oddsidemargin}{\oprawa}
+\addtolength{\evensidemargin}{-\oprawa}
+
+% table span multirows
+\usepackage{multirow}
+\usepackage{enumitem}	% enumitem.pdf
+\setlist{listparindent=\parindent, parsep=\parskip} % potrzebuje enumitem
+
+%%%%%%%%%%%%%%% Dodatkowe Pakiety %%%%%%%%%%%%%%%%%
+\usepackage{prmag2017}   % definiuje komendy opieku,nrindeksu, rodzaj pracy, ...
+
+
+%%%%%%%%%%%%%%% Strona Tytu³owa %%%%%%%%%%%%%%%%%
+% To trzeba wypelnic swoimi danymi
+\title{Interaktywna aplikacja internetowa do obs³ugi szko³y jazdy}
+
+% autor
+\author{Patryk Zaniewski}
+\nrindeksu{291119}
+
+\opiekun{dr in¿. Maciej Stodolski}
+\terminwykonania{1 lutego 2021} % data na oœwiadczeniu o samodzielnoœci
+\rok{2021}
+
+
+% Podziekowanie - opcjonalne
+\podziekowania{\input{podziekowania.tex}}
+
+% To sa domyslne wartosci
+% - mozna je zmienic, jesli praca jest pisana gdzie indziej niz w ZETiIS
+% - mozna je wyrzucic jesli praca jest pisana w ZETiIS
+%\miasto{Warszawa}
+%\uczelnia{POLITECHNIKA WARSZAWSKA}
+%\wydzial{WYDZIA£ ELEKTRYCZNY}
+%\instytut{INSTYTUT ELEKTROTECHNIKI TEORETYCZNEJ\linebreak[1] I~SYSTEMÓW INFORMACYJNO-POMIAROWYCH}
+% \zaklad{ZAK£AD ELEKTROTECHNIKI TEORETYCZNEJ\linebreak[1] I~INFORMATYKI STOSOWANEJ}
+%\kierunekstudiow{INFORMATYKA}
+
+% domyslnie praca jest inzynierska, ale po odkomentowaniu ponizszej linii zrobi sie magisterska
+%\pracamagisterska
+%%% koniec od P.W
+
+\opinie{%
+  \input{opiniaopiekuna.tex}
+  \newpage
+  \input{recenzja.tex}
+}
+
+\streszczenia{
+  \input{streszczenia.tex}
+}
+
+\begin{document}
+\maketitle
+
+%-----------------
+% Wstêp
+%-----------------
+\chapter{Wstêp}
+\section{Cel pracy}
+Celem niniejszego dokumentu jest przedstawienie efektów pracy autora nad aplikacj¹ internetow¹ do zarz¹dzania szko³¹ jazdy.
+\section{Motywacja wybranego tematu}
+Szybki rozwój technologii oraz rozwój sektora us³ug jest ze sob¹ œciœle powi¹zany. Jest to szczególnie widoczne w sektorze prywatnym, którego celem jest osi¹gniêcie jak najwiêkszych zysków poprzez jak najmniejsze nak³ady. W celu obni¿enia kosztów, a tak¿e u³atwienia zarz¹dzania przedsiêbiorstwami, ich w³aœciciele decyduj¹ siê na systemy u³atwiaj¹ce administrowanie nimi. Systemy te maj¹ za zadanie maksymalnie uproœciæ i przyœpieszyæ proces zarz¹dzania, a w konsekwencji pozwoliæ u¿ytkownikom na skupieniu siê na najwa¿niejszych aspektach pracy w przedsiêbiorstwie.
+
+Przyk³adem takiego przedsiêbiorstwa jest szko³a jazdy. Wed³ug nieoficjalnych danych, na koniec roku 2019 w Polsce funkcjonowa³o blisko 5000 takich szkó³.\cite{szkolyliczba}. Z oficjalnych danych dostarczonych przez Centraln¹ Ewidencjê Pojazdów i Kierowców (CEPiK) wynika, ¿e prawo jazdy uzyska³o w roku 2019 ponad 370 000 osób \cite{prawojazdyliczba} (Liczba ta dotyczy tylko osób, które uzyska³y prawo jazdy po raz pierwszy. Nie zosta³y tutaj wliczone osoby, które w 2019 roku uczestniczy³y w kursach maj¹cych na celu rozszerzenie ich uprawnieñ.). Kursanci Ci byli egzaminowani w 49 Wojewódzkich Oœrodkach Ruchu Drogowego (WORD)\cite{wordliczba}. Osi¹gnêli oni nastêpuj¹ce wyniki: 45.2\% - 58.9\% zdawalnoœci czêœci teoretycznej egzaminu oraz 24.9\% - 53.0\% zdawalnoœci czêœci praktycznej.\cite{wordzdawalnosc}
+
+\section{Aplikacja internetowa - narzêdzie w szkole jazdy}
+Do u³atwienia zarz¹dzania przedstawionym powy¿ej przedsiêbiorstwem zosta³a zaprojektowana odpowiednia aplikacja internetowa. Poni¿ej przedstawiono czym jest taka aplikacja w kontekœcie szko³y jazdy, a w kolejnych rozdzia³ach zawarto jej dok³adny opis funkcjonalny.
+
+Aplikacja internetowa jest to aplikacja znajduj¹ca siê i dzia³aj¹ca po stronie serwera. Komunikacja z ni¹ nastêpuje przy wykorzystaniu po³¹czenia internetowego. W porównaniu do klasycznych programów, aplikacja ta nie jest uzale¿niona od wykorzystywanego systemu operacyjnego. Do korzystania z niej i jej zasobów wystarczy przegl¹darka internetowa oraz stabilne ³¹cze sieciowe. \cite{aplikacjainternetowa}
+G³ówn¹ zalet¹ tego typu rozwi¹zania jest zapewnienie wieloplatformowoœci programu. U¿ytkownik nie jest uzale¿niony od sprzêtu czy te¿ systemu operacyjnego. Niezale¿nie od rodzaju urz¹dzenia na którym u¿ytkownik korzysta z aplikacji, jej stan jest zawsze taki sam. Skutkuje to wygod¹ obs³ugi takich programów, a tak¿e mo¿liwoœci¹ korzystania z nich na ró¿nych urz¹dzeniach (smartfony, telefony, tablety, komputery).
+
+W przypadku szko³y jazdy, aplikacja taka zapewnia mo¿liwoœæ dostêpu oraz modyfikacji do zasobów szko³y. S¹ nimi dane zwi¹zane z zasobami ludzkimi, kursami oraz pojazdami.
+
+
+
+
+
+\chapter{Definicja wymagañ}
+W poni¿szym rozdziale zosta³y przedstawione pojêcia i elementy zwi¹zane z wymaganiami jakie spe³nia zaprojektowana aplikacja.
+\section{S³ownik pojêæ}
+Poni¿ej przedstawione s¹ pojêcia oraz definicje elementów zwi¹zanych z dziedzin¹ projektu.
+
+\begin{itemize}
+ \item U¿ytkownik - osoba uprawioniona do korzystania z systemu. U¿ytkownik nale¿y do jednej i tylko jednej grupy (Kursant, Instruktor, Student). W zale¿noœci od przynale¿noœci posiada inne prawa w aplikacji.
+ \item Kursant - pierwsza z trzech grup u¿ytkowników. Umo¿liwia dostêp do funkcjonalnoœci przewidzianych dla osoby uczestnicz¹cej w kursie jako kursant.
+ \item Instruktor - druga z trzech grup u¿ytkowników. Umo¿liwia dostêp do funkcjonalnoœci przewidzianych dla osoby nadzoruj¹cej kursem - instruktora.
+ \item Administrator - trzecia z trzech grup u¿ytkowników. Zapewnia dostêp do wszystkich funkcjonalnoœci aplikacji umo¿liwiaj¹c zarz¹dzanie wszystkimi zasobami szko³y jazdy.
+ \item Konto u¿ytkownika - zbiór zasobów zwi¹zanych z uwierzytelnianiem u¿ytkownika.
+ \item Konto kursanta - zbiór zasobów zasobów zwi¹zanych z danymi personalnymi kursanta. Realizuje funkcjonalnoœci grupy 'Kursant'.
+ \item Konto instruktora - zbiór zasobów zasobów zwi¹zanych z danymi personalnymi instruktora. Realizuje funkcjonalnoœci grupy 'Instruktor'.
+ \item Konto administratora - zbiór zasobów zasobów zwi¹zanych z danymi personalnymi administratora. Realizuje funkcjonalnoœci grupy 'Administrator'.
+ \item Kategoria - zasób okreœlaj¹cy rodzaj oraz typ przeprowadzanego kursu (Teoretyczny/Praktyczny)
+ \item Pojazd - pojazd szko³y jazdy wraz z jego danymi oraz przypisan¹ do niego kategori¹, któr¹ realizuje.
+ \item Kurs - zdefiniowany zestaw informacji dotycz¹cych przeprowadzanego szkolenia. Przedstawia informacje zwi¹zane z kursantem, instruktorem oraz kategori¹ prawa jazdy.
+ \item Lekcja - zbiór informacji dotycz¹cych lekcji przeprowadzonej w ramach przypisanego kursu.
+\end{itemize}
+
+\newpage
+
+\section{Zakres funkcjonalny}
+Przedstawiony poni¿ej zakres funkcjonalny zosta³ sformu³owany na podstawie zebranych wymagañ u¿ytkownika. Wymagania te zosta³y podzielone na 3 grupy u¿ytkowników, których dotycz¹. S¹ to kolejno: administratorzy, instruktorzy oraz kursanci. Zastosowany podzia³ pozwoli³ na prostsze zebranie wymagañ, a w konsekwencji na szybsze sformu³owanie zakresu funkcjonalnego;
+
+Poni¿ej, w postaci listy, przedstawiony zosta³ zakres funkcjonalny czyli zbiór funkcjonalnoœci oferowanych przez aplikacjê:
+
+\begin{itemize}
+ \item Modu³ zapewniaj¹cy mo¿liwoœæ aktywacji logowania do konta oraz przypomnienia has³a.
+ \item Modu³ odpowiedzialny za zarz¹dzanie kontami u¿ytkowników, ich kreacj¹, edycj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi oraz udostêpnianie ich wybranym u¿ytkownikom.
+ \item Modu³ odpowiedzialny za zarz¹dzanie instruktorami szko³y jazdy, ich dodawaniem, edycj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za zarz¹dzanie pojazdami szko³y jazdy, ich dodawaniem, edycj¹, usuwaniem oraz przypisywaniem konkrentym instruktorom.
+ \item Modu³ odpowiedzialny za zarz¹dzanie kursantami szko³y jazdy, ich dodawaniem, edycj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za zarz¹dzanie kategoriami praw jazdy w szkole jazdy, ich dodawaniem, edycj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za zarz¹dzanie kursami praw jazdy, ich kreacj¹, edycj¹, usuwaniem, przypisywaniem instruktorów i kursantów.
+ \item Modu³ odpowiedzialny za zarz¹dzanie lekcjami w ramach kursu w szkole jazdy, ich kreacjê, edycj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach, ich kreacj¹ oraz usuwaniem.
+ \item Modu³ odpowiedzialny za komunikacjê wewnetrzn¹.
+\end{itemize}
+
+
+\section{Diagramy przypadków u¿ycia}
+
+W poni¿szym podrozdziale przedstawione zosta³y diagramy przypadków u¿ycia. Zosta³y one wykonane w jêzyku modelowania UML na podstawie œciœle okreœlonych zasad.\cite{inzynieriawymagan}
+
+Przedstawione diagramy wraz z opisami stanowi¹ rozszerzenie przedstawionego powy¿ej zakresu funkcjonalnego. Doprecyzowuj¹ jakie funkcjonalnoœci dostêpne s¹ w poszczególnych modu³ach oraz jakich grup u¿ytkowników dotycz¹. Poni¿sze diagramy zosta³y pogrupowane wed³ug modu³ów z wczeœniejszego podrozdzia³u i zosta³y przedstawione w takiej samej kolejnoœci. Ponadto, zbiór diagramów zosta³ uzupe³niony o dodatkowe, uzupie³niaj¹ce schematy.
+\newline
+
+\subsection{Grupy u¿ytkowników systemu}
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/users.png}
+\end{center}
+	\caption{Grupy u¿ytkowników}
+	\label{schematKomunikacji}
+\end{figure}
+
+
+Powy¿szy diagram przedstawia grupy u¿ytkowników korzystaj¹cych z systemu. 
+
+Aktor ,,U¿ytkownik'' jest tutaj generalizacj¹ aktora zalogowanego i obejmuje wszystkie 3 grupy aktorów korzystaj¹cych z systemu. S¹ nimi: Administrator, Instruktor oraz Kursant. 
+
+Ponadto, diagram przedstawia jeszcze jednego aktora - ,,Niezalogowany u¿ytkownik'', którym jest u¿ytkownik przed procesem autentykacji.
+\newpage
+
+
+\subsection{Modu³ odpowiedzialny za aktywacjê, logowanie przypomnienie has³a do konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/account_login.png}
+\end{center}
+	\caption{Przypadki u¿ycia do modu³u aktywacji, logowania i przypomnienia has³a do konta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z logowaniem, aktywacj¹ oraz zerowaniem has³a do konta. 
+
+Niezalogowany u¿ytkownik mo¿e zalogowaæ siê do swojego konta lub zresetowaæ do niego has³o. U¿ytkownik ten, mo¿e te¿ jednokrotnie aktywowaæ swoje konto poprzez wiadomoœæ email.
+
+\newpage
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie kontami u¿ytkowników}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/account_details.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania kontami u¿ytkowników}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z kontami u¿ytkowników. 
+
+Wszyscy zalogowani u¿ytkownicy maj¹ mo¿liwoœæ wyœwietlania oraz edycji okreœlonych danych w³asnego konta. 
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich kont w systemie. W momencie wyœwietlania listy kont uzyskuje on mo¿liwoœæ edycji, usuniêcia, a tak¿e zablokowania/odblokowania wybranego konta (w zale¿noœci od aktualnego stanu danego konta).
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/files_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania materia³ami dydaktycznymi}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z zarz¹dzaniem materia³ami dydaktycznymi. 
+
+Administrator ma mo¿liwoœæ dodania nowej pomocy dydaktycznej oraz wyœwietlenia listy wszystkich materia³ów w systemie. Po wyœwietleniu listy uzyskuje dostêp do funkcjonalnoœci zwi¹zanych z usuwaniem i pobieraniem wybranych przez niego pozycji z listy.
+
+Instruktor ma mo¿liwoœæ dodawania nowych pomocy naukowych i wyœwietlania ich listy. Ograniczone jest to jednak kategoriami prawa jazdy, poniewa¿ mo¿e on przeprowadzaæ akcje tylko na materia³ach dydaktycznych, których kategorie pokrywaj¹ siê z kategoriami przez niego prowadzonymi. Po wyœwietleniu listy materia³ów instruktor uzyskuje dostêp do funkcjonalnoœci usuwania i pobierania wybranych pomocy dydaktycznych.
+
+Kursant ma mo¿liwoœæ wyœwietlenia listy wszystkich kategorii, a nastêpnie pobrania wybranej. Analogicznie jak w przypadku instruktora, akcje te ograniczone s¹ do kategorii prawa jazdy, do których dostêp ma kursant.
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie instruktorami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/instructor_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania instruktorami}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z zarz¹dzaniem instruktorami.
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich instruktorów oraz szczegó³ów wybranego instruktora. Ma równie¿ mo¿liwoœæ edycji danych instruktora zarówno z widoku listy jak i poziomu szczegó³ów danego instruktora.
+
+Kursant ma mo¿liwoœæ wyœwietlenia szczegó³ów przypisanego do niego instruktora.
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie pojazdami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/car_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania materia³ami dydaktycznymi}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z zarz¹dzaniem pojazdami.
+
+Administrator ma mo¿liwoœæ dodania nowego pojazdu, wyœwietlenia listy wszystkich pojazdów oraz wyœwietlenia szczegó³ów wybranego pojazdu. Ma on równie¿ mo¿liwoœæ edycji oraz usuniêcia dowolnego pojazdu zarówno z widoku listy pojazdów jak i szczegó³ów danego pojazdu.
+
+Instruktor ma mo¿liwoœæ wyœwietlenia listy przypisanych do niego pojazdów oraz szczegó³ów wybranego przez niego pojazdu.
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/student_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania kursantami}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z zarz¹dzaniem kursantami.
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich kursantów oraz szczegó³ów wybranego kursanta. Ma równie¿ mo¿liwoœæ edycji danych kursanta zarówno z widoku listy jak i poziomu szczegó³ów danego kursanta.
+
+Instruktor ma mo¿liwoœæ wyœwietlenia szczegó³ów przypisanego do niego kursanta.
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie kategoriami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/category_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania kategoriami}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z kategoriami prawa jazdy.
+
+Administrator ma mo¿liwoœæ utworzenia nowej kategorii, a tak¿e wyœwietlenia listy kategorii. Po jej wyœwietleniu otrzymuje te¿ mo¿liwoœæ usuniêcia wybranej pozycji z listy.
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie kursami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/course_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania kursami}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z kursami.
+
+Administrator ma mo¿liwoœæ utworzenia nowego kursu, wyœwietlenia listy wszystkich kursów oraz szczegó³ów wybranego kursu. Po wybraniu konkretnego kursu administrator ma mo¿liwoœæ jego edycji b¹dŸ usuniêcia.
+
+Instruktor ma mo¿liwoœæ wyœwietlenia listy kursów, które prowadzi, a tak¿e wyœwietlenia szczegó³ów wybranego kursu.
+
+Kursant ma mo¿liwoœæ wyœwietlenia listy kursów w których bierze udzia³, a tak¿e wyœwietlenia szczegó³ów wybranego kursu.
+
+
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/review_managment.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania opiniami o instruktorach}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z opiniami o instruktorach.
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy opinii o wybranym instruktorze oraz szczegó³ów wybranej opinii.
+
+Kursant ma mo¿liwoœæ jednokrotnego wystawienia opinii instruktorowi prowadz¹cemu kurs.
+
+
+\subsection{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/message_managment.png}
+\end{center}
+	\caption{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z komunikacj¹ wewnetrzn¹.
+
+U¿ytkownik ma mo¿liwoœæ wyœwietlenia w³asnej skrzynki odbiorczej z list¹ wiadomoœcia, a tak¿e szczegó³ów wybranej przez niego wiadomoœci. Ma on równie¿ mo¿liwoœæ wys³ania nowej wiadomoœci do adresata z listy kontaktów. Lista kontaktów jest inna dla ka¿dej grupy u¿ytkowników i przedstawia siê nastêpuj¹co:
+
+\begin{itemize}
+    \item Administrator: wszyscy u¿ytkownicy szko³y jazdy
+    \item Instruktor: wszyscy administratorzy oraz kursanci przypisani do danego instruktora
+    \item Kursant: wszyscy administratorzy oraz instruktorzy przypisani do danego kursanta
+\end{itemize}
+
+
+\chapter{Architektura}
+W poni¿szym rozdziale zosta³a przedstawiona architektura wykonanego projektu.
+
+\section{Architektura Dockera}
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.63]{\ImgPath/rys/docker.png}
+\end{center}
+	\caption{Docker}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy diagram przedstawia architekturê kontenerów i sieci dockerowej projektu. Zaprojektowane zosta³y dwa kontenery: iRide\_app oraz iRide\_db.
+
+iRide\_app jest kontenerem odpowiedzialnym za wirtualizacjê napisanej aplikacji. Jego bazowym obrazem jest ,,openjdk:8-jdk-alpine'', który uzupe³niany jest o plik .jar zbudowany z plików napisanej aplikacji. Kontener uruchamiany jest na porcie 8000. W celu po³¹czenia z nim nale¿y wykorzystaæ adres \emph{localhost:8000}.
+
+iRide\_db jest kontenerem odpowiedzialnym za wirtualizacjê bazy danych. Jego bazowym obrazem jest ,,postgres'', który uzupe³niany jest o 2 pliki startowe, zawieraj¹ce odpowiednio strukturê bazy danych oraz rekordy wype³niaj¹ce j¹. Kontener uruchamiany jest na porcie 54320. W celu po³¹czenia z nim nale¿y wykorzystaæ adres \emph{localhost:54320}.
+
+
+
+\section{Architektura bazy danych}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.5]{\ImgPath/rys/database.png}
+\end{center}
+	\caption{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
+	\label{schematKomunikacji}
+\end{figure}
+
+\newpage
+
+Powy¿szy schemat przedstawia zaprojektowan¹ i wykorzystan¹ w projekcie bazê danych. Do wykonania diagramu zosta³a wykorzystana notacja IE/Martina. Polega ona na graficznym oddzieleniu kluczy prywatnych i obcych od innych atrybutów. Dodatkowo charakterystyczn¹ cech¹ tej notacji s¹ symbole koñcowe linii zwi¹zków. Wykorzystywany jest tu symbol tak zwanej ,,kurzej stopki''. U¿ywany jest on w celu oznaczania krotnoœci relacji elementów oraz zale¿noœci elementów nadrzêdnych i podrzêdnych.\cite{modelowaniedanych}
+
+Poni¿ej przedstawiono opisy tabel bazy danych:
+
+\begin{itemize}
+    \item user - tabela odpowiadaj¹ca za przechowywanie kluczowych danych dotycz¹cych kont u¿ytkowników. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora konta
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item email - atrybut typu \emph{text}, s³u¿y do przechowywania emaila u¿ytkownika
+            \item password - atrybut typu \emph{text}, s³u¿y do przechowywania has³a u¿ytkownika w postaci haszu
+            \item creation\_date - atrybut typu \emph{date}, s³u¿y do przechowywania daty utworzenia konta
+            \item status - atrybut typu \emph{text}, s³u¿y do przechowywania statusu konta.
+            \item account\_role - atrybut typu \emph{text}, s³u¿y do przechowywania roli konta
+        \end{itemize}
+    \end{itemize}
+    \item student - tabela odpowiadaj¹ca za przechowywanie danych studentów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora studenta
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_user - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{user}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item firstname - atrybut typu \emph{text}, s³u¿y do przechowywania imienia studenta
+            \item lastname - atrybut typu \emph{text}, s³u¿y do przechowywania nazwiska studenta
+            \item phone\_number - atrybut typu \emph{text}, s³u¿y do przechowywania numeru telefonu studenta
+        \end{itemize}
+    \end{itemize}
+    \item instructor - tabela odpowiadaj¹ca za przechowywanie danych instruktorów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora instruktora
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_user - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{user}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item firstname - atrybut typu \emph{text}, s³u¿y do przechowywania imienia instruktora
+            \item lastname - atrybut typu \emph{text}, s³u¿y do przechowywania nazwiska instruktora
+            \item employment\_date - atrybut typu \emph{date}, s³u¿y do przechowywania daty zatrudnienia instruktora
+            \item dissmisal\_date - atrybut typu \emph{text}, s³u¿y do przechowywania daty zwolnienia instruktora
+            \item phone\_number - atrybut typu \emph{text}, s³u¿y do przechowywania numeru telefonu instruktora
+        \end{itemize}
+    \end{itemize}
+    \item admin - tabela odpowiadaj¹ca za przechowywanie danych administratorów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora administratora
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_user - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{user}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item firstname - atrybut typu \emph{text}, s³u¿y do przechowywania imienia administratora
+            \item lastname - atrybut typu \emph{text}, s³u¿y do przechowywania nazwiska administratora
+            \item phone\_number - atrybut typu \emph{text}, s³u¿y do przechowywania numeru telefonu administratora
+        \end{itemize}
+    \end{itemize}
+    \item category - tabela odpowiadaj¹ca za przechowywanie kategorii kursów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora kategorii
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item category\_name - atrybut typu \emph{text}, s³u¿y do przechowywania nazwy kategorii
+            \item category\_type - atrybut typu \emph{text}, s³u¿y do przechowywania typu kategorii
+        \end{itemize}
+    \end{itemize}
+    \item instructor\_category - tabela odpowiadaj¹ca za przechowywanie relacji instruktorów do kategorii. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora relacji instruktora do kategorii
+        \end{itemize}
+        \item Klucze obce:
+        \begin{itemize}
+            \item id\_category - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{category}
+            \item id\_instructor - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{instructor}
+        \end{itemize}
+    \end{itemize}
+     \item vehicle - tabela odpowiadaj¹ca za przechowywanie danych pojazdów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora pojazdu
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_category - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{category}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item mark - atrybut typu \emph{text}, s³u¿y do przechowywania marki pojazdu
+            \item model - atrybut typu \emph{text}, s³u¿y do przechowywania modelu pojazdu
+            \item plate\_number - atrybut typu \emph{text}, s³u¿y do przechowywania numeru rejestracyjnego pojazdu
+            \item vin - atrybut typu \emph{text}, s³u¿y do przechowywania numeru vin pojazdu
+        \end{itemize}
+    \end{itemize}
+    \item instructor\_vehicle - tabela odpowiadaj¹ca za przechowywanie relacji instruktorów do pojazdów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora relacji instruktora do pojazdu
+        \end{itemize}
+        \item Klucze obce:
+        \begin{itemize}
+            \item id\_instructor - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{instructor}
+            \item id\_vehicle - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{vehicle}
+        \end{itemize}
+    \end{itemize}
+    \item course - tabela odpowiadaj¹ca za przechowywanie danych kursów. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora kursu
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_student - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{student}
+            \item id\_instructor - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{instructor}
+            \item id\_category - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{category}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item hours\_minimum - atrybut typu \emph{int}, s³u¿y do przechowywania minimalnych liczby godzin, które nale¿y przeprowadziæ w ramach kursu
+            \item hours\_remaining - atrybut typu \emph{int}, s³u¿y do przechowywania liczby pozosta³ych godzin kursu
+            \item hours\_done - atrybut typu \emph{int}, s³u¿y do przechowywania liczby wypracowanych godzin
+            \item status - atrybut typu \emph{text}, s³u¿y do przechowywania statusu kursu
+        \end{itemize}
+    \end{itemize}
+    \item Event - tabela odpowiadaj¹ca za przechowywanie danych lekcji. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora lekcji
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_instructor - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{instructor}
+            \item id\_student - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{student}
+            \item id\_vehicle - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{vehicle}
+            \item id\_course - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{course}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item start\_date - atrybut typu \emph{timestamp}, s³u¿y do przechowywania daty i godziny rozpoczêcia lekcji
+            \item end\_date - atrybut typu \emph{timestamp}, s³u¿y do przechowywania daty i godziny zakoñczenia lekcji
+            \item duration - atrybut typu \emph{int}, s³u¿y do przechowywania czasu trwania lekcji w godzinach
+            \item comment - atrybut typu \emph{text}, s³u¿y do przechowywania komentarza do lekcji
+            \item status - atrybut typu \emph{text}, s³u¿y do przechowywania statusu lekcji
+        \end{itemize}
+    \end{itemize}
+    \item instructor\_rating - tabela odpowiadaj¹ca za przechowywanie opinii o instruktorach. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora opinii
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_student - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{student}
+            \item id\_instructor - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{instructor}
+            \item id\_course - atrybut typu \emph{int}, s³u¿y do przechowywania referencji do rekordu w tabeli \emph{course}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item grade - atrybut typu \emph{int}, s³u¿y do przechowywania oceny kursu
+            \item comment - atrybut typu \emph{text}, s³u¿y do przechowywania komentarza do opinii
+        \end{itemize}
+    \end{itemize}
+    \item message - tabela odpowiadaj¹ca za przechowywanie wiadomoœci. Zbudowana jest z nastêpuj¹cych atrybutów:
+    \begin{itemize}
+        \item Klucz prywatny:
+        \begin{itemize}
+            \item id - atrybut typu \emph{int}, s³u¿y do przechowywania identyfikatora wiadomoœci
+        \end{itemize}
+        \item Klucz obcy:
+        \begin{itemize}
+            \item id\_from - atrybut typu \emph{int}, dotyczy nadawcy wiadomoœci i przechowuje referencjê do rekordu w tabeli \emph{user}
+            \item id\_to - atrybut typu \emph{int}, dotyczy odbiorcy wiadomoœci i przechowuje referencjê do rekordu w tabeli \emph{user}
+        \end{itemize}
+        \item Pozosta³e atrybuty:
+        \begin{itemize}
+            \item message - atrybut typu \emph{text}, s³u¿y do przechowywania treœci wiadomoœci
+            \item title - atrybut typu \emph{text}, s³u¿y do przechowywania tytu³u wiadomoœci
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section{Architektura aplikacji}
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/architecture.png}
+\end{center}
+	\caption{Architektura aplikacji. Rysunek na podstawie: https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿szy schemat przedstawia architekturê wykonanej aplikacji. Opiera siê ona o wzorzec MVC (Model-View-Controller) jednoczeœnie rozszerzaj¹c go o dodatkowe elementy. Dok³adny opis architektury zosta³ przedstawiony poni¿ej na podstawie przyk³adowego przep³ywu.
+
+Przep³yw rozpoczyna siê w momencie wys³ania przez klienta zapytania HTTP pod okreœlony adres. Odbierane jest ono przez Front Controller, który jest implementaj¹ wzorca o tej samej nazwie. We wzorcu tym wystêpuje jeden obiekt (w tym przypadku \emph{servlet}), który wykonuje operacje wspólne dla wszystkich zapytañ HTTP. Obiekt ten ma zaimplementowane dekoratory, które po wykonaniu wspólnych akcji przekierowuj¹ przep³yw do obiektu odpowiedzialnego za dane zapytanie (w tym przypadku adres URL).\cite{frontcontroller}. Obiektem takim jest odpowiedni Controller, który obs³uguje dany adres URL. Wewn¹trz obiektu Controllera wyszukiwana jest odpowiednia funkcja, która na podstawie ca³kowitego adresu URL realizuje zadane dzia³anie. Jest ono realizowane na obiekcie Service, który odpowiada za logikê biznesow¹. Realizuje j¹ przy udziale odpowiedniego obiektu Repository, który realizuje zapytania do bazy danych. Po przeprowadzeniu odpowiednich operacji Service zwraca rezultat dzia³añ do Controllera. Uzupe³nia on Model o zdefiniowane wartoœci i wraz z nazw¹ odpowiedniego widoku (View) zwraca go do Front Controllera. Nastêpuje wyszukanie odpowiedniego widoku, a nastêpnie uzupe³nienie go o dane z Modelu, wyrenderowanie i zwrócenie ponownie do Front Controllera. Wyrenderowany przez aplikacjê widok jest zwracany i wyœwietlany klientowi.
+
+
+
+
+
+
+\chapter{Wykorzystane narzêdzia i technologie}
+W powy¿szym paragrafie przedstawione zosta³y narzêdzia i technologie wykorzystane w procesie wytwarzania przedstawionej aplikacji internetowej. Ich wybór by³ œciœle zwi¹zany z ju¿ posiadanymi przez autora umiejêtnoœciami, ale równie¿ i z chêci¹ poznania nowych narzêdzi.
+
+\section{PostgreSQL 13.1}
+Podstawowy element funkcjonowania przedstawionej aplikacji. Zawiera elementy kluczowe dla dzia³ania ca³ego systemu.Wybrana przez autora baza jest relacyjn¹ baz¹ danych powsta³¹ w 1986 roku. Oparta jest ona na jêzyku SQL i umo¿liwia przechowywanie oraz skalowanie nawet najbardziej skomplikowanych danych. Miêdzy innymi ze wzglêdu na swoj¹ architekturê oraz status open source jest jedn¹ z najczêœciej wykorzystywanych baz danych na œwiecie.\cite{postgresqldoc}
+
+\section{Java 8}
+G³ówny jêzyk programowania wykorzystany w projekcie. U¿yty do implementacji aplikacji, ale równie¿ i testów jednostkowych. Jêzyk ten zosta³ stworzony przez Jamesa Goslinga w 1996 roku i opiera siê na obiektowym paradygmacie programowania. Java do uruchomienia aplikacji u¿ywa wirtualnej maszyny Java  - JVM (Java Virtual Machine). Sprawia to, ¿e aplikacje pisane w tym jêzyku s¹ multiplatformowe i mog¹ byæ uruchamiane na ka¿dej maszynie z zainstalowanym JVM.
+
+\section{Gradle}
+Gradle to open-source'owe narzêdzie u¿ywane do budowania projektu. Pozwala ono na elastyczne zarz¹dzanie zale¿noœciami wykorzystywanymi w aplikacji. Dodatkowo, zapewnia ono równie¿ mo¿liwoœæ wykonywania konkretnych zadañ na projekcie. Przyk³adami s¹ zadania zwi¹zane z kompilowaniem projektu, jego testowaniem oraz budowaniem pliku koñcowego *.jar.
+
+\section{Spring Boot}
+Spring Boot jest modu³em bazuj¹cym na Spring Security. Jego g³ównym celem jest minimalizacja konfiguracji w taki sposób, aby programista móg³ skupiæ siê tylko na logice aplikacji. Dzieje siê to miêdzy innymi, dziêki zawartemu w Spring Boocie serwerowi Tomcat, na którym uruchamiana jest aplikacja. Dodatkow¹ zalet¹ Spring Boota jest mo¿liwoœæ tworzenia przy jego pomocy aplikacji internetowych. Nastêpuje to poprzez wykorzystanie zale¿noœci Spring-Boot-Web.
+
+\section{Spring Security}
+Spring security czyli framework odpowiedzialny za szeroko pojête zabezpieczanie aplikacji. Stworzony do wspó³pracy z przedstawionym powy¿ej Spring Framework. G³ównym zadaniem tego narzêdzia jest autentykacja oraz autoryzacja u¿ytkowników. Dodatkowo zapewnia funkcjonalnosæ w postaci ochrony przed atakami na aplikacjê.
+
+\section{Spring Data JPA i Hibernate}
+Spring Data JPA to framework odpowiedzialny za po³¹czenie z baz¹ danych. Realizuje to przy wykorzystaniu odpowiedniego ORMa (Object-Relational Mapping) czyli narzêdzia mapuj¹cego rekordy tabeli bazy danych na obiekty jêzyka Java. W przypadku Spring Data JPA domyœlnym ORM jest Hibernate, który oprócz mapowania zapewnia równie¿ funkcjonalnoœæ w postaci tworzenia w³asnych zapytañ do bazy danych w jêzyku HQL (Hibernate Query Language).
+
+\section{Thymeleaf}
+Thymeleaf to silnik szablonów dla aplikacji internetowych, ale i okienkowych. Wykorzystuje on mechanizm server-side rendering czyli renderowania widoku po stronie serwera. Narzêdzie te, w po³¹czeniu ze Springiem pozwala na umieszczanie obiektów jêzyka Java wewn¹trz kodu HTML strony.
+
+\section{JUnit 5 - ROZWAZYC CZY WSPOMINAC O TESTACH}
+JUnit to narzêdzie s³u¿¹ce do testowania kodu aplikacji napisanych w JVM. Pozwala na przeprowadzanie testów jednostkowych czyli testowanie pojedynczych elementów programu. 
+
+\section{Docker}
+Docker to narzêdzie umo¿liwiaj¹ce wirtualizacjê stworzonego projektu. Zapewnia on funkcjonalnoœæ w postaci spakowania aplikacji oraz uruchomienia jej w izolowanym œrodowisku nazywanym kontenerem. Przewag¹ Dockera nad innymi rozwi¹zaniami wirtualizacyjnymi jest jego lekkoœæ, poniewa¿ potrzebuje on znacznie mniej zasobów ni¿ inne wirtualizatory.\cite{dockerdoc}
+
+
+\section{Git}
+Git czyli system kontroli wersji. Umo¿liwia przechowywanie kodu w zdalnym b¹dŸ lokalnym repozytorium, a dodatkowo u³atwia jego zarz¹dzanie.
+
+\section{Intellij IDEA}
+Intellij IDEA czyli zintegrowane œrodowisko programistyczne stworzone przez firmê JetBrains. Dostarcza szereg funkcjonalnosæi u³atwiaj¹cych pracê nad projektem. S¹ to miêdzy innymi narzêdzia odpowiedzialne za analizê, debuggowanie, testowanie czy te¿ kompilowanie kodu. 
+
+
+
+
+
+
+
+
+
+\chapter{Wykonany projekt aplikacji}
+Tu trzeba zacz¹æ wstawiaæ w³asn¹ treœæ i oczywiœcie usun¹æ tê, która jest u¿yta w przyk³adzie...
+
+
+
+
+
+
+
+
+
+\chapter{Podsumowanie}
+Tu trzeba zacz¹æ wstawiaæ w³asn¹ treœæ i oczywiœcie usun¹æ tê, która jest u¿yta w przyk³adzie...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%-----------------
+% Steganografia
+%-----------------
+\chapter{}
+\chapter{Steganografia}
+Wywodz¹ce siê z greki s³owo ,,steganografia'' oznacza ,,ukryte pismo'' 
+(\textit{steganos} - ukryty, tajny; \textit{graphein} - pisaæ, malowaæ), co w 
+odniesieniu do kana³u informacyjnego oznacza przesy³anie danych w taki sposób, 
+aby osoby postronne maj¹ce wgl¹d do danych nie mog³y stwierdziæ istnienia w nich 
+ukrytej informacji. Ca³y mechanizm steganografii opiera siê na zasadzie ukrycia 
+informacji w tych czêœciach wiadomoœci, które nie s³u¿¹ do przekazywania 
+informacji lub których modyfikacja nie wp³ywa na treœæ g³ównego przekazu.
+
+W celu przes³ania informacji za pomoc¹ steganografii nale¿y utworzyæ kana³ 
+steganograficzny, zdefiniowany \cite{USDoD}  jako: ,,ka¿dy kana³ komunikacyjny, 
+który mo¿e byæ wykorzystany przez stronê do przes³ania informacji w sposób 
+naruszaj¹cy politykê bezpieczeñstwa systemu''. Metoda ta wykorzystuje fakt 
+przes³ania danych w sposób i w miejscach, które zgodnie z protoko³em do tego nie 
+s³u¿¹, nara¿aj¹c system na nieautoryzowany przesy³ informacji.
+
+Steganografia w znacz¹cym stopniu ró¿ni siê od kryptografii, która nie dba o 
+zatajenie istnienia przekazu, a jedynie o jego integralnoœæ oraz uniemo¿liwienie 
+stronom trzecim poznanie treœci przekazu. Oczywiœcie najlepsz¹ technik¹ jest 
+po³¹czenie steganografii z kryptografi¹. Takie podejœcie pozwala zabezpieczyæ 
+siê przed sytuacj¹, w której strona nadzoruj¹ca transmisjê, nawet w przypadku 
+odkrycia przekazu steganograficznego nie mo¿e go odczytaæ ze wzglêdu na si³ê 
+zastosowanej kryptografii.
+  %-----------------
+  % Historia
+  %-----------------
+\section{Historia}
+Pomimo, ¿e pierwsze wzmianki o steganografii, a dok³adnie o ukrytych kana³ach w 
+odniesieniu do systemów informatycznych notuje siê na lata siedemdziesi¹te XX 
+wieku \cite{FirstCC}, to przyk³ady u¿ycia steganografii siêgaj¹ staro¿ytnoœci. W 
+literaturze powtarzaj¹ siê opisy przekazywania tajnej informacji poprzez 
+wytatuowanie jej na ogolonej g³owie pos³añca, który po odroœniêciu w³osów by³ 
+wysy³any z ma³o znacz¹c¹ wiadomoœci¹ do armii swojego dowódcy. Ka¿dy kto natkn¹³ 
+siê na pos³añca mia³ wgl¹d do niewa¿nej wiadomoœci, niepodejrzewaj¹c nawet 
+istnienia sekretnej informacji w postaci tatua¿u.
+
+Przyk³ady z historii odnosz¹ siê tak¿e do bardziej wspó³czesnych czasów. Wiele z 
+metod steganografii by³o stosowanych podczas II Wojny Œwiatowej (np. 
+mikro-kropki) a tak¿e w latach Zimnej Wojny. Wiadomo tak¿e, ¿e wielu agentów 
+s³u¿b wywiadowczych, a szczególnie podwójnych agentów, przekazywa³o obcym 
+pañstwom informacjê wykorzystuj¹c steganografiê. Przyk³adem mo¿e tu byæ sprawa 
+szpiega FBI Roberta Hanssena \cite{Hanssen}, który przy pomocy technik 
+steganograficzny przez oko³o dekadê przekazywa³ tajne informacje s³u¿bom KGB.
+
+Rozdzia³y \ref{sectionSteganografiaWObiektachMultimedialnych} oraz 
+\ref{chapterSteganografiaWRuchuTCPIP} opisuj¹ nowoczesne podejœcie do 
+steganografii wykorzystuj¹ce wspó³czesne kana³y informacyjne. 
+  %-----------------
+  % Pojêcia
+  %-----------------
+\section{Pojêcia}
+W celu zdefiniowania kana³u steganograficznego oraz opisania transmisji z 
+wykorzystaniem takiego kana³u nale¿y omówiæ jego czêœci sk³adowe:
+\begin{itemize}
+	\item dane do ukrycia, tajne dane - informacja jak¹ nale¿y przes³aæ 
+miêdzy uczestnikami komunikacji, tak aby strony trzecie nie mia³y do niej 
+wgl¹du,
+	\item dane noœne, wiadomoœæ zakrywaj¹ca - wiadomoœæ, w której ukryte 
+zostan¹ tajne dane; przesy³anie wiadomoœci zakrywaj¹cych musi byæ dozwolone w 
+danym kanale informacyjnym i nie powinno wzbudzaæ podejrzeñ,
+	\item funkcja steganograficzna - funkcja przekszta³caj¹ca dane do 
+ukrycia oraz wiadomoœæ zakrywaj¹c¹ w jedn¹ po³¹czon¹ wiadomoœæ,
+	\item dane z ukryt¹ wiadomoœci¹ - dane zawieraj¹ce ukryt¹ informacjê a 
+jednoczeœnie wykazuj¹ce cechy danych noœnych,
+	\item nadzorca komunikacji, wartownik - mechanizm maj¹cy pe³en wgl¹d do 
+wiadomoœci przekazywanej miêdzy stronami komunikacji, œwiadomy struktury 
+komunikatów i potrafi¹cy wykrywaæ wystêpuj¹ce w nich anomalie,
+	\item kana³ komunikacyjny - kana³ zestawiony pomiêdzy nadawc¹ a 
+odbiorc¹, zapewniaj¹cy przep³yw informacji, do którego wgl¹d ma nadzorca 
+komunikacji,
+	\item odwrotna funkcja steganograficzna - funkcja przekszta³caj¹ca dane 
+z ukryt¹ wiadomoœci¹ na tajne dane,
+	\item klucz kryptograficzny - klucz znany tylko obu stronom komunikacji, 
+s³u¿¹cy do zabezpieczenia tajnej informacji metodami kryptografii symetrycznej 
+przed ewentualnoœci¹ z³amania funkcji steganograficznej.
+\end{itemize}
+  %-----------------
+  % Schemat komunikacji steganograficznej
+  %-----------------
+\section{Schemat komunikacji steganograficznej}
+\label{sectionSchematKomunikacjiSteganograficznej}
+Podstawowy scenariusz, powszechny w literaturze na temat steganografii, odnosi 
+siê do sytuacji opisanej w \cite{PrisonersProblem}. Dwóch wiêŸniów (w naszym 
+przypadku Alicja(\tech{A}) i Bob(\tech{B})) zamkniêci s¹ w dwóch odrêbnych 
+celach. Mog¹ siê ze sob¹ kontaktowaæ, jednak ich ca³a korespondencja przechodzi 
+przez rêce Wartownika (\tech{W}). Ma on pe³en wgl¹d do przekazywanych 
+informacji, wiêc mo¿e przechwyciæ wszelkie przekazywane tajemnice, a dodatkowo w 
+razie podejrzeñ mo¿e nie dopuœciæ do komunikacji\footnote{podejrzana informacja 
+jest tu analogi¹ do stosowania kryptografii przez wiêŸniów}. W takim przypadku w 
+celu przekazania wa¿nych informacji \tech{A} i \tech{B} musz¹ pos³u¿yæ siê 
+pewnego rodzaju podstêpem. Musz¹ tak sformu³owaæ treœæ przekazu, aby \tech{W} 
+nie rozró¿ni³ ,,niegroŸnej'' wiadomoœci od wiadomoœci z ukrytym przekazem. 
+Dlatego te¿ przekazuj¹ wiadomoœæ, w której prawdziwa treœæ mo¿liwa jest do 
+odczytania po z³o¿eniu kolejno ka¿dej np.  drugiej litery z ka¿dego wyrazu.
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/schemat_komunikacji.png}
+\end{center}
+	\caption{Schemat komunikacji steganograficznej}
+	\label{schematKomunikacji}
+\end{figure}
+
+Przedstawion¹ tak sytuacjê pokazuje rysunek 
+\ref{schematKomunikacji}\footnote{sporz¹dzony na podstawie 
+\cite{schematKomunikacjiPrzypis}, rysunek 1, strona 3}. \tech{A} próbuje 
+przes³aæ tajn¹ informacjê \tech{E} do \tech{B}. Ca³a komunikacja odbywa siê 
+przez kana³ publiczny, kontrolowany przez \tech{W}. W celu ukrycia faktu 
+komunikacji \tech{A} stara siê ukryæ tajny przekaz w informacji \tech{C}. W celu 
+uzyskania skutecznej steganografii \tech{W} nie mo¿e rozró¿niæ informacji 
+poprawnej, nie zawieraj¹cej tajnych danych, od informacji \tech{S}, która 
+zawiera tajn¹ informacjê. W celu dodatkowego zabezpieczenia przekazu, \tech{A} i 
+\tech{B} mog¹ korzystaæ z funkcji kryptograficznej zabezpieczaj¹cej przekazywane 
+informacje. Mo¿na tu wykorzystaæ metody kryptografii symetrycznej (ustalony 
+klucz kryptograficzny \tech{K}) lub niesymetrycznej (klucz publiczny 
+\tech{K}$_{pub}$ i klucz prywatny \tech{K}$_{pryw}$).
+
+Stosowanie technik kryptograficznych wp³ywa na poprawê bezpieczeñstwa 
+przesy³anej informacji, jednak nale¿y pamiêtaæ o nieporz¹dnych cechach jakie 
+mog¹ one wywo³aæ. W wiêkszoœci przypadków umieszczenie tajnej informacji 
+steganograficznej w przekazie wi¹¿e siê z zamian¹ istniej¹cej ju¿ niewa¿nej 
+czêœci informacji. Jednak ka¿da porcja usuniêtej informacji mo¿e mieæ pewn¹ 
+charakterystyczn¹ postaæ lub specyficzny histogram. Zastosowanie funkcji 
+kryptograficznej w stosunku do tajnej informacji zmienia j¹, a wynikowy rozk³ad 
+bitów jest nieprzewidywalny i w wiêkszoœci przypadków ró¿ny od standardowych 
+histogramów okreœlonych dla podmienianych czêœci wiadomoœci.
+  %-----------------
+  % Stegoanaliza
+  %-----------------
+\section{Stegoanaliza}
+Stegoanaliza to nauka zajmuj¹ca siê wykrywaniem istnienia ukrytych informacji w 
+kana³ach komunikacyjnych. Nie zawsze prowadzi to do odkrycia dok³adnej treœci 
+ukrytego przekazu, a w wiêkszoœci przypadków polega jedynie na wskazaniu 
+istnienia ukrytego kana³u steganograficznego.
+
+Mo¿liwoœæ wykrycia kana³u steganograficznego sprowadza siê do analizy ró¿nych 
+czêœci wiadomoœci lub strumienia danych w celu wykrycia anomalii. Takie 
+podejœcie wynika z faktu, ¿e tajna informacja ukryta jest w miejscach nie 
+przeznaczonych do przesy³ania informacji lub na miejscu danych, które s¹ w 
+pewien sposób nadmiarowe (np. dla zmys³ów cz³owieka). Mo¿na wskazaæ dwa 
+podstawowe sposoby wykrywania anomalii:
+\begin{itemize}
+	\item pierwsze podejœcie opiera siê na przebadaniu wszystkich czêœci 
+informacji (np. pól nag³ówka TCP/IP), których struktura jest w pe³ni 
+przewidywalna lub których wartoœci s¹ zdefiniowane przez standardy lub 
+powszechne praktyki; wa¿ne jest tak¿e sprawdzenie czy wystêpuj¹ wartoœci 
+nadmiarowe oraz czy elementy sygnalizuj¹ce wyst¹pienie dodatkowych danych maj¹ 
+faktyczne pokrycie w danych,
+	\item drug¹ metod¹ jest porównanie wartoœci czêœci wiadomoœci (np. pól 
+nag³ówka TCP/IP) i zaklasyfikowanie ich jako prawdopodobnych lub nie dla danego 
+systemu b¹dŸ protoko³u; takie podejœcie mo¿e byæ stosowane do wartoœci œciœle 
+okreœlonych, takich jak wymienione w pierwszym punkcie, jednak mo¿na je tak¿e 
+stosowaæ do wartoœci które s¹ pseudolosowe lub których histogram jest 
+charakterystyczny; w celu realizacji tej metody warto pos³u¿yæ siê sieciami 
+neuronowymi takimi jak SVM i RSVM, zdolnymi rozpoznawaæ wzorce i separowaæ dane.
+\end{itemize}
+  %-----------------
+  % Metody tworzenia steganografii
+  %-----------------
+\section{Metody tworzenia steganografii oraz rodzaje ukrytych kana³ów}
+Przes³anie danych za pomoc¹ przekazu steganograficznego wi¹¿e siê w wiêkszoœci 
+przypadków z umieszczeniem dodatkowej informacji w wiadomoœci. Odbywa siê to za 
+pomoc¹ podmiany tej czêœci wiadomoœci (nag³ówka TCP/IP), która wykazuje cechy 
+nadmiarowoœci lub której (kontrolowana) zmiana nie prowadzi do przerwania 
+transmisji. Pewn¹ podgrup¹ mo¿e byæ w tym przypadku wykorzystanie pól 
+oryginalnie pustych (zerowych) lub niewykorzystywanych w istniej¹cych 
+implementacjach.
+
+Kana³y steganograficzne mo¿na podzieliæ na dwa zasadniczne 
+typy\cite{SweetyPresentation}:
+\begin{itemize}
+	\item kana³ pojemnoœciowy (ang. storage channel) - informacja zawarta w 
+czêœciach wiadomoœci, polach nag³ówka,
+	\item kana³ czasowy (ang. timing channel) - informacja zawarta w czasach 
+wyst¹pienia danych zdarzeñ, np. przes³ania pakietu TCP/IP.
+\end{itemize}
+W przypadku sieci pakietowych mo¿na tak¿e po³¹czyæ dwa typu kana³ów 
+steganograficznych, tworz¹c kana³ mieszany, w którym jeden z typów (np. 
+pojemnoœciowy) bêdzie wykorzystywany do przekazywania informacji, a drugi (np. 
+czasowy) do sygnalizacji tego zdarzenia.
+
+Wiêkszoœæ opracowanych programów s³u¿¹cych do przesy³ania danych z 
+wykorzystaniem steganografii opiera siê na kana³ach pojemnoœciowych. Wynika to z 
+faktu, ¿e kana³y czasowe narzucaj¹ pewne ograniczenia na generacjê pakietów 
+TCP/IP przez co ich wykrycie staje siê prostsze.
+
+Dodatkowo nale¿y zauwa¿yæ, ¿e w sieciach pakietowych mo¿na skonstruowaæ 
+abstrakcyjny kana³ steganograficzny, w którym do przesy³ania tajnych danych 
+lub/i obs³ugi protoko³u steganograficznego wykorzystywane s¹ ró¿ne pola 
+nag³ówka. Zmiana wykorzystania danego pola mo¿e byæ dynamiczna, zale¿na od 
+wymaganej przepustowoœci lub w celu zminimalizowania wykrycia kana³u 
+steganograficznego. 
+  %-----------------
+  % Cechy kana³u steganograficznego
+  %-----------------
+\section{Cechy kana³u steganograficznego}
+Ka¿dy kana³ steganograficzny posiada trzy cechy, które decyduj¹ o jego 
+przydatnoœci w danej sytuacji:
+\begin{enumerate}
+	\item pojemnoœæ (przepustowoœæ) - okreœla jak¹ porcjê informacji mo¿emy 
+przes³aæ w danej wiadomoœci noœnej; w przypadku steganografii w TCP/IP, wyra¿ana 
+jest w bitach na sekundê, bitach na pakiet lub bitach na sesjê TCP; 
+przepustowoœæ odgrywa wa¿n¹ rolê w przypadku koniecznoœci przekazania du¿ej 
+iloœci informacji, jednak nale¿y pamiêtaæ, ¿e to przewa¿nie prowadzi do 
+u³atwionej detekcji steganografii,
+	\item bezpieczeñstwo - okreœla jak ³atwo jest uzyskaæ dostêp do 
+przekazywanej tajnej informacji w przypadku poznania mechanizmu tworzenia 
+przekazu steganograficznego; dodatkowym mechanizmem zwiêkszaj¹cym bezpieczeñstwo 
+mo¿e byæ u¿ywanie znanych tylko sobie zmiennych pseudolosowych lub modyfikacji 
+algorytmu\footnote{jest to znane jako ,,bezpieczeñstwo przez zatajenie'' (ang. 
+security through obscurity) i powinno byæ u¿ywane tylko jako dodatkowy element 
+systemu zabezpieczeñ},
+	\item krzepkoœæ (ang. robustness) - okreœla stopieñ w jakim mo¿emy 
+zmodyfikowaæ przekaz nie uszkadzaj¹c zawartej w nim informacji 
+steganograficznej; niestety w przypadku steganografii naruszenie kana³u (pola) 
+zawieraj¹cego przekaz steganograficzny przewa¿nie wi¹¿e siê z utrat¹ tajnego 
+przekazu.
+\end{enumerate}
+
+  %-----------------
+  % Steganografia w obiektach multimedialnych
+  %-----------------
+\section{Steganografia w obiektach multimedialnych}
+\label{sectionSteganografiaWObiektachMultimedialnych}
+Pomimo, ¿e steganografia ma zastosowanie prawie w ka¿dej formie komunikacji, w 
+latach 90-tych zyska³a ona powodzenie jako technika ukrywania informacji w 
+obiektach multimedialnych. Wynika to przede wszystkim z powszechnoœci tego 
+rodzaju przekazu, jego rozmiarów oraz prostoty obs³ugi programów do ukrywania 
+informacji w obiektach multimedialnych, takich jak obraz, dŸwiêk i wideo. 
+Dodatkowym atutem przy zastosowaniu tych metod jest stosunek ukrytej informacji 
+do oryginalnego przekazu, siêgaj¹cy w ekstremalnych sytuacjach 50\%, bez 
+zauwa¿alnego pogorszenia siê jakoœci przekazywanych danych.
+
+U¿ycie steganografii w treœciach multimedialnych sprowadza siê do takiego 
+manipulowania danymi, aby plik wynikowy zawiera³ dodatkowe informacje, a 
+jednoczeœnie nie by³ rozró¿niany przez zmys³y cz³owieka w porównaniu z 
+orygina³em.
+
+Jedn¹ z najszerzej omawianych form steganografii w obiektach multimedialnych 
+jest ukrywanie informacji w plikach graficznych. Istnieje wiele rozwi¹zañ, 
+zarówno bezp³atnych, o otwartym kodzie jak i komercyjnych. Przyk³adami mog¹ tu 
+byæ takie programy jak Outguess, JPHide, StegHide. Istniej¹ ró¿ne techniki 
+ukrywania informacji w plikach graficznych. Najprostszym rozwi¹zaniem jest 
+podmiana najmniej znacz¹cych bitów opisuj¹cych kolor danego piksela. Mo¿liwe 
+jest te¿ zastosowanie dyskretnej transformaty kosinusowej.
+
+W przypadku wybrania jako wiadomoœci noœnej pliku audio, mo¿emy tak¿e zastosowaæ 
+metodê podmiany najmniej znacz¹cych bitów. Dodatkowo stosowane s¹ metody 
+ukrywania tajnych wiadomoœci poprzez rozszerzanie spektrum danego nagrania, czy 
+te¿ dodawanie echa. Przyk³adem narzêdzia do tworzenia wiadomoœci 
+steganograficznych mo¿e byæ UnderMP3Cover, MP3Stego czy 
+S-Tools\footnote{\url{http://www.stegoarchive.com}}.
+
+Kolejnym przyk³adem wykorzystania jako pliku noœnego obiektu multimedialnego 
+jest plik wideo. Dodatkowa informacja mo¿e byæ przekazana przy u¿yciu dyskretnej 
+transformaty kosinusowej. Jako przyk³adowe implementacje mo¿na podaæ StegoVideo.
+
+Istnieje kilka technik umo¿liwiaj¹cych wykrycie lub usuniêcie steganografii 
+zastosowanej w obiektach multimedialnych. Pierwszym podejœciem, choæ przewa¿nie 
+trudnym do zastosowania, jest u¿ycie oryginalnego pliku jako wzorca do 
+porównania z przechwycon¹ wersj¹. W przypadku plików graficznych lub wideo 
+mo¿liwe jest u¿ycie analizatorów statystycznych, które mog¹ wykryæ anomalie 
+wystêpuj¹ce w histogramach tych wiadomoœci.
+
+Zamiast wykrywaæ istnienie steganografii, czêstym podejœciem jest jej 
+ograniczanie lub ,,œlepe'' usuwanie z wiadomoœci tych danych, które mog¹ byæ 
+noœnikiem kana³u steganograficznego. W przypadku plików multimedialnych 
+najlepszym sposobem uzyskania takiego efektu jest przekodowanie pliku na inny 
+standard i powrót do standardu wejœciowego. Przewa¿nie zmiany w jakoœci plików 
+s¹ niezauwa¿alne, a u¿ycie konwersji sprowadza siê do takiej zmiany bitów, która 
+niszczy zawart¹ w nich steganografiê.
+
+W przypadku plików multimedialnych u¿ycie steganografii jest pomocne w ochronie 
+praw autorskich, przez stosowanie jej jako cyfrowych znaków wodnych. Niestety, 
+tak jak zosta³o to wczeœniej przedstawione w trakcie konwersji wiele z 
+zakodowanej informacji ginie bezpowrotnie. Skutkiem tego mo¿e byæ pogorszenie 
+jakoœci pliku multimedialnego, ale tak¿e usuniêcie z niego cyfrowego znaku 
+wodnego.
+
+Itd., itd., itd. ...
+
+\chapter{Steganografia w ruchu TCPIP}
+\label{chapterSteganografiaWRuchuTCPIP}
+
+Itd., itd., itd ...
+
+%-----------------
+% Wnioski 
+%-----------------
+\chapter{Wnioski}
+
+Protokó³ TCP/IP jest najbardziej rozpowszechnionym i u¿ywanym protoko³em 
+komunikacji miêdzy systemami w sieci Internet oraz w sieciach intranet. Niestety 
+zosta³ on opracowany na pocz¹tku lat siedemdziesi¹tych, gdy problemy 
+bezpieczeñstwa informacji nie sta³y na pierwszym miejscu. Ci¹g³y wzrost dzia³añ 
+przestêpczych w sieci Internet, w tym wymiana nielegalnych treœci, prowadzi do 
+stosowania coraz to nowszych technik zabezpieczaj¹cych. Z tego wzglêdu obserwuje 
+siê dzia³ania maj¹ce na celu wprowadzenie tajnej komunikacji miêdzy przejêtymi 
+systemami, tak aby nie wzbudziæ ostrze¿eñ w analizatorach sieciowych. Taka 
+ukryta komunikacja odbywa siê z wykorzystaniem steganografii.
+
+Wprowadzenie steganografii do niskich warstwach stosu TCP/IP umo¿liwia obejœcie 
+wielu filtrów na³o¿onych na warstwy wy¿sze. Wiêkszoœæ sieci oparta jest na 
+protoko³ach rodziny TCP/IP, przez co nie mo¿na zabroniæ ich u¿ywania. Mo¿liwa 
+jest jedynie kontrola poprawnoœci semantyki protoko³ów TCP/IP, a tak¿e 
+ewentualna ingerencja w przekazywane wartoœci, z uwzglêdnieniem stanowoœci 
+niektórych pól.
+
+Opracowany schemat generacji pocz¹tkowych numerów sekwencyjnych w jak najlepszy 
+sposób odzwierciedla oryginalny proces zachodz¹cy w stosie sieciowym systemu 
+Linux. W wiêkszoœci przypadków wystêpuj¹cych w rzeczywistych sieciach i 
+systemach, numery wygenerowane przy pomocy \tech{Shushi} nie by³yby rozró¿nialne 
+od numerów wygenerowanych przez stos sieciowy systemu.
+
+Je¿eli proces generacji wartoœci u¿ytych do przekazania danych 
+steganograficznych zostanie oparty o oryginalne mechanizmy u¿ywane do ich 
+generacji, to pasywny analizator sieciowy nie bêdzie w stanie wykryæ istnienia 
+anomalii. Ró¿nice mo¿liwe s¹ do zaobserwowania w przypadku zaistnienia 
+specyficznych sytuacji wystêpuj¹cych dla danej implementacji protoko³u. W 
+przypadku zastosowania pasywnego analizatora wymaga to jednak oczekiwania na 
+tak¹ sytuacjê. Z przeprowadzonych testów wynika, ¿e lepszym podejœciem jest 
+zastosowanie analizatorów aktywnych, które posiadaj¹ wiedzê na temat testowanych 
+systemów oraz ich chrakterystycznych cech implementacji. Skonstruowanie takiego 
+analizatora jest zadaniem stosunkowo prostym a daje bardzo wysok¹ skutecznoœæ.
+
+Z przeprowadzonych testów wynika, ¿e celowe jest prowadzenie dalszych prac w 
+nastêpuj¹cych obszarach:
+\begin{itemize}
+ \item dok³adniejszy mechanizm generacji wartoœci mikrosekund
+ \item wprowadzenie algorytmów zdolnych wykryæ i uniemo¿liwiæ dzia³anie 
+analizatora aktywnego
+\end {itemize}
+
+Je¿eli powy¿sze punkty nie zostan¹ spe³nione, analizatory aktywne bêd¹ w stanie 
+wykryæ istnienie modu³u steganograficznego opartego na pocz¹tkowych numerach 
+sekwencyjnych.
+
+\begin{tabular}{c|cc}
+pierwsza kolumna & druga & trzecia \\ \hline
+1 & 2 & 3 \\
+a & b & c \\
+\end{tabular} 
+
+\begin{equation}
+ E = m c^2 \label{einstein}
+\end{equation}
+
+Rozwój opracowanego rozwi¹zania steganograficznego jest mo¿liwy poprzez 
+wprowadzenie elementów  -- patrz wzór (\ref{einstein}) -- jak:
+\begin{itemize}
+ \item obs³uga innych, przysz³oœciowych protoko³ów sieciowych, takich jak SCTP 
+(ang. Stream Control Transmission Protocol)\cite{RFC2960}
+ \item zapewnienie dwustronnej komunikacji z wykorzystaniem numerów 
+potwierdzenia \tech{ACK}
+ \item przeniesienie implementacji do innych systemów operacyjnych
+\end{itemize}
+
+Wraz ze wzrostem przepustowoœci urz¹dzeñ sieciowych (obecnie 10Gb/s i wiêcej) 
+wzrasta problem analizy przep³ywaj¹cych danych w czasie rzeczywistym. 
+Analizatory sieciowe musz¹ w coraz krótszym czasie zbadaæ coraz wiêkszy strumieñ 
+danych (miliony pakietów na sekundê). Jednak problem wzrostu prêdkoœci sieci 
+utrudnia zadanie tak¿e osobom implementuj¹cym kana³y steganograficzne w 
+protokole TCP/IP. Coraz wiêcej operacji wy¿szych warstw stosu sieciowego 
+przenoszonych jest do uk³adów scalonych interfejsów sieciowych. Taka technologia 
+znana jest pod skrótem TOE (ang. TCP Offload Engine) i odnosi siê przede 
+wszystkim do sprzêtowej generacji sum kontrolnych oraz mechanizmu TSO (ang. TCP 
+segmentation offload). W nastêpnych latach spodziewane jest przenoszenie 
+kolejnych elementów stosu sieciowego TCP/IP do implementacji sprzêtowych.
+
+Ze wzglêdu na rozwój systemów zabezpieczaj¹cych ruch sieciowy oraz wzrost 
+bezpieczeñstwa systemów operacyjnych, w kolejnych latach wzroœnie tak¿e 
+wykorzystanie technik steganograficznych przez grupy przestêpcze dzia³aj¹ce w 
+ramach Internetu. Z tego powodu poznanie technik steganograficznych oraz 
+wypracowanie metod obrony i wykrywania takiej komunikacji jest bardzo wa¿ne.
+
+%-----------------
+% Dodatki 
+%-----------------
+\appendix
+\chapter{Porównanie numerów ISN j¹dra Linux i modu³u Shushi}
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.21]{\ImgPath/rys/IPPortConstData.pdf}
+\end{center}
+	\caption{Numery ISN wygenerowane przez j¹dro oraz \tech{Shushi}, sta³e 
+numery IP oraz porty TCP, sta³e dane dla \tech{Shushi}, serie po oko³o 2800 
+próbek.}
+	\label{IPPortConstData}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.21]{\ImgPath/rys/IPPortConstDataDiff.pdf}
+\end{center}
+	\caption{Ró¿nice pomiêdzy kolejnymi numerami ISN wygenerowanymi przez 
+j¹dro oraz \tech{Shushi}, sta³e numery IP oraz porty TCP, sta³e dane dla 
+\tech{Shushi}, serie po oko³o 60000 próbek.}
+	\label{IPPortConstDataDiff}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.21]{\ImgPath/rys/IPPortRandData.pdf}
+\end{center}
+	\caption{Numery ISN wygenerowane przez j¹dro oraz \tech{Shushi}, sta³e 
+numery IP oraz porty TCP, losowe dane dla \tech{Shushi}, serie po oko³o 860 
+próbek.}
+	\label{IPPortRandData}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.21]{\ImgPath/rys/IPPortRandDataDiff.pdf}
+\end{center}
+	\caption{Ró¿nice pomiêdzy kolejnymi numerami ISN wygenerowanymi przez 
+j¹dro oraz \tech{Shushi}, sta³e numery IP oraz porty TCP, losowe dane dla 
+\tech{Shushi}, serie po oko³o 60000 próbek.}
+	\label{IPPortRandDataDiff}
+\end{figure}
+
+\begin{thebibliography}{99}
+\addcontentsline{toc}{chapter}{Bibliografia}
+\bibitem{postgresqldoc}{Dokumentacja bazy danych PostgreSQL. \url{https://www.postgresql.org/about/}}
+\bibitem{springdoc}{Dokumentacja Spring Framework. \url{https://docs.spring.io/spring-framework/docs/5.0.0.RC3/spring-framework-reference/overview.html}}
+\bibitem{thymeleafdoc}{Dokumentacja Spring Framework. \url{https://www.thymeleaf.org/}}
+\bibitem{dockerdoc}{Dokumentacja Spring Framework. \url{https://docs.docker.com/get-started/overview/}}
+\bibitem{szkolyliczba}{Liczba szkó³ jazdy w Polsce w 2019.
+\url{https://www.prawo-jazdy-360.pl/ranking-szkol-jazdy}}
+\bibitem{wordliczba}{Liczba wojewódzkich oœrodków ruchu drogowego w Polsce w 2019.
+\url{https://info-car.pl/infocar/adresy}}
+\bibitem{prawojazdyliczba}{Liczba nowych praw jazdy w Polsce w 2019.
+\url{http://www.cepik.gov.pl/statystyki}}
+\bibitem{wordzdawalnosc}{Zdawalnoœæ egzaminów na prawo jazdy w Polsce w 2019.
+\url{https://www.portalnaukijazdy.pl/wybierz-word/}}
+\bibitem{aplikacjainternetowa}{Definicja aplikacji internetowej.
+\url{https://en.wikipedia.org/wiki/Web_application}}
+\bibitem{inzynieriawymagan}{Micha³ Œmia³ek, Wiktor Nowakowski, Tomasz Straszak, Jacek Bojarski, Albert Ambroziewicz, ,,In¿ynieria wymagañ
+oprogramowania'', Politechnika Warszawska
+Warszawa, 2010.}
+\bibitem{modelowaniedanych}{Sharon Allen ,,Modelowanie danych'', Helion
+2006.}
+\bibitem{frontcontroller}{Martin Fowler ,,Patterns of Enterprise Application Architecture'' str. 344-349, Addison Wesley 2005.}
+\bibitem{springmvcflow}{Przep³yw sterowania w Spring MVC.
+\url{https://javarevisited.blogspot.com/2017/06/how-spring-mvc-framework-works-web-flow.html}}
+
+\end{thebibliography}
+
+\zakonczenie  % wklejenie recenzji i opinii
+
+\end{document}
+%+++ END +++
