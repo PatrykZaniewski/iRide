@@ -8,10 +8,60 @@
 
     <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
     <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
-
     <div class="jumbotron p-2">
         <table class="table">
-            <caption style="caption-side: top;" class="text-center"><h1>Kursy</h1></caption>
+            <caption style="caption-side: top;">
+                <h1 class="text-center">Kursy</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Id kursu">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Instruktor">
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie typy kategorii</option>
+                                <option>Teoria</option>
+                                <option>Praktyka</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie kategorie</option>
+                                <option>AM</option>
+                                <option>A1</option>
+                                <option>A2</option>
+                                <option>A</option>
+                                <option>B1</option>
+                                <option>B</option>
+                                <option>B+E</option>
+                                <option>C</option>
+                                <option>C+E</option>
+                                <option>C1</option>
+                                <option>C1+E</option>
+                                <option>D</option>
+                                <option>D+E</option>
+                                <option>D1+E</option>
+                                <option>T</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie statusy</option>
+                                <option>Oczekuje na rozpoczęcie</option>
+                                <option>W trakcie</option>
+                                <option>Przerwany</option>
+                                <option>Ukończony</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj" class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </caption>
             <thead>
             <tr>
                 <th scope="col">ID</th>

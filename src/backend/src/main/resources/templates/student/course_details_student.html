@@ -6,6 +6,8 @@
 </head>
 <body>
 <div layout:fragment="content" class="container" style="min-width: 600px;">
+<!--    <div th:text="#{'abc}" class="alert alert-danger text-center" role="alert">-->
+    </div>
     <div class="jumbotron p-2" style="max-width: 100%;">
         <table class="table" style="table-layout: fixed;word-wrap: break-word;">
             <caption style="caption-side: top;" class="text-center"><h1>Szczegóły kursu</h1></caption>
@@ -68,6 +70,11 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <a th:href="@{'/courseReview/'}" class="btn btn-primary btn-lg" style="color: black">Wystaw opinię o instruktorze</a>
+        </div>
     </div>
 </div>
 </body>

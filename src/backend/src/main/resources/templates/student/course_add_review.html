@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="max-width: 800px;">
+    <div class="jumbotron p-2" style="max-width: 100%;">
+        <h1 class="text-center" style="color: #6c757d;"> Opinia o instruktorze: Paweł Andrut</h1>
+        <form th:action="@{'/user/create'}" method="post">
+            <div class="form-row">
+                <div class="col">
+                    <label for="firstname" class="pt-2">Komentarz:</label>
+                    <textarea class="form-control" id="firstname" name="firstname" required></textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="phoneNumber" class="pt-2">Ocena:</label>
+                    <select class="form-control" id="phoneNumber" name="phoneNumber" required>
+                        <option>5</option>
+                        <option>4</option>
+                        <option>3</option>
+                        <option>2</option>
+                        <option>1</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group text-center pt-2">
+                <input class="btn btn-primary btn-sm my-2" type="submit" value="Prześlij opinię">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

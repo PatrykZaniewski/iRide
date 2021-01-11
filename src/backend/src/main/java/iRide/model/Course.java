@@ -39,6 +39,8 @@ public class Course {
     private int hoursDone;
     @NotNull
     private String status;
+    @OneToOne(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private InstructorRating instructorRating;
 
     public Course(){
 
@@ -124,5 +126,21 @@ public class Course {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public InstructorRating getInstructorRating() {
+        return instructorRating;
+    }
+
+    public void setInstructorRating(InstructorRating instructorRating) {
+        this.instructorRating = instructorRating;
     }
 }

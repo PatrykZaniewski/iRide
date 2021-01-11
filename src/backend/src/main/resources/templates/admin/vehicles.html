@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
 <head>
     <title>iRide</title>
 </head>
@@ -11,37 +12,90 @@
 
     <div class="jumbotron p-2">
         <table class="table">
-            <caption style="caption-side: top;" class="text-center"><h1>Pojazdy</h1></caption>
+            <caption style="caption-side: top;" class="text-center">
+                <h1>Pojazdy</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Id pojazdu">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Marka">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Model">
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie kategorie</option>
+                                <option>AM</option>
+                                <option>A1</option>
+                                <option>A2</option>
+                                <option>A</option>
+                                <option>B1</option>
+                                <option>B</option>
+                                <option>B+E</option>
+                                <option>C</option>
+                                <option>C+E</option>
+                                <option>C1</option>
+                                <option>C1+E</option>
+                                <option>D</option>
+                                <option>D+E</option>
+                                <option>D1+E</option>
+                                <option>T</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszyscy instruktorzy</option>
+                                <option>Monika Słoneczna</option>
+                                <option>Paweł Andrut</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj"
+                                   class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </caption>
             <thead>
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Marka</th>
                 <th scope="col">Model</th>
-                <th scope="col">Kategorie</th>
+                <th scope="col">Kategoria</th>
                 <th scope="col">Instruktorzy</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="vehicleListAdminOutput: ${vehicleListAdminOutputs}">
-                <th scope="row" th:text="${vehicleListAdminOutput.id}" />
-                <td th:text="${vehicleListAdminOutput.mark}" />
-                <td th:text="${vehicleListAdminOutput.model}" />
+                <th scope="row" th:text="${vehicleListAdminOutput.id}"/>
+                <td th:text="${vehicleListAdminOutput.mark}"/>
+                <td th:text="${vehicleListAdminOutput.model}"/>
                 <td th:text="${vehicleListAdminOutput.category} ? ${vehicleListAdminOutput.category} : 'Brak'"></td>
                 <td>
-                    <div th:if="${#lists.size(vehicleListAdminOutput.instructors)} > 0" th:each="instructor : ${vehicleListAdminOutput.instructors}" style="display: inline">
-                        <a th:href="@{'/instructor/' + ${instructor.key}}" th:text="${instructor.value}"  style="display: inline"/>
+                    <div th:if="${#lists.size(vehicleListAdminOutput.instructors)} > 0"
+                         th:each="instructor : ${vehicleListAdminOutput.instructors}" style="display: inline">
+                        <a th:href="@{'/instructor/' + ${instructor.key}}" th:text="${instructor.value}"
+                           style="display: inline"/>
                     </div>
                     <div th:if="${#lists.size(vehicleListAdminOutput.instructors)} == 0" style="display: inline">
                         <div style="display: inline">Brak</div>
                     </div>
                 </td>
                 <td style="max-width: 140px;">
-                    <a style="width: 80px;" th:href="@{'/vehicle/' + ${vehicleListAdminOutput.id}}" class="btn btn-primary btn-sm my-2 text-center">Szczegóły</a>
-                    <a style="width: 80px" th:href="@{'/vehicleEdit/' + ${vehicleListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
-                    <form style=" display: inline" th:action="@{'/vehicle/{id}'(id=${vehicleListAdminOutput.id})}" th:method="DELETE">
+                    <a style="width: 80px;" th:href="@{'/vehicle/' + ${vehicleListAdminOutput.id}}"
+                       class="btn btn-primary btn-sm my-2 text-center">Szczegóły</a>
+                    <a style="width: 80px" th:href="@{'/vehicleEdit/' + ${vehicleListAdminOutput.id}}"
+                       class="btn btn-primary btn-sm my-2">Edycja</a>
+                    <form style=" display: inline" th:action="@{'/vehicle/{id}'(id=${vehicleListAdminOutput.id})}"
+                          th:method="DELETE">
                         <input type="hidden" name="_method" value="DELETE"/>
-                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">
+                            Usuń
+                        </button>
                     </form>
                 </td>
             </tr>

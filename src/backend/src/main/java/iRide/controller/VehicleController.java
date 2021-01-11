@@ -1,14 +1,17 @@
 package iRide.controller;
 
+import iRide.config.AuthenticationUserDetails;
+import iRide.service.Course.model.output.CourseAdminOutput;
+import iRide.service.Course.model.output.CourseInstructorOutput;
+import iRide.service.Course.model.output.CourseStudentOutput;
 import iRide.service.Vehicle.VehicleService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
-import iRide.service.Vehicle.model.output.VehicleAdminOutput;
-import iRide.service.Vehicle.model.output.VehicleCreateOutput;
-import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
+import iRide.service.Vehicle.model.output.*;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +32,10 @@ public class VehicleController {
     }
 
     @GetMapping(value = "")
-    public String getVehicles(Model model){
-        List<VehicleListAdminOutput> vehicleListAdminOutputs = this.vehicleService.getVehicleListAdminOutput();
+    public String getVehicles(Model model, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails){
+        String group = authenticationUserDetails.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetails.getId();
+
         if (model.asMap().get("code") != null) {
             Integer code = (Integer)model.asMap().get("code");
             switch (code) {
@@ -56,16 +61,41 @@ public class VehicleController {
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
             }
         }
-        model.addAttribute("vehicleListAdminOutputs", vehicleListAdminOutputs);
-        return "admin/vehicles";
+
+        switch (group){
+            case "ADMIN":
+                List<VehicleListAdminOutput> vehicleListAdminOutputs = this.vehicleService.getVehicleListAdminOutput();
+                model.addAttribute("vehicleListAdminOutputs", vehicleListAdminOutputs);
+                return "admin/vehicles";
+            case "INSTRUCTOR":
+                List<VehicleListInstructorOutput> vehicleListInstructorOutputs = this.vehicleService.getVehicleListInstructorOutput(userId);
+                model.addAttribute("vehicleListInstructorOutputs", vehicleListInstructorOutputs);
+                return "instructor/vehicles";
+            default:
+                //TODO do 403?
+                return null;
+        }
     }
 
     @GetMapping(value = "/{id}")
-    public String getVehicleDetails(Model model, @PathVariable int id, RedirectAttributes redirectAttributes){
+    public String getVehicleDetails(Model model, @PathVariable int id, RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails){
+        String group = authenticationUserDetails.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetails.getId();
+
         try {
-            VehicleAdminOutput vehicleAdminOutput = this.vehicleService.getVehicleDetailsAsAdmin(id);
-            model.addAttribute("vehicleAdminOutput", vehicleAdminOutput);
-            return "admin/vehicle_details_admin";
+            switch (group){
+                case "ADMIN":
+                    VehicleAdminOutput vehicleAdminOutput = this.vehicleService.getVehicleDetailsAsAdmin(id);
+                    model.addAttribute("vehicleAdminOutput", vehicleAdminOutput);
+                    return "admin/vehicle_details_admin";
+                case "INSTRUCTOR":
+                    VehicleInstructorOutput vehicleInstructorOutput = this.vehicleService.getVehicleDetailsAsInstructor(id, userId);
+                    model.addAttribute("vehicleInstructorOutput", vehicleInstructorOutput);
+                    return "instructor/vehicle_details_instructor";
+                default:
+                    //TODO do 403?
+                    return null;
+            }
         }
         catch (NotFoundException e){
             redirectAttributes.addFlashAttribute("code", 202);

@@ -20,7 +20,7 @@ public class Category {
     private String categoryName;
     @NotNull
     @Column(name = "category_type")
-    //TODO moze enumy?
+    //TODO moze enumy? moze nie
     private String categoryType;
     @JsonIgnore
     @ManyToMany

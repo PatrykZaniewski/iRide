@@ -7,7 +7,48 @@
 <div layout:fragment="content" class="container" style="min-width: 700px; max-width: 1500px">
     <div class="jumbotron p-2">
         <table class="table">
-            <caption style="caption-side: top;" class="text-center"><h1>Kursanci</h1></caption>
+            <caption style="caption-side: top;" class="text-center">
+                <h1>Kursanci</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Id studenta">
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Id konta">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Imię">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Nazwisko">
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie kategorie kursów</option>
+                                <option>AM</option>
+                                <option>A1</option>
+                                <option>A2</option>
+                                <option>A</option>
+                                <option>B1</option>
+                                <option>B</option>
+                                <option>B+E</option>
+                                <option>C</option>
+                                <option>C+E</option>
+                                <option>C1</option>
+                                <option>C1+E</option>
+                                <option>D</option>
+                                <option>D+E</option>
+                                <option>D1+E</option>
+                                <option>T</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj" class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </caption>
             <thead>
             <tr>
                 <th scope="col" style="max-width: 85px">ID kursanta</th>

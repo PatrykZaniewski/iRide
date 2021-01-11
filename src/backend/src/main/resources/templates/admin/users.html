@@ -11,7 +11,38 @@
 
     <div class="jumbotron p-2">
         <table class="table">
-            <caption style="caption-side: top;" class="text-center"><h1>Konta</h1></caption>
+            <caption style="caption-side: top;" class="text-center">
+                <h1>Konta</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Id konta">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie statusy</option>
+                                <option>Aktywny</option>
+                                <option>Oczekuje na potwierdzenie</option>
+                                <option>Zablokowany</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Wszystkie grupy</option>
+                                <option>Administrator</option>
+                                <option>Instruktor</option>
+                                <option>Kursant</option>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj" class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </caption>
             <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -29,8 +60,9 @@
                 <td th:text="${userListAdminOutput.creationDate}" />
                 <td th:text="${userListAdminOutput.status}" />
                 <td th:text="${userListAdminOutput.accountRole}" />
-                <td style="max-width: 100px;">
+                <td style="max-width: 115px;">
                     <a style="width: 80px" th:href="@{'/userEdit/' + ${userListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
+                    <a style="width: 80px" th:href="@{'/userEdit/' + ${userListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Zablokuj</a>
                     <form style=" display: inline" th:action="@{'/user/{id}/{group}'(id=${userListAdminOutput.id}, group=${userListAdminOutput.accountRole})}" th:method="DELETE">
                         <input type="hidden" name="_method" value="DELETE"/>
                         <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>

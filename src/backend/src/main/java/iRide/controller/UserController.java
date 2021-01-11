@@ -47,6 +47,11 @@ public class UserController {
         return "admin/users";
     }
 
+    @GetMapping(value = "/my_account")
+    public String getMyAccountDetails(Model model){
+        return "account";
+    }
+
     @PostMapping(value = "/create")
     public String createUser(RedirectAttributes redirectAttributes, @ModelAttribute UserCreateInput userCreateInput){
         this.userService.createUser(userCreateInput);

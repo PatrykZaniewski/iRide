@@ -52,6 +52,8 @@ public class Instructor {
     private List<Event> events;
     @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Course> courses;
+    @OneToMany(mappedBy = "instructor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<InstructorRating> instructorRatings;
 
 
     public Instructor() {
@@ -152,5 +154,11 @@ public class Instructor {
         this.courses = courses;
     }
 
+    public List<InstructorRating> getInstructorRatings() {
+        return instructorRatings;
+    }
 
+    public void setInstructorRatings(List<InstructorRating> instructorRatings) {
+        this.instructorRatings = instructorRatings;
+    }
 }

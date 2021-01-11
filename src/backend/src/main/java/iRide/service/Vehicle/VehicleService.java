@@ -8,10 +8,7 @@ import iRide.service.Category.CategoryService;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Vehicle.model.input.VehicleCreateInput;
 import iRide.service.Vehicle.model.input.VehicleUpdateInput;
-import iRide.service.Vehicle.model.output.VehicleAdminOutput;
-import iRide.service.Vehicle.model.output.VehicleCreateOutput;
-import iRide.service.Vehicle.model.output.VehicleInstructorOutput;
-import iRide.service.Vehicle.model.output.VehicleListAdminOutput;
+import iRide.service.Vehicle.model.output.*;
 import iRide.utils.exception.DataExistsException;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +65,27 @@ public class VehicleService {
             vehicleListAdminOutputs.add(vehicleListAdminOutput);
         }
         return vehicleListAdminOutputs;
+    }
+
+    public List<VehicleListInstructorOutput> getVehicleListInstructorOutput(int userId) {
+        List<Vehicle> vehicles = this.vehicleRepository.findAll();
+        List<VehicleListInstructorOutput> vehicleListInstructorOutputs = new ArrayList<>();
+        Instructor instructor = this.instructorService.getInstructorByUserId(userId);
+        for (Vehicle vehicle: vehicles){
+            for (Instructor i: vehicle.getInstructors()){
+                if(i.getId() == instructor.getId()){
+                    VehicleListInstructorOutput vehicleListInstructorOutput = new VehicleListInstructorOutput();
+
+                    vehicleListInstructorOutput.setId(vehicle.getId());
+                    vehicleListInstructorOutput.setMark(vehicle.getMark());
+                    vehicleListInstructorOutput.setModel(vehicle.getModel());
+                    vehicleListInstructorOutput.setCategory(vehicle.getCategory().getCategoryName());
+
+                    vehicleListInstructorOutputs.add(vehicleListInstructorOutput);
+                }
+            }
+        }
+        return vehicleListInstructorOutputs;
     }
 
     public int updateVehicle(VehicleUpdateInput vehicleUpdateInput, int vehicleId) {

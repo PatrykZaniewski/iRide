@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{./fragments/main_layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
 <head>
     <title>iRide</title>
 </head>
 <body>
-<div layout:fragment="content" class="container" style="min-width: 700px; max-width: 700px">
+<div layout:fragment="content" class="container" style="min-width: 600px; max-width: 1500px">
 
     <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
     <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
@@ -12,15 +13,17 @@
     <div class="jumbotron p-2">
         <table class="table">
             <caption style="caption-side: top;" class="text-center">
-                <h1>Kategorie</h1>
+                <h1>Pojazdy</h1>
                 <form>
                     <div class="form-row">
                         <div class="col">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Wszystkie typy kategorii</option>
-                                <option>Teoria</option>
-                                <option>Praktyka</option>
-                            </select>
+                            <input type="number" class="form-control" placeholder="Id pojazdu">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Marka">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Model">
                         </div>
                         <div class="col">
                             <select class="form-control" id="exampleFormControlSelect1">
@@ -42,8 +45,9 @@
                                 <option>T</option>
                             </select>
                         </div>
-                        <div class="col-2">
-                            <input style="width: 100%" type="submit" value="Szukaj" class="btn btn-success">
+                        <div class="col-1">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj"
+                                   class="btn btn-success">
                         </div>
                     </div>
                 </form>
@@ -51,22 +55,21 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Typ kategorii</th>
-                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Model</th>
+                <th scope="col">Kategoria</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="courseListAdminOutput: ${categoryListAdminOutputs}">
-                <th scope="row" th:text="${courseListAdminOutput.id}" />
-                <td th:text="${courseListAdminOutput.categoryType}" />
-                <td th:text="${courseListAdminOutput.categoryName}" />
-                <td style="max-width: 150px;">
-                    <a style="width: 80px" th:href="@{'/categoryEdit/' + ${courseListAdminOutput.id}}" class="btn btn-primary btn-sm my-2">Edycja</a>
-                    <form style=" display: inline" th:action="@{'/category/{id}'(id=${courseListAdminOutput.id})}" th:method="DELETE">
-                        <input type="hidden" name="_method" value="DELETE"/>
-                        <button style="width: 80px;" class="btn btn-danger btn-sm my-2" type="submit" id="submitButton">Usuń</button>
-                    </form>
+            <tr th:each="vehicleListInstructorOutput: ${vehicleListInstructorOutputs}">
+                <th scope="row" th:text="${vehicleListInstructorOutput.id}"/>
+                <td th:text="${vehicleListInstructorOutput.mark}"/>
+                <td th:text="${vehicleListInstructorOutput.model}"/>
+                <td th:text="${vehicleListInstructorOutput.category} ? ${vehicleListInstructorOutput.category} : 'Brak'"></td>
+                <td style="width: 10px;">
+                    <a style="width: 80px;" th:href="@{'/vehicle/' + ${vehicleListInstructorOutput.id}}"
+                       class="btn btn-primary btn-sm my-2 text-center">Szczegóły</a>
                 </td>
             </tr>
             </tbody>

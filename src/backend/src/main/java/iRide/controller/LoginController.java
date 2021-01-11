@@ -35,4 +35,22 @@ public class LoginController {
         return "login";
     }
 
+    @GetMapping("/change_password")
+    public String getChangePassword(Model model){
+        //        model.addAttribute("message", "test");
+        return "change_password";
+    }
+
+    @GetMapping("/reset")
+    public String getReset(Model model, Authentication authentication , @RequestParam(name = "error", required = false) String errorCode){
+//        model.addAttribute("message", "test");
+        return "login_reset";
+    }
+
+    @GetMapping("/reset/new_password")
+    public String getResetNewPassword(Model model, Authentication authentication , @RequestParam(name = "error", required = false) String errorCode){
+//        model.addAttribute("message", "test");
+        return "login_reset_new_password";
+    }
+
 }

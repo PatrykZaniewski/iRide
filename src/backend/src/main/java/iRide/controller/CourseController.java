@@ -50,7 +50,6 @@ public class CourseController {
                     model.addAttribute("infoError", "Wystąpił nieznany błąd.");
             }
         }
-
         switch (group){
             case "ADMIN":
                 List<CourseListAdminOutput> courseListAdminOutputs = this.courseService.getCourseListAdminOutput();

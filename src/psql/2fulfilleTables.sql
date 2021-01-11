@@ -96,9 +96,6 @@ values (1, 1),
         (2, 2),
         (2, 3);
 
--- insert into instructor_rating(id_student, id_instructor, grade, comment)
--- values (1, 1, 5, 'OK');
-
 insert into course(id_student, id_instructor, id_category, hours_minimum, hours_remaining, hours_done, status)
 values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),
          (1, 2, 22, 30, 30, 0, 'WAITING'),
@@ -106,6 +103,12 @@ values (1, 1, 6, 30, 30, 0, 'IN_PROGRESS'),
          (2, 2, 22, 30, 8, 28, 'IN_PROGRESS'),
          (3, 1, 6, 30, 0, 30, 'FINISHED'),
          (3, 2, 22, 30, 17, 13, 'WAITING');
+
+insert into instructor_rating(id_student, id_course, id_instructor, grade, comment)
+values (1, 1, 1, 5, 'OK'),
+       (1, 2, 2, 4, 'Dobrze'),
+       (2, 3, 1, 3, 'Znośnie'),
+       (2, 4, 2, 1, 'Słabo');
 
 insert into event(id_student, id_instructor, id_vehicle, id_course, start_date, end_date, duration, comment)
 values (1, 1, NULL, 1, '2019-03-01T12:00', '2019-03-01 14:00', 15, NULL),
@@ -118,14 +121,4 @@ values (1, 1, NULL, 1, '2019-03-01T12:00', '2019-03-01 14:00', 15, NULL),
        (3, 1, NULL, 5, '2019-03-08T12:00', '2019-03-01 14:00', 15, NULL),
        (3, 2, 1, 6, '2019-03-09T12:00', '2019-03-01 14:00', 10, NULL),
        (3, 2, 1, 6, '2019-03-10T12:00', '2019-03-01 14:00', 10, NULL);
-
-
-
-
-
-
-
-
--- INSERT INTO course(id_student, id_instructor, id_category, hours_minimum, hours_remaining, hours_done, status)
--- values (1, )
 

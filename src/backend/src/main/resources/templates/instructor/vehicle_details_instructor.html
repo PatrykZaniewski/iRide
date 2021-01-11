@@ -13,32 +13,32 @@
             <tr>
                 <td style="border-right: 1px solid #dee2e6">
                     <div style="float:left;">Id:</div>
-                    <div th:text="${vehicleAdminOutput.id}" style="float:right; "></div>
+                    <div th:text="${vehicleInstructorOutput.id}" style="float:right; "></div>
                 </td>
                 <td style="border-right: 1px solid #dee2e6">
                     <div style="float:left;">Marka:</div>
-                    <div th:text="${vehicleAdminOutput.mark}" style="float:right; "></div>
+                    <div th:text="${vehicleInstructorOutput.mark}" style="float:right; "></div>
                 </td>
                 <td>
                     <div style="float:left;">Model:</div>
-                    <div th:text="${vehicleAdminOutput.model}" style="float:right; "></div>
+                    <div th:text="${vehicleInstructorOutput.model}" style="float:right; "></div>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="border-right: 1px solid #dee2e6">
                     <div style="float:left;">Przypisani instruktorzy:</div>
-                    <div th:if="${#lists.size(vehicleAdminOutput.instructors)} > 0"
-                         th:each="instructor : ${vehicleAdminOutput.instructors}" style="display: inline; float:right;">
+                    <div th:if="${#lists.size(vehicleInstructorOutput.instructors)} > 0"
+                         th:each="instructor : ${vehicleInstructorOutput.instructors}" style="display: inline; float:right;">
                         <div th:text="'&nbsp;' + ${instructor.value}"
                            style="float:right;"/>
                     </div>
-                    <div th:if="${#lists.size(vehicleAdminOutput.instructors)} == 0">
+                    <div th:if="${#lists.size(vehicleInstructorOutput.instructors)} == 0">
                         <div style="float:right;">Brak</div>
                     </div>
                 </td>
                 <td>
                     <div style="float:left;">Kategoria:</div>
-                    <div th:text="${vehicleAdminOutput.category}" style="float:right; "></div>
+                    <div th:text="${vehicleInstructorOutput.category}" style="float:right; "></div>
                 </td>
             </tr>
             </tbody>
