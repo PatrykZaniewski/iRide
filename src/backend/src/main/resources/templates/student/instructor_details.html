@@ -8,7 +8,7 @@
 <div layout:fragment="content" class="container" style="min-width: 600px;">
     <div class="jumbotron p-2" style="max-width: 100%;">
         <table class="table" style="table-layout: fixed;word-wrap: break-word;">
-            <caption style="caption-side: top;" class="text-center"><h1>Szczegóły kursu</h1></caption>
+            <caption style="caption-side: top;" class="text-center"><h1>Szczegóły instruktora</h1></caption>
             <tbody>
             <tr>
                 <td style="border-right: 1px solid #dee2e6">
@@ -16,40 +16,28 @@
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Instruktor:</div>
-                    <div style="float:right;">
-                        <a th:href="@{'/course/'}" th:text="${'d@iride.pl'}" />
-                    </div>
+                    <div style="float:left;">Imię:</div>
+                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td>
-                    <div style="float:left;">Kategoria:</div>
+                    <div style="float:left;">Nazwisko:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
             </tr>
             <tr>
                 <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Min. liczba godzin:</div>
+                    <div style="float:left;">Email:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Pozostałe godziny:</div>
+                    <div style="float:left;">Numer kontaktowy:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td>
-                    <div style="float:left;">Godziny zaliczone:</div>
-                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="border-right: 1px solid #dee2e6">
-                    <div style="float:left; ">Przeprowadzone lekcje:</div>
+                    <div style="float:left;">Kategorie:</div>
                     <div style="display: inline; float:right;">
-                        <a th:href="@{'/event/'}" th:text="${'d@iride.pl'}" style="float:right; display: inline;"></a>
+                        <div th:text="${'d@iride.pl'}" style="float:right; display: inline;"></div>
                     </div>
-                </td>
-                <td>
-                    <div style="float:left;">Status:</div>
-                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
             </tr>
             </tbody>

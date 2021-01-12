@@ -1,11 +1,16 @@
 package iRide.controller;
 
+import iRide.config.AuthenticationUserDetails;
+import iRide.service.Course.model.output.CourseAdminOutput;
+import iRide.service.Course.model.output.CourseInstructorOutput;
+import iRide.service.Course.model.output.CourseStudentOutput;
 import iRide.service.Instructor.InstructorService;
 import iRide.service.Instructor.model.output.InstructorAdminOutput;
 import iRide.service.Instructor.model.output.InstructorListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,11 +52,22 @@ public class InstructorController {
     }
 
     @GetMapping(value = "/{id}")
-    public String getInstructorDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
+    public String getInstructorDetails(Model model, RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails, @PathVariable int id){
         try {
-            InstructorAdminOutput instructorAdminOutput = this.instructorService.getInstructorDetailsAsAdmin(id);
-            model.addAttribute("instructorAdminOutput", instructorAdminOutput);
-            return "admin/instructor_details_admin";
+            String group = authenticationUserDetails.getAuthorities().get(0).toString();
+            int userId = authenticationUserDetails.getId();
+
+            switch (group){
+                case "ADMIN":
+                    InstructorAdminOutput instructorAdminOutput = this.instructorService.getInstructorDetailsAsAdmin(id);
+                    model.addAttribute("instructorAdminOutput", instructorAdminOutput);
+                    return "admin/instructor_details_admin";
+                case "STUDENT":
+                    return "student/instructor_details";
+                default:
+                    //TODO do 403?
+                    return null;
+            }
         }
         catch (NotFoundException e){
             redirectAttributes.addFlashAttribute("code", 202);

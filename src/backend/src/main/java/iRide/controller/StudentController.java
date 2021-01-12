@@ -1,10 +1,15 @@
 package iRide.controller;
 
+import iRide.config.AuthenticationUserDetails;
+import iRide.service.Course.model.output.CourseAdminOutput;
+import iRide.service.Course.model.output.CourseInstructorOutput;
+import iRide.service.Course.model.output.CourseStudentOutput;
 import iRide.service.Student.StudentService;
 import iRide.service.Student.model.output.StudentAdminOutput;
 import iRide.service.Student.model.output.StudentListAdminOutput;
 import iRide.utils.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,15 +51,26 @@ public class StudentController {
     }
 
     @GetMapping(value = "/{id}")
-    public String getStudentDetails(Model model, RedirectAttributes redirectAttributes, @PathVariable int id){
-        try {
-            StudentAdminOutput studentAdminOutput = this.studentService.getStudentDetailsAsAdmin(id);
-            model.addAttribute("studentAdminOutput", studentAdminOutput);
-            return "admin/student_details_admin";
-        }
-        catch (NotFoundException e){
-            redirectAttributes.addFlashAttribute("code", 202);
-            return "redirect:/student";
+    public String getStudentDetails(Model model, RedirectAttributes redirectAttributes, @AuthenticationPrincipal AuthenticationUserDetails authenticationUserDetails, @PathVariable int id){
+        String group = authenticationUserDetails.getAuthorities().get(0).toString();
+        int userId = authenticationUserDetails.getId();
+
+        switch (group){
+            case "ADMIN":
+                try {
+                    StudentAdminOutput studentAdminOutput = this.studentService.getStudentDetailsAsAdmin(id);
+                    model.addAttribute("studentAdminOutput", studentAdminOutput);
+                    return "admin/student_details_admin";
+                }
+                catch (NotFoundException e){
+                    redirectAttributes.addFlashAttribute("code", 202);
+                    return "redirect:/student";
+                }
+            case "INSTRUCTOR":
+                return "instructor/student_details";
+            default:
+                //TODO do 403?
+                return null;
         }
     }
 
@@ -68,6 +84,8 @@ public class StudentController {
         }
         return "redirect:/category";
     }
+
+
 
 
 

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="min-width: 600px; max-width: 800px">
+
+    <div th:replace="${infoMessage} ? ~{fragments/status_label :: status_info} : _"></div>
+    <div th:replace="${infoError} ? ~{fragments/status_label :: status_error} : _"></div>
+
+    <div class="jumbotron p-2">
+        <table class="table">
+            <caption style="caption-side: top;" class="text-center">
+                <h1>Skrzynka odbiorcza</h1>
+                <form>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="number" class="form-control" placeholder="Nadawca">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Tytuł">
+                        </div>
+                        <div class="col-2">
+                            <input style="width: 100%; min-width: 75px" type="submit" value="Szukaj"
+                                   class="btn btn-success">
+                        </div>
+                    </div>
+                </form>
+            </caption>
+            <thead>
+            <tr>
+                <th scope="col">Nadawca</th>
+                <th scope="col">Tytuł</th>
+                <th scope="col">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${'d@iride.pl'}"/>
+                <td th:text="${'d@iride.pl'}"/>
+                <td style="max-width: 40px;">
+                    <a style="width: 80px;" th:href="@{'/vehicle/'}"
+                       class="btn btn-primary btn-sm text-center">Szczegóły</a>
+                    <form style=" display: inline" th:action="@{'/vehicle/'}"
+                          th:method="DELETE">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <button style="width: 80px;" class="btn btn-danger btn-sm" type="submit" id="submitButton">
+                            Usuń
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

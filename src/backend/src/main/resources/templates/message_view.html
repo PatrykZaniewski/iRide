@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="width: 600px;">
+    <div class="jumbotron p-2" style="max-width: 100%;">
+        <table class="table" style="table-layout: fixed;word-wrap: break-word;">
+            <caption style="caption-side: top;" class="text-center"><h1>Wiadomość od: Anna Konieczna</h1></caption>
+            <tbody>
+            <tr>
+                <td>
+                    <div style="display:inline;">Tytuł:</div>
+                    <div th:text="${'d@iride.pl'}" style="display:inline;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>Wiadomość:</div>
+                    <div th:text="${'aaaaaaaaaaaaaaaaa'}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <form th:action="@{'/vehicle/'}" th:method="DELETE"
+                  style="display: inline">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button class="btn btn-danger btn-lg" type="submit" id="submitButton" style="color: black">Usuń</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

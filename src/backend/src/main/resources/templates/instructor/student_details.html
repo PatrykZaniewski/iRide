@@ -8,7 +8,7 @@
 <div layout:fragment="content" class="container" style="min-width: 600px;">
     <div class="jumbotron p-2" style="max-width: 100%;">
         <table class="table" style="table-layout: fixed;word-wrap: break-word;">
-            <caption style="caption-side: top;" class="text-center"><h1>Szczegóły kursu</h1></caption>
+            <caption style="caption-side: top;" class="text-center"><h1>Szczegóły kursanta</h1></caption>
             <tbody>
             <tr>
                 <td style="border-right: 1px solid #dee2e6">
@@ -16,42 +16,39 @@
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Instruktor:</div>
-                    <div style="float:right;">
-                        <a th:href="@{'/course/'}" th:text="${'d@iride.pl'}" />
-                    </div>
-                </td>
-                <td>
-                    <div style="float:left;">Kategoria:</div>
-                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
-                </td>
-            </tr>
-            <tr>
-                <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Min. liczba godzin:</div>
-                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
-                </td>
-                <td style="border-right: 1px solid #dee2e6">
-                    <div style="float:left;">Pozostałe godziny:</div>
+                    <div style="float:left;">Imię:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
                 <td>
-                    <div style="float:left;">Godziny zaliczone:</div>
+                    <div style="float:left;">Nazwisko:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="border-right: 1px solid #dee2e6">
-                    <div style="float:left; ">Przeprowadzone lekcje:</div>
-                    <div style="display: inline; float:right;">
-                        <a th:href="@{'/event/'}" th:text="${'d@iride.pl'}" style="float:right; display: inline;"></a>
-                    </div>
+                    <div style="display: inline; float:left;">Powiązane aktywne kursy:</div>
+                    <a th:href="@{'/course/'}" th:text="'&nbsp;B-Teoria'"
+                       style="float:right;"/>
                 </td>
                 <td>
-                    <div style="float:left;">Status:</div>
+                    <div style="float:left;">Email:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" style="border-right: 1px solid #dee2e6">
+                    <div style="float:left;">Powiązane zakończone kursy:</div>
+                    <div style="display: inline; float:right;">
+                        <a th:href="@{'/course/'}" th:text="'&nbsp;B-Teoria'"
+                           style="float:right;"/>
+                    </div>
+                </td>
+                <td>
+                    <div style="float:left;">Numer kontaktowy:</div>
+                    <div th:text="${'d@iride.pl'}" style="float:right; "></div>
+                </td>
+            </tr>
+
             </tbody>
         </table>
     </div>
