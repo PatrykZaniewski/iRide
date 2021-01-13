@@ -66,6 +66,20 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="float:left;">Zaplanowane lekcje:</div>
+                    <div style="display: inline; float:right;">
+                        <div th:if="${#lists.size(courseAdminOutput.events)} > 0"
+                             th:each="event : ${courseAdminOutput.events}" style="display: inline">
+                            <a th:href="@{'/event/' + ${event.key}}" th:text="${event.value} + '&nbsp;'" style="float:right; display: inline;"></a>
+                        </div>
+                        <div th:if="${#lists.size(courseAdminOutput.events)} == 0">
+                            <div style="float:right;">Brak</div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

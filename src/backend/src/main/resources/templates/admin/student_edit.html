@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="max-width: 600px;">
+    <div class="jumbotron p-2" style="max-width: 100%;">
+        <h1 class="text-center" style="color: #6c757d;">Edycja kursanta</h1>
+        <form th:action="@{'/user/create'}" method="post">
+            <div class="form-row">
+                <div class="col">
+                    <label for="firstname" class="pt-2">Imię:</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                </div>
+                <div class="col">
+                    <label for="lastname" class="pt-2">Nazwisko:</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="phoneNumber" class="pt-2">Numer kontaktowy:</label>
+                    <input type="number" min="100000" max="999999999" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                </div>
+            </div>
+            <div class="form-group text-center pt-2">
+                <input class="btn btn-primary btn-sm my-2" type="submit" value="Zatwierdź">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -75,6 +75,11 @@ public class InstructorController {
         }
     }
 
+    @GetMapping(value = "/edit/{id}")
+    public String getEdit(){
+        return "admin/instructor_edit";
+    }
+
 //    @PostMapping(value = "/")
 //    public ResponseEntity<String> createInstructor(@Valid @RequestBody InstructorCreateInput instructorCreateInput) {
 //        try {

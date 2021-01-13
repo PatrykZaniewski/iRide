@@ -41,15 +41,27 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="border-right: 1px solid #dee2e6">
-                    <div style="float:left; ">Przeprowadzone lekcje:</div>
+                <td colspan="2">
+                    <div style="float:left;">Zaplanowane lekcje:</div>
                     <div style="display: inline; float:right;">
-                        <a th:href="@{'/event/'}" th:text="${'d@iride.pl'}" style="float:right; display: inline;"></a>
+                        <div style="display: inline">
+                            <a th:href="@{'/event/'}" th:text="${'d@iride.pl'}" style="float:right; display: inline;"></a>
+                        </div>
                     </div>
                 </td>
                 <td>
                     <div style="float:left;">Status:</div>
                     <div th:text="${'d@iride.pl'}" style="float:right; "></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div style="float:left; ">Przeprowadzone lekcje:</div>
+                    <div style="display: inline; float:right;">
+                        <div style="display: inline">
+                            <a th:href="@{'/event/'}" th:text="${'d@iride.pl'}" style="float:right; display: inline;"></a>
+                        </div>
+                    </div>
                 </td>
             </tr>
             </tbody>

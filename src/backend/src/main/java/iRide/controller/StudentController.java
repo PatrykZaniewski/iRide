@@ -85,6 +85,11 @@ public class StudentController {
         return "redirect:/category";
     }
 
+    @GetMapping(value = "/edit/{id}")
+    public String getEditStudent(){
+        return "admin/student_edit";
+    }
+
 
 
 

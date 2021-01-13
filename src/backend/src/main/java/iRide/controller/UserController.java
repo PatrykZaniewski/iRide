@@ -69,6 +69,11 @@ public class UserController {
         return "redirect:/user";
     }
 
+    @GetMapping(value = "/edit/{id}")
+    public String getEditUser(){
+        return "admin/user_edit";
+    }
+
     @GetMapping(value = "/create")
     public String getCreateUser(Model model){
         UserCreateOutput userCreateOutput = this.userService.getCreateUser();

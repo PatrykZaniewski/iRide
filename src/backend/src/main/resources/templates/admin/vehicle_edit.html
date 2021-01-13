@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{./fragments/main_layout}">
+<head>
+    <title>iRide</title>
+</head>
+<body>
+<div layout:fragment="content" class="container" style="max-width: 600px;">
+    <div class="jumbotron p-2" style="max-width: 100%;">
+        <h1 class="text-center" style="color: #6c757d;">Edytuj pojazd</h1>
+        <form th:action="@{'/vehicle/create'}" method="post">
+            <div class="form-row">
+                <div class="col">
+                    <label for="mark" class="pt-2">Marka:</label>
+                    <input type="text" class="form-control" id="mark" name="mark" required>
+                </div>
+                <div class="col">
+                    <label for="model" class="pt-2">Model:</label>
+                    <input type="text" class="form-control" id="model" name="model" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="plateNumber" class="pt-2">Numer rejestracyjny:</label>
+                    <input type="text" class="form-control" id="plateNumber" name="plateNumber" required>
+                </div>
+                <div class="col">
+                    <label for="vin" class="pt-2">Vin:</label>
+                    <input type="text" class="form-control" id="vin" name="vin" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="categoryId" class="pt-2">Kategoria:</label>
+                    <select class="custom-select" id="categoryId" name="categoryId" required>
+                        <option>AM</option>
+                        <option>A1</option>
+                        <option>A2</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group text-center pt-3">
+                <input class="btn btn-primary btn-sm my-2" type="submit" value="Dodaj">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

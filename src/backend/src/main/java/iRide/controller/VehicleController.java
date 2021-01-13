@@ -114,6 +114,11 @@ public class VehicleController {
         return "redirect:/vehicle";
     }
 
+    @GetMapping(value = "/edit/{id}")
+    public String getEdit(){
+        return "admin/vehicle_edit";
+    }
+
     @PostMapping(value = "/create")
     public String createOne(@ModelAttribute VehicleCreateInput vehicleCreateInput, RedirectAttributes redirectAttributes) {
         try {

@@ -126,6 +126,11 @@ public class CourseController {
         return "redirect:/course";
     }
 
+    @GetMapping(value = "/edit/{id}")
+    public String getEditCourse(){
+        return "admin/course_edit";
+    }
+
     @ModelAttribute("accountRole")
     public String getAccountRole(Authentication authentication) {
         if (authentication != null) {
