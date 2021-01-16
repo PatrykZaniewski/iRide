@@ -65,24 +65,27 @@
             <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Kursant</th>
-                <th scope="col">Typ kategorii</th>
-                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Instruktor</th>
+                <th scope="col">Dzień</th>
+                <th scope="col">Godzina</th>
+                <th scope="col">Długość (w godz.)</th>
                 <th scope="col">Status</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="courseListInstructorOutput: ${courseListInstructorOutputs}">
-                <th scope="row" th:text="${courseListInstructorOutput.id}" />
+            <tr>
+                <th scope="row" th:text="${'1'}" />
                 <td>
-                    <a th:href="@{'/student/' + ${courseListInstructorOutput.studentId}}" th:text="${courseListInstructorOutput.student}" />
+                    <a th:href="@{'/student/'}" th:text="${'d@iride.pl'}" />
                 </td>
-                <td th:text="${courseListInstructorOutput.categoryType}" />
-                <td th:text="${courseListInstructorOutput.categoryName}" />
-                <td th:text="${courseListInstructorOutput.status}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
                 <td style="width: 100px;">
-                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListInstructorOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
+                    <a style="width: 80px;" th:href="@{'/course/'}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
                 </td>
             </tr>
             </tbody>

@@ -29,4 +29,14 @@ public class EventController {
     public String getEventDetails(){
         return "student/event_details";
     }
+
+    @GetMapping(value = "/create/{id}")
+    public String getCreateEvent(){
+        return "admin/event_create";
+    }
+
+    @GetMapping(value = "/")
+    public String getEvents(){
+        return "instructor/events";
+    }
 }

@@ -22,30 +22,13 @@
                         </div>
                         <div class="col">
                             <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Wszystkie typy kategorii</option>
-                                <option>Teoria</option>
+                                <option>Wszyscy Kursanci</option>
+                                <option>Jan Kowalski</option>
                                 <option>Praktyka</option>
                             </select>
                         </div>
                         <div class="col">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Wszystkie kategorie</option>
-                                <option>AM</option>
-                                <option>A1</option>
-                                <option>A2</option>
-                                <option>A</option>
-                                <option>B1</option>
-                                <option>B</option>
-                                <option>B+E</option>
-                                <option>C</option>
-                                <option>C+E</option>
-                                <option>C1</option>
-                                <option>C1+E</option>
-                                <option>D</option>
-                                <option>D+E</option>
-                                <option>D1+E</option>
-                                <option>T</option>
-                            </select>
+                            <input type="date"/>
                         </div>
                         <div class="col">
                             <select class="form-control" id="exampleFormControlSelect1">
@@ -66,23 +49,26 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Kursant</th>
-                <th scope="col">Typ kategorii</th>
-                <th scope="col">Nazwa kategorii</th>
+                <th scope="col">Dzień</th>
+                <th scope="col">Godzina</th>
+                <th scope="col">Długość (w godz.)</th>
                 <th scope="col">Status</th>
                 <th scope="col">Akcje</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="courseListInstructorOutput: ${courseListInstructorOutputs}">
-                <th scope="row" th:text="${courseListInstructorOutput.id}" />
+            <tr>
+                <th scope="row" th:text="${'1'}" />
                 <td>
-                    <a th:href="@{'/student/' + ${courseListInstructorOutput.studentId}}" th:text="${courseListInstructorOutput.student}" />
+                    <a th:href="@{'/student/'}" th:text="${'d@iride.pl'}" />
                 </td>
-                <td th:text="${courseListInstructorOutput.categoryType}" />
-                <td th:text="${courseListInstructorOutput.categoryName}" />
-                <td th:text="${courseListInstructorOutput.status}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
+                <td th:text="${'d@iride.pl'}" />
                 <td style="width: 100px;">
-                    <a style="width: 80px;" th:href="@{'/course/' + ${courseListInstructorOutput.id}}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
+                    <a style="width: 80px;" th:href="@{'/course/'}" class="btn btn-primary btn-sm my-2">Szczegóły</a>
                 </td>
             </tr>
             </tbody>
