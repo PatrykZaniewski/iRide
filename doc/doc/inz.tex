@@ -143,7 +143,7 @@ Przedstawiony poni¿ej zakres funkcjonalny zosta³ sformu³owany na podstawie zebra
 Poni¿ej, w postaci listy, przedstawiony zosta³ zakres funkcjonalny czyli zbiór funkcjonalnoœci oferowanych przez aplikacjê:
 
 \begin{itemize}
- \item Modu³ zapewniaj¹cy mo¿liwoœæ aktywacji logowania do konta oraz przypomnienia has³a.
+ \item Modu³ zapewniaj¹cy mo¿liwoœæ aktywacji logowania oraz przypomnienia has³a do konta.
  \item Modu³ odpowiedzialny za zarz¹dzanie kontami u¿ytkowników, ich kreacj¹, edycj¹ oraz usuwaniem.
  \item Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi oraz udostêpnianie ich wybranym u¿ytkownikom.
  \item Modu³ odpowiedzialny za zarz¹dzanie instruktorami szko³y jazdy, ich dodawaniem, edycj¹ oraz usuwaniem.
@@ -326,6 +326,44 @@ Instruktor ma mo¿liwoœæ wyœwietlenia listy kursów, które prowadzi, a tak¿e wyœwi
 
 Kursant ma mo¿liwoœæ wyœwietlenia listy kursów w których bierze udzia³, a tak¿e wyœwietlenia szczegó³ów wybranego kursu.
 
+\subsection{Modu³ odpowiedzialny za zarz¹dzanie lekcjami}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_admin.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania lekcjami - administrator}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_instructor.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania lekcjami - instruktor}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_student.png}
+\end{center}
+	\caption{Modu³ do zarz¹dzania lekcjami - kursant}
+	\label{schematKomunikacji}
+\end{figure}
+
+Powy¿sze diagramy przedstawiaj¹ przypadki u¿ycia zwi¹zane z lekcjami. Ich rozdzielenie spowodowane jest chêci¹ uzyskania czytelniejszych diagramów.
+
+Administrator ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia dowolnej lekcji w systemie. Po wybraniu konkretnej lekcji mo¿e j¹ edytowaæ oraz usun¹æ. Dodatkowo, w zale¿noœci od aktualnego statusu lekcji zyskuje on mo¿liwoœæ zmiany jej stanu. Ma on mo¿liwoœæ potwierdziæ lub odrzuciæ zaplanowan¹ lekcjê, potwierdziæ lub odrzuciæ zapytanie o anulowanie lekcji, potwierdziæ przeprowadzenie lekcji i anulowaæ lekcjê.
+
+Instruktor ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia wszystkich swoich lekcji oraz szczegó³ów wybranej przez niego pozycji. Po wybraniu konkretnej lekcji mo¿e j¹ edytowaæ. Dodatkowo, w zale¿noœci od aktualnego statusu lekcji zyskuje on mo¿liwoœæ zmiany jej stanu. Ma on mo¿liwoœæ potwierdziæ lub odrzuciæ zaplanowan¹ lekcjê, potwierdziæ lub odrzuciæ zapytanie o anulowanie lekcji, potwierdziæ przeprowadzenie lekcji i anulowaæ lekcjê.
+
+Kursant ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia wszystkich swoich lekcji oraz szczegó³ów wybranej przez niego pozycji. Po wybraniu konkretnej lekcji w zale¿noœci od jej stanu mo¿e j¹ edytowaæ, usun¹æ b¹dŸ te¿ z³o¿yæ wniosek o jej anulowanie.
+
+
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach}
 
@@ -358,7 +396,7 @@ Kursant ma mo¿liwoœæ jednokrotnego wystawienia opinii instruktorowi prowadz¹cemu
 
 Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z komunikacj¹ wewnetrzn¹.
 
-U¿ytkownik ma mo¿liwoœæ wyœwietlenia w³asnej skrzynki odbiorczej z list¹ wiadomoœcia, a tak¿e szczegó³ów wybranej przez niego wiadomoœci. Ma on równie¿ mo¿liwoœæ wys³ania nowej wiadomoœci do adresata z listy kontaktów. Lista kontaktów jest inna dla ka¿dej grupy u¿ytkowników i przedstawia siê nastêpuj¹co:
+U¿ytkownik ma mo¿liwoœæ wyœwietlenia w³asnej skrzynki odbiorczej z list¹ wiadomoœcia, a tak¿e wyœwietlenia szczegó³ów wiadomoœci oraz jej usuniêcia. Ma on równie¿ mo¿liwoœæ wys³ania nowej wiadomoœci do adresata z listy kontaktów. Lista kontaktów jest inna dla ka¿dej grupy u¿ytkowników i przedstawia siê nastêpuj¹co:
 
 \begin{itemize}
     \item Administrator: wszyscy u¿ytkownicy szko³y jazdy
@@ -376,7 +414,7 @@ W poni¿szym rozdziale zosta³a przedstawiona architektura wykonanego projektu.
 \centering
 \includegraphics[scale=0.63]{\ImgPath/rys/docker.png}
 \end{center}
-	\caption{Docker}
+	\caption{Architektura dockerowa}
 	\label{schematKomunikacji}
 \end{figure}
 
@@ -607,19 +645,23 @@ Poni¿ej przedstawiono opisy tabel bazy danych:
     \end{itemize}
 \end{itemize}
 
+\newpage
+
 \section{Architektura aplikacji}
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
 \includegraphics[scale=0.6]{\ImgPath/rys/architecture.png}
 \end{center}
-	\caption{Architektura aplikacji. Rysunek na podstawie: https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html}
+	\caption{Architektura aplikacji. \footnotemark}
 	\label{schematKomunikacji}
 \end{figure}
 
+\footnotetext{Rysunek na podstawie: https://docs.spring.io/spring-framework/docs/3.2.x/spring-framework-reference/html/mvc.html}
+
 Powy¿szy schemat przedstawia architekturê wykonanej aplikacji. Opiera siê ona o wzorzec MVC (Model-View-Controller) jednoczeœnie rozszerzaj¹c go o dodatkowe elementy. Dok³adny opis architektury zosta³ przedstawiony poni¿ej na podstawie przyk³adowego przep³ywu.
 
-Przep³yw rozpoczyna siê w momencie wys³ania przez klienta zapytania HTTP pod okreœlony adres. Odbierane jest ono przez Front Controller, który jest implementaj¹ wzorca o tej samej nazwie. We wzorcu tym wystêpuje jeden obiekt (w tym przypadku \emph{servlet}), który wykonuje operacje wspólne dla wszystkich zapytañ HTTP. Obiekt ten ma zaimplementowane dekoratory, które po wykonaniu wspólnych akcji przekierowuj¹ przep³yw do obiektu odpowiedzialnego za dane zapytanie (w tym przypadku adres URL).\cite{frontcontroller}. Obiektem takim jest odpowiedni Controller, który obs³uguje dany adres URL. Wewn¹trz obiektu Controllera wyszukiwana jest odpowiednia funkcja, która na podstawie ca³kowitego adresu URL realizuje zadane dzia³anie. Jest ono realizowane na obiekcie Service, który odpowiada za logikê biznesow¹. Realizuje j¹ przy udziale odpowiedniego obiektu Repository, który realizuje zapytania do bazy danych. Po przeprowadzeniu odpowiednich operacji Service zwraca rezultat dzia³añ do Controllera. Uzupe³nia on Model o zdefiniowane wartoœci i wraz z nazw¹ odpowiedniego widoku (View) zwraca go do Front Controllera. Nastêpuje wyszukanie odpowiedniego widoku, a nastêpnie uzupe³nienie go o dane z Modelu, wyrenderowanie i zwrócenie ponownie do Front Controllera. Wyrenderowany przez aplikacjê widok jest zwracany i wyœwietlany klientowi.
+Przep³yw rozpoczyna siê w momencie wys³ania przez klienta zapytania HTTP pod okreœlony adres. Odbierane jest ono przez Front Controller, który jest implementaj¹ wzorca o tej samej nazwie. We wzorcu tym wystêpuje jeden obiekt (w tym przypadku \emph{servlet}), który wykonuje operacje wspólne dla wszystkich zapytañ HTTP. Obiekt ten ma zaimplementowane dekoratory, które po wykonaniu wspólnych akcji przekierowuj¹ przep³yw do obiektu odpowiedzialnego za dane zapytanie (w tym przypadku adres URL).\cite{frontcontroller}. Obiektem takim jest odpowiedni Controller, który obs³uguje dany adres URL. Wewn¹trz obiektu Controllera wyszukiwana jest odpowiednia funkcja, która na podstawie ca³kowitego adresu URL realizuje zadane dzia³anie. Jest ono realizowane na obiekcie Service, który odpowiada za logikê biznesow¹. Realizuje j¹ przy udziale odpowiedniego obiektu Repository, który realizuje zapytania do bazy danych. Po przeprowadzeniu odpowiednich operacji Service zwraca rezultat dzia³añ do Controllera. Uzupe³nia on Model o zdefiniowane wartoœci i wraz z nazw¹ odpowiedniego widoku (View) zwraca go do Front Controllera. Nastêpuje wyszukanie odpowiedniego widoku, a nastêpnie uzupe³nienie go o dane z Modelu, wyrenderowanie i zwrócenie ponownie do Front Controllera. Wyrenderowany przez aplikacjê widok jest zwracany i wyœwietlany klientowi.\cite{springmvcflow}
 
 
 
@@ -627,52 +669,842 @@ Przep³yw rozpoczyna siê w momencie wys³ania przez klienta zapytania HTTP pod okr
 
 
 \chapter{Wykorzystane narzêdzia i technologie}
-W powy¿szym paragrafie przedstawione zosta³y narzêdzia i technologie wykorzystane w procesie wytwarzania przedstawionej aplikacji internetowej. Ich wybór by³ œciœle zwi¹zany z ju¿ posiadanymi przez autora umiejêtnoœciami, ale równie¿ i z chêci¹ poznania nowych narzêdzi.
+W poni¿szym rozdziale przedstawione zosta³y narzêdzia i technologie wykorzystane w procesie wytwarzania przedstawionej aplikacji internetowej.
 
 \section{PostgreSQL 13.1}
-Podstawowy element funkcjonowania przedstawionej aplikacji. Zawiera elementy kluczowe dla dzia³ania ca³ego systemu.Wybrana przez autora baza jest relacyjn¹ baz¹ danych powsta³¹ w 1986 roku. Oparta jest ona na jêzyku SQL i umo¿liwia przechowywanie oraz skalowanie nawet najbardziej skomplikowanych danych. Miêdzy innymi ze wzglêdu na swoj¹ architekturê oraz status open source jest jedn¹ z najczêœciej wykorzystywanych baz danych na œwiecie.\cite{postgresqldoc}
+Podstawowy element funkcjonowania przedstawionej aplikacji. Zawiera elementy kluczowe dla dzia³ania ca³ego systemu. Wybrana przez autora baza jest relacyjn¹ baz¹ danych powsta³¹ w 1986 roku. Oparta jest ona na jêzyku SQL i umo¿liwia przechowywanie oraz skalowanie nawet najbardziej skomplikowanych danych. Miêdzy innymi ze wzglêdu na swoj¹ architekturê oraz status open source jest jedn¹ z najczêœciej wykorzystywanych baz danych na œwiecie.\cite{postgresqldoc}
 
 \section{Java 8}
-G³ówny jêzyk programowania wykorzystany w projekcie. U¿yty do implementacji aplikacji, ale równie¿ i testów jednostkowych. Jêzyk ten zosta³ stworzony przez Jamesa Goslinga w 1996 roku i opiera siê na obiektowym paradygmacie programowania. Java do uruchomienia aplikacji u¿ywa wirtualnej maszyny Java  - JVM (Java Virtual Machine). Sprawia to, ¿e aplikacje pisane w tym jêzyku s¹ multiplatformowe i mog¹ byæ uruchamiane na ka¿dej maszynie z zainstalowanym JVM.
+G³ówny jêzyk programowania wykorzystywany w fazie implementacji aplikacji. Jêzyk ten zosta³ stworzony przez Jamesa Goslinga w 1996 roku i opiera siê na obiektowym paradygmacie programowania. Java do uruchomienia aplikacji u¿ywa wirtualnej maszyny Java  - JVM (Java Virtual Machine). Sprawia to, ¿e aplikacje pisane w tym jêzyku s¹ multiplatformowe i mog¹ byæ uruchamiane na ka¿dej maszynie z zainstalowanym JVM.
 
 \section{Gradle}
 Gradle to open-source'owe narzêdzie u¿ywane do budowania projektu. Pozwala ono na elastyczne zarz¹dzanie zale¿noœciami wykorzystywanymi w aplikacji. Dodatkowo, zapewnia ono równie¿ mo¿liwoœæ wykonywania konkretnych zadañ na projekcie. Przyk³adami s¹ zadania zwi¹zane z kompilowaniem projektu, jego testowaniem oraz budowaniem pliku koñcowego *.jar.
 
 \section{Spring Boot}
-Spring Boot jest modu³em bazuj¹cym na Spring Security. Jego g³ównym celem jest minimalizacja konfiguracji w taki sposób, aby programista móg³ skupiæ siê tylko na logice aplikacji. Dzieje siê to miêdzy innymi, dziêki zawartemu w Spring Boocie serwerowi Tomcat, na którym uruchamiana jest aplikacja. Dodatkow¹ zalet¹ Spring Boota jest mo¿liwoœæ tworzenia przy jego pomocy aplikacji internetowych. Nastêpuje to poprzez wykorzystanie zale¿noœci Spring-Boot-Web.
+Spring Boot jest frameworkiem bazuj¹cym na Spring Framework. Jego g³ównym celem jest minimalizacja konfiguracji oraz u³atwienie kreacji mikroserwisów. Spring Boot realizuje te zadania miêdzy innymi poprzez \emph{Beany}. Odpowiadaj¹ one za \emph{Dependency Injection} czyli wstrzykiwanie zale¿noœci.\cite{springdoc} Dziêki temu komponenty wewn¹trz aplikacji nie s¹ ze sob¹ sztywno powi¹zane co sprawia, ¿e w dowolnym momencie mog¹ one zostaæ zamienione.
+
 
 \section{Spring Security}
-Spring security czyli framework odpowiedzialny za szeroko pojête zabezpieczanie aplikacji. Stworzony do wspó³pracy z przedstawionym powy¿ej Spring Framework. G³ównym zadaniem tego narzêdzia jest autentykacja oraz autoryzacja u¿ytkowników. Dodatkowo zapewnia funkcjonalnosæ w postaci ochrony przed atakami na aplikacjê.
+Spring Security czyli framework odpowiedzialny za kwestie zwi¹zane z zabezpieczeniami aplikacji. G³ównym zadaniem tego narzêdzia jest autentykacja u¿ytkowników oraz ich autoryzacja. Spring Security wykonuje to przy pomocy bazy danych wewn¹trz, której zdefiniowane s¹ konta u¿ytkowników wraz z ich uprawnieniami. Dodatko, framework ten zapewnia równie¿ ochronê przed atakami na przyk³ad CSRF.\cite{springsecuritydoc} Z uwagi na fakt, ¿e Spring Security jest czêœci¹ projektu Spring sprawia, ¿e œwietnie wspó³pracuje z przedstawionym wczeœniej Spring Bootem.
 
 \section{Spring Data JPA i Hibernate}
 Spring Data JPA to framework odpowiedzialny za po³¹czenie z baz¹ danych. Realizuje to przy wykorzystaniu odpowiedniego ORMa (Object-Relational Mapping) czyli narzêdzia mapuj¹cego rekordy tabeli bazy danych na obiekty jêzyka Java. W przypadku Spring Data JPA domyœlnym ORM jest Hibernate, który oprócz mapowania zapewnia równie¿ funkcjonalnoœæ w postaci tworzenia w³asnych zapytañ do bazy danych w jêzyku HQL (Hibernate Query Language).
 
 \section{Thymeleaf}
-Thymeleaf to silnik szablonów dla aplikacji internetowych, ale i okienkowych. Wykorzystuje on mechanizm server-side rendering czyli renderowania widoku po stronie serwera. Narzêdzie te, w po³¹czeniu ze Springiem pozwala na umieszczanie obiektów jêzyka Java wewn¹trz kodu HTML strony.
+Thymeleaf to silnik szablonów dla aplikacji internetowych, ale równie¿ i okienkowych. Wykorzystuje on mechanizm server-side rendering czyli renderowania widoku po stronie serwera. Narzêdzie te, w po³¹czeniu ze Spring Bootem pozwala na serwowanie widoków uzupe³nionych o obiekty jêzyka java.\cite{thymeleafdoc}
 
-\section{JUnit 5 - ROZWAZYC CZY WSPOMINAC O TESTACH}
-JUnit to narzêdzie s³u¿¹ce do testowania kodu aplikacji napisanych w JVM. Pozwala na przeprowadzanie testów jednostkowych czyli testowanie pojedynczych elementów programu. 
+\section{Bootstrap}
+Bootstrap to framework u³atwiaj¹cy budowanie interfejsu graficznego u¿ytkownika. Dostarcza ono predefiniowane komponenty odpowiadaj¹ce za stylizacjê wybranych elementów widoku. U¿ytkownik ma mo¿liwoœæ edycji tych komponentów w celu dopasowania ich do swoich potrzeb, a w konsekwencji skrócenia czasu potrzebnego na przygotowanie interfejsu graficznego. \cite{bootstrapdoc}
 
 \section{Docker}
-Docker to narzêdzie umo¿liwiaj¹ce wirtualizacjê stworzonego projektu. Zapewnia on funkcjonalnoœæ w postaci spakowania aplikacji oraz uruchomienia jej w izolowanym œrodowisku nazywanym kontenerem. Przewag¹ Dockera nad innymi rozwi¹zaniami wirtualizacyjnymi jest jego lekkoœæ, poniewa¿ potrzebuje on znacznie mniej zasobów ni¿ inne wirtualizatory.\cite{dockerdoc}
-
-
-\section{Git}
-Git czyli system kontroli wersji. Umo¿liwia przechowywanie kodu w zdalnym b¹dŸ lokalnym repozytorium, a dodatkowo u³atwia jego zarz¹dzanie.
-
-\section{Intellij IDEA}
-Intellij IDEA czyli zintegrowane œrodowisko programistyczne stworzone przez firmê JetBrains. Dostarcza szereg funkcjonalnosæi u³atwiaj¹cych pracê nad projektem. S¹ to miêdzy innymi narzêdzia odpowiedzialne za analizê, debuggowanie, testowanie czy te¿ kompilowanie kodu. 
-
-
-
-
-
-
+Docker to narzêdzie odpowiedzialne za wirtualizacjê stworzonego projektu. Zapewnia on funkcjonalnoœæ w postaci spakowania aplikacji oraz uruchomienia jej w izolowanym œrodowisku nazywanym kontenerem. Olbrzymi¹ zalet¹ Dockera jest jego lekkoœæ, poniewa¿ potrzebuje on znacznie mniej zasobów ni¿ inne wirtualizatory.
 
 
 
 \chapter{Wykonany projekt aplikacji}
-Tu trzeba zacz¹æ wstawiaæ w³asn¹ treœæ i oczywiœcie usun¹æ tê, która jest u¿yta w przyk³adzie...
+W poni¿szym rozdziale przedstawiona zosta³a aplikacja realizuj¹ca za³o¿enia sformu³owane w rozdziale 2.
+
+\section{Modu³ zapewniaj¹cy mo¿liwoœæ aktywacji, logowania oraz przypomnienia has³a do konta}
+\subsection{Aktywacja konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_aktywacja_1.png}
+\end{center}
+	\caption{Mail aktywuj¹cy konto}
+	\label{schematKomunikacji}
+\end{figure}
+
+Proces aktywacji konta rozpoczyna siê w momencie otrzymania przez u¿ytkownika powy¿szego maila aktywacyjnego. W wiadomoœci zawarty jest link aktywacyjny do konta. Po klikniêciu w niego u¿ytkownik przenoszony jest na odpowiedni¹ stronê aplikacji.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_aktywacja_2a.png}
+\end{center}
+	\caption{Udana aktywacja konta}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_aktywacja_2b.png}
+\end{center}
+	\caption{Nieudana aktywacja konta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Po przeniesieniu na stronê serwisu u¿ytkownik otrzymuje komunikat. W zale¿noœci od powodzenia akcji przyjmuje on ró¿ny komunikat. W przypadku, kiedy aktywacja przebieg³a pomyœlnie wyœwietlana jest wiadomoœæ z \emph{Rysunek 5.2}. Jeœli jednak proces aktywacji zakoñczony zosta³ negatywnie to wyœwietlana jest wiadomoœæ z \emph{Rysunek 5.3}
+
+\subsection{Przypomnienie has³a do konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_0.png}
+\end{center}
+	\caption{Formularz logowania - przypomnienie has³a}
+	\label{schematKomunikacji}
+\end{figure}
+
+Proces rozpoczyna siê w momencie przejœcia u¿ytkownika do formularza logowania. U¿ytkownik wybiera przycisk odpowiadaj¹cy za przypomnienie has³a, a nastêpnie przekierowywany jest pod odpowiedni adres.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_1.png}
+\end{center}
+	\caption{Reset has³a}
+	\label{schematKomunikacji}
+\end{figure}
+
+
+Po wyœwietleniu formularza u¿ytkownik wprowadza adres email powi¹zany z kontem. Po jego walidacji u¿ytkownik klika przycisk, aby wys³aæ wiadomoœæ umo¿liwiaj¹c¹ reset has³a.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_1b2.png}
+\end{center}
+	\caption{B³¹d walidacji podczas resetowania has³a}
+	\label{schematKomunikacji}
+\end{figure}
+
+W przypadku pope³nienia przez u¿ytkownika b³êdu w formularzu wyœwietlana jest odpowiednia informacja.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_2.png}
+\end{center}
+	\caption{Komunikat o pomyœlnym wys³aniu wiadomoœci resetuj¹cej has³o}
+	\label{schematKomunikacji}
+\end{figure}
+
+Po pomyœlnym wys³aniu maila u¿ytkownik przenoszony jest do formularza logowania. Wyœwietlany jest odpowiedni komunikat zawieraj¹cy informacjê o pomyœlnym wys³aniu maila. Powy¿szy komunikat jest wyœwietlany nawet w sytuacji, gdy w bazie danych nie istnieje konto powi¹zane z wpisanym adresem email. Ma to na celu wzmocnienie ochrony aplikacji.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_3.png}
+\end{center}
+	\caption{Mail resetuj¹cy has³o}
+	\label{schematKomunikacji}
+\end{figure}
+
+U¿ytkownik otrzymuje mail o treœci przedstawionej na powy¿szym rysunku. Wiadomoœæ zawiera adres po którego klikniêciu u¿ytkownik przenoszony jest na odpowiedni¹ stronê odpowiedzialn¹ za reset has³a.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_3a.png}
+\end{center}
+	\caption{Weryfikacja maila resetuj¹cego has³o zakoñczona pomyœlnie}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_4b.png}
+\end{center}
+	\caption{Weryfikacja maila resetuj¹cego has³o zakoñczona negatywnie}
+	\label{schematKomunikacji}
+\end{figure}
+
+Po przeniesieniu, sprawdzany jest token zawarty w adresie. W przypadku walidacji zakoñczonej negatywnie u¿ytkownik przenoszony jest do formularza logowania, gdzie wyœwietlany jest nastêpuj¹cy komunikat - \emph{Rysunek 5.10}. W sytuacji jednak, gdy walidacja zosta³a zakoñczona pozytywnie wyœwietlany jest formularz ustawiaj¹cy nowe has³o. U¿ytkownik wype³nia wszystkie pola oraz klika przycisk zmieniaj¹cy has³o. Nastêpuje walidacja i przeniesienie u¿ytkownika pod kolejny adres.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_3b.png}
+\end{center}
+	\caption{Walidacja danych resetuj¹cych has³o}
+	\label{schematKomunikacji}
+\end{figure}
+
+W przypadku, kiedy u¿ytkownik wpisze do formularza nieprawid³owe dane proces resetowania has³a jest wstrzymywany. Wyœwietlany jest odpowiedni komunikat zawieraj¹cy przyczynê b³êdu walidacji.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_4a.png}
+\end{center}
+	\caption{Komunikat o pomyœlnym resecie has³a}
+	\label{schematKomunikacji}
+\end{figure}
+
+Jeœli jednak walidacja pól zosta³a zakoñczona pomyœlnie, u¿ytkownik przenoszony jest na stronê logowania. Wyœwietlany jest równie¿ komunikat o pomyœlnym resecie has³a.
+
+\subsection{Logowanie do konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_logowanie_1.png}
+\end{center}
+	\caption{Formularz logowania - logowanie}
+	\label{schematKomunikacji}
+\end{figure}
+
+Proces rozpoczyna siê w momencie przejœcia u¿ytkownika do formularza logowania. U¿ytkownik wprowadza dane logowania oraz wciska przycisk zalogowania. Wprowadzone dane s¹ walidowane, a nastêpnie nastêpuje przekierowanie pod odpowiedni adres.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_logowanie_1b.png}
+\end{center}
+	\caption{Walidacja danych logowania}
+	\label{schematKomunikacji}
+\end{figure}
+
+W przypadku walidacji zakoñczonej negatywnie wyœwietlany jest odpowiedni komunikat.
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_logowanie_2a.png}
+\end{center}
+	\caption{Walidacja danych logowania}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_logowanie_2b.png}
+\end{center}
+	\caption{Walidacja danych logowania}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/2_logowanie_2c.png}
+\end{center}
+	\caption{Walidacja danych logowania}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.3]{\ImgPath/rys/2_logowanie_3.png}
+\end{center}
+	\caption{Walidacja danych logowania}
+	\label{schematKomunikacji}
+\end{figure}
+
+Jeœli walidacja wprowadzonych danych zakoñczy³a siê pozytywnie nastêpuje proces autentykacji. W zale¿noœci od jego wyniku nastêpuje wyœwietlenie odpowiednich komunikatów. W przypadku autentykacji zakoñczonej negatywnie wyœwietlone zostaj¹ odpowiednie komunikaty - \emph{Rysunek 5.15}, \emph{Rysunek 5.16}, \emph{Rysunek 5.17}. Jeœli autentykacja zakoñczy³a siê pomyœlnie u¿ytkownik przenoszony jest do strony g³ównej aplikacji, gdzie otrzymuje imienny komunikat o pomyœlnym zalogowaniu.
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie kontami u¿ytkowników}
+
+\subsection{Wyœwietlenie szczgó³ów w³asnego konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/3_profil_2.png}
+\end{center}
+	\caption{Szczegó³y w³asnego profilu}
+	\label{schematKomunikacji}
+\end{figure}
+U¿ytkownik ma mo¿liwoœæ wyœwietlenia swojego profilu. Po przejœciu do odpowiedniego adresu nastêpuje wyœwietlenie wszystkich danych u¿ytkownika. Mo¿liwa jest równie¿ ich edycja poprzez wciœniêcie przycisku edycji profilu.
+
+
+\subsection{Utworzenie nowego konta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/3_konta_3.png}
+\end{center}
+	\caption{Dodawanie nowego konta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ kreacji nowych kont w systemie. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za tworzenie nowego konta. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Utwórz''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku utworzenie nowego konta.
+
+\subsection{Wyœwietlenie listy wszystkich kont}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.3]{\ImgPath/rys/3_konta_2.png}
+\end{center}
+	\caption{Lista kont}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator ma mo¿liwoœæ wyœwietlenia wszystkich konta w systemie. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kont w systemie. Administrator ma mo¿liwoœæ sortowania kont wed³ug wybranych parametrów. Dodatkowo, uzyskuje mo¿liwoœæ edycji, usuniêcia oraz zablokowania b¹dŸ odblokowania wybranego konta z listy.
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi}
+
+\subsection{Dodanie nowej pomocy naukowej}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/4_pliki_2.png}
+\end{center}
+	\caption{Dodawanie nowej pomocy naukowej}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator oraz intruktor maj¹ mo¿liwoœæ dodawania nowych pomocy naukowych. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza dodawania nowej pomocy naukowej. Administrator mo¿e dodaæ pomoc dydaktyczn¹ do ka¿dej kategorii, a instruktor tylko do tych, które s¹ do niego przypisane. Po wype³nieniu formularza i wciœniêciu przycisku zatwierdzaj¹cego dodanie nowej pozycji nastêpuje zapisanie pliku w zasobach aplikacji.
+
+
+\subsection{Wyœwietlenie listy pomocy naukowych}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/4_pliki_3.png}
+\end{center}
+	\caption{Lista szybkiego wybierania - pomoce naukowe}
+	\label{schematKomunikacji}
+\end{figure}
+Ka¿dy zalogowany u¿ytkownik ma mo¿liwoœæ wyœwietlenia listy pomocy naukowych. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy pomocy naukowych. W zale¿noœci od rodzaju u¿ytkownika lista ta ma inn¹ zawartoœæ. Administrator widzi wszystkie pomoce naukowe, instruktor tylko te, których kategorie pokrywaj¹ siê z jego uprawnieniami, a instruktor tylko te, które dotycz¹ kursów w których bierze on udzia³. Dodatkowo, administratory i instruktorzy maj¹ mo¿liwoœæ usuwania pomocy naukowych w ramach swoich kategorii.
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie instruktorami}
+
+\subsection{Wyœwietlenie listy instruktorów}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/5_instruktorzy_2.png}
+\end{center}
+	\caption{Lista instruktorów}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator ma mo¿liwoœæ wyœwietlenia listy instruktorów. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich instruktorów. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów instruktora oraz edycji jego danych.
+
+\subsection{Wyœwietlenie szczegó³ów instruktora}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/5_instruktorzy_3.png}
+\end{center}
+	\caption{Szczegó³y instruktora - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/5_instruktorzy_4.png}
+\end{center}
+	\caption{Szczegó³y instruktora - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów wybranego instruktora. 
+
+W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego instruktora z listy instruktorów. Po wybraniu konkretnej pozycji otrzymuje on pe³ne informacje o danym pracowniku - \emph{Rysunek 5.31}. Dodatkowo ma on mo¿liwoœæ edycji jego danych.
+
+W przypadku kursanta ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych instruktorów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego instruktora otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.32}.
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie pojazdami}
+
+\subsection{Dodanie nowego pojazdu}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/6_pojazdy_2.png}
+\end{center}
+	\caption{Szczegó³y instruktora - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator ma mo¿liwoœæ dodania nowego pojazdu. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie pojazdu. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Dodaj''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie pojazdu do systemu.
+
+\subsection{Wyœwietlenie listy pojazdów}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.3]{\ImgPath/rys/6_pojazdy_3.png}
+\end{center}
+	\caption{Lista pojazdów - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.3]{\ImgPath/rys/6_pojazdy_4.png}
+\end{center}
+	\caption{Lista pojazdów - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia sortowanej listy pojazdów.
+
+Administrator ma mo¿liwoœæ wyœwietlenia wszystkich pojazdów szko³y jazdy - \emph{Rysunek 5.28}. Ma on równie¿ mo¿liwoœæ wyœwietlenia szczegó³ów, edycji oraz usuniêcia danego pojazdu.
+
+Instruktor ma mo¿liwoœæ wyœwietlenia listy tylko pojazdów do niego przypisanych - \emph{Rysunek 5.29}. Dodatkowo mo¿e równie¿ wyœwietliæ szczegó³y przypisanego do niego pojazdu.
+
+\subsection{Wyœwietlenie szczegó³ów wybranego pojazdu}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.45]{\ImgPath/rys/6_pojazdy_5.png}
+\end{center}
+	\caption{Szczegó³y pojazdu - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.45]{\ImgPath/rys/6_pojazdy_6.png}
+\end{center}
+	\caption{Szczegó³y pojazdu - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów pojazdu.
+
+Administrator mo¿e wyœwietliæ szczegó³y ka¿dego pojazdu - \emph{Rysunek 5.30}. Dodatkowo ma równie¿ mo¿liwoœæ jego edycji oraz usuniêcia.
+
+Instruktor mo¿e wyœwietliæ szczegó³y tylko przypisanego do niego pojazdu - \emph{Rysunek 5.31}
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
+
+\subsection{Wyœwietlenie listy kursantów}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/7_kursanci_1.png}
+\end{center}
+	\caption{Lista kursantów}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy kursantów. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kursantów. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów kursanta oraz edycji jego danych.
+
+\subsection{Wyœwietlenie szczegó³ów kursanta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_2.png}
+\end{center}
+	\caption{Szczegó³y kursanta - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_3.png}
+\end{center}
+	\caption{Szczegó³y kursanta - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów wybranego kursanta. 
+
+W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego kursanta z listy kursantów. Po wybraniu konkretnej pozycji otrzymuje on pe³ne informacje o danym uczniu - \emph{Rysunek 5.33}. Dodatkowo ma on mo¿liwoœæ edycji jego danych.
+
+W przypadku instruktora ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych kursantów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego kursanta otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.34}.
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
+
+\subsection{Wyœwietlenie listy kursantów}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/7_kursanci_1.png}
+\end{center}
+	\caption{Lista kursantów}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy kursantów. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kursantów. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów kursanta oraz edycji jego danych.
+
+\subsection{Wyœwietlenie szczegó³ów kursanta}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_2.png}
+\end{center}
+	\caption{Szczegó³y kursanta - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_3.png}
+\end{center}
+	\caption{Szczegó³y kursanta - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów wybranego kursanta. 
+
+W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego kursanta z listy kursantów. Po wybraniu konkretnej pozycji otrzymuje on pe³ne informacje o danym uczniu - \emph{Rysunek 5.33}. Dodatkowo ma on mo¿liwoœæ edycji jego danych.
+
+W przypadku instruktora ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych kursantów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego kursanta otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.34}.
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie kategoriami}
+
+\subsection{Dodanie nowej kategorii}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/8_kategorie_1.png}
+\end{center}
+	\caption{Dodanie nowej kategorii}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator ma mo¿liwoœæ dodania nowej kategorii prawa jazdy. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie kategorii. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Dodaj''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie pojazdu do systemu.
+
+\subsection{Wyœwietlenie listy kategorii}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/8_kategorie_2.png}
+\end{center}
+	\caption{Lista kategorii}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy kategorii. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kategorii. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ edycji oraz usuniêcia wybranej pozycji z listy.
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie kursami}
+
+\subsection{Utworzenie nowego kursu}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/9_kursy_1.png}
+\end{center}
+	\caption{Dodanie nowego kursu}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator ma mo¿liwoœæ utworzenia nowego kursu. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie kursu. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Dodaj''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie pojazdu do systemu.
+
+\subsection{Wyœwietlenie listy kursów}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_2.png}
+\end{center}
+	\caption{Lista kursów - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_3.png}
+\end{center}
+	\caption{Lista kursów - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_4.png}
+\end{center}
+	\caption{Lista kursów - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia listy kursów.
+
+Administrator ma dostêp do listy wszystkich kursów w systemie - \emph{Rysunek 5.41}. Dodatkowo administrator ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlenia szczegó³ów, edycji oraz usuniêcia wybranej pozycji z listy.
+
+Instruktor ma dostêp tylko do listy kursów prowadzonych przez niego - \emph{Rysunek 5.42}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+
+Kursant ma dostêp tylko do listy kursów, w których bierze udzia³ - \emph{Rysunek 5.43}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+
+\subsection{Wyœwietlenie szczegó³ów wybranego kursu}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_5.png}
+\end{center}
+	\caption{Szczegó³y kursu - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_6.png}
+\end{center}
+	\caption{Szczegó³y kursu - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/9_kursy_7.png}
+\end{center}
+	\caption{Szczegó³y kursu - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów kursu.
+
+Administrator ma dostêp do wszystkich kursów dostêpnych w systemie. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.44}. Dodatkowo administrator ma mo¿liwoœæ edycji oraz usuniêcia kursu, a tak¿e utworzenia nowej lekcji w ramach kursu.
+
+Instruktor ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.45}. Dodatkowo instruktor ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu.
+
+Kursant ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.46}. Dodatkowo kursant ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu. Jest to jednak mo¿liwe tylko w momencie, kiedy nie ma zaplanowanej innej lekcji w aktualnym kursie.
+
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie lekcjami}
+
+\subsection{Utworzenie nowej lekcji}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_1.png}
+\end{center}
+	\caption{Utworzenie nowej lekcji - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_2.png}
+\end{center}
+	\caption{Utworzenie nowej lekcji - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_3.png}
+\end{center}
+	\caption{Utworzenie nowej lekcji - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ utworzenia nowej lekcji. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za utworzenie lekcji.
+
+Formularz przyjmuje ró¿ne dane w zale¿noœci od tego czy jest to administrator, instruktor lub kursant - \emph{Rysunek 5.47}, \emph{Rysunek 5.48}, \emph{Rysunek 5.49}. Po wype³nieniu formularza i wciœniêciu przyciska ,,Utwórz'' nastêpuje walidacja danych, a nastêpnie utworzenie nowej lekcji. 
+
+
+
+\subsection{Wyœwietlenie listy lekcji}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_4.png}
+\end{center}
+	\caption{Lista lekcji - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_5.png}
+\end{center}
+	\caption{Lista lekcji - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia listy lekcji.
+
+Instruktor ma dostêp tylko do listy lekcji zwi¹zanych z jego kursami - \emph{Rysunek 5.50}. Dodatkowo ma mo¿liwoœæ filtrowania lekcji wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+
+Kursant ma dostêp tylko do listy lekcji zwi¹zanych z kursami, w których bierze udzia³ - \emph{Rysunek 5.51}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+
+
+\subsection{Wyœwietlenie szczegó³ów lekcji}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_6.png}
+\end{center}
+	\caption{Szczegó³y lekcji - widok administratora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_7.png}
+\end{center}
+	\caption{Szczegó³y lekcji - widok instruktora}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.35]{\ImgPath/rys/10_lekcje_8.png}
+\end{center}
+	\caption{Szczegó³y lekcji - widok kursanta}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów lekcji.
+
+Administrator ma dostêp do szczegó³ów ka¿dej lekcji w systemie - \emph{Rysunek 5.52}. Dodatkowo ma mo¿liwoœæ do jej usuniêcia oraz edycji. W zale¿noœci od stanu lekcji ma te¿ dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Administrator ma mo¿liwoœæ:
+\begin{itemize}
+    \item potwierdzenia lub odrzucenia zaproponowanego terminu przeprowadzenia lekcji
+    \item zaakceptowania lub odrzucenia wniosku o anulowanie lekcji
+    \item potwierdzenia przeprowadzenia lekcji
+    \item anulowania lekcji
+\end{itemize}
+
+Instruktor ma dostêp tylko do szczegó³ów lekcji zwi¹zanej z jego kursami - \emph{Rysunek 5.53}. Dodatkowo ma te¿ mo¿liwoœæ edycji lekcji, a zale¿noœci od jej stanu ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Instruktor ma mo¿liwoœæ:
+\begin{itemize}
+    \item potwierdzenia lub odrzucenia zaproponowanego terminu przeprowadzenia lekcji
+    \item zaakceptowania lub odrzucenia wniosku o anulowanie lekcji
+    \item potwierdzenia przeprowadzenia lekcji
+    \item anulowania lekcji
+\end{itemize}
+
+Kursant ma dostêp tylko do szczegó³ów lekcji zwi¹zanej kursami, w których bierze udzia³ - \emph{Rysunek 5.54}. Dodatkowo w zale¿noœci od stanu lekcji ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Kursant ma mo¿liwoœæ:
+\begin{itemize}
+    \item edycji lekcji
+    \item usuniêcia lekcji
+    \item z³o¿enia zapytania o anulowanie lekcji
+\end{itemize}
+
+
+\section{Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach}
+
+\subsection{Dodanie nowej opinii}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_1.png}
+\end{center}
+	\caption{Dodanie nowej opinii o instruktorze}
+	\label{schematKomunikacji}
+\end{figure}
+Kursant ma jednokrotn¹ mo¿liwoœæ dodania opinii o instruktorze. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie opinii. Kursant wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Przeœlij opiniê''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie opinii do systemu.
+
+\subsection{Wyœwietlenie listy opinii wybranego instruktora}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_2.png}
+\end{center}
+	\caption{Lista opinii o instruktorze}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_3.png}
+\end{center}
+	\caption{Szczegó³y opinii}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy opinii wybranego instruktora. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich opinii - \emph{Rysunek 5.56}. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów - \emph{Rysunek 5.57} oraz usuniêcia wybranej pozycji z listy. 
+
+
+\section{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
+
+\subsection{Wys³anie nowej wiadomoœci}
+
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_1.png}
+\end{center}
+	\caption{Dodanie nowej opinii o instruktorze}
+	\label{schematKomunikacji}
+\end{figure}
+
+Kursant ma jednokrotn¹ mo¿liwoœæ dodania opinii o instruktorze. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie opinii. Kursant wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Przeœlij opiniê''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie opinii do systemu.
+
+\subsection{Wyœwietlenie listy opinii wybranego instruktora}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_2.png}
+\end{center}
+	\caption{Lista opinii o instruktorze}
+	\label{schematKomunikacji}
+\end{figure}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_3.png}
+\end{center}
+	\caption{Szczegó³y opinii}
+	\label{schematKomunikacji}
+\end{figure}
+
+Administrator ma mo¿liwoœæ wyœwietlenia listy opinii wybranego instruktora. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich opinii - \emph{Rysunek 5.56}. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów - \emph{Rysunek 5.57} oraz usuniêcia wybranej pozycji z listy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -683,7 +1515,7 @@ Tu trzeba zacz¹æ wstawiaæ w³asn¹ treœæ i oczywiœcie usun¹æ tê, która jest u¿yta 
 
 
 \chapter{Podsumowanie}
-Tu trzeba zacz¹æ wstawiaæ w³asn¹ treœæ i oczywiœcie usun¹æ tê, która jest u¿yta w przyk³adzie...
+W poni¿szym rozdziale przedstawiono dalsze mo¿liwoœci rozwoju projektu oraz koñcowe podsumowanie.
 
 \section{Dalsze mo¿liwoœci rozwoju}
 Wykonany projekt aplikacji mo¿e zostaæ rozwiniêty o kolejne funkcjonalnoœci i modu³y. Zosta³y one przedstawione na poni¿szej liœcie:
@@ -691,461 +1523,26 @@ Wykonany projekt aplikacji mo¿e zostaæ rozwiniêty o kolejne funkcjonalnoœci i mo
 \begin{itemize}
     \item API - dodatkowy interfejs do komunikacji z aplikacj¹ bez koniecznosci renderowania widoku. Umo¿liwi on korzystanie z aplikacji z wykorzystaniem klientów innych ni¿ zaimplementowany, a tak¿e z samej linii poleceñ.
     \item Aplikacja mobilna - dodatkowy klient na urz¹dzenia mobilne. Pozwoli na u³atwienie korzystania z aplikacji, a tak¿e na integracjê z takim urz¹dzeniem. Zapewni to mo¿liwoœæ z korzystania takich funkcjonalnoœci jak na przyk³ad powiadomienia push.
+    \item Modu³ egzaminacyjny - modu³ umo¿liwiaj¹cy przeprowadzanie wewnêtrznych egzaminów teoretycznych. 
+    \item Modu³ zapisów i p³atnoœci online - modu³ odpowiedzialny za zapisy nowych kursantów. Umo¿liwi wybranie i zapisanie siê na wybrany przez kursanta kurs oraz przeprowadzenie p³atnoœci online.
     \item Motyw graficzny - dodatkowy, ciemny motyw graficzny. Pozwoli na ³atwiejsze u¿ywanie aplikacji w ciemnych warunkach.
-    \item Modu³ egzaminacyjny - modu³ odpowiedzialny za przeprowadzanie wewnêtrznych egzaminów teoretycznych. 
-    \item Modu³ zapisów i p³atnoœci online - modu³ odpowiedzialny za zapisy nowych kursantów. 
+    \item System logów - mechanizm odpowiedzialny za logowanie dzia³ania aplikacji. Pozwoli na przechowywanie informacji o akcjach wykonywanych w aplikacji. U³atwi on lokalizacjê ewentualnych b³êdów dzia³ania aplikacji.
 \end{itemize}
 
 
 \section{Wnioski}
+Rezultatem ponad pó³rocznej pracy jest koñcowa aplikacja. Zapewnia ona podstawowe funkcjonalnoœci potrzebne do efektywnego zarz¹dzania szko³¹ jazdy. Koñcowy produkt jest te¿ idealnym punktem wyjœcia do dalszego rozwoju. Szczególnie do modu³ów przedstawionych w poprzednim podrozdziale.
 
+Ponadto praca nad aplikacj¹ poszerzy³a stos technologiczny autora. Pozwoli³a na szersze poznanie znanych ju¿ mu technologii, ale równie¿ i na poznanie tych zupe³nie dla niego nowych. Sprawi³o to, ¿e sama praca in¿ynierska nie by³a tylko podsumowaniem studiów, ale i okazj¹ do poszerzenia swoich horyzontów.
 
-
-
-
-
-
-
-
-
-
-
-
-
-%-----------------
-% Steganografia
-%-----------------
-\chapter{}
-\chapter{Steganografia}
-Wywodz¹ce siê z greki s³owo ,,steganografia'' oznacza ,,ukryte pismo'' 
-(\textit{steganos} - ukryty, tajny; \textit{graphein} - pisaæ, malowaæ), co w 
-odniesieniu do kana³u informacyjnego oznacza przesy³anie danych w taki sposób, 
-aby osoby postronne maj¹ce wgl¹d do danych nie mog³y stwierdziæ istnienia w nich 
-ukrytej informacji. Ca³y mechanizm steganografii opiera siê na zasadzie ukrycia 
-informacji w tych czêœciach wiadomoœci, które nie s³u¿¹ do przekazywania 
-informacji lub których modyfikacja nie wp³ywa na treœæ g³ównego przekazu.
-
-W celu przes³ania informacji za pomoc¹ steganografii nale¿y utworzyæ kana³ 
-steganograficzny, zdefiniowany \cite{USDoD}  jako: ,,ka¿dy kana³ komunikacyjny, 
-który mo¿e byæ wykorzystany przez stronê do przes³ania informacji w sposób 
-naruszaj¹cy politykê bezpieczeñstwa systemu''. Metoda ta wykorzystuje fakt 
-przes³ania danych w sposób i w miejscach, które zgodnie z protoko³em do tego nie 
-s³u¿¹, nara¿aj¹c system na nieautoryzowany przesy³ informacji.
-
-Steganografia w znacz¹cym stopniu ró¿ni siê od kryptografii, która nie dba o 
-zatajenie istnienia przekazu, a jedynie o jego integralnoœæ oraz uniemo¿liwienie 
-stronom trzecim poznanie treœci przekazu. Oczywiœcie najlepsz¹ technik¹ jest 
-po³¹czenie steganografii z kryptografi¹. Takie podejœcie pozwala zabezpieczyæ 
-siê przed sytuacj¹, w której strona nadzoruj¹ca transmisjê, nawet w przypadku 
-odkrycia przekazu steganograficznego nie mo¿e go odczytaæ ze wzglêdu na si³ê 
-zastosowanej kryptografii.
-  %-----------------
-  % Historia
-  %-----------------
-\section{Historia}
-Pomimo, ¿e pierwsze wzmianki o steganografii, a dok³adnie o ukrytych kana³ach w 
-odniesieniu do systemów informatycznych notuje siê na lata siedemdziesi¹te XX 
-wieku \cite{FirstCC}, to przyk³ady u¿ycia steganografii siêgaj¹ staro¿ytnoœci. W 
-literaturze powtarzaj¹ siê opisy przekazywania tajnej informacji poprzez 
-wytatuowanie jej na ogolonej g³owie pos³añca, który po odroœniêciu w³osów by³ 
-wysy³any z ma³o znacz¹c¹ wiadomoœci¹ do armii swojego dowódcy. Ka¿dy kto natkn¹³ 
-siê na pos³añca mia³ wgl¹d do niewa¿nej wiadomoœci, niepodejrzewaj¹c nawet 
-istnienia sekretnej informacji w postaci tatua¿u.
-
-Przyk³ady z historii odnosz¹ siê tak¿e do bardziej wspó³czesnych czasów. Wiele z 
-metod steganografii by³o stosowanych podczas II Wojny Œwiatowej (np. 
-mikro-kropki) a tak¿e w latach Zimnej Wojny. Wiadomo tak¿e, ¿e wielu agentów 
-s³u¿b wywiadowczych, a szczególnie podwójnych agentów, przekazywa³o obcym 
-pañstwom informacjê wykorzystuj¹c steganografiê. Przyk³adem mo¿e tu byæ sprawa 
-szpiega FBI Roberta Hanssena \cite{Hanssen}, który przy pomocy technik 
-steganograficzny przez oko³o dekadê przekazywa³ tajne informacje s³u¿bom KGB.
-
-Rozdzia³y \ref{sectionSteganografiaWObiektachMultimedialnych} oraz 
-\ref{chapterSteganografiaWRuchuTCPIP} opisuj¹ nowoczesne podejœcie do 
-steganografii wykorzystuj¹ce wspó³czesne kana³y informacyjne. 
-  %-----------------
-  % Pojêcia
-  %-----------------
-\section{Pojêcia}
-W celu zdefiniowania kana³u steganograficznego oraz opisania transmisji z 
-wykorzystaniem takiego kana³u nale¿y omówiæ jego czêœci sk³adowe:
-\begin{itemize}
-	\item dane do ukrycia, tajne dane - informacja jak¹ nale¿y przes³aæ 
-miêdzy uczestnikami komunikacji, tak aby strony trzecie nie mia³y do niej 
-wgl¹du,
-	\item dane noœne, wiadomoœæ zakrywaj¹ca - wiadomoœæ, w której ukryte 
-zostan¹ tajne dane; przesy³anie wiadomoœci zakrywaj¹cych musi byæ dozwolone w 
-danym kanale informacyjnym i nie powinno wzbudzaæ podejrzeñ,
-	\item funkcja steganograficzna - funkcja przekszta³caj¹ca dane do 
-ukrycia oraz wiadomoœæ zakrywaj¹c¹ w jedn¹ po³¹czon¹ wiadomoœæ,
-	\item dane z ukryt¹ wiadomoœci¹ - dane zawieraj¹ce ukryt¹ informacjê a 
-jednoczeœnie wykazuj¹ce cechy danych noœnych,
-	\item nadzorca komunikacji, wartownik - mechanizm maj¹cy pe³en wgl¹d do 
-wiadomoœci przekazywanej miêdzy stronami komunikacji, œwiadomy struktury 
-komunikatów i potrafi¹cy wykrywaæ wystêpuj¹ce w nich anomalie,
-	\item kana³ komunikacyjny - kana³ zestawiony pomiêdzy nadawc¹ a 
-odbiorc¹, zapewniaj¹cy przep³yw informacji, do którego wgl¹d ma nadzorca 
-komunikacji,
-	\item odwrotna funkcja steganograficzna - funkcja przekszta³caj¹ca dane 
-z ukryt¹ wiadomoœci¹ na tajne dane,
-	\item klucz kryptograficzny - klucz znany tylko obu stronom komunikacji, 
-s³u¿¹cy do zabezpieczenia tajnej informacji metodami kryptografii symetrycznej 
-przed ewentualnoœci¹ z³amania funkcji steganograficznej.
-\end{itemize}
-  %-----------------
-  % Schemat komunikacji steganograficznej
-  %-----------------
-\section{Schemat komunikacji steganograficznej}
-\label{sectionSchematKomunikacjiSteganograficznej}
-Podstawowy scenariusz, powszechny w literaturze na temat steganografii, odnosi 
-siê do sytuacji opisanej w \cite{PrisonersProblem}. Dwóch wiêŸniów (w naszym 
-przypadku Alicja(\tech{A}) i Bob(\tech{B})) zamkniêci s¹ w dwóch odrêbnych 
-celach. Mog¹ siê ze sob¹ kontaktowaæ, jednak ich ca³a korespondencja przechodzi 
-przez rêce Wartownika (\tech{W}). Ma on pe³en wgl¹d do przekazywanych 
-informacji, wiêc mo¿e przechwyciæ wszelkie przekazywane tajemnice, a dodatkowo w 
-razie podejrzeñ mo¿e nie dopuœciæ do komunikacji\footnote{podejrzana informacja 
-jest tu analogi¹ do stosowania kryptografii przez wiêŸniów}. W takim przypadku w 
-celu przekazania wa¿nych informacji \tech{A} i \tech{B} musz¹ pos³u¿yæ siê 
-pewnego rodzaju podstêpem. Musz¹ tak sformu³owaæ treœæ przekazu, aby \tech{W} 
-nie rozró¿ni³ ,,niegroŸnej'' wiadomoœci od wiadomoœci z ukrytym przekazem. 
-Dlatego te¿ przekazuj¹ wiadomoœæ, w której prawdziwa treœæ mo¿liwa jest do 
-odczytania po z³o¿eniu kolejno ka¿dej np.  drugiej litery z ka¿dego wyrazu.
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.4]{\ImgPath/rys/schemat_komunikacji.png}
-\end{center}
-	\caption{Schemat komunikacji steganograficznej}
-	\label{schematKomunikacji}
-\end{figure}
-
-Przedstawion¹ tak sytuacjê pokazuje rysunek 
-\ref{schematKomunikacji}\footnote{sporz¹dzony na podstawie 
-\cite{schematKomunikacjiPrzypis}, rysunek 1, strona 3}. \tech{A} próbuje 
-przes³aæ tajn¹ informacjê \tech{E} do \tech{B}. Ca³a komunikacja odbywa siê 
-przez kana³ publiczny, kontrolowany przez \tech{W}. W celu ukrycia faktu 
-komunikacji \tech{A} stara siê ukryæ tajny przekaz w informacji \tech{C}. W celu 
-uzyskania skutecznej steganografii \tech{W} nie mo¿e rozró¿niæ informacji 
-poprawnej, nie zawieraj¹cej tajnych danych, od informacji \tech{S}, która 
-zawiera tajn¹ informacjê. W celu dodatkowego zabezpieczenia przekazu, \tech{A} i 
-\tech{B} mog¹ korzystaæ z funkcji kryptograficznej zabezpieczaj¹cej przekazywane 
-informacje. Mo¿na tu wykorzystaæ metody kryptografii symetrycznej (ustalony 
-klucz kryptograficzny \tech{K}) lub niesymetrycznej (klucz publiczny 
-\tech{K}$_{pub}$ i klucz prywatny \tech{K}$_{pryw}$).
-
-Stosowanie technik kryptograficznych wp³ywa na poprawê bezpieczeñstwa 
-przesy³anej informacji, jednak nale¿y pamiêtaæ o nieporz¹dnych cechach jakie 
-mog¹ one wywo³aæ. W wiêkszoœci przypadków umieszczenie tajnej informacji 
-steganograficznej w przekazie wi¹¿e siê z zamian¹ istniej¹cej ju¿ niewa¿nej 
-czêœci informacji. Jednak ka¿da porcja usuniêtej informacji mo¿e mieæ pewn¹ 
-charakterystyczn¹ postaæ lub specyficzny histogram. Zastosowanie funkcji 
-kryptograficznej w stosunku do tajnej informacji zmienia j¹, a wynikowy rozk³ad 
-bitów jest nieprzewidywalny i w wiêkszoœci przypadków ró¿ny od standardowych 
-histogramów okreœlonych dla podmienianych czêœci wiadomoœci.
-  %-----------------
-  % Stegoanaliza
-  %-----------------
-\section{Stegoanaliza}
-Stegoanaliza to nauka zajmuj¹ca siê wykrywaniem istnienia ukrytych informacji w 
-kana³ach komunikacyjnych. Nie zawsze prowadzi to do odkrycia dok³adnej treœci 
-ukrytego przekazu, a w wiêkszoœci przypadków polega jedynie na wskazaniu 
-istnienia ukrytego kana³u steganograficznego.
-
-Mo¿liwoœæ wykrycia kana³u steganograficznego sprowadza siê do analizy ró¿nych 
-czêœci wiadomoœci lub strumienia danych w celu wykrycia anomalii. Takie 
-podejœcie wynika z faktu, ¿e tajna informacja ukryta jest w miejscach nie 
-przeznaczonych do przesy³ania informacji lub na miejscu danych, które s¹ w 
-pewien sposób nadmiarowe (np. dla zmys³ów cz³owieka). Mo¿na wskazaæ dwa 
-podstawowe sposoby wykrywania anomalii:
-\begin{itemize}
-	\item pierwsze podejœcie opiera siê na przebadaniu wszystkich czêœci 
-informacji (np. pól nag³ówka TCP/IP), których struktura jest w pe³ni 
-przewidywalna lub których wartoœci s¹ zdefiniowane przez standardy lub 
-powszechne praktyki; wa¿ne jest tak¿e sprawdzenie czy wystêpuj¹ wartoœci 
-nadmiarowe oraz czy elementy sygnalizuj¹ce wyst¹pienie dodatkowych danych maj¹ 
-faktyczne pokrycie w danych,
-	\item drug¹ metod¹ jest porównanie wartoœci czêœci wiadomoœci (np. pól 
-nag³ówka TCP/IP) i zaklasyfikowanie ich jako prawdopodobnych lub nie dla danego 
-systemu b¹dŸ protoko³u; takie podejœcie mo¿e byæ stosowane do wartoœci œciœle 
-okreœlonych, takich jak wymienione w pierwszym punkcie, jednak mo¿na je tak¿e 
-stosowaæ do wartoœci które s¹ pseudolosowe lub których histogram jest 
-charakterystyczny; w celu realizacji tej metody warto pos³u¿yæ siê sieciami 
-neuronowymi takimi jak SVM i RSVM, zdolnymi rozpoznawaæ wzorce i separowaæ dane.
-\end{itemize}
-  %-----------------
-  % Metody tworzenia steganografii
-  %-----------------
-\section{Metody tworzenia steganografii oraz rodzaje ukrytych kana³ów}
-Przes³anie danych za pomoc¹ przekazu steganograficznego wi¹¿e siê w wiêkszoœci 
-przypadków z umieszczeniem dodatkowej informacji w wiadomoœci. Odbywa siê to za 
-pomoc¹ podmiany tej czêœci wiadomoœci (nag³ówka TCP/IP), która wykazuje cechy 
-nadmiarowoœci lub której (kontrolowana) zmiana nie prowadzi do przerwania 
-transmisji. Pewn¹ podgrup¹ mo¿e byæ w tym przypadku wykorzystanie pól 
-oryginalnie pustych (zerowych) lub niewykorzystywanych w istniej¹cych 
-implementacjach.
-
-Kana³y steganograficzne mo¿na podzieliæ na dwa zasadniczne 
-typy\cite{SweetyPresentation}:
-\begin{itemize}
-	\item kana³ pojemnoœciowy (ang. storage channel) - informacja zawarta w 
-czêœciach wiadomoœci, polach nag³ówka,
-	\item kana³ czasowy (ang. timing channel) - informacja zawarta w czasach 
-wyst¹pienia danych zdarzeñ, np. przes³ania pakietu TCP/IP.
-\end{itemize}
-W przypadku sieci pakietowych mo¿na tak¿e po³¹czyæ dwa typu kana³ów 
-steganograficznych, tworz¹c kana³ mieszany, w którym jeden z typów (np. 
-pojemnoœciowy) bêdzie wykorzystywany do przekazywania informacji, a drugi (np. 
-czasowy) do sygnalizacji tego zdarzenia.
-
-Wiêkszoœæ opracowanych programów s³u¿¹cych do przesy³ania danych z 
-wykorzystaniem steganografii opiera siê na kana³ach pojemnoœciowych. Wynika to z 
-faktu, ¿e kana³y czasowe narzucaj¹ pewne ograniczenia na generacjê pakietów 
-TCP/IP przez co ich wykrycie staje siê prostsze.
-
-Dodatkowo nale¿y zauwa¿yæ, ¿e w sieciach pakietowych mo¿na skonstruowaæ 
-abstrakcyjny kana³ steganograficzny, w którym do przesy³ania tajnych danych 
-lub/i obs³ugi protoko³u steganograficznego wykorzystywane s¹ ró¿ne pola 
-nag³ówka. Zmiana wykorzystania danego pola mo¿e byæ dynamiczna, zale¿na od 
-wymaganej przepustowoœci lub w celu zminimalizowania wykrycia kana³u 
-steganograficznego. 
-  %-----------------
-  % Cechy kana³u steganograficznego
-  %-----------------
-\section{Cechy kana³u steganograficznego}
-Ka¿dy kana³ steganograficzny posiada trzy cechy, które decyduj¹ o jego 
-przydatnoœci w danej sytuacji:
-\begin{enumerate}
-	\item pojemnoœæ (przepustowoœæ) - okreœla jak¹ porcjê informacji mo¿emy 
-przes³aæ w danej wiadomoœci noœnej; w przypadku steganografii w TCP/IP, wyra¿ana 
-jest w bitach na sekundê, bitach na pakiet lub bitach na sesjê TCP; 
-przepustowoœæ odgrywa wa¿n¹ rolê w przypadku koniecznoœci przekazania du¿ej 
-iloœci informacji, jednak nale¿y pamiêtaæ, ¿e to przewa¿nie prowadzi do 
-u³atwionej detekcji steganografii,
-	\item bezpieczeñstwo - okreœla jak ³atwo jest uzyskaæ dostêp do 
-przekazywanej tajnej informacji w przypadku poznania mechanizmu tworzenia 
-przekazu steganograficznego; dodatkowym mechanizmem zwiêkszaj¹cym bezpieczeñstwo 
-mo¿e byæ u¿ywanie znanych tylko sobie zmiennych pseudolosowych lub modyfikacji 
-algorytmu\footnote{jest to znane jako ,,bezpieczeñstwo przez zatajenie'' (ang. 
-security through obscurity) i powinno byæ u¿ywane tylko jako dodatkowy element 
-systemu zabezpieczeñ},
-	\item krzepkoœæ (ang. robustness) - okreœla stopieñ w jakim mo¿emy 
-zmodyfikowaæ przekaz nie uszkadzaj¹c zawartej w nim informacji 
-steganograficznej; niestety w przypadku steganografii naruszenie kana³u (pola) 
-zawieraj¹cego przekaz steganograficzny przewa¿nie wi¹¿e siê z utrat¹ tajnego 
-przekazu.
-\end{enumerate}
-
-  %-----------------
-  % Steganografia w obiektach multimedialnych
-  %-----------------
-\section{Steganografia w obiektach multimedialnych}
-\label{sectionSteganografiaWObiektachMultimedialnych}
-Pomimo, ¿e steganografia ma zastosowanie prawie w ka¿dej formie komunikacji, w 
-latach 90-tych zyska³a ona powodzenie jako technika ukrywania informacji w 
-obiektach multimedialnych. Wynika to przede wszystkim z powszechnoœci tego 
-rodzaju przekazu, jego rozmiarów oraz prostoty obs³ugi programów do ukrywania 
-informacji w obiektach multimedialnych, takich jak obraz, dŸwiêk i wideo. 
-Dodatkowym atutem przy zastosowaniu tych metod jest stosunek ukrytej informacji 
-do oryginalnego przekazu, siêgaj¹cy w ekstremalnych sytuacjach 50\%, bez 
-zauwa¿alnego pogorszenia siê jakoœci przekazywanych danych.
-
-U¿ycie steganografii w treœciach multimedialnych sprowadza siê do takiego 
-manipulowania danymi, aby plik wynikowy zawiera³ dodatkowe informacje, a 
-jednoczeœnie nie by³ rozró¿niany przez zmys³y cz³owieka w porównaniu z 
-orygina³em.
-
-Jedn¹ z najszerzej omawianych form steganografii w obiektach multimedialnych 
-jest ukrywanie informacji w plikach graficznych. Istnieje wiele rozwi¹zañ, 
-zarówno bezp³atnych, o otwartym kodzie jak i komercyjnych. Przyk³adami mog¹ tu 
-byæ takie programy jak Outguess, JPHide, StegHide. Istniej¹ ró¿ne techniki 
-ukrywania informacji w plikach graficznych. Najprostszym rozwi¹zaniem jest 
-podmiana najmniej znacz¹cych bitów opisuj¹cych kolor danego piksela. Mo¿liwe 
-jest te¿ zastosowanie dyskretnej transformaty kosinusowej.
-
-W przypadku wybrania jako wiadomoœci noœnej pliku audio, mo¿emy tak¿e zastosowaæ 
-metodê podmiany najmniej znacz¹cych bitów. Dodatkowo stosowane s¹ metody 
-ukrywania tajnych wiadomoœci poprzez rozszerzanie spektrum danego nagrania, czy 
-te¿ dodawanie echa. Przyk³adem narzêdzia do tworzenia wiadomoœci 
-steganograficznych mo¿e byæ UnderMP3Cover, MP3Stego czy 
-S-Tools\footnote{\url{http://www.stegoarchive.com}}.
-
-Kolejnym przyk³adem wykorzystania jako pliku noœnego obiektu multimedialnego 
-jest plik wideo. Dodatkowa informacja mo¿e byæ przekazana przy u¿yciu dyskretnej 
-transformaty kosinusowej. Jako przyk³adowe implementacje mo¿na podaæ StegoVideo.
-
-Istnieje kilka technik umo¿liwiaj¹cych wykrycie lub usuniêcie steganografii 
-zastosowanej w obiektach multimedialnych. Pierwszym podejœciem, choæ przewa¿nie 
-trudnym do zastosowania, jest u¿ycie oryginalnego pliku jako wzorca do 
-porównania z przechwycon¹ wersj¹. W przypadku plików graficznych lub wideo 
-mo¿liwe jest u¿ycie analizatorów statystycznych, które mog¹ wykryæ anomalie 
-wystêpuj¹ce w histogramach tych wiadomoœci.
-
-Zamiast wykrywaæ istnienie steganografii, czêstym podejœciem jest jej 
-ograniczanie lub ,,œlepe'' usuwanie z wiadomoœci tych danych, które mog¹ byæ 
-noœnikiem kana³u steganograficznego. W przypadku plików multimedialnych 
-najlepszym sposobem uzyskania takiego efektu jest przekodowanie pliku na inny 
-standard i powrót do standardu wejœciowego. Przewa¿nie zmiany w jakoœci plików 
-s¹ niezauwa¿alne, a u¿ycie konwersji sprowadza siê do takiej zmiany bitów, która 
-niszczy zawart¹ w nich steganografiê.
-
-W przypadku plików multimedialnych u¿ycie steganografii jest pomocne w ochronie 
-praw autorskich, przez stosowanie jej jako cyfrowych znaków wodnych. Niestety, 
-tak jak zosta³o to wczeœniej przedstawione w trakcie konwersji wiele z 
-zakodowanej informacji ginie bezpowrotnie. Skutkiem tego mo¿e byæ pogorszenie 
-jakoœci pliku multimedialnego, ale tak¿e usuniêcie z niego cyfrowego znaku 
-wodnego.
-
-Itd., itd., itd. ...
-
-\chapter{Steganografia w ruchu TCPIP}
-\label{chapterSteganografiaWRuchuTCPIP}
-
-Itd., itd., itd ...
-
-%-----------------
-% Wnioski 
-%-----------------
-\chapter{Wnioski}
-
-Protokó³ TCP/IP jest najbardziej rozpowszechnionym i u¿ywanym protoko³em 
-komunikacji miêdzy systemami w sieci Internet oraz w sieciach intranet. Niestety 
-zosta³ on opracowany na pocz¹tku lat siedemdziesi¹tych, gdy problemy 
-bezpieczeñstwa informacji nie sta³y na pierwszym miejscu. Ci¹g³y wzrost dzia³añ 
-przestêpczych w sieci Internet, w tym wymiana nielegalnych treœci, prowadzi do 
-stosowania coraz to nowszych technik zabezpieczaj¹cych. Z tego wzglêdu obserwuje 
-siê dzia³ania maj¹ce na celu wprowadzenie tajnej komunikacji miêdzy przejêtymi 
-systemami, tak aby nie wzbudziæ ostrze¿eñ w analizatorach sieciowych. Taka 
-ukryta komunikacja odbywa siê z wykorzystaniem steganografii.
-
-Wprowadzenie steganografii do niskich warstwach stosu TCP/IP umo¿liwia obejœcie 
-wielu filtrów na³o¿onych na warstwy wy¿sze. Wiêkszoœæ sieci oparta jest na 
-protoko³ach rodziny TCP/IP, przez co nie mo¿na zabroniæ ich u¿ywania. Mo¿liwa 
-jest jedynie kontrola poprawnoœci semantyki protoko³ów TCP/IP, a tak¿e 
-ewentualna ingerencja w przekazywane wartoœci, z uwzglêdnieniem stanowoœci 
-niektórych pól.
-
-Opracowany schemat generacji pocz¹tkowych numerów sekwencyjnych w jak najlepszy 
-sposób odzwierciedla oryginalny proces zachodz¹cy w stosie sieciowym systemu 
-Linux. W wiêkszoœci przypadków wystêpuj¹cych w rzeczywistych sieciach i 
-systemach, numery wygenerowane przy pomocy \tech{Shushi} nie by³yby rozró¿nialne 
-od numerów wygenerowanych przez stos sieciowy systemu.
-
-Je¿eli proces generacji wartoœci u¿ytych do przekazania danych 
-steganograficznych zostanie oparty o oryginalne mechanizmy u¿ywane do ich 
-generacji, to pasywny analizator sieciowy nie bêdzie w stanie wykryæ istnienia 
-anomalii. Ró¿nice mo¿liwe s¹ do zaobserwowania w przypadku zaistnienia 
-specyficznych sytuacji wystêpuj¹cych dla danej implementacji protoko³u. W 
-przypadku zastosowania pasywnego analizatora wymaga to jednak oczekiwania na 
-tak¹ sytuacjê. Z przeprowadzonych testów wynika, ¿e lepszym podejœciem jest 
-zastosowanie analizatorów aktywnych, które posiadaj¹ wiedzê na temat testowanych 
-systemów oraz ich chrakterystycznych cech implementacji. Skonstruowanie takiego 
-analizatora jest zadaniem stosunkowo prostym a daje bardzo wysok¹ skutecznoœæ.
-
-Z przeprowadzonych testów wynika, ¿e celowe jest prowadzenie dalszych prac w 
-nastêpuj¹cych obszarach:
-\begin{itemize}
- \item dok³adniejszy mechanizm generacji wartoœci mikrosekund
- \item wprowadzenie algorytmów zdolnych wykryæ i uniemo¿liwiæ dzia³anie 
-analizatora aktywnego
-\end {itemize}
-
-Je¿eli powy¿sze punkty nie zostan¹ spe³nione, analizatory aktywne bêd¹ w stanie 
-wykryæ istnienie modu³u steganograficznego opartego na pocz¹tkowych numerach 
-sekwencyjnych.
-
-\begin{tabular}{c|cc}
-pierwsza kolumna & druga & trzecia \\ \hline
-1 & 2 & 3 \\
-a & b & c \\
-\end{tabular} 
-
-\begin{equation}
- E = m c^2 \label{einstein}
-\end{equation}
-
-Rozwój opracowanego rozwi¹zania steganograficznego jest mo¿liwy poprzez 
-wprowadzenie elementów  -- patrz wzór (\ref{einstein}) -- jak:
-\begin{itemize}
- \item obs³uga innych, przysz³oœciowych protoko³ów sieciowych, takich jak SCTP 
-(ang. Stream Control Transmission Protocol)\cite{RFC2960}
- \item zapewnienie dwustronnej komunikacji z wykorzystaniem numerów 
-potwierdzenia \tech{ACK}
- \item przeniesienie implementacji do innych systemów operacyjnych
-\end{itemize}
-
-Wraz ze wzrostem przepustowoœci urz¹dzeñ sieciowych (obecnie 10Gb/s i wiêcej) 
-wzrasta problem analizy przep³ywaj¹cych danych w czasie rzeczywistym. 
-Analizatory sieciowe musz¹ w coraz krótszym czasie zbadaæ coraz wiêkszy strumieñ 
-danych (miliony pakietów na sekundê). Jednak problem wzrostu prêdkoœci sieci 
-utrudnia zadanie tak¿e osobom implementuj¹cym kana³y steganograficzne w 
-protokole TCP/IP. Coraz wiêcej operacji wy¿szych warstw stosu sieciowego 
-przenoszonych jest do uk³adów scalonych interfejsów sieciowych. Taka technologia 
-znana jest pod skrótem TOE (ang. TCP Offload Engine) i odnosi siê przede 
-wszystkim do sprzêtowej generacji sum kontrolnych oraz mechanizmu TSO (ang. TCP 
-segmentation offload). W nastêpnych latach spodziewane jest przenoszenie 
-kolejnych elementów stosu sieciowego TCP/IP do implementacji sprzêtowych.
-
-Ze wzglêdu na rozwój systemów zabezpieczaj¹cych ruch sieciowy oraz wzrost 
-bezpieczeñstwa systemów operacyjnych, w kolejnych latach wzroœnie tak¿e 
-wykorzystanie technik steganograficznych przez grupy przestêpcze dzia³aj¹ce w 
-ramach Internetu. Z tego powodu poznanie technik steganograficznych oraz 
-wypracowanie metod obrony i wykrywania takiej komunikacji jest bardzo wa¿ne.
-
-%-----------------
-% Dodatki 
-%-----------------
-\appendix
-\chapter{Porównanie numerów ISN j¹dra Linux i modu³u Shushi}
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.21]{\ImgPath/rys/IPPortConstData.pdf}
-\end{center}
-	\caption{Numery ISN wygenerowane przez j¹dro oraz \tech{Shushi}, sta³e 
-numery IP oraz porty TCP, sta³e dane dla \tech{Shushi}, serie po oko³o 2800 
-próbek.}
-	\label{IPPortConstData}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.21]{\ImgPath/rys/IPPortConstDataDiff.pdf}
-\end{center}
-	\caption{Ró¿nice pomiêdzy kolejnymi numerami ISN wygenerowanymi przez 
-j¹dro oraz \tech{Shushi}, sta³e numery IP oraz porty TCP, sta³e dane dla 
-\tech{Shushi}, serie po oko³o 60000 próbek.}
-	\label{IPPortConstDataDiff}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.21]{\ImgPath/rys/IPPortRandData.pdf}
-\end{center}
-	\caption{Numery ISN wygenerowane przez j¹dro oraz \tech{Shushi}, sta³e 
-numery IP oraz porty TCP, losowe dane dla \tech{Shushi}, serie po oko³o 860 
-próbek.}
-	\label{IPPortRandData}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.21]{\ImgPath/rys/IPPortRandDataDiff.pdf}
-\end{center}
-	\caption{Ró¿nice pomiêdzy kolejnymi numerami ISN wygenerowanymi przez 
-j¹dro oraz \tech{Shushi}, sta³e numery IP oraz porty TCP, losowe dane dla 
-\tech{Shushi}, serie po oko³o 60000 próbek.}
-	\label{IPPortRandDataDiff}
-\end{figure}
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
 \bibitem{postgresqldoc}{Dokumentacja bazy danych PostgreSQL. \url{https://www.postgresql.org/about/}}
-\bibitem{springdoc}{Dokumentacja Spring Framework. \url{https://docs.spring.io/spring-framework/docs/5.0.0.RC3/spring-framework-reference/overview.html}}
-\bibitem{thymeleafdoc}{Dokumentacja Spring Framework. \url{https://www.thymeleaf.org/}}
-\bibitem{dockerdoc}{Dokumentacja Spring Framework. \url{https://docs.docker.com/get-started/overview/}}
+\bibitem{springdoc}{Dokumentacja Spring Boot. \url{https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/}}
+\bibitem{bootstrapdoc}{Dokumentacja Bootstrap 5.0. \url{https://getbootstrap.com/docs/5.0}}
+\bibitem{thymeleafdoc}{Dokumentacja Thymeleaf. \url{https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html}}
+\bibitem{springsecuritydoc}{Dokumentacja Spring Security. \url{https://docs.spring.io/spring-security/site/docs/current/reference/html5/}}
 \bibitem{szkolyliczba}{Liczba szkó³ jazdy w Polsce w 2019.
 \url{https://www.prawo-jazdy-360.pl/ranking-szkol-jazdy}}
 \bibitem{wordliczba}{Liczba wojewódzkich oœrodków ruchu drogowego w Polsce w 2019.
@@ -1167,7 +1564,9 @@ Warszawa, 2010.}
 
 \end{thebibliography}
 
-\zakonczenie  % wklejenie recenzji i opinii
+\listoffigures
+
+% \zakonczenie  % wklejenie recenzji i opinii
 
 \end{document}
 %+++ END +++
