@@ -217,6 +217,7 @@ Wszyscy zalogowani u¿ytkownicy maj¹ mo¿liwoœæ wyœwietlania oraz edycji okreœlony
 
 Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich kont w systemie. W momencie wyœwietlania listy kont uzyskuje on mo¿liwoœæ edycji, usuniêcia, a tak¿e zablokowania/odblokowania wybranego konta (w zale¿noœci od aktualnego stanu danego konta).
 
+\newpage
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi}
 
@@ -235,7 +236,7 @@ Administrator ma mo¿liwoœæ dodania nowej pomocy dydaktycznej oraz wyœwietlenia l
 
 Instruktor ma mo¿liwoœæ dodawania nowych pomocy naukowych i wyœwietlania ich listy. Ograniczone jest to jednak kategoriami prawa jazdy, poniewa¿ mo¿e on przeprowadzaæ akcje tylko na materia³ach dydaktycznych, których kategorie pokrywaj¹ siê z kategoriami przez niego prowadzonymi. Po wyœwietleniu listy materia³ów instruktor uzyskuje dostêp do funkcjonalnoœci usuwania i pobierania wybranych pomocy dydaktycznych.
 
-Kursant ma mo¿liwoœæ wyœwietlenia listy wszystkich kategorii, a nastêpnie pobrania wybranej. Analogicznie jak w przypadku instruktora, akcje te ograniczone s¹ do kategorii prawa jazdy, do których dostêp ma kursant.
+Kursant ma mo¿liwoœæ wyœwietlenia listy oraz pobrania wybranej pomocy dydaktycznej. Analogicznie jak w przypadku instruktora, akcje te ograniczone s¹ do kategorii prawa jazdy, do których dostêp ma kursant.
 
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie instruktorami}
@@ -256,6 +257,8 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich instruktorów oraz szcze
 Kursant ma mo¿liwoœæ wyœwietlenia szczegó³ów przypisanego do niego instruktora.
 
 
+\newpage
+
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie pojazdami}
 
 \begin{figure}[!htbp]
@@ -273,6 +276,7 @@ Administrator ma mo¿liwoœæ dodania nowego pojazdu, wyœwietlenia listy wszystkich
 
 Instruktor ma mo¿liwoœæ wyœwietlenia listy przypisanych do niego pojazdów oraz szczegó³ów wybranego przez niego pojazdu.
 
+\newpage
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
 
@@ -291,6 +295,7 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy wszystkich kursantów oraz szczegó³
 
 Instruktor ma mo¿liwoœæ wyœwietlenia szczegó³ów przypisanego do niego kursanta.
 
+\newpage
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie kategoriami}
 
@@ -306,6 +311,8 @@ Instruktor ma mo¿liwoœæ wyœwietlenia szczegó³ów przypisanego do niego kursanta.
 Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z kategoriami prawa jazdy.
 
 Administrator ma mo¿liwoœæ utworzenia nowej kategorii, a tak¿e wyœwietlenia listy kategorii. Po jej wyœwietleniu otrzymuje te¿ mo¿liwoœæ usuniêcia wybranej pozycji z listy.
+
+\newpage
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie kursami}
 
@@ -326,12 +333,14 @@ Instruktor ma mo¿liwoœæ wyœwietlenia listy kursów, które prowadzi, a tak¿e wyœwi
 
 Kursant ma mo¿liwoœæ wyœwietlenia listy kursów w których bierze udzia³, a tak¿e wyœwietlenia szczegó³ów wybranego kursu.
 
+\newpage
+
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie lekcjami}
 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_admin.png}
+\includegraphics[scale=0.56]{\ImgPath/rys/event_managment_admin.png}
 \end{center}
 	\caption{Modu³ do zarz¹dzania lekcjami - administrator}
 	\label{schematKomunikacji}
@@ -340,7 +349,7 @@ Kursant ma mo¿liwoœæ wyœwietlenia listy kursów w których bierze udzia³, a tak¿e 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_instructor.png}
+\includegraphics[scale=0.56]{\ImgPath/rys/event_managment_instructor.png}
 \end{center}
 	\caption{Modu³ do zarz¹dzania lekcjami - instruktor}
 	\label{schematKomunikacji}
@@ -349,13 +358,13 @@ Kursant ma mo¿liwoœæ wyœwietlenia listy kursów w których bierze udzia³, a tak¿e 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/event_managment_student.png}
+\includegraphics[scale=0.56]{\ImgPath/rys/event_managment_student.png}
 \end{center}
 	\caption{Modu³ do zarz¹dzania lekcjami - kursant}
 	\label{schematKomunikacji}
 \end{figure}
 
-Powy¿sze diagramy przedstawiaj¹ przypadki u¿ycia zwi¹zane z lekcjami. Ich rozdzielenie spowodowane jest chêci¹ uzyskania czytelniejszych diagramów.
+Powy¿sze diagramy przedstawiaj¹ przypadki u¿ycia zwi¹zane z lekcjami. Ich rozdzielenie spowodowane jest chêci¹ uzyskania czytelniejszych i bardziej przejrzystych diagramów.
 
 Administrator ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia dowolnej lekcji w systemie. Po wybraniu konkretnej lekcji mo¿e j¹ edytowaæ oraz usun¹æ. Dodatkowo, w zale¿noœci od aktualnego statusu lekcji zyskuje on mo¿liwoœæ zmiany jej stanu. Ma on mo¿liwoœæ potwierdziæ lub odrzuciæ zaplanowan¹ lekcjê, potwierdziæ lub odrzuciæ zapytanie o anulowanie lekcji, potwierdziæ przeprowadzenie lekcji i anulowaæ lekcjê.
 
@@ -363,7 +372,7 @@ Instruktor ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia wszystkich
 
 Kursant ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia wszystkich swoich lekcji oraz szczegó³ów wybranej przez niego pozycji. Po wybraniu konkretnej lekcji w zale¿noœci od jej stanu mo¿e j¹ edytowaæ, usun¹æ b¹dŸ te¿ z³o¿yæ wniosek o jej anulowanie.
 
-
+\newpage
 
 \subsection{Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach}
 
@@ -378,10 +387,11 @@ Kursant ma mo¿liwoœæ utworzenia nowej lekcji, a tak¿e wyœwietlenia wszystkich sw
 
 Powy¿szy diagram przedstawia przypadki u¿ycia zwi¹zane z opiniami o instruktorach.
 
-Administrator ma mo¿liwoœæ wyœwietlenia listy opinii o wybranym instruktorze oraz szczegó³ów wybranej opinii.
+Administrator ma mo¿liwoœæ wyœwietlenia listy opinii o wybranym instruktorze, a tak¿e jej szczegó³ów. Ma te¿ mo¿liwoœæ usuniêcia wybranej opinii zarówno z widoku listy jak i szczegó³ów wiadomoœci.
 
-Kursant ma mo¿liwoœæ jednokrotnego wystawienia opinii instruktorowi prowadz¹cemu kurs.
+Kursant ma mo¿liwoœæ jednokrotnego wystawienia opinii instruktorowi prowadz¹cemu kurs, w którym uczestniczy.
 
+\newpage
 
 \subsection{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
 
@@ -661,6 +671,8 @@ Poni¿ej przedstawiono opisy tabel bazy danych:
 
 Powy¿szy schemat przedstawia architekturê wykonanej aplikacji. Opiera siê ona o wzorzec MVC (Model-View-Controller) jednoczeœnie rozszerzaj¹c go o dodatkowe elementy. Dok³adny opis architektury zosta³ przedstawiony poni¿ej na podstawie przyk³adowego przep³ywu.
 
+\newpage
+
 Przep³yw rozpoczyna siê w momencie wys³ania przez klienta zapytania HTTP pod okreœlony adres. Odbierane jest ono przez Front Controller, który jest implementaj¹ wzorca o tej samej nazwie. We wzorcu tym wystêpuje jeden obiekt (w tym przypadku \emph{servlet}), który wykonuje operacje wspólne dla wszystkich zapytañ HTTP. Obiekt ten ma zaimplementowane dekoratory, które po wykonaniu wspólnych akcji przekierowuj¹ przep³yw do obiektu odpowiedzialnego za dane zapytanie (w tym przypadku adres URL).\cite{frontcontroller}. Obiektem takim jest odpowiedni Controller, który obs³uguje dany adres URL. Wewn¹trz obiektu Controllera wyszukiwana jest odpowiednia funkcja, która na podstawie ca³kowitego adresu URL realizuje zadane dzia³anie. Jest ono realizowane na obiekcie Service, który odpowiada za logikê biznesow¹. Realizuje j¹ przy udziale odpowiedniego obiektu Repository, który realizuje zapytania do bazy danych. Po przeprowadzeniu odpowiednich operacji Service zwraca rezultat dzia³añ do Controllera. Uzupe³nia on Model o zdefiniowane wartoœci i wraz z nazw¹ odpowiedniego widoku (View) zwraca go do Front Controllera. Nastêpuje wyszukanie odpowiedniego widoku, a nastêpnie uzupe³nienie go o dane z Modelu, wyrenderowanie i zwrócenie ponownie do Front Controllera. Wyrenderowany przez aplikacjê widok jest zwracany i wyœwietlany klientowi.\cite{springmvcflow}
 
 
@@ -736,6 +748,8 @@ Proces aktywacji konta rozpoczyna siê w momencie otrzymania przez u¿ytkownika po
 	\label{schematKomunikacji}
 \end{figure}
 
+\newpage
+
 Po przeniesieniu na stronê serwisu u¿ytkownik otrzymuje komunikat. W zale¿noœci od powodzenia akcji przyjmuje on ró¿ny komunikat. W przypadku, kiedy aktywacja przebieg³a pomyœlnie wyœwietlana jest wiadomoœæ z \emph{Rysunek 5.2}. Jeœli jednak proces aktywacji zakoñczony zosta³ negatywnie to wyœwietlana jest wiadomoœæ z \emph{Rysunek 5.3}
 
 \subsection{Przypomnienie has³a do konta}
@@ -763,6 +777,8 @@ Proces rozpoczyna siê w momencie przejœcia u¿ytkownika do formularza logowania. 
 
 Po wyœwietleniu formularza u¿ytkownik wprowadza adres email powi¹zany z kontem. Po jego walidacji u¿ytkownik klika przycisk, aby wys³aæ wiadomoœæ umo¿liwiaj¹c¹ reset has³a.
 
+\newpage
+
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
@@ -785,21 +801,23 @@ W przypadku pope³nienia przez u¿ytkownika b³êdu w formularzu wyœwietlana jest od
 
 Po pomyœlnym wys³aniu maila u¿ytkownik przenoszony jest do formularza logowania. Wyœwietlany jest odpowiedni komunikat zawieraj¹cy informacjê o pomyœlnym wys³aniu maila. Powy¿szy komunikat jest wyœwietlany nawet w sytuacji, gdy w bazie danych nie istnieje konto powi¹zane z wpisanym adresem email. Ma to na celu wzmocnienie ochrony aplikacji.
 
+\newpage
+
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_3.png}
+\includegraphics[scale=0.55]{\ImgPath/rys/2_reset_3.png}
 \end{center}
 	\caption{Mail resetuj¹cy has³o}
 	\label{schematKomunikacji}
 \end{figure}
 
-U¿ytkownik otrzymuje mail o treœci przedstawionej na powy¿szym rysunku. Wiadomoœæ zawiera adres po którego klikniêciu u¿ytkownik przenoszony jest na odpowiedni¹ stronê odpowiedzialn¹ za reset has³a.
+W dalszej kolejnoœci u¿ytkownik otrzymuje mail o treœci przedstawionej na powy¿szym rysunku. Wiadomoœæ zawiera adres po którego klikniêciu u¿ytkownik przenoszony jest na odpowiedni¹ stronê odpowiedzialn¹ za reset has³a.
 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_3a.png}
+\includegraphics[scale=0.55]{\ImgPath/rys/2_reset_3a.png}
 \end{center}
 	\caption{Weryfikacja maila resetuj¹cego has³o zakoñczona pomyœlnie}
 	\label{schematKomunikacji}
@@ -808,11 +826,13 @@ U¿ytkownik otrzymuje mail o treœci przedstawionej na powy¿szym rysunku. Wiadomoœ
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/2_reset_4b.png}
+\includegraphics[scale=0.55]{\ImgPath/rys/2_reset_4b.png}
 \end{center}
 	\caption{Weryfikacja maila resetuj¹cego has³o zakoñczona negatywnie}
 	\label{schematKomunikacji}
 \end{figure}
+
+\newpage
 
 Po przeniesieniu, sprawdzany jest token zawarty w adresie. W przypadku walidacji zakoñczonej negatywnie u¿ytkownik przenoszony jest do formularza logowania, gdzie wyœwietlany jest nastêpuj¹cy komunikat - \emph{Rysunek 5.10}. W sytuacji jednak, gdy walidacja zosta³a zakoñczona pozytywnie wyœwietlany jest formularz ustawiaj¹cy nowe has³o. U¿ytkownik wype³nia wszystkie pola oraz klika przycisk zmieniaj¹cy has³o. Nastêpuje walidacja i przeniesienie u¿ytkownika pod kolejny adres.
 
@@ -862,6 +882,8 @@ Proces rozpoczyna siê w momencie przejœcia u¿ytkownika do formularza logowania. 
 
 W przypadku walidacji zakoñczonej negatywnie wyœwietlany jest odpowiedni komunikat.
 
+\newpage
+
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
@@ -879,6 +901,8 @@ W przypadku walidacji zakoñczonej negatywnie wyœwietlany jest odpowiedni komunik
 	\caption{Walidacja danych logowania}
 	\label{schematKomunikacji}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -914,6 +938,21 @@ Jeœli walidacja wprowadzonych danych zakoñczy³a siê pozytywnie nastêpuje proces 
 \end{figure}
 U¿ytkownik ma mo¿liwoœæ wyœwietlenia swojego profilu. Po przejœciu do odpowiedniego adresu nastêpuje wyœwietlenie wszystkich danych u¿ytkownika. Mo¿liwa jest równie¿ ich edycja poprzez wciœniêcie przycisku edycji profilu.
 
+\subsection{Wyœwietlenie listy wszystkich kont}
+
+\begin{figure}[!htbp]
+	\begin{center}
+\centering
+\includegraphics[scale=0.3]{\ImgPath/rys/3_konta_2.png}
+\end{center}
+	\caption{Lista kont}
+	\label{schematKomunikacji}
+\end{figure}
+
+\newpage
+
+Administrator ma mo¿liwoœæ wyœwietlenia wszystkich kont w systemie. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kont w systemie. Administrator ma mo¿liwoœæ sortowania kont wed³ug okreœlonych parametrów. Dodatkowo, uzyskuje mo¿liwoœæ edycji, usuniêcia oraz zablokowania b¹dŸ odblokowania wybranego konta z listy.
+
 
 \subsection{Utworzenie nowego konta}
 
@@ -928,18 +967,7 @@ U¿ytkownik ma mo¿liwoœæ wyœwietlenia swojego profilu. Po przejœciu do odpowiedni
 
 Administrator ma mo¿liwoœæ kreacji nowych kont w systemie. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za tworzenie nowego konta. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Utwórz''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku utworzenie nowego konta.
 
-\subsection{Wyœwietlenie listy wszystkich kont}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.3]{\ImgPath/rys/3_konta_2.png}
-\end{center}
-	\caption{Lista kont}
-	\label{schematKomunikacji}
-\end{figure}
-Administrator ma mo¿liwoœæ wyœwietlenia wszystkich konta w systemie. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kont w systemie. Administrator ma mo¿liwoœæ sortowania kont wed³ug wybranych parametrów. Dodatkowo, uzyskuje mo¿liwoœæ edycji, usuniêcia oraz zablokowania b¹dŸ odblokowania wybranego konta z listy.
-
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie materia³ami dydaktycznymi}
 
@@ -955,6 +983,7 @@ Administrator ma mo¿liwoœæ wyœwietlenia wszystkich konta w systemie. Po przejœci
 \end{figure}
 Administrator oraz intruktor maj¹ mo¿liwoœæ dodawania nowych pomocy naukowych. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza dodawania nowej pomocy naukowej. Administrator mo¿e dodaæ pomoc dydaktyczn¹ do ka¿dej kategorii, a instruktor tylko do tych, które s¹ do niego przypisane. Po wype³nieniu formularza i wciœniêciu przycisku zatwierdzaj¹cego dodanie nowej pozycji nastêpuje zapisanie pliku w zasobach aplikacji.
 
+\newpage
 
 \subsection{Wyœwietlenie listy pomocy naukowych}
 
@@ -966,7 +995,9 @@ Administrator oraz intruktor maj¹ mo¿liwoœæ dodawania nowych pomocy naukowych. P
 	\caption{Lista szybkiego wybierania - pomoce naukowe}
 	\label{schematKomunikacji}
 \end{figure}
-Ka¿dy zalogowany u¿ytkownik ma mo¿liwoœæ wyœwietlenia listy pomocy naukowych. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy pomocy naukowych. W zale¿noœci od rodzaju u¿ytkownika lista ta ma inn¹ zawartoœæ. Administrator widzi wszystkie pomoce naukowe, instruktor tylko te, których kategorie pokrywaj¹ siê z jego uprawnieniami, a instruktor tylko te, które dotycz¹ kursów w których bierze on udzia³. Dodatkowo, administratory i instruktorzy maj¹ mo¿liwoœæ usuwania pomocy naukowych w ramach swoich kategorii.
+Ka¿dy zalogowany u¿ytkownik ma mo¿liwoœæ wyœwietlenia listy pomocy naukowych. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy pomocy naukowych. W zale¿noœci od rodzaju u¿ytkownika lista ta ma inn¹ zawartoœæ. Administrator widzi wszystkie pomoce naukowe, instruktor tylko te, których kategorie pokrywaj¹ siê z jego uprawnieniami, a kursant tylko te, które dotycz¹ kursów w których bierze on udzia³. Dodatkowo, administratory i instruktorzy maj¹ mo¿liwoœæ usuwania pomocy naukowych w ramach swoich kategorii.
+
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie instruktorami}
 
@@ -1002,12 +1033,15 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy instruktorów. Po przejœciu na odpo
 	\label{schematKomunikacji}
 \end{figure}
 
+\newpage
+
 Administrator oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów wybranego instruktora. 
 
 W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego instruktora z listy instruktorów. Po wybraniu konkretnej pozycji otrzymuje on pe³ne informacje o danym pracowniku - \emph{Rysunek 5.31}. Dodatkowo ma on mo¿liwoœæ edycji jego danych.
 
 W przypadku kursanta ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych instruktorów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego instruktora otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.32}.
 
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie pojazdami}
 
@@ -1050,12 +1084,14 @@ Administrator ma mo¿liwoœæ wyœwietlenia wszystkich pojazdów szko³y jazdy - \emph
 
 Instruktor ma mo¿liwoœæ wyœwietlenia listy tylko pojazdów do niego przypisanych - \emph{Rysunek 5.29}. Dodatkowo mo¿e równie¿ wyœwietliæ szczegó³y przypisanego do niego pojazdu.
 
+\newpage
+
 \subsection{Wyœwietlenie szczegó³ów wybranego pojazdu}
 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.45]{\ImgPath/rys/6_pojazdy_5.png}
+\includegraphics[scale=0.38]{\ImgPath/rys/6_pojazdy_5.png}
 \end{center}
 	\caption{Szczegó³y pojazdu - widok administratora}
 	\label{schematKomunikacji}
@@ -1064,11 +1100,12 @@ Instruktor ma mo¿liwoœæ wyœwietlenia listy tylko pojazdów do niego przypisanych 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.45]{\ImgPath/rys/6_pojazdy_6.png}
+\includegraphics[scale=0.38]{\ImgPath/rys/6_pojazdy_6.png}
 \end{center}
 	\caption{Szczegó³y pojazdu - widok instruktora}
 	\label{schematKomunikacji}
 \end{figure}
+
 
 Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów pojazdu.
 
@@ -1076,6 +1113,7 @@ Administrator mo¿e wyœwietliæ szczegó³y ka¿dego pojazdu - \emph{Rysunek 5.30}. D
 
 Instruktor mo¿e wyœwietliæ szczegó³y tylko przypisanego do niego pojazdu - \emph{Rysunek 5.31}
 
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
 
@@ -1092,6 +1130,7 @@ Instruktor mo¿e wyœwietliæ szczegó³y tylko przypisanego do niego pojazdu - \emph
 
 Administrator ma mo¿liwoœæ wyœwietlenia listy kursantów. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kursantów. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów kursanta oraz edycji jego danych.
 
+
 \subsection{Wyœwietlenie szczegó³ów kursanta}
 
 \begin{figure}[!htbp]
@@ -1102,6 +1141,8 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy kursantów. Po przejœciu na odpowie
 	\caption{Szczegó³y kursanta - widok administratora}
 	\label{schematKomunikacji}
 \end{figure}
+
+\newpage
 
 \begin{figure}[!htbp]
 	\begin{center}
@@ -1118,47 +1159,7 @@ W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego kursan
 
 W przypadku instruktora ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych kursantów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego kursanta otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.34}.
 
-
-\section{Modu³ odpowiedzialny za zarz¹dzanie kursantami}
-
-\subsection{Wyœwietlenie listy kursantów}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.35]{\ImgPath/rys/7_kursanci_1.png}
-\end{center}
-	\caption{Lista kursantów}
-	\label{schematKomunikacji}
-\end{figure}
-
-Administrator ma mo¿liwoœæ wyœwietlenia listy kursantów. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kursantów. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów kursanta oraz edycji jego danych.
-
-\subsection{Wyœwietlenie szczegó³ów kursanta}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_2.png}
-\end{center}
-	\caption{Szczegó³y kursanta - widok administratora}
-	\label{schematKomunikacji}
-\end{figure}
-
-\begin{figure}[!htbp]
-	\begin{center}
-\centering
-\includegraphics[scale=0.4]{\ImgPath/rys/7_kursanci_3.png}
-\end{center}
-	\caption{Szczegó³y kursanta - widok instruktora}
-	\label{schematKomunikacji}
-\end{figure}
-
-Administrator oraz instruktor maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów wybranego kursanta. 
-
-W przypadku administratora mo¿liwe jest to poprzez wyœwietlenie wybranego kursanta z listy kursantów. Po wybraniu konkretnej pozycji otrzymuje on pe³ne informacje o danym uczniu - \emph{Rysunek 5.33}. Dodatkowo ma on mo¿liwoœæ edycji jego danych.
-
-W przypadku instruktora ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych kursantów, którzy s¹ z nim powi¹zani kursem. Po wyœwietleniu konkretnego kursanta otrzymuje on tylko podstawowe informacje z nim powi¹zane - \emph{Rysunek 5.34}.
+\newpage
 
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie kategoriami}
@@ -1176,6 +1177,8 @@ W przypadku instruktora ma on mo¿liwoœæ wyœwietliæ szczegó³y tylko tych kursantó
 \end{figure}
 Administrator ma mo¿liwoœæ dodania nowej kategorii prawa jazdy. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie kategorii. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Dodaj''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie pojazdu do systemu.
 
+\newpage
+
 \subsection{Wyœwietlenie listy kategorii}
 
 \begin{figure}[!htbp]
@@ -1187,8 +1190,10 @@ Administrator ma mo¿liwoœæ dodania nowej kategorii prawa jazdy. Po przejœciu na 
 	\label{schematKomunikacji}
 \end{figure}
 
+
 Administrator ma mo¿liwoœæ wyœwietlenia listy kategorii. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich kategorii. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ edycji oraz usuniêcia wybranej pozycji z listy.
 
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie kursami}
 
@@ -1204,6 +1209,8 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy kategorii. Po przejœciu na odpowie
 	\label{schematKomunikacji}
 \end{figure}
 Administrator ma mo¿liwoœæ utworzenia nowego kursu. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za dodanie kursu. Administrator wype³nia dane w formularzu, a nastêpnie wciska przycisk ,,Dodaj''. Nastêpuje walidacja wprowadzonych danych, a po jej pomyœlnym wyniku dodanie pojazdu do systemu.
+
+\newpage
 
 \subsection{Wyœwietlenie listy kursów}
 
@@ -1236,11 +1243,11 @@ Administrator ma mo¿liwoœæ utworzenia nowego kursu. Po przejœciu na odpowiedni a
 
 Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia listy kursów.
 
-Administrator ma dostêp do listy wszystkich kursów w systemie - \emph{Rysunek 5.41}. Dodatkowo administrator ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlenia szczegó³ów, edycji oraz usuniêcia wybranej pozycji z listy.
+Administrator ma dostêp do listy wszystkich kursów w systemie - \emph{Rysunek 5.38}. Dodatkowo administrator ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlenia szczegó³ów, edycji oraz usuniêcia wybranej pozycji z listy.
 
-Instruktor ma dostêp tylko do listy kursów prowadzonych przez niego - \emph{Rysunek 5.42}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+Instruktor ma dostêp tylko do listy kursów prowadzonych przez niego - \emph{Rysunek 5.39}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
 
-Kursant ma dostêp tylko do listy kursów, w których bierze udzia³ - \emph{Rysunek 5.43}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+Kursant ma dostêp tylko do listy kursów, w których bierze udzia³ - \emph{Rysunek 5.40}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
 
 \subsection{Wyœwietlenie szczegó³ów wybranego kursu}
 
@@ -1262,6 +1269,8 @@ Kursant ma dostêp tylko do listy kursów, w których bierze udzia³ - \emph{Rysunek
 	\label{schematKomunikacji}
 \end{figure}
 
+\newpage
+
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
@@ -1273,13 +1282,14 @@ Kursant ma dostêp tylko do listy kursów, w których bierze udzia³ - \emph{Rysunek
 
 Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów kursu.
 
-Administrator ma dostêp do wszystkich kursów dostêpnych w systemie. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.44}. Dodatkowo administrator ma mo¿liwoœæ edycji oraz usuniêcia kursu, a tak¿e utworzenia nowej lekcji w ramach kursu.
+Administrator ma dostêp do wszystkich kursów dostêpnych w systemie. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.41}. Dodatkowo administrator ma mo¿liwoœæ edycji oraz usuniêcia kursu, a tak¿e utworzenia nowej lekcji w ramach kursu.
 
-Instruktor ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.45}. Dodatkowo instruktor ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu.
+Instruktor ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.42}. Dodatkowo instruktor ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu.
 
-Kursant ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.46}. Dodatkowo kursant ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu. Jest to jednak mo¿liwe tylko w momencie, kiedy nie ma zaplanowanej innej lekcji w aktualnym kursie.
+Kursant ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybranego kursu prezentowane s¹ jego szczegó³y  - \emph{Rysunek 5.43}. Dodatkowo kursant ma mo¿liwoœæ utworzenia nowej lekcji w ramach kursu. Jest to jednak mo¿liwe tylko w momencie, kiedy nie ma zaplanowanej innej lekcji w aktualnym kursie.
 
 
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie lekcjami}
 
@@ -1312,9 +1322,12 @@ Kursant ma dostêp tylko do kursów z nim powi¹zanych. Po wybraniu szczegó³ów wybr
 	\caption{Utworzenie nowej lekcji - widok kursanta}
 	\label{schematKomunikacji}
 \end{figure}
+
+\newpage
+
 Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ utworzenia nowej lekcji. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiadaj¹cego za utworzenie lekcji.
 
-Formularz przyjmuje ró¿ne dane w zale¿noœci od tego czy jest to administrator, instruktor lub kursant - \emph{Rysunek 5.47}, \emph{Rysunek 5.48}, \emph{Rysunek 5.49}. Po wype³nieniu formularza i wciœniêciu przyciska ,,Utwórz'' nastêpuje walidacja danych, a nastêpnie utworzenie nowej lekcji. 
+Formularz przyjmuje ró¿ne dane w zale¿noœci od tego czy jest to administrator, instruktor lub kursant - \emph{Rysunek 5.44}, \emph{Rysunek 5.45}, \emph{Rysunek 5.46}. Po wype³nieniu formularza i wciœniêciu przyciska ,,Utwórz'' nastêpuje walidacja danych, a nastêpnie utworzenie nowej lekcji. 
 
 
 
@@ -1340,9 +1353,9 @@ Formularz przyjmuje ró¿ne dane w zale¿noœci od tego czy jest to administrator, i
 
 Instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia listy lekcji.
 
-Instruktor ma dostêp tylko do listy lekcji zwi¹zanych z jego kursami - \emph{Rysunek 5.50}. Dodatkowo ma mo¿liwoœæ filtrowania lekcji wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+Instruktor ma dostêp tylko do listy lekcji zwi¹zanych z jego kursami - \emph{Rysunek 5.47}. Dodatkowo ma mo¿liwoœæ filtrowania lekcji wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
 
-Kursant ma dostêp tylko do listy lekcji zwi¹zanych z kursami, w których bierze udzia³ - \emph{Rysunek 5.51}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
+Kursant ma dostêp tylko do listy lekcji zwi¹zanych z kursami, w których bierze udzia³ - \emph{Rysunek 5.48}. Dodatkowo ma mo¿liwoœæ filtrowania kursów wed³ug okreœlonych parametrów, a tak¿e wyœwietlania szczegó³ów wybranej pozycji z listy.
 
 
 \subsection{Wyœwietlenie szczegó³ów lekcji}
@@ -1374,9 +1387,11 @@ Kursant ma dostêp tylko do listy lekcji zwi¹zanych z kursami, w których bierze u
 	\label{schematKomunikacji}
 \end{figure}
 
+\newpage
+
 Administrator, instruktor oraz kursant maj¹ mo¿liwoœæ wyœwietlenia szczegó³ów lekcji.
 
-Administrator ma dostêp do szczegó³ów ka¿dej lekcji w systemie - \emph{Rysunek 5.52}. Dodatkowo ma mo¿liwoœæ do jej usuniêcia oraz edycji. W zale¿noœci od stanu lekcji ma te¿ dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Administrator ma mo¿liwoœæ:
+Administrator ma dostêp do szczegó³ów ka¿dej lekcji w systemie - \emph{Rysunek 5.49}. Dodatkowo ma mo¿liwoœæ do jej usuniêcia oraz edycji. W zale¿noœci od stanu lekcji ma te¿ dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Administrator ma mo¿liwoœæ:
 \begin{itemize}
     \item potwierdzenia lub odrzucenia zaproponowanego terminu przeprowadzenia lekcji
     \item zaakceptowania lub odrzucenia wniosku o anulowanie lekcji
@@ -1384,7 +1399,7 @@ Administrator ma dostêp do szczegó³ów ka¿dej lekcji w systemie - \emph{Rysunek 5
     \item anulowania lekcji
 \end{itemize}
 
-Instruktor ma dostêp tylko do szczegó³ów lekcji zwi¹zanej z jego kursami - \emph{Rysunek 5.53}. Dodatkowo ma te¿ mo¿liwoœæ edycji lekcji, a zale¿noœci od jej stanu ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Instruktor ma mo¿liwoœæ:
+Instruktor ma dostêp tylko do szczegó³ów lekcji zwi¹zanej z jego kursami - \emph{Rysunek 5.50}. Dodatkowo ma te¿ mo¿liwoœæ edycji lekcji, a zale¿noœci od jej stanu ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Instruktor ma mo¿liwoœæ:
 \begin{itemize}
     \item potwierdzenia lub odrzucenia zaproponowanego terminu przeprowadzenia lekcji
     \item zaakceptowania lub odrzucenia wniosku o anulowanie lekcji
@@ -1392,13 +1407,14 @@ Instruktor ma dostêp tylko do szczegó³ów lekcji zwi¹zanej z jego kursami - \emph
     \item anulowania lekcji
 \end{itemize}
 
-Kursant ma dostêp tylko do szczegó³ów lekcji zwi¹zanej kursami, w których bierze udzia³ - \emph{Rysunek 5.54}. Dodatkowo w zale¿noœci od stanu lekcji ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Kursant ma mo¿liwoœæ:
+Kursant ma dostêp tylko do szczegó³ów lekcji zwi¹zanej z kursami, w których bierze udzia³ - \emph{Rysunek 5.51}. Dodatkowo w zale¿noœci od stanu lekcji ma on dostêp do funkcjonalnoœci zwi¹zanych ze sterowaniem jej statusem. Kursant ma mo¿liwoœæ:
 \begin{itemize}
     \item edycji lekcji
     \item usuniêcia lekcji
     \item z³o¿enia zapytania o anulowanie lekcji
 \end{itemize}
 
+\newpage
 
 \section{Modu³ odpowiedzialny za zarz¹dzanie opiniami o instruktorach}
 
@@ -1420,7 +1436,7 @@ Kursant ma jednokrotn¹ mo¿liwoœæ dodania opinii o instruktorze. Po przejœciu na 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/11_ocena_2.png}
+\includegraphics[scale=0.4]{\ImgPath/rys/11_ocena_2.png}
 \end{center}
 	\caption{Lista opinii o instruktorze}
 	\label{schematKomunikacji}
@@ -1435,8 +1451,9 @@ Kursant ma jednokrotn¹ mo¿liwoœæ dodania opinii o instruktorze. Po przejœciu na 
 	\label{schematKomunikacji}
 \end{figure}
 
-Administrator ma mo¿liwoœæ wyœwietlenia listy opinii wybranego instruktora. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich opinii - \emph{Rysunek 5.56}. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów - \emph{Rysunek 5.57} oraz usuniêcia wybranej pozycji z listy. 
+Administrator ma mo¿liwoœæ wyœwietlenia listy opinii wybranego instruktora. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie listy wszystkich opinii - \emph{Rysunek 5.53}. Administrator ma mo¿liwoœæ sortowania listy wed³ug okreœlonych parametrów. Dodatkowo ma mo¿liwoœæ wyœwietlenia szczegó³ów - \emph{Rysunek 5.54} oraz usuniêcia wybranej pozycji z listy. 
 
+\newpage
 
 \section{Modu³ odpowiedzialny za komunikacjê wewnetrzn¹}
 
@@ -1454,12 +1471,14 @@ Administrator ma mo¿liwoœæ wyœwietlenia listy opinii wybranego instruktora. Po p
 
 U¿ytkownik ma mo¿liwoœæ wys³ania wiadomoœci do innego u¿ytkownika ze œciœle okreœlonej grupy odbiorców. Po przejœciu na odpowiedni adres nastêpuje wyœwietlenie formularza odpowiedzialnego za wys³anie wiadomoœci. Po jego wype³nieniu u¿ytkownik wciska przycisk ,,Wyœlij''. Nastêpuje walidacja wprowadzonych danych i wys³anie wiadomoœci do odbiorcy
 
+\newpage
+
 \subsection{Wyœwietlenie skrzynki odbiorczej}
 
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/12_wiadomosc_2.png}
+\includegraphics[scale=0.4]{\ImgPath/rys/12_wiadomosc_2.png}
 \end{center}
 	\caption{Skrzynka odbiorcza}
 	\label{schematKomunikacji}
@@ -1468,50 +1487,13 @@ U¿ytkownik ma mo¿liwoœæ wys³ania wiadomoœci do innego u¿ytkownika ze œciœle okre
 \begin{figure}[!htbp]
 	\begin{center}
 \centering
-\includegraphics[scale=0.6]{\ImgPath/rys/12_wiadomosc_3.png}
+\includegraphics[scale=0.47]{\ImgPath/rys/12_wiadomosc_3.png}
 \end{center}
 	\caption{Szczegó³y wiadomoœci}
 	\label{schematKomunikacji}
 \end{figure}
 
-U¿ytkownik ma mo¿liwoœæ wyœwietlenia swojej skrzynki odbiorczej. Po przejœciu na odpowiedni adres wyœwietlana jest skrzynka odbiorcza u¿ytkownika - \emph{Rysunek 5.59}. U¿ytkownik ma mo¿liwoœæ wyœwietlenia szczegó³ów wiadomoœci - \emph{Rysunek 5.60} oraz jej usuniêcia.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+U¿ytkownik ma mo¿liwoœæ wyœwietlenia swojej skrzynki odbiorczej. Po przejœciu na odpowiedni adres wyœwietlana jest skrzynka odbiorcza u¿ytkownika - \emph{Rysunek 5.56}. U¿ytkownik ma mo¿liwoœæ wyœwietlenia szczegó³ów wiadomoœci - \emph{Rysunek 5.59} oraz jej usuniêcia.
 
 
 \chapter{Podsumowanie}
@@ -1531,18 +1513,13 @@ Wykonany projekt aplikacji mo¿e zostaæ rozwiniêty o kolejne funkcjonalnoœci i mo
 
 
 \section{Wnioski}
-Rezultatem ponad pó³rocznej pracy jest koñcowa aplikacja. Zapewnia ona podstawowe funkcjonalnoœci potrzebne do efektywnego zarz¹dzania szko³¹ jazdy. Koñcowy produkt jest te¿ idealnym punktem wyjœcia do dalszego rozwoju. Szczególnie do modu³ów przedstawionych w poprzednim podrozdziale.
+Rezultatem ponad pó³rocznej pracy jest koñcowa aplikacja. Spe³nia ona wszystkie za³o¿one przez autora wymagania co sprawia, ¿e mo¿e byæ wykorzystywana do efektywnego zarz¹dzania szko³¹ jazdy. Koñcowy produkt jest te¿ idealnym punktem wyjœcia do dalszego rozwoju. Szczególnie do modu³ów przedstawionych w poprzednim podrozdziale.
 
-Ponadto praca nad aplikacj¹ poszerzy³a stos technologiczny autora. Pozwoli³a na szersze poznanie znanych ju¿ mu technologii, ale równie¿ i na poznanie tych zupe³nie dla niego nowych. Sprawi³o to, ¿e sama praca in¿ynierska nie by³a tylko podsumowaniem studiów, ale i okazj¹ do poszerzenia swoich horyzontów.
+Ponadto, praca nad aplikacj¹ pozwoli³a na rozwój umiejêtnoœci autora. Projektowana aplikacja pozwoli³a na szersze poznanie znanych ju¿ mu technologii, ale równie¿ i na poznanie tych zupe³nie dla niego nowych. Sprawi³o to, ¿e sama praca in¿ynierska nie by³a tylko podsumowaniem studiów, ale i okazj¹ do poszerzenia swoich horyzontów.
 
 
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{Bibliografia}
-\bibitem{postgresqldoc}{Dokumentacja bazy danych PostgreSQL. \url{https://www.postgresql.org/about/}}
-\bibitem{springdoc}{Dokumentacja Spring Boot. \url{https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/}}
-\bibitem{bootstrapdoc}{Dokumentacja Bootstrap 5.0. \url{https://getbootstrap.com/docs/5.0}}
-\bibitem{thymeleafdoc}{Dokumentacja Thymeleaf. \url{https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html}}
-\bibitem{springsecuritydoc}{Dokumentacja Spring Security. \url{https://docs.spring.io/spring-security/site/docs/current/reference/html5/}}
 \bibitem{szkolyliczba}{Liczba szkó³ jazdy w Polsce w 2019.
 \url{https://www.prawo-jazdy-360.pl/ranking-szkol-jazdy}}
 \bibitem{wordliczba}{Liczba wojewódzkich oœrodków ruchu drogowego w Polsce w 2019.
@@ -1553,6 +1530,11 @@ Ponadto praca nad aplikacj¹ poszerzy³a stos technologiczny autora. Pozwoli³a na 
 \url{https://www.portalnaukijazdy.pl/wybierz-word/}}
 \bibitem{aplikacjainternetowa}{Definicja aplikacji internetowej.
 \url{https://en.wikipedia.org/wiki/Web_application}}
+\bibitem{postgresqldoc}{Dokumentacja bazy danych PostgreSQL. \url{https://www.postgresql.org/about/}}
+\bibitem{springdoc}{Dokumentacja Spring Boot. \url{https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/}}
+\bibitem{bootstrapdoc}{Dokumentacja Bootstrap 5.0. \url{https://getbootstrap.com/docs/5.0}}
+\bibitem{thymeleafdoc}{Dokumentacja Thymeleaf. \url{https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html}}
+\bibitem{springsecuritydoc}{Dokumentacja Spring Security. \url{https://docs.spring.io/spring-security/site/docs/current/reference/html5/}}
 \bibitem{inzynieriawymagan}{Micha³ Œmia³ek, Wiktor Nowakowski, Tomasz Straszak, Jacek Bojarski, Albert Ambroziewicz, ,,In¿ynieria wymagañ
 oprogramowania'', Politechnika Warszawska
 Warszawa, 2010.}
